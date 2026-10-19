@@ -1,0 +1,959 @@
+{
+  "executed_at": "2026-10-19T00:38:42.503296+00:00",
+  "passed": 189,
+  "checks": 189,
+  "live_local_http_test": false,
+  "errors": [],
+  "limitations": [
+    "Local HTTP navigation unavailable: Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:38129/workflow_github/index.html",
+    "Interaction tests used local HTML contents. Query parameters and a repository-style base URL were supplied in the test harness. They are not end-to-end HTTP checks."
+  ],
+  "scope": "Browser smoke checks of shipped pages, shared record views and representative controls. No live GitHub deployment, external playback, Safari or Firefox test.",
+  "details": [
+    {
+      "check": "Home renders",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Start action exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "One home heading",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Homepage has no remote scripts or players",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Home links preserve repository prefix",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "All five modules present",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Initial comparison retains Kahn",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Compare static in summary",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Compare static in code",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Compare static in all",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Compare versions in summary",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Compare versions in code",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Compare versions in all",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Compare closest in summary",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Compare closest in code",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Compare closest in all",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Compare counters in summary",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Compare counters in code",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Compare counters in all",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Compare reductions in summary",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Compare reductions in code",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Compare reductions in all",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Compare dynamic in summary",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Compare dynamic in code",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Compare dynamic in all",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Compare memory in summary",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Compare memory in code",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Compare memory in all",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Compare audit in summary",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Compare audit in code",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Compare audit in all",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog S0",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog S1",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog S2",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog S3",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog S4",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog S5",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog S6",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog S7",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog D1",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog D2",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog D10",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog D3",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog D4",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog D5",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog D6",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog D11",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog D7",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog D8",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog D9",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog R1",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog R2",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog R3",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog M1",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog M2",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog M3",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog M4",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog M5",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog M6",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog M7",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog M8",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog M9",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog P0",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog P1",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog P2",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog P3",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog P4",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog P5",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog E08",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog E10",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog E14",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog E15",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog E17",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog E18",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog E19",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog E20",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog E23",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog E24",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog E26",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog E27",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog E28",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog E30",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog E29",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog E31",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog E32",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog E33",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog E34",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog E35",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Source dialog E36",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Research tree overview",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Research tree focus",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Research tree g0",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Research tree g1",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Research tree g2",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Research tree g3",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Research tree g4",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Research tree g5",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Research tree g6",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Research tree all",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Research tree g7",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Simulation fifo",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Simulation lifo",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Simulation priority",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Simulation lexical",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Simulation generations",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Simulation dfs",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Simulation bfs",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Simulation bounded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Simulation reduction",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Simulation enumeration",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Simulation critical",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Simulation insertion",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Simulation pk",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Simulation scc",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Simulation heap",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Simulation fullscore",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Simulation counters",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Simulation grouped",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Simulation maximal",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Simulation lifetime",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Simulation heft",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Simulation sortscan",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Simulation lrc",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Term xla",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Term dag",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Term lattice",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Lesson graph",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Lesson kahn",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Lesson dfs",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Lesson priority",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Lesson reachability",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Lesson critical",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Lesson counting",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Lesson incremental",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Lesson proof",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Lesson measure",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Application fifo",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Application lifo",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Application priority",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Application lexical",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Application generations",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Application dfs",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Application bfs",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Application bounded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Application reduction",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Application enumeration",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Application critical",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Application insertion",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Application pk",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Application scc",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Application heap",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Application fullscore",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Application counters",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Application grouped",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Application maximal",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Application lifetime",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Application heft",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Application sortscan",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Application lrc",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Comparison export retains teaching modules",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Exported simulator completes",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Notes round trip restores comparison",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Direct route lesson kahn",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Direct route algorithms None",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Direct route simulation dfs",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Simulation route chooses the requested method dfs",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Direct route applications pk",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Application route chooses requested profile",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Direct route terms xla",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Direct route videos None",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Direct route simulation not-a-method",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Simulation route chooses the requested method not-a-method",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Standalone Algorithm_Lessons.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Standalone Algorithm_Simulations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Standalone Algorithm_Applications.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Standalone Workflow_Learning_Resources.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Standalone Workflow_Terms_and_Nomenclature.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Standalone Verification.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Standalone Audit_Report.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "No page overflow index.html 390",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "No page overflow Workflow_Research_Guide.html 390",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Simulator controls at 390",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "No page overflow index.html 768",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "No page overflow Workflow_Research_Guide.html 768",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Simulator controls at 768",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "No page overflow index.html 1440",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "No page overflow Workflow_Research_Guide.html 1440",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Simulator controls at 1440",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "No JavaScript page errors",
+      "passed": true,
+      "detail": "[]"
+    }
+  ]
+}

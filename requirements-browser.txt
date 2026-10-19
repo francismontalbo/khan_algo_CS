@@ -1,0 +1,2 @@
+# Maintainer-only Chromium smoke tests; not needed by the website.
+playwright==1.64.0

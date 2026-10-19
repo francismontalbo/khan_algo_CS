@@ -1,0 +1,91 @@
+/* Standalone definitions. Render-time spans preserve original source data and code text. */
+(() => {
+'use strict';
+const $=id=>document.getElementById(id), dataEl=$('reference-data');if(!dataEl)return;
+const DATA=JSON.parse(dataEl.textContent), entries=DATA.entries, byId=Object.fromEntries(entries.map(e=>[e.id,e]));
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const dialog=$('reference-dialog'),panel=$('reference-scroll'),search=$('reference-search'),results=$('reference-results'),detail=$('reference-detail'),tooltip=$('term-tooltip');
+const SHELL=dialog.outerHTML+tooltip.outerHTML;
+let category='All',selected=null,returnFocus=null,returnScroll=null,priorHash='',trail=[],tipAnchor=null,hideTimer=0,hoverTimer=0,listScroll=0,suppressUntil=0;
+const cats=['All','Abbreviations','Symbols','Concepts','Code'];
+const catLabel=c=>c==='Symbols'?'Nomenclature':c==='Code'?'Code names':c;
+function writeHash(id){try{history.replaceState(null,'',location.href.split('#')[0]+(id?'#term-'+encodeURIComponent(id):priorHash));}catch(_){}}
+function setReturn(trigger){if(dialog.open)return;returnFocus=trigger||document.activeElement;returnScroll={x:scrollX,y:scrollY};priorHash=location.hash.startsWith('#term-')?'#compare':location.hash;}
+function showDialog(trigger){hideTip();if(!dialog.open){setReturn(trigger);dialog.showModal();}}
+function tabs(){ $('reference-tabs').innerHTML=cats.map(c=>`<button type="button" data-ref-category="${c}" aria-pressed="${category===c}">${catLabel(c)} <small>${c==='All'?entries.length:entries.filter(e=>e.category===c).length}</small></button>`).join(''); }
+function normalized(s){return String(s).toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g,'');}
+function matched(){const q=normalized(search.value).trim();const rank=e=>{if(!q)return 0;const term=normalized(e.term),full=normalized(e.full);if(term===q||full===q)return 0;if(e.aliases.some(a=>normalized(a)===q))return 1;if(term.startsWith(q))return 2;if(full.startsWith(q))return 3;return 4;};return entries.filter(e=>(category==='All'||e.category===category)&&(!q||normalized([e.term,e.full,e.brief,e.here,...e.aliases].join(' ')).includes(q))).sort((a,b)=>rank(a)-rank(b)||a.term.localeCompare(b.term,'en',{numeric:true}));}
+function renderList(){selected=null;detail.hidden=true;results.hidden=false;tabs();$('reference-clear').hidden=!search.value;$('reference-all').hidden=category==='All'&&!search.value;const found=matched();$('reference-count').textContent=`${found.length} ${category==='Symbols'?'symbol definitions':'definitions'}${search.value?' matching “'+search.value+'”':''}`;
+ const note=category==='Symbols'?`<p class="reference-note">${esc(DATA.notation_note)} One-letter symbols are linked only where the context is unambiguous.</p>`:'';
+ results.innerHTML=note+(found.length?`<table class="reference-table"><caption>${category==='All'?'Abbreviations, symbols, concepts and code names':catLabel(category)+' reference'}</caption><thead><tr><th scope="col">${category==='Symbols'?'Symbol':'Term'}</th><th scope="col">${category==='Abbreviations'?'Full form':'Meaning'}</th><th scope="col">In this guide</th></tr></thead><tbody>${found.map(e=>`<tr><th scope="row"><button class="term-select" type="button" data-ref-entry="${esc(e.id)}">${esc(e.term)}</button>${category==='All'?`<small class="term-kind">${catLabel(e.category)}</small>`:''}</th><td>${esc(e.full)}</td><td>${esc(e.brief)}</td></tr>`).join('')}</tbody></table>`:'<div class="reference-empty">No matching definition. Try the full name, a code identifier, or a shorter term.</div>');
+}
+function openReference(trigger=null,cat='All',q=''){showDialog(trigger);category=cats.includes(cat)?cat:'All';search.value=q;trail=[];renderList();panel.scrollTop=0;writeHash(null);search.focus({preventScroll:true});}
+function sourceHTML(e){const refs=[];const seen=new Set();for(const r of e.references||[]){const key=r.url||r.label;if(seen.has(key))continue;seen.add(key);refs.push(r.url&&/^https:\/\//.test(r.url)?`<p><a href="${esc(r.url)}" target="_blank" rel="noopener noreferrer">${esc(r.label)} ↗</a>${r.record?` <small>Record ${esc(r.record)}</small>`:''}</p>`:`<p class="term-local">${esc(r.label)}</p>`);}return refs.join('');}
+function openTerm(id,trigger=null,fromRelated=false){const e=byId[id];if(!e)return;const wasOpen=dialog.open;showDialog(trigger);if(fromRelated&&selected)trail.push(selected);else if(!wasOpen){trail=[];listScroll=0;}else if(!selected){listScroll=panel.scrollTop;}
+ selected=id;results.hidden=true;detail.hidden=false;$('reference-all').hidden=false;$('reference-count').textContent=catLabel(e.category)+(e.category==='Symbols'?' · scoped notation':'');
+ detail.innerHTML=`<button type="button" class="reference-back" data-reference-back>← ${trail.length?'Previous definition':'Reference tables'}</button><p class="term-category">${esc(catLabel(e.category))}</p><h3 id="term-heading" tabindex="-1">${esc(e.term)}</h3><p class="term-expanded">${esc(e.full)}</p><p class="term-description">${esc(e.explanation)}</p>${e.here?`<section class="term-section"><h4>In this study</h4><p>${esc(e.here)}</p></section>`:''}${e.example?`<section class="term-example"><h4>Example</h4><p>${esc(e.example)}</p></section>`:''}${e.caution?`<section class="term-caution"><h4>Do not confuse</h4><p>${esc(e.caution)}</p></section>`:''}${e.scope?`<p class="term-scope">${esc(e.scope)}</p>`:''}${e.code?`<pre><code>${esc(e.code)}</code></pre>`:''}${e.related?.length?`<h4>Related terms</h4><div class="term-related">${e.related.map(r=>`<button type="button" data-ref-related="${esc(r)}">${esc(byId[r].term)}</button>`).join('')}</div>`:''}${window.workflowLearning?window.workflowLearning.termInline(id):''}<section class="term-sources"><h4>Reference</h4>${sourceHTML(e)}</section>`;
+ panel.scrollTop=0;writeHash(id);$('term-heading').focus({preventScroll:true});
+}
+function closeReference(){hideTip();if(dialog.open)dialog.close();}
+dialog.addEventListener('close',()=>{hideTip();suppressUntil=performance.now()+350;writeHash(null);if(returnFocus?.isConnected)returnFocus.focus({preventScroll:true});if(returnScroll)window.scrollTo(returnScroll.x,returnScroll.y);});
+$('reference-close').onclick=closeReference;
+dialog.addEventListener('click',ev=>{if(ev.target===dialog){const b=dialog.getBoundingClientRect();if(ev.clientX<b.left||ev.clientX>b.right||ev.clientY<b.top||ev.clientY>b.bottom)closeReference();}});
+$('reference-tabs').onclick=ev=>{const b=ev.target.closest('[data-ref-category]');if(!b)return;category=b.dataset.refCategory;renderList();panel.scrollTop=0;writeHash(null);};
+search.addEventListener('input',()=>{category='All';trail=[];renderList();panel.scrollTop=0;writeHash(null);});
+$('reference-clear').onclick=()=>{search.value='';renderList();panel.scrollTop=0;search.focus();};
+$('reference-all').onclick=()=>{category='All';search.value='';trail=[];renderList();panel.scrollTop=0;writeHash(null);search.focus({preventScroll:true});};
+results.onclick=ev=>{const b=ev.target.closest('[data-ref-entry]');if(b)openTerm(b.dataset.refEntry,b);};
+detail.onclick=ev=>{const related=ev.target.closest('[data-ref-related]');if(related){openTerm(related.dataset.refRelated,related,true);return;}if(ev.target.closest('[data-reference-back]')){if(trail.length)openTerm(trail.pop(),null,false);else{renderList();panel.scrollTop=listScroll;writeHash(null);search.focus({preventScroll:true});}}};
+$('reference-markings').onchange=ev=>{document.body.classList.toggle('hide-term-marks',!ev.target.checked);try{localStorage.setItem('workflow-term-markings-v1',String(ev.target.checked));}catch(_){}};
+try{if(localStorage.getItem('workflow-term-markings-v1')==='false'){$('reference-markings').checked=false;document.body.classList.add('hide-term-marks');}}catch(_){}
+// Non-modal popover: keyboard-focusable explanation action; never replaces a parent control.
+function hideTip(){clearTimeout(hideTimer);clearTimeout(hoverTimer);if(tooltip.matches(':popover-open'))tooltip.hidePopover();if(tipAnchor)tipAnchor.removeAttribute('aria-describedby');tipAnchor=null;}
+function tipFor(target){return target?.closest?.('[data-term-id]');}
+function showTip(anchor){const e=byId[anchor.dataset.termId];if(!e)return;hideTip();tipAnchor=anchor;anchor.setAttribute('aria-describedby','term-tip-description');tooltip.innerHTML=`<h3>${esc(e.term)}</h3><p class="tip-full">${esc(e.full)}</p><p class="tip-brief" id="term-tip-description">${esc(e.brief)}</p><div class="tip-actions"><button type="button" id="term-tip-open">Read explanation →</button><button type="button" id="term-tip-close" class="tip-close" aria-label="Dismiss definition">×</button></div>`;
+ if(typeof tooltip.showPopover==='function')tooltip.showPopover();else return;
+ const r=anchor.getBoundingClientRect(),b=tooltip.getBoundingClientRect(),vw=document.documentElement.clientWidth,vh=window.innerHeight;let left=Math.min(Math.max(r.left,10),Math.max(10,vw-b.width-10));let top=r.bottom+8;if(top+b.height>vh-10)top=Math.max(10,r.top-b.height-8);tooltip.style.left=left+'px';tooltip.style.top=top+'px';
+ $('term-tip-open').onclick=()=>openTerm(e.id,anchor);$('term-tip-close').onclick=hideTip;
+}
+document.addEventListener('pointerover',ev=>{if(ev.pointerType==='touch')return;const a=tipFor(ev.target);if(!a||dialog.contains(a))return;if(tipAnchor===a){clearTimeout(hideTimer);return;}clearTimeout(hoverTimer);hoverTimer=setTimeout(()=>{if(a.isConnected)showTip(a);},220);});
+document.addEventListener('pointerout',ev=>{const a=tipFor(ev.target);if(!a)return;if(a.contains(ev.relatedTarget)||tooltip.contains(ev.relatedTarget))return;clearTimeout(hoverTimer);hideTimer=setTimeout(hideTip,350);});
+tooltip.addEventListener('pointerenter',()=>clearTimeout(hideTimer));tooltip.addEventListener('pointerleave',()=>{hideTimer=setTimeout(hideTip,220);});
+document.addEventListener('focusin',ev=>{if(performance.now()<suppressUntil)return;const a=tipFor(ev.target);if(a&&!dialog.contains(a)){clearTimeout(hoverTimer);showTip(a);}});
+document.addEventListener('focusout',ev=>{if(tooltip.contains(ev.relatedTarget)||tipFor(ev.relatedTarget))return;hideTimer=setTimeout(hideTip,100);});
+window.addEventListener('scroll',ev=>{if(!dialog.contains(ev.target)&&!tooltip.contains(ev.target))hideTip();},true);
+window.addEventListener('resize',hideTip);
+document.addEventListener('keydown',ev=>{if(window.workflowLearning?.isOpen())return;if(ev.key!=='Escape')return;if(tooltip.matches(':popover-open')){ev.preventDefault();ev.stopImmediatePropagation();hideTip();}else if(dialog.open){ev.preventDefault();ev.stopImmediatePropagation();closeReference();}},true);
+document.addEventListener('click',ev=>{const opener=ev.target.closest('[data-open-reference]');if(opener){ev.preventDefault();hideTip();openReference(opener,opener.dataset.openReference||'All');return;}const a=ev.target.closest('a.term-link');if(a){ev.preventDefault();ev.stopPropagation();openTerm(a.dataset.termId,a);}},true);
+// Metadata-driven, text-preserving annotations. Avoid native form controls, source URLs,
+// publication license text, existing links and tree/method selection behavior.
+const aliasRows=[];for(const e of entries){if(!e.automatic)continue;for(const alias of e.aliases){if(alias.length)aliasRows.push({alias,e});}}
+aliasRows.sort((a,b)=>b.alias.length-a.alias.length);const aliasLookup=new Map();for(const row of aliasRows){const key=row.alias.toLowerCase();if(!aliasLookup.has(key))aliasLookup.set(key,[]);aliasLookup.get(key).push(row);}
+const rxEscape=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+const pattern=[...new Set(aliasRows.map(x=>rxEscape(x.alias)))].join('|');const word=/[\p{L}\p{N}_]/u;const matcher=new RegExp(pattern,'giu');
+const excluded='script,style,textarea,input,select,option,svg,math,.reference-detail,#reference-dialog,#term-tooltip,.term-link,.term-passive,.reference-hint,[data-no-glossary],.source-license,.license-text,[contenteditable="true"]';
+function allows(row,text,start,end,inCode){const e=row.e;if(e.caseSensitive&&!e.aliases.includes(text))return false;if(e.codeOnly&&!inCode)return false;if(start>0&&word.test(text[0])&&word.test(row.before||''))return false;return true;}
+function annotateText(node){const parent=node.parentElement;if(!parent||parent.closest(excluded))return;const text=node.nodeValue;if(!text.trim()||text.length>60000)return;if(parent.closest('a')&&/^\s*https?:\/\//.test(text))return;
+ const inCode=!!parent.closest('pre,code,.code-step,.code-line,.code-cell'),native=parent.closest('a,button,summary,label,[role="button"]');const seen=new Set();let m,last=0,frag=null;matcher.lastIndex=0;
+ while((m=matcher.exec(text))){const raw=m[0],start=m.index,end=start+raw.length,rows=aliasLookup.get(raw.toLowerCase())||[];const row=rows.find(r=>(!r.e.caseSensitive||r.e.aliases.includes(raw))&&(!r.e.codeOnly||inCode));if(!row)continue;
+ if(word.test(raw[0])&&start>0&&word.test(text[start-1]))continue;if(word.test(raw.at(-1))&&end<text.length&&word.test(text[end]))continue;if(seen.has(row.e.id)&&row.e.category==='Concepts')continue;seen.add(row.e.id);
+ if(!frag)frag=document.createDocumentFragment();frag.append(document.createTextNode(text.slice(last,start)));const a=document.createElement(native?'span':'a');a.className=native?'term-passive':'term-link';a.dataset.termId=row.e.id;a.textContent=raw;
+ if(!native){a.href='#term-'+encodeURIComponent(row.e.id);a.setAttribute('aria-label',raw+' — explain '+row.e.full);a.setAttribute('aria-haspopup','dialog');}else{a.setAttribute('title',row.e.full+' — '+row.e.brief);}
+ frag.append(a);last=end;
+ }
+ if(frag){frag.append(document.createTextNode(text.slice(last)));node.replaceWith(frag);}
+}
+function annotate(root){if(!root?.isConnected||root.nodeType!==1||root.closest(excluded))return;const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>n.parentElement&&!n.parentElement.closest(excluded)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT});const todo=[];while(walker.nextNode())todo.push(walker.currentNode);for(const n of todo)if(n.isConnected)annotateText(n);
+ for(const f of root.querySelectorAll('.formula-cell,.formula,.math-statement')){if(f.closest('#reference-dialog')||f.dataset.referenceAdded)continue;f.dataset.referenceAdded='1';const b=document.createElement('button');b.className='math-reference';b.type='button';b.dataset.openReference='Symbols';b.textContent='Symbols';b.setAttribute('aria-label','Open nomenclature for this mathematical statement');f.insertAdjacentElement('afterend',b);}
+}
+let pending=new Set(),raf=0;const observer=new MutationObserver(mutations=>{for(const mu of mutations)for(const node of mu.addedNodes){if(node.nodeType===1&&!node.closest(excluded))pending.add(node);else if(node.nodeType===3&&node.parentElement&&!node.parentElement.closest(excluded))pending.add(node.parentElement);}if(!pending.size||raf)return;raf=requestAnimationFrame(()=>{raf=0;observer.disconnect();const work=[...pending];pending.clear();for(const node of work)if(node.isConnected&&!work.some(o=>o!==node&&o.contains(node)))annotate(node);observer.observe(document.body,{childList:true,subtree:true});});});
+annotate(document.body);observer.observe(document.body,{childList:true,subtree:true});
+// Self-contained glossary exports; the current comparison remains usable offline.
+function download(name,text,type){const u=URL.createObjectURL(new Blob([text],{type})),a=document.createElement('a');a.href=u;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),5000);}
+function support(){const script=$('reference-app').textContent,style=$('reference-style').textContent;return (window.workflowLearning?window.workflowLearning.moduleHTML():'')+'<style id="reference-style">'+style+'</style>'+SHELL+'<scr'+'ipt id="reference-data" type="application/json">'+JSON.stringify(DATA).replace(/<\//g,'<\\/')+'</scr'+'ipt><scr'+'ipt id="reference-app">'+script+'</scr'+'ipt>';}
+function addToExport(html){return html.replace('</body>',()=>'<p style="margin:18px 0"><button class="reference-open" type="button" data-open-reference="All">Terms and symbols</button></p>'+support()+'</body>');}
+function referenceFile(){const section=c=>`<section><h2>${esc(catLabel(c))}</h2><table><thead><tr><th>${c==='Symbols'?'Symbol':'Term'}</th><th>${c==='Abbreviations'?'Full form':'Meaning'}</th><th>Use in this guide</th></tr></thead><tbody>${entries.filter(e=>e.category===c).sort((a,b)=>a.term.localeCompare(b.term)).map(e=>`<tr><th><a href="#term-${esc(e.id)}" class="term-link" data-term-id="${esc(e.id)}">${esc(e.term)}</a></th><td>${esc(e.full)}</td><td>${esc(e.brief)}${e.caution?'<br><small>'+esc(e.caution)+'</small>':''}</td></tr>`).join('')}</tbody></table></section>`;
+ return '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Workflow research — terms and nomenclature</title><style>body{font:15px/1.6 system-ui;color:#203746;max-width:1000px;margin:25px auto;padding:0 18px}h1{font-size:28px}h2{font-size:22px;margin-top:32px}table{border-collapse:collapse;width:100%;table-layout:fixed}th,td{padding:11px;border:1px solid #d4dee5;text-align:left;vertical-align:top;overflow-wrap:anywhere}th:first-child{width:22%}td small{color:#607482}a{color:#245a7a}.term-link{color:#245a7a}thead{background:#edf3f7}@media print{thead{display:table-header-group}tr{break-inside:avoid}button{display:none}}</style></head><body><h1>Terms and nomenclature</h1><p>Reference for the workflow comparison. Select a term for its explanation, example, cautions and sources.</p><p>'+esc(DATA.notation_note)+'</p>'+cats.filter(c=>c!=='All').map(section).join('')+support()+'</body></html>';
+}
+$('reference-save').onclick=()=>download('Workflow_Terms_and_Nomenclature.html',referenceFile(),'text/html');
+window.workflowReference={open:openReference,openTerm,close:closeReference,annotate,counts:Object.fromEntries(cats.map(c=>[c,c==='All'?entries.length:entries.filter(e=>e.category===c).length])),addToExport,referenceFile,ids:entries.map(e=>e.id)};
+const initial=location.hash.startsWith('#term-')?decodeURIComponent(location.hash.slice(6)):null;if(initial&&byId[initial])openTerm(initial);tabs();
+})();

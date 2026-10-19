@@ -1,0 +1,6 @@
+{
+  "checks": [],
+  "javascript_errors": [],
+  "scope": "Short local-file Chromium smoke test; no external media playback or all-browser claim.",
+  "unverified": "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at file:///mnt/data/workflow_local_app/workflow-research-guide/index.html\nCall log:\n  - navigating to \"file:///mnt/data/workflow_local_app/workflow-research-guide/index.html\", waiting until \"domcontentloaded\"\n"
+}
