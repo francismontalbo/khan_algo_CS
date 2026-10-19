@@ -25,6 +25,7 @@ Run these from the repository root before generating new test reports.
 python tools/check_manifest.py
 python tools/check_site.py --out output/ci/static-checks.json
 python tools/sync_assets.py --check
+python tools/build_thesis.py --check
 python verify.py
 ```
 
@@ -64,6 +65,7 @@ python -m playwright install chromium
 python tools/check_browser.py --require-http
 python tools/check_math.py --out output/ci/math-checks.json
 python tools/check_setup.py
+python tools/check_thesis.py
 ```
 
 On a Linux CI runner, install Chromium's system dependencies with `python -m playwright install --with-deps chromium`. An existing Chromium executable can be selected through `CHROMIUM_PATH`.
@@ -93,3 +95,24 @@ The pins in [requirements-dev.txt](requirements-dev.txt) and [requirements-brows
 ## Research freshness
 
 The retained literature snapshot and its coverage limits are dated 15 October 2026. Packaging and interface checks do not refresh that research. Recheck the closest papers and implementation versions before a student makes a novelty claim.
+
+## Maintain the thesis research library
+
+The additive library is maintained in `data/Thesis_Research.json`, with presentation
+sources in `code/thesis.css` and `code/thesis.js`. After verifying primary paper
+records and updating the dated search audit, regenerate its offline page and
+BibTeX references:
+
+```bash
+python tools/build_thesis.py
+python tools/build_thesis.py --check
+python tools/check_thesis.py
+python tools/check_manifest.py --write
+```
+
+The builder validates source IDs, publication status, reference links and metadata.
+The browser check covers filters, citation copying and its permission-denied
+fallback, filtered BibTeX export, deep links, responsive layouts, print, and reading
+without JavaScript. The setup test also opens this page from the committed ZIP.
+These checks do not certify novelty or reproduce the papers' experiments. Existing
+source records remain intact; the library links back to reused evidence IDs.

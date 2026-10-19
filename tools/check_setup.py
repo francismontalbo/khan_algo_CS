@@ -24,14 +24,14 @@ REQUIRED = (
     "Workflow_Learning_Resources.html", "Workflow_Terms_and_Nomenclature.html",
     "Verification.html", "Audit_Report.html", "favicon.svg", ".nojekyll",
     "README.md", "START_HERE.txt", "DEPLOY.md", "TESTING.md", "NOTICE.md",
-    "tools/check_setup.py",
+    "tools/check_setup.py", "Thesis_Research.html", "data/Thesis_References.bib",
 )
 LOCAL_DIRS = {".git", ".venv", "venv", "node_modules", "__pycache__", "output",
               ".playwright-cli", "private-notes", "local-exports"}
 LOCAL_FILES = re.compile(r"^(?:\.env(?:\..*)?|\.DS_Store|Thumbs\.db|"
                          r"Workflow_(?:Comparison_Notes|Research_Notes).*\.json|"
                          r"Algorithm_Simulation_Run.*\.json|"
-                         r"Workflow_Visual_Comparison_Saved.*\.html)$")
+                         r"Workflow_Visual_Comparison_Saved.*\.html|Thesis_References_filtered.*\.bib)$")
 
 
 def main() -> int:
@@ -112,6 +112,15 @@ def main() -> int:
                       and not page.locator("#sim-error").is_visible())
                 check("Simulation equation renders MathML after stepping",
                       page.locator("#sim-equation-0 math").count() > 0)
+                page.goto(home, wait_until="load")
+                page.get_by_role("link", name="Open the thesis research library", exact=True).click()
+                check("Thesis library opens from the extracted homepage offline",
+                      page.url.startswith((site / "Thesis_Research.html").as_uri())
+                      and page.locator(".paper:visible").count() > 0)
+                page.locator("#research-period").select_option("2026")
+                check("Current-year paper filter works in the download",
+                      page.locator(".paper:visible").count() > 0
+                      and all(year == "2026" for year in page.locator(".paper:visible .paper-year").all_text_contents()))
                 context.close()
                 browser.close()
     except Exception as exc:
