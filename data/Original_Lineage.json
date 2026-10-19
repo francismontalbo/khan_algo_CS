@@ -1,0 +1,1011 @@
+{
+  "title": "Kahn and Workflow Ordering Research Lineage",
+  "review_date": "2026-10-14",
+  "scope": "Representative source-backed branches, not an exhaustive historical census or a claim of first invention.",
+  "legend": {
+    "Published": "Named published contribution",
+    "Preprint": "Named research preprint; status explicitly limited",
+    "Standard": "Documented implementation or established form; no fabricated origin date",
+    "Reference model": "Study specification or competent baseline, not novelty",
+    "Candidate": "Proposed refinement whose exact novelty and benefit remain to be established"
+  },
+  "nodes": [
+    {
+      "id": "S0",
+      "title": "Lasser antecedent",
+      "year": "1961",
+      "family": "Static ordering",
+      "parent": null,
+      "relationship": "Earlier publication cited by Kahn; not an asserted direct code derivation",
+      "kind": "Published",
+      "change": "An early published treatment of topological ordering of numbered network elements.",
+      "strength": "Documents that the literature predates the named Kahn method.",
+      "limitation": "Only its bibliographic role is used here; no unverified complexity or priority claim.",
+      "application": "Ordering network elements.",
+      "fit": "Background",
+      "opportunity": "Use to establish historical context, not as the principal benchmark.",
+      "sources": [
+        "LASSER",
+        "KAHN"
+      ],
+      "evidence": "Bibliographic metadata and citation in Kahn; original full text not audited."
+    },
+    {
+      "id": "S1",
+      "title": "Kahn source removal",
+      "year": "1962",
+      "family": "Static ordering",
+      "parent": "S0",
+      "relationship": "Kahn cites Lasser as earlier work",
+      "kind": "Published",
+      "change": "Repeatedly remove a vertex with zero remaining indegree.",
+      "strength": "Standard adjacency-list implementation is linear in vertices plus edges; supports ready-set selection.",
+      "limitation": "A valid order alone does not optimize retained storage or task execution time.",
+      "application": "Original paper discusses PERT network analysis.",
+      "fit": "Baseline",
+      "opportunity": "Preserve prerequisite eligibility; change only one clearly defined additional mechanism.",
+      "sources": [
+        "KAHN",
+        "PRINCETON",
+        "PYGRAPH"
+      ],
+      "evidence": "Publisher or author abstract and official documentation; not a full proof audit."
+    },
+    {
+      "id": "S2",
+      "title": "FIFO and LIFO ready sets",
+      "year": "Standard forms; no origin date assigned",
+      "family": "Static ordering",
+      "parent": "S1",
+      "relationship": "Ready-set implementation variants",
+      "kind": "Standard",
+      "change": "Select the oldest or newest eligible vertex.",
+      "strength": "Simple and inexpensive; useful controls.",
+      "limitation": "Different orders can result; neither optimizes every secondary objective.",
+      "application": "Sequential dependency processing.",
+      "fit": "Baseline",
+      "opportunity": "A queue-to-stack replacement alone is not a novel contribution.",
+      "sources": [
+        "PYGRAPH",
+        "DASKSTATE"
+      ],
+      "evidence": "Publisher or author abstract and official documentation; not a full proof audit."
+    },
+    {
+      "id": "S3",
+      "title": "Priority and lexicographical ordering",
+      "year": "Standard forms; no origin date assigned",
+      "family": "Static ordering",
+      "parent": "S1",
+      "relationship": "Changes eligible-vertex selection, not the dependency rule",
+      "kind": "Standard",
+      "change": "Choose an eligible vertex by a deterministic key, commonly with a heap.",
+      "strength": "Reproducibility and control over which valid order is produced.",
+      "limitation": "Heap operations cost more than a FIFO queue; the quality depends on the key.",
+      "application": "Deterministic task ordering and dependency tools.",
+      "fit": "Baseline",
+      "opportunity": "A novel, justified policy or efficient maintenance mechanism is needed beyond adding a heap.",
+      "sources": [
+        "LEX",
+        "HEAP"
+      ],
+      "evidence": "Publisher or author abstract and official documentation; not a full proof audit."
+    },
+    {
+      "id": "S4",
+      "title": "Topological generations",
+      "year": "Standard form; no origin date assigned",
+      "family": "Static ordering",
+      "parent": "S1",
+      "relationship": "Groups currently eligible vertices into generations",
+      "kind": "Standard",
+      "change": "Produce layers whose predecessors occur in earlier layers.",
+      "strength": "Exposes dependency levels and concurrent eligibility.",
+      "limitation": "Eligibility does not imply enough processors or memory; layer barriers can be restrictive.",
+      "application": "Staged task execution and dependency inspection.",
+      "fit": "Baseline",
+      "opportunity": "Do not claim generation construction as a new parallel scheduler.",
+      "sources": [
+        "GEN",
+        "PYGRAPH"
+      ],
+      "evidence": "Publisher or author abstract and official documentation; not a full proof audit."
+    },
+    {
+      "id": "S5",
+      "title": "DFS reverse postorder",
+      "year": "Established alternative",
+      "family": "Static ordering",
+      "parent": null,
+      "relationship": "Sibling static algorithm, not a Kahn extension",
+      "kind": "Standard",
+      "change": "Reverse DFS completion order on a DAG.",
+      "strength": "Another linear-time construction and useful independent validity reference.",
+      "limitation": "Does not directly expose the same dynamic ready-set priority policy.",
+      "application": "Dependency traversal and compiler graph processing.",
+      "fit": "Baseline",
+      "opportunity": "Use as an independent reference, not as proof that the proposed priority rule is efficient.",
+      "sources": [
+        "PRINCETON"
+      ],
+      "evidence": "Publisher or author abstract and official documentation; not a full proof audit."
+    },
+    {
+      "id": "S6",
+      "title": "Enumerating topological orders",
+      "year": "1974",
+      "family": "Static ordering",
+      "parent": null,
+      "relationship": "Different output problem: generate all valid orders",
+      "kind": "Published",
+      "change": "Knuth and Szwarcfiter generate multiple valid topological arrangements.",
+      "strength": "Allows exact checks on very small instances.",
+      "limitation": "The number of orders can be enormous.",
+      "application": "Combinatorial generation and exhaustive small-case validation.",
+      "fit": "Testing only",
+      "opportunity": "Use tiny graphs; do not enumerate all orders of full Montage instances.",
+      "sources": [
+        "KS"
+      ],
+      "evidence": "Publisher or author abstract and official documentation; not a full proof audit."
+    },
+    {
+      "id": "S7",
+      "title": "Fast generation of linear extensions",
+      "year": "1994",
+      "family": "Static ordering",
+      "parent": "S6",
+      "relationship": "Same enumeration branch; not an assertion of direct implementation inheritance",
+      "kind": "Published",
+      "change": "Pruesse and Ruskey develop efficient generation of linear extensions.",
+      "strength": "Low amortized generation work in its output model.",
+      "limitation": "Explicitly writing every complete order still has an output cost; total enumeration can remain infeasible.",
+      "application": "Combinatorial generation.",
+      "fit": "Testing only",
+      "opportunity": "Use the implementation or technique for bounded validation cases.",
+      "sources": [
+        "PR"
+      ],
+      "evidence": "Publisher or author abstract and official documentation; not a full proof audit."
+    },
+    {
+      "id": "D1",
+      "title": "AHRSZ incremental discovery",
+      "year": "1990",
+      "family": "Changing graph",
+      "parent": null,
+      "relationship": "Related problem: maintain an order as dependencies change",
+      "kind": "Published",
+      "change": "Limit maintenance to an affected part instead of recomputing everything.",
+      "strength": "Change-sensitive analysis motivated by computational circuits.",
+      "limitation": "More involved than a static traversal; affected regions can be large.",
+      "application": "Interactive semantic checking and circuit timing analysis.",
+      "fit": "Stretch",
+      "opportunity": "Read before claiming local repair as a new idea.",
+      "sources": [
+        "AHRSZ"
+      ],
+      "evidence": "Publisher or author abstract and official documentation; not a full proof audit."
+    },
+    {
+      "id": "D2",
+      "title": "Depth-First Discovery Algorithm",
+      "year": "2003",
+      "family": "Changing graph",
+      "parent": "D1",
+      "relationship": "Explicit refinement of Alpern discovery",
+      "kind": "Published",
+      "change": "Use depth-first discovery to reduce temporary storage.",
+      "strength": "A documented example of a focused algorithmic refinement.",
+      "limitation": "Still a changing-graph method; not a priority-update algorithm on a fixed DAG.",
+      "application": "Incremental DAG maintenance.",
+      "fit": "Stretch",
+      "opportunity": "A useful model for the scale of a contribution, not a new topic by itself.",
+      "sources": [
+        "DFDA"
+      ],
+      "evidence": "Publisher or author abstract and official documentation; not a full proof audit."
+    },
+    {
+      "id": "D10",
+      "title": "Katriel–Bodlaender online ordering",
+      "year": "2006",
+      "family": "Changing graph",
+      "parent": "D1",
+      "relationship": "Explicit modification of the AHRSZ approach",
+      "kind": "Published",
+      "change": "Refine the earlier discovery method and its update analysis.",
+      "strength": "Strengthens theoretical maintenance guarantees.",
+      "limitation": "More machinery than the static algorithm; favorable graph regimes still matter.",
+      "application": "Online dependency-order maintenance.",
+      "fit": "Background",
+      "opportunity": "The 2007 tight-analysis paper documents this direct parent relationship.",
+      "sources": [
+        "KB"
+      ],
+      "evidence": "Relationship verified through a primary follow-up analysis and author publication metadata."
+    },
+    {
+      "id": "D3",
+      "title": "MNR edge-insertion maintenance",
+      "year": "1996",
+      "family": "Changing graph",
+      "parent": null,
+      "relationship": "Independent milestone in the same dynamic problem",
+      "kind": "Published",
+      "change": "Maintain an existing order under edge insertions.",
+      "strength": "Simple methods with O(n) amortized time per insertion in the paper’s model.",
+      "limitation": "A bound across insertions differs from the cost of one static sort.",
+      "application": "Dependency structures that receive new edges.",
+      "fit": "Feasible with corpus",
+      "opportunity": "Requires an honest edge-update dataset or explicitly controlled generated updates.",
+      "sources": [
+        "MNR"
+      ],
+      "evidence": "Publisher or author abstract and official documentation; not a full proof audit."
+    },
+    {
+      "id": "D4",
+      "title": "Pearce–Kelly dynamic ordering",
+      "year": "2004 conference; author lists journal version as 2007",
+      "family": "Changing graph",
+      "parent": null,
+      "relationship": "Practical alternative to earlier incremental methods",
+      "kind": "Published",
+      "change": "Restrict searches and reassign affected vertices in the current order.",
+      "strength": "Simple implementation with strong results in the authors’ experiments.",
+      "limitation": "Not uniformly fastest; graph structure and affected regions matter.",
+      "application": "Dynamic dependency checking, graph libraries and program analysis.",
+      "fit": "Feasible with corpus",
+      "opportunity": "One reassignment optimization may fit two semesters, but obtaining update traces adds work.",
+      "sources": [
+        "PK"
+      ],
+      "evidence": "Publisher or author abstract and official documentation; not a full proof audit."
+    },
+    {
+      "id": "D5",
+      "title": "Batch topological maintenance",
+      "year": "2010",
+      "family": "Changing graph",
+      "parent": "D4",
+      "relationship": "Same authors’ batch treatment of the maintenance problem",
+      "kind": "Published",
+      "change": "Process several edge insertions together and repair affected regions.",
+      "strength": "Amortizes overlapping work when batches are sufficiently large.",
+      "limitation": "Less attractive for tiny batches; batch construction affects results.",
+      "application": "Batched dependency changes.",
+      "fit": "Stretch",
+      "opportunity": "Only a new batch decision or repair rule could be the contribution.",
+      "sources": [
+        "BATCH"
+      ],
+      "evidence": "Publisher or author abstract and official documentation; not a full proof audit."
+    },
+    {
+      "id": "D6",
+      "title": "Temporary-cycle tolerance",
+      "year": "2023 preprint",
+      "family": "Changing graph",
+      "parent": "D4",
+      "relationship": "Explicit modification of Pearce–Kelly",
+      "kind": "Preprint",
+      "change": "Recover topological order when a graph becomes acyclic again after temporary cycles.",
+      "strength": "Supports editing situations where cycles may arise temporarily.",
+      "limitation": "A cyclic graph still has no valid topological order.",
+      "application": "Dependency graph editing.",
+      "fit": "Feasible with corpus",
+      "opportunity": "Temporary-cycle handling itself is already studied.",
+      "sources": [
+        "ROBUST"
+      ],
+      "evidence": "Publisher or author abstract and official documentation; not a full proof audit."
+    },
+    {
+      "id": "D11",
+      "title": "Ajwani–Friedrich–Meyer dense-graph ordering",
+      "year": "2006 conference; 2008 journal",
+      "family": "Changing graph",
+      "parent": null,
+      "relationship": "Alternative dense-graph algorithm improving the prior bound; not claimed to inherit its implementation",
+      "kind": "Published",
+      "change": "Maintain an order with O(n^2.75) total time over insertions in the stated model.",
+      "strength": "A historical improvement for dense graphs, with experimental comparisons.",
+      "limitation": "Later bounds supersede the historical guarantee; this is total insertion cost, not static-sort runtime.",
+      "application": "Dense evolving DAGs.",
+      "fit": "Background",
+      "opportunity": "Use to understand how assumptions determine which improvement matters.",
+      "sources": [
+        "AFM"
+      ],
+      "evidence": "Publisher or author abstract and official documentation; not a full proof audit."
+    },
+    {
+      "id": "D7",
+      "title": "Improved total insertion bounds",
+      "year": "2012–2020 selected milestones",
+      "family": "Changing graph",
+      "parent": null,
+      "relationship": "Chronological theory branch, not a single parent-to-child chain",
+      "kind": "Published",
+      "change": "Haeupler et al. 2012; Bender et al. 2016; Bernstein–Chechik 2018; Bhattacharya–Kulkarni 2020 improve maintenance bounds in different regimes.",
+      "strength": "Strong amortized or expected guarantees for growing graphs.",
+      "limitation": "Search structures and proofs are considerably more involved; graph density and randomization assumptions differ.",
+      "application": "Large dynamically growing dependency graphs.",
+      "fit": "Background",
+      "opportunity": "Do not compare a total insertion bound with one static Kahn run.",
+      "sources": [
+        "HKMST",
+        "BFGT",
+        "BC",
+        "BK"
+      ],
+      "evidence": "Publisher or author abstract and official documentation; not a full proof audit."
+    },
+    {
+      "id": "D8",
+      "title": "Topological ordering with predictions",
+      "year": "2024",
+      "family": "Changing graph",
+      "parent": null,
+      "relationship": "Uses algorithms-with-predictions for incremental ordering",
+      "kind": "Published",
+      "change": "Exploit predictions of evolving graph information while controlling prediction error.",
+      "strength": "Theory addresses consistency, robustness and smooth degradation.",
+      "limitation": "Adds prediction assumptions and a larger experimental burden.",
+      "application": "Incremental dependency graphs with useful prior information.",
+      "fit": "Outside chosen scope",
+      "opportunity": "Not needed for a CPU-only fixed-workflow priority-maintenance thesis.",
+      "sources": [
+        "PRED"
+      ],
+      "evidence": "Publisher or author abstract and official documentation; not a full proof audit."
+    },
+    {
+      "id": "D9",
+      "title": "Strong components with predictions",
+      "year": "2026",
+      "family": "Changing graph",
+      "parent": "D8",
+      "relationship": "Related predictive dynamic-graph branch; different maintained object",
+      "kind": "Published",
+      "change": "Maintain strongly connected components under edge insertions.",
+      "strength": "Extends predictive dynamic-graph research to component structure.",
+      "limitation": "Not a direct replacement for Kahn and not the same output problem.",
+      "application": "Dynamic directed graphs that may contain cycles.",
+      "fit": "Outside chosen scope",
+      "opportunity": "Use to mark the boundary of recent related work.",
+      "sources": [
+        "SCCP"
+      ],
+      "evidence": "Publisher or author abstract and official documentation; not a full proof audit."
+    },
+    {
+      "id": "R1",
+      "title": "Parallel topological sorting",
+      "year": "1983 representative paper",
+      "family": "Other computational models",
+      "parent": null,
+      "relationship": "Different machine model",
+      "kind": "Published",
+      "change": "Distribute topological-order computation across processing resources.",
+      "strength": "Potential wall-clock gains when graph structure exposes parallelism.",
+      "limitation": "Synchronization and dependency depth constrain benefit.",
+      "application": "Parallel network analysis.",
+      "fit": "Outside chosen scope",
+      "opportunity": "No need for this branch when targeting one CPU process.",
+      "sources": [
+        "ER"
+      ],
+      "evidence": "Publisher or author abstract and official documentation; not a full proof audit."
+    },
+    {
+      "id": "R2",
+      "title": "External-memory topological sorting",
+      "year": "2019 conference; expanded journal treatment 2022",
+      "family": "Other computational models",
+      "parent": null,
+      "relationship": "Different cost model: block transfers",
+      "kind": "Published",
+      "change": "Cao et al. optimize input-output costs for topological sorting and related directed-graph problems.",
+      "strength": "Addresses graphs that are expensive to process with ordinary memory access patterns.",
+      "limitation": "A storage-transfer bound is not an ordinary CPU-operation bound.",
+      "application": "Graphs larger than practical internal-memory capacity.",
+      "fit": "Outside chosen scope",
+      "opportunity": "A separate research project; unnecessary for the selected modest traces.",
+      "sources": [
+        "EXT"
+      ],
+      "evidence": "Publisher or author abstract and official documentation; not a full proof audit."
+    },
+    {
+      "id": "R3",
+      "title": "Parameterized streaming sorting",
+      "year": "2025",
+      "family": "Other computational models",
+      "parent": null,
+      "relationship": "Limited-memory, multi-pass graph input model",
+      "kind": "Published",
+      "change": "Exploit graph parameters to trade stream passes against memory.",
+      "strength": "Addresses constrained input access with formal bounds.",
+      "limitation": "Different assumptions and proof burden from an in-memory scheduler.",
+      "application": "Graph streams, with applications to SCC and 2-SAT.",
+      "fit": "Outside chosen scope",
+      "opportunity": "Do not add streaming merely to make the title appear newer.",
+      "sources": [
+        "STREAM"
+      ],
+      "evidence": "Publisher or author abstract and official documentation; not a full proof audit."
+    },
+    {
+      "id": "M1",
+      "title": "Tree pebbling for memory use",
+      "year": "1987",
+      "family": "Scheduling and lifetime",
+      "parent": null,
+      "relationship": "Related objective: choose an execution order with low memory",
+      "kind": "Published",
+      "change": "Liu uses tree structure to optimize traversal memory.",
+      "strength": "Exact structural reasoning for tree-shaped computation.",
+      "limitation": "Tree-specific reasoning does not directly solve arbitrary DAGs.",
+      "application": "Sparse matrix factorization.",
+      "fit": "Background",
+      "opportunity": "Establishes the history of order-dependent memory use.",
+      "sources": [
+        "LIU"
+      ],
+      "evidence": "Publisher or author abstract and official documentation; not a full proof audit."
+    },
+    {
+      "id": "M2",
+      "title": "Series-parallel peak-memory scheduling",
+      "year": "2018",
+      "family": "Scheduling and lifetime",
+      "parent": "M1",
+      "relationship": "Explicit extension of Liu’s tree approach",
+      "kind": "Published",
+      "change": "Extend polynomial optimization to series-parallel task graphs under the paper’s model.",
+      "strength": "Exact results on a broader structured graph class.",
+      "limitation": "Cannot assume arbitrary Montage graphs or shared-file semantics match this model.",
+      "application": "Structured scientific computations.",
+      "fit": "Background",
+      "opportunity": "Useful theory, but reproducing the complete proof is not required for the chosen thesis.",
+      "sources": [
+        "SP"
+      ],
+      "evidence": "Publisher or author abstract and official documentation; not a full proof audit."
+    },
+    {
+      "id": "M3",
+      "title": "Sequential dataflow scheduling",
+      "year": "2023",
+      "family": "Scheduling and lifetime",
+      "parent": "M2",
+      "relationship": "Extends the studied graph classes using transformations and search",
+      "kind": "Published",
+      "change": "Fradet, Girault and Honorat combine task-graph transformations and branch-and-bound.",
+      "strength": "Exact optimization on suitable small or reducible graphs.",
+      "limitation": "Search and conversion may grow; optimal scheduling differs from faster maintenance of one fixed heuristic.",
+      "application": "Embedded dataflow applications and task graphs.",
+      "fit": "Background",
+      "opportunity": "Existing reductions must be reviewed before claiming a new scheduling reduction.",
+      "sources": [
+        "FR23",
+        "FR_AUTHOR"
+      ],
+      "evidence": "Publisher or author abstract and official documentation; not a full proof audit."
+    },
+    {
+      "id": "M4",
+      "title": "Graph transformations for peak memory",
+      "year": "2025",
+      "family": "Scheduling and lifetime",
+      "parent": "M3",
+      "relationship": "Same authors’ expanded transformation-based treatment",
+      "kind": "Published",
+      "change": "Four transformations preserve minimal peak memory; search handles unreduced cases.",
+      "strength": "Formal preservation properties provide strong correctness foundations.",
+      "limitation": "An optimal-memory result is not equivalence to the proposed greedy order.",
+      "application": "Task graphs and synchronous dataflow programs.",
+      "fit": "Background",
+      "opportunity": "Review reduction semantics and distinguish graph transformation from metadata reduction.",
+      "sources": [
+        "FR25",
+        "FR_AUTHOR"
+      ],
+      "evidence": "Publisher or author abstract and official documentation; not a full proof audit."
+    },
+    {
+      "id": "M5",
+      "title": "HEFT heterogeneous scheduling",
+      "year": "2002",
+      "family": "Scheduling and lifetime",
+      "parent": null,
+      "relationship": "Related list-scheduling problem, not Kahn genealogy",
+      "kind": "Published",
+      "change": "Rank tasks and assign them to heterogeneous processors.",
+      "strength": "Balances precedence and predicted finish times at modest heuristic complexity.",
+      "limitation": "Requires processor and cost assumptions; does not optimize just order-construction overhead.",
+      "application": "Heterogeneous computing.",
+      "fit": "Outside chosen scope",
+      "opportunity": "HEFT is context, not the main baseline for identical-policy maintenance.",
+      "sources": [
+        "HEFT"
+      ],
+      "evidence": "Publisher or author abstract and official documentation; not a full proof audit."
+    },
+    {
+      "id": "M6",
+      "title": "Memory-aware adaptive HEFT variant",
+      "year": "2025",
+      "family": "Scheduling and lifetime",
+      "parent": "M5",
+      "relationship": "Explicit HEFT variant with additional resource concerns",
+      "kind": "Published",
+      "change": "Incorporate memory limits, evictions and adaptation to observed task parameters.",
+      "strength": "Targets memory failures and execution makespan jointly.",
+      "limitation": "Several resource dimensions and runtime integration enlarge scope.",
+      "application": "Scientific workflows on heterogeneous platforms.",
+      "fit": "Outside chosen scope",
+      "opportunity": "Do not replicate the whole scheduler for this undergraduate topic.",
+      "sources": [
+        "MHEFT"
+      ],
+      "evidence": "Publisher or author abstract and official documentation; not a full proof audit."
+    },
+    {
+      "id": "M7",
+      "title": "Dask memory-conscious ordering",
+      "year": "Official documentation; no invention date assigned",
+      "family": "Scheduling and lifetime",
+      "parent": null,
+      "relationship": "Related practical system, not a proven direct Kahn descendant",
+      "kind": "Standard",
+      "change": "Use graph structure and task-completion state to select practical execution order.",
+      "strength": "Existing implementations show that ordering and bookkeeping matter.",
+      "limitation": "No universal optimum for the proposed file-byte score; policies and software versions must be pinned.",
+      "application": "Local and distributed data-processing task graphs.",
+      "fit": "Related baseline study",
+      "opportunity": "Inspect implementation mechanisms; benchmark fairly only under matching semantics.",
+      "sources": [
+        "DASK",
+        "DASKSTATE"
+      ],
+      "evidence": "Publisher or author abstract and official documentation; not a full proof audit."
+    },
+    {
+      "id": "M8",
+      "title": "Least Reference Count caching",
+      "year": "2017 preprint",
+      "family": "Scheduling and lifetime",
+      "parent": null,
+      "relationship": "Related use of unfinished-dependent counts; cache replacement, not task ordering",
+      "kind": "Preprint",
+      "change": "Count dependent computations not yet finished and use the count for cache decisions.",
+      "strength": "Demonstrates dependency-aware reference tracking in data analytics.",
+      "limitation": "Its objective is retaining or evicting blocks, not choosing the next ready task.",
+      "application": "Spark-style data-analytics caches.",
+      "fit": "Novelty check",
+      "opportunity": "Rules out claiming that unfinished-consumer counting alone is new.",
+      "sources": [
+        "LRC"
+      ],
+      "evidence": "Publisher or author abstract and official documentation; not a full proof audit."
+    },
+    {
+      "id": "M9",
+      "title": "Pegasus workflow file cleanup",
+      "year": "Official documentation; no invention date assigned",
+      "family": "Scheduling and lifetime",
+      "parent": null,
+      "relationship": "Application context for file-lifetime handling",
+      "kind": "Standard",
+      "change": "Arrange cleanup of data no longer needed by workflow execution.",
+      "strength": "Real workflow-management need and existing implementation practice.",
+      "limitation": "Per-file planning can introduce overhead; production constraints exceed the proposed simulator.",
+      "application": "Scientific workflow data management.",
+      "fit": "Application context",
+      "opportunity": "Do not claim to invent deletion after final use.",
+      "sources": [
+        "PEGASUS"
+      ],
+      "evidence": "Publisher or author abstract and official documentation; not a full proof audit."
+    },
+    {
+      "id": "P0",
+      "title": "Defined storage-priority Kahn reference",
+      "year": "Proposal model",
+      "family": "Thesis candidates",
+      "parent": null,
+      "relationship": "Combines Kahn eligibility with a declared greedy file-byte score",
+      "kind": "Reference model",
+      "change": "For ready v, priority equals releasable generated-file bytes minus its original output bytes.",
+      "strength": "Simple specification permits exact equivalence tests.",
+      "limitation": "The score is a heuristic, not an optimal-memory guarantee; full recomputation is a correctness oracle, not a strong runtime baseline.",
+      "application": "Sequential ordering of recorded Montage workflows.",
+      "fit": "Baseline",
+      "opportunity": "The research changes maintenance cost, not the scoring objective.",
+      "sources": [
+        "KAHN",
+        "LEX",
+        "WF"
+      ],
+      "evidence": "Defined model for this proposal, not a newly discovered published algorithm."
+    },
+    {
+      "id": "P1",
+      "title": "Efficient per-file priority maintenance",
+      "year": "Established ingredients",
+      "family": "Thesis candidates",
+      "parent": "P0",
+      "relationship": "Reference implementation improvement",
+      "kind": "Reference model",
+      "change": "Use incremental counters, initialize singleton release credits, and batch heap refreshes by affected task.",
+      "strength": "Avoids full ready-set rescoring with straightforward bookkeeping.",
+      "limitation": "Still updates separate counters for files whose state may be redundant.",
+      "application": "Same fixed Montage application and score.",
+      "fit": "Baseline",
+      "opportunity": "This is the competent baseline the candidate must beat.",
+      "sources": [
+        "LRC",
+        "HEAP",
+        "DASKSTATE"
+      ],
+      "evidence": "Constructed benchmark baseline from standard techniques; no novelty claim."
+    },
+    {
+      "id": "P2",
+      "title": "Equal consumer-set aggregation",
+      "year": "Candidate; not novelty-verified",
+      "family": "Thesis candidates",
+      "parent": "P1",
+      "relationship": "Proposed exact representation reduction",
+      "kind": "Candidate",
+      "change": "Share a counter across files with identical consumer sets; sum release bytes but retain original producer costs.",
+      "strength": "Counter-state equality is direct to prove; may reduce repeated decrements.",
+      "limitation": "Grouping has a cost; generic aggregation is old; dependency-forced final consumers can be a stronger simplification.",
+      "application": "Montage files with repeated consumer sets.",
+      "fit": "Pilot candidate",
+      "opportunity": "Compare against a baseline that already exploits simple forced final consumers. Do not claim fewer heap refreshes automatically.",
+      "sources": [
+        "WF",
+        "HYPER"
+      ],
+      "evidence": "Derived candidate and prior synthetic evidence in the separate validation package; no real Montage timing or novelty proof."
+    },
+    {
+      "id": "P3",
+      "title": "Static credit for a forced final consumer",
+      "year": "Required competing simplification",
+      "family": "Thesis candidates",
+      "parent": "P1",
+      "relationship": "Precedence-based exact specialization",
+      "kind": "Reference model",
+      "change": "When all other consumers precede one consumer, assign its release credit statically and remove the dynamic counter.",
+      "strength": "Can remove all dynamic reference-count work for that file.",
+      "limitation": "Checking the condition costs work; arbitrary consumer sets need not have a forced final consumer.",
+      "application": "Files whose consumers have a dependency-determined last use.",
+      "fit": "Baseline and pilot",
+      "opportunity": "Include this simpler method before approving more elaborate aggregation.",
+      "sources": [
+        "WF"
+      ],
+      "evidence": "Mathematical observation in this proposal; historical novelty not asserted."
+    },
+    {
+      "id": "P4",
+      "title": "Precedence pruning of consumer sets",
+      "year": "Candidate; not novelty-verified",
+      "family": "Thesis candidates",
+      "parent": "P3",
+      "relationship": "Proposed generalization of forced-final-consumer recognition",
+      "kind": "Candidate",
+      "change": "Track only consumers with no later consumer reachable through dependencies; fold a singleton into static release credit.",
+      "strength": "A short ready-task equivalence argument can justify fewer tracked consumers.",
+      "limitation": "Reachability preprocessing may cost more than the updates removed; exact prior-art search remains necessary.",
+      "application": "Fixed Montage file-consumption graphs.",
+      "fit": "Pilot candidate",
+      "opportunity": "Keep task edges and actual file uses unchanged. Choose this OR aggregation as the thesis contribution, not both.",
+      "sources": [
+        "WF",
+        "FR25",
+        "LRC"
+      ],
+      "evidence": "New derivation offered for investigation; not claimed as a first publication, tested implementation or measured improvement."
+    },
+    {
+      "id": "P5",
+      "title": "Adaptive sorting versus scanning in reassignment",
+      "year": "Alternative candidate; not novelty-verified",
+      "family": "Thesis candidates",
+      "parent": null,
+      "relationship": "Modifies a Pearce–Kelly subroutine rather than the Montage proposal",
+      "kind": "Candidate",
+      "change": "Recover affected vertices in prior order by sorting k vertices or scanning an interval of length L.",
+      "strength": "Can compare O(k log(k+1)) work with O(L) while preserving reassignment.",
+      "limitation": "Same optimization may exist; the study requires credible edge-update traces.",
+      "application": "Build-dependency order maintenance.",
+      "fit": "Alternative with corpus",
+      "opportunity": "Use only if the students prefer dynamic graph algorithms and can build the update corpus early.",
+      "sources": [
+        "PK",
+        "NINJA"
+      ],
+      "evidence": "Derived candidate; prior-art and application-level performance unresolved."
+    }
+  ],
+  "connections": [
+    {
+      "source": "S1",
+      "target": "P0",
+      "relation": "uses prerequisite eligibility",
+      "type": "design composition"
+    },
+    {
+      "source": "S3",
+      "target": "P0",
+      "relation": "uses priority selection among eligible tasks",
+      "type": "design composition"
+    },
+    {
+      "source": "M8",
+      "target": "P1",
+      "relation": "related reference-counting idea; different objective",
+      "type": "related work"
+    },
+    {
+      "source": "M7",
+      "target": "P1",
+      "relation": "related scheduler state-maintenance practice",
+      "type": "related work"
+    },
+    {
+      "source": "M4",
+      "target": "P4",
+      "relation": "prior art to check for reduction techniques, not proven derivation",
+      "type": "novelty check"
+    },
+    {
+      "source": "D4",
+      "target": "P5",
+      "relation": "proposed subroutine modification",
+      "type": "candidate derivation"
+    },
+    {
+      "source": "P3",
+      "target": "P2",
+      "relation": "mandatory competing simplification",
+      "type": "baseline comparison"
+    }
+  ],
+  "sources": {
+    "LASSER": {
+      "title": "Lasser (1961), Topological ordering of a list of randomly-numbered elements of a network",
+      "url": "https://doi.org/10.1145/355578.366314"
+    },
+    "KAHN": {
+      "title": "Kahn (1962), Topological sorting of large networks",
+      "url": "https://doi.org/10.1145/368996.369025"
+    },
+    "PRINCETON": {
+      "title": "Sedgewick and Wayne, Algorithms, Directed Graphs companion material",
+      "url": "https://algs4.cs.princeton.edu/42digraph/"
+    },
+    "LEX": {
+      "title": "NetworkX, lexicographical_topological_sort documentation",
+      "url": "https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.dag.lexicographical_topological_sort.html"
+    },
+    "GEN": {
+      "title": "NetworkX, topological_generations documentation",
+      "url": "https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.dag.topological_generations.html"
+    },
+    "PYGRAPH": {
+      "title": "Python, graphlib documentation",
+      "url": "https://docs.python.org/3/library/graphlib.html"
+    },
+    "KS": {
+      "title": "Knuth and Szwarcfiter (1974), A structured program to generate all topological sorting arrangements",
+      "url": "https://doi.org/10.1016/0020-0190(74)90001-5"
+    },
+    "PR": {
+      "title": "Pruesse and Ruskey (1994), Generating Linear Extensions Fast",
+      "url": "https://webhome.cs.uvic.ca/~ruskey/Publications/ExtensionFast/ExtensionFast.html"
+    },
+    "AHRSZ": {
+      "title": "Alpern et al. (1990), Incremental evaluation of computational circuits",
+      "url": "https://research.ibm.com/publications/incremental-evaluation-of-computational-circuits"
+    },
+    "MNR": {
+      "title": "Marchetti-Spaccamela, Nanni and Rohnert (1996), Maintaining a topological order under edge insertions",
+      "url": "https://www.sciencedirect.com/science/article/pii/0020019096000750"
+    },
+    "DFDA": {
+      "title": "Zhou and Müller (2003), Depth-First Discovery Algorithm for incremental topological sorting of directed acyclic graphs",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0020019003004071"
+    },
+    "PK": {
+      "title": "Pearce and Kelly, A Dynamic Topological Sort Algorithm for Directed Acyclic Graphs, journal version listed as 2007 by the author",
+      "url": "https://whileydave.com/publications/pk07_jea/"
+    },
+    "BATCH": {
+      "title": "Pearce and Kelly (2010), A Batch Algorithm for Maintaining a Topological Order",
+      "url": "https://whileydave.com/publications/pk10_acsc/"
+    },
+    "ROBUST": {
+      "title": "Smith (2023), Robust Topological Orderings for Directed Graphs, preprint",
+      "url": "https://arxiv.org/abs/2306.05475"
+    },
+    "HKMST": {
+      "title": "Haeupler et al. (2012), Incremental Cycle Detection, Topological Ordering, and Strong Component Maintenance",
+      "url": "https://doi.org/10.1145/2071379.2071382"
+    },
+    "BFGT": {
+      "title": "Bender et al. (2016), A New Approach to Incremental Cycle Detection and Related Problems",
+      "url": "https://arxiv.org/abs/1112.0784"
+    },
+    "BC": {
+      "title": "Bernstein and Chechik (2018), Incremental Topological Sort and Cycle Detection in Õ(m√n) Expected Total Time",
+      "url": "https://doi.org/10.1137/1.9781611975031.2"
+    },
+    "BK": {
+      "title": "Bhattacharya and Kulkarni (2020), An Improved Algorithm for Incremental Cycle Detection and Topological Ordering in Sparse Graphs",
+      "url": "https://doi.org/10.1137/1.9781611975994.153"
+    },
+    "PRED": {
+      "title": "McCauley et al. (2024), Incremental Topological Ordering and Cycle Detection with Predictions",
+      "url": "https://proceedings.mlr.press/v235/mccauley24a.html"
+    },
+    "SCCP": {
+      "title": "Deng et al. (2026), Incremental Strongly Connected Components with Predictions",
+      "url": "https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.SWAT.2026.17"
+    },
+    "ER": {
+      "title": "Er (1983), A Parallel Computation Approach to Topological Sorting",
+      "url": "https://doi.org/10.1093/comjnl/26.4.293"
+    },
+    "EXT": {
+      "title": "Cao et al. (2019), I/O-Efficient Algorithms for Topological Sort and Related Problems",
+      "url": "https://doi.org/10.1137/1.9781611975482.124"
+    },
+    "STREAM": {
+      "title": "Chen, Lin and Tsai (2025), Parameterized Streaming Algorithms for Topological Sorting",
+      "url": "https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.WADS.2025.18"
+    },
+    "LIU": {
+      "title": "Liu (1987), An Application of Generalized Tree Pebbling to Sparse Matrix Factorization",
+      "url": "https://doi.org/10.1137/0608031"
+    },
+    "SP": {
+      "title": "Scheduling series-parallel task graphs to minimize peak memory (2018)",
+      "url": "https://doi.org/10.1016/j.tcs.2017.09.037"
+    },
+    "FR23": {
+      "title": "Fradet, Girault and Honorat (2023), Sequential Scheduling of Dataflow Graphs for Memory Peak Minimization",
+      "url": "https://doi.org/10.1145/3589610.3596280"
+    },
+    "FR25": {
+      "title": "Fradet, Girault and Honorat (2025), Graph Transformations for Memory Peak Minimization by Scheduling",
+      "url": "https://doi.org/10.1145/3707206"
+    },
+    "FR_AUTHOR": {
+      "title": "Fradet author abstracts, including the 2023 and 2025 scheduling papers",
+      "url": "https://pop-art.inrialpes.fr/~fradet/abstracts.html"
+    },
+    "HEFT": {
+      "title": "Topcuoglu, Hariri and Wu (2002), Performance-effective and low-complexity task scheduling for heterogeneous computing",
+      "url": "https://doi.org/10.1109/71.993206"
+    },
+    "MHEFT": {
+      "title": "Kulagina, Benoit and Meyerhenke (2025), Memory-Aware Adaptive Scheduling of Scientific Workflows on Heterogeneous Architectures",
+      "url": "https://arxiv.org/abs/2503.22365"
+    },
+    "DASK": {
+      "title": "Dask, Ordering documentation",
+      "url": "https://docs.dask.org/en/stable/order.html"
+    },
+    "DASKSTATE": {
+      "title": "Dask, Scheduling Policy documentation",
+      "url": "https://docs.dask.org/en/stable/scheduling-policy.html"
+    },
+    "LRC": {
+      "title": "Yu et al. (2017), LRC: Dependency-Aware Cache Management for Data Analytics Clusters",
+      "url": "https://arxiv.org/abs/1703.08280"
+    },
+    "PEGASUS": {
+      "title": "Pegasus, Data Management, In-Place Cleanup",
+      "url": "https://pegasus.isi.edu/documentation/reference-guide/data-management.html"
+    },
+    "HEAP": {
+      "title": "Python, heapq, Priority Queue Implementation Notes",
+      "url": "https://docs.python.org/3/library/heapq.html"
+    },
+    "WF": {
+      "title": "WfCommons, Montage execution instances and task counts",
+      "url": "https://github.com/wfcommons/WfInstances/blob/main/pegasus/montage/README.md"
+    },
+    "WFLOAD": {
+      "title": "WfCommons, analyzing recorded workflow instances",
+      "url": "https://docs.wfcommons.org/en/latest/analyzing_instances.html"
+    },
+    "NINJA": {
+      "title": "Ninja manual, graph tool",
+      "url": "https://ninja-build.org/manual.html"
+    },
+    "HYPER": {
+      "title": "Mt-KaHyPar, parallel hyperedge deduplication implementation",
+      "url": "https://github.com/kahypar/mt-kahypar/blob/master/mt-kahypar/partition/refinement/flows/parallel_construction.cpp"
+    },
+    "KB": {
+      "title": "Katriel and Bodlaender (2006), Online Topological Ordering; relationship documented by the 2007 tight analysis",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0304397507006573"
+    },
+    "AFM": {
+      "title": "Ajwani, Friedrich and Meyer (2006), An O(n^2.75) algorithm for online topological ordering",
+      "url": "https://arxiv.org/abs/cs/0602073"
+    }
+  },
+  "benchmark": {
+    "application": "Montage 2MASS, fixed workflow, one simulated task completes at a time",
+    "development_tasks": [
+      58,
+      310
+    ],
+    "evaluation_tasks": [
+      103,
+      619,
+      748,
+      1312,
+      1738,
+      4846
+    ],
+    "metrics": [
+      "Total ordering time including method-specific initialization and reduction",
+      "Dynamic reference-counter decrements"
+    ],
+    "correctness": "Every dependency respected; exact reference priority and task-order equivalence with identical tie-breaking.",
+    "baselines": [
+      "Efficient incremental per-file implementation",
+      "Strongest simple forced-final-consumer or aggregation reference for the chosen candidate",
+      "One proposed refinement"
+    ],
+    "caveats": [
+      "No actual image processing, GPU, retries, new edge arrivals or distributed execution.",
+      "File sizes are not process RAM measurements.",
+      "Repeated timings are not additional independent workflow instances.",
+      "The exact novelty and real Montage runtime advantage remain unverified.",
+      "Do not transform a held-out workflow after viewing its results."
+    ]
+  },
+  "roadmap": [
+    [
+      "Semester 1, first third",
+      "Reproduce the competent baseline, freeze file semantics, audit the two development traces.",
+      "Working loader, dependency validator, source comparison table."
+    ],
+    [
+      "Semester 1, middle third",
+      "Evaluate ONE reduction against the strongest simple alternative.",
+      "Equivalence proof, operation count and pilot including preprocessing."
+    ],
+    [
+      "Semester 1, final third",
+      "Resolve the closest prior work and freeze the method and test plan.",
+      "Approved narrow contribution, pseudocode, versioned code and six held-out files."
+    ],
+    [
+      "Semester 2, first third",
+      "Run paired measurements and automated correctness checks.",
+      "Reproducible logs for three methods across six evaluation instances."
+    ],
+    [
+      "Semester 2, middle third",
+      "Explain successes, regressions and preprocessing break-even.",
+      "Per-instance timing and dynamic-counter-update results; no inflated independence claims."
+    ],
+    [
+      "Semester 2, final third",
+      "Write, review and reproduce the final study.",
+      "Thesis, code, benchmark manifests, proof, limitations and defense material."
+    ]
+  ]
+}

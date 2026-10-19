@@ -1,0 +1,599 @@
+{
+  "module": {
+    "title": "Learn the algorithms",
+    "checked": "2026-10-15",
+    "scope": "A suggested sequence of prerequisites and tested companions. Not a prescribed new algorithm or a certification of novelty.",
+    "video_scope": "University-linked recordings are unchanged. Companion code and examples are independently written. No full end-to-end video audit or playback certification was performed.",
+    "order": [
+      "graph",
+      "kahn",
+      "dfs",
+      "priority",
+      "reachability",
+      "critical",
+      "counting",
+      "incremental",
+      "proof",
+      "measure"
+    ],
+    "code_file": "algorithm_foundations.py",
+    "notation": "n = number of tasks; m = number of dependency edges; I = number of file-consumer incidences."
+  },
+  "lessons": [
+    {
+      "id": "graph",
+      "title": "Represent the dependency graph",
+      "why": "Know exactly what an edge means before reading any scheduling method.",
+      "video_id": "v-nptel-graphs",
+      "video_match": "Lecture topic matches; companion independently checked",
+      "watch_for": "How the same graph becomes an adjacency list. Do not confuse successors with predecessors.",
+      "steps": [
+        "Treat u → v as “u must finish before v”.",
+        "Store successors in adj[u], then count incoming edges for each vertex.",
+        "Preserve isolated tasks; they are part of the input too."
+      ],
+      "formula": "indegree(v) = |{u : (u,v) ∈ E}|",
+      "proof": "Each edge contributes once to its target’s indegree. The array therefore records the number of unfinished prerequisites before execution starts.",
+      "cost": "Adjacency construction and indegrees: O(n + m) expected with a hash set for duplicate checks. Stored graph: O(n + m).",
+      "warning": "Python graphlib expects predecessor lists. This teaching module expects successor lists. Reversing that convention reverses the meaning of the workflow.",
+      "exercise": "How would you show that two graph representations encode the same prerequisites without relying on their vertex labels?",
+      "methods": [
+        "S1",
+        "S5"
+      ],
+      "references": [
+        "d-graphlib",
+        "d-networkx"
+      ],
+      "code": "",
+      "code_label": "Independent Python teaching code · standard method, not a proposed contribution",
+      "example": {
+        "headers": [
+          "Task",
+          "Successors",
+          "Initial indegree"
+        ],
+        "rows": [
+          [
+            "A",
+            "C",
+            0
+          ],
+          [
+            "B",
+            "C",
+            0
+          ],
+          [
+            "C",
+            "D",
+            2
+          ],
+          [
+            "D",
+            "none",
+            1
+          ],
+          [
+            "E",
+            "none",
+            0
+          ]
+        ],
+        "caption": "A → C, B → C, C → D; E is independent."
+      },
+      "optional": false
+    },
+    {
+      "id": "kahn",
+      "title": "Kahn’s algorithm",
+      "why": "Understand the eligibility rule that every priority-based variant must preserve.",
+      "video_id": "v-nptel-topological",
+      "video_match": "Topological-sorting lecture; source-removal code below is separately checked",
+      "watch_for": "Why a task with zero remaining indegree can be chosen, and why a queue avoids repeatedly searching every vertex.",
+      "steps": [
+        "Initialize a queue with every zero-indegree task.",
+        "Remove one task, append it to the order, and decrement each successor’s indegree.",
+        "Enqueue a successor only when its count becomes zero. Reject the graph if fewer than n tasks are output."
+      ],
+      "formula": "d_D(v) = |pred(v) ∖ D|;  choose only v with d_D(v) = 0.",
+      "proof": "The indegree invariant makes each chosen task eligible. Removing its outgoing edges preserves the invariant. A nonempty residual DAG has a source, so an empty queue before completion implies a cycle.",
+      "cost": "O(n + m) time with adjacency lists and a deque; O(n) auxiliary space beyond the graph and output.",
+      "warning": "Kahn is not ordinary BFS. BFS discovering a task does not mean all its prerequisites are satisfied. Residual blocked tasks need not all lie on a cycle.",
+      "exercise": "Which operations are needed for eligibility, and which are only needed by an added selection policy?",
+      "methods": [
+        "S1",
+        "S2",
+        "S4"
+      ],
+      "references": [
+        "d-graphlib"
+      ],
+      "code": "def kahn(adj: Sequence[Sequence[int]]) -> list[int]:\n    degree = indegrees(adj)\n    ready = deque(v for v, d in enumerate(degree) if d == 0)\n    order = []\n    while ready:\n        u = ready.popleft()\n        order.append(u)\n        for v in adj[u]:\n            degree[v] -= 1\n            if degree[v] == 0:\n                ready.append(v)\n    if len(order) != len(adj):\n        raise ValueError(\"The graph contains a directed cycle\")\n    return order",
+      "code_label": "Independent Python teaching code · standard method, not a proposed contribution",
+      "example": {
+        "headers": [
+          "Event",
+          "Ready queue",
+          "Indegrees A–E",
+          "Output"
+        ],
+        "rows": [
+          [
+            "Start",
+            "A, B, E",
+            "[0, 0, 2, 1, 0]",
+            "empty"
+          ],
+          [
+            "Finish A",
+            "B, E",
+            "[0, 0, 1, 1, 0]",
+            "A"
+          ],
+          [
+            "Finish B",
+            "E, C",
+            "[0, 0, 0, 1, 0]",
+            "A, B"
+          ],
+          [
+            "Finish E",
+            "C",
+            "[0, 0, 0, 1, 0]",
+            "A, B, E"
+          ],
+          [
+            "Finish C",
+            "D",
+            "[0, 0, 0, 0, 0]",
+            "A, B, E, C"
+          ],
+          [
+            "Finish D",
+            "empty",
+            "[0, 0, 0, 0, 0]",
+            "A, B, E, C, D"
+          ]
+        ],
+        "caption": "A → C, B → C, C → D; E is independent."
+      },
+      "optional": false
+    },
+    {
+      "id": "dfs",
+      "title": "DFS ordering and cycle detection",
+      "why": "Learn an independent way to verify ordering and detect cycles.",
+      "video_id": "v-dfs",
+      "video_match": "Direct algorithm topic",
+      "watch_for": "The active recursion stack, finish order, and the reason to reverse that order.",
+      "steps": [
+        "Mark a task active, then visit its unseen successors.",
+        "An edge to an active task is a directed-cycle witness.",
+        "Append a task only after its successors finish; reverse the complete finishing list."
+      ],
+      "formula": "For every edge u → v in a DAG, finish(v) < finish(u).",
+      "proof": "If v is unseen, DFS finishes v before returning to u. If v is finished, its finish already precedes u’s. An active v would create a cycle, so that case is excluded in a DAG.",
+      "cost": "O(n + m) time and O(n) auxiliary space. Recursive teaching code can hit Python’s recursion limit on deep graphs.",
+      "warning": "Two valid topological algorithms can return different orders. That is not an error. Exact sequence equality is required only for implementations of the same policy and tie-break.",
+      "exercise": "What should a correctness oracle check when two valid algorithms intentionally use different traversal rules?",
+      "methods": [
+        "S5",
+        "D6"
+      ],
+      "references": [
+        "d-graphlib"
+      ],
+      "code": "def dfs_order(adj: Sequence[Sequence[int]]) -> list[int]:\n    \"\"\"Recursive teaching version. Prefer an explicit stack for deep graphs.\"\"\"\n    color = [0] * len(adj)  # 0 unseen, 1 active, 2 finished\n    finished = []\n\n    def visit(u: int) -> None:\n        color[u] = 1\n        for v in adj[u]:\n            if color[v] == 1:\n                raise ValueError(\"Back edge: directed cycle\")\n            if color[v] == 0:\n                visit(v)\n        color[u] = 2\n        finished.append(u)\n\n    for u in range(len(adj)):\n        if color[u] == 0:\n            visit(u)\n    return finished[::-1]",
+      "code_label": "Independent Python teaching code · standard method, not a proposed contribution",
+      "example": {
+        "headers": [
+          "Method",
+          "Valid output on the same graph"
+        ],
+        "rows": [
+          [
+            "FIFO Kahn",
+            "A, B, E, C, D"
+          ],
+          [
+            "DFS reverse postorder",
+            "E, B, A, C, D"
+          ]
+        ],
+        "caption": "A → C, B → C, C → D; E is independent."
+      },
+      "optional": false
+    },
+    {
+      "id": "priority",
+      "title": "Heaps and priority-based Kahn",
+      "why": "Separate the rule that permits a task from the rule that prefers it.",
+      "video_id": "v-nptel-heapupdates",
+      "video_match": "Heap-update lesson; priority-Kahn composition is the companion",
+      "watch_for": "Restoring the heap property after an insertion or key change. The video is not a reproduction of the XLA scheduler.",
+      "steps": [
+        "Keep Kahn’s indegrees and ready condition unchanged.",
+        "Store only ready tasks in a heap keyed by priority and a fixed tie-break.",
+        "For changing scores, update the heap correctly or invalidate stale entries; changing an unrelated score array is not enough."
+      ],
+      "formula": "v* = argmax { (score(v), −id(v)) : v ∈ R(D) }",
+      "proof": "Every heap entry is eligible. The key selects one eligible task, so topological validity is preserved. Heap ordering must reflect the current key to preserve the intended policy.",
+      "cost": "Fixed-score example: O(m + n log n) time and O(n) extra storage. Dynamic priorities add update and stale-entry costs; the fixed-score bound does not cover them.",
+      "warning": "A heap does not improve FIFO Kahn’s linear asymptotic bound. It implements a different selection policy. Lazy stale entries can increase memory.",
+      "exercise": "Is the real cost in calculating a score, locating affected tasks, or refreshing the queue? What measurement would distinguish them?",
+      "methods": [
+        "S3",
+        "P1",
+        "E20",
+        "E29",
+        "E30"
+      ],
+      "references": [
+        "v-heaps",
+        "d-heap",
+        "d-lexicographic"
+      ],
+      "code": "def priority_kahn(adj: Sequence[Sequence[int]], score: Sequence[int]) -> list[int]:\n    \"\"\"Fixed scores only. A dynamic score needs an additional update mechanism.\"\"\"\n    if len(score) != len(adj):\n        raise ValueError(\"One score is required per vertex\")\n    degree = indegrees(adj)\n    ready = [(-score[v], v) for v, d in enumerate(degree) if d == 0]\n    heapify(ready)\n    order = []\n    while ready:\n        _, u = heappop(ready)  # highest score, then smallest vertex ID\n        order.append(u)\n        for v in adj[u]:\n            degree[v] -= 1\n            if degree[v] == 0:\n                heappush(ready, (-score[v], v))\n    if len(order) != len(adj):\n        raise ValueError(\"The graph contains a directed cycle\")\n    return order",
+      "code_label": "Independent Python teaching code · standard method, not a proposed contribution",
+      "example": {
+        "headers": [
+          "Policy",
+          "Order"
+        ],
+        "rows": [
+          [
+            "FIFO",
+            "A, B, E, C, D"
+          ],
+          [
+            "Fixed priorities A=2, B=5, C=4, D=6, E=1",
+            "B, A, C, D, E"
+          ]
+        ],
+        "caption": "Same dependencies, different policy. Both outputs are valid."
+      },
+      "optional": false
+    },
+    {
+      "id": "reachability",
+      "title": "BFS reachability and redundant edges",
+      "why": "Learn what actually certifies that one prerequisite implies another.",
+      "video_id": "v-bfs",
+      "video_match": "Direct BFS lesson; transitive reduction requires the linked reference",
+      "watch_for": "Visited sets and systematic edge exploration. A stopped search is not proof that a path does not exist.",
+      "steps": [
+        "Search from u through successors to test whether v is reachable.",
+        "To test whether edge u → v is redundant, exclude that edge during the search.",
+        "Keep the edge unless an alternative path has been proved. A budget-limited search needs a distinct “unknown” result."
+      ],
+      "formula": "Remove (u,v) only if u reaches v in G without that edge.",
+      "proof": "The alternative path preserves the same precedence implication. In a finite DAG, its transitive reduction preserves reachability. This does not license deleting file-use metadata with different semantics.",
+      "cost": "One BFS: O(n + m) worst case. The clear per-edge reference below costs O(n + m + m(n + m)); it is not an optimized baseline.",
+      "warning": "The companion reduces graph edges, not release counters. A counter reduction needs its own ready-score equivalence proof. Do not present this existing technique as a new idea.",
+      "exercise": "Which easily checked properties might avoid an expensive search, and how would you measure the cost of those checks?",
+      "methods": [
+        "P3",
+        "P4",
+        "E08",
+        "M9",
+        "D4"
+      ],
+      "references": [
+        "d-transitive"
+      ],
+      "code": "def transitive_reduction(adj: Sequence[Sequence[int]]) -> list[list[int]]:\n    \"\"\"Slow but clear DAG reference: test an alternate path for each edge.\"\"\"\n    kahn(adj)  # reject cyclic graphs first\n    reduced = [[] for _ in adj]\n    for u, successors in enumerate(adj):\n        for v in successors:\n            if not reachable(adj, u, v, skip=(u, v)):\n                reduced[u].append(v)\n    return reduced",
+      "code_label": "Independent Python teaching code · standard method, not a proposed contribution",
+      "example": {
+        "headers": [
+          "Input edges",
+          "Result",
+          "Reason"
+        ],
+        "rows": [
+          [
+            "A → B, B → C, A → C",
+            "A → B, B → C",
+            "A → B → C replaces the direct A → C implication"
+          ]
+        ],
+        "caption": "The original graph is a DAG. The full module includes the BFS helper."
+      },
+      "optional": false
+    },
+    {
+      "id": "critical",
+      "title": "Longest paths and critical-path reasoning",
+      "why": "Recognize the difference between ordering overhead and workflow completion time.",
+      "video_id": "v-nptel-longest",
+      "video_match": "Direct DAG longest-path topic",
+      "watch_for": "Values passed along a topological order, rather than a search over arbitrary paths.",
+      "steps": [
+        "Give each task a nonnegative duration.",
+        "Process tasks in topological order and propagate the largest predecessor finish time.",
+        "Interpret the result under its resource assumptions before using it as a scheduling objective."
+      ],
+      "formula": "finish(v) = duration(v) + max({finish(u) : u ∈ pred(v)} ∪ {0})",
+      "proof": "A topological order processes every predecessor before v. Induction along that order makes finish(v) the earliest finish under unlimited processors, zero communication delay, and the stated durations.",
+      "cost": "O(n + m) time and O(n) auxiliary space.",
+      "warning": "This is not HEFT. Heterogeneous processors, communication costs and insertion-based placement require the original HEFT method. A critical path alone is not a finite-resource schedule.",
+      "exercise": "Which metric would change if an ordering algorithm ran faster but returned exactly the same task order?",
+      "methods": [
+        "M5",
+        "M6",
+        "M7",
+        "S4"
+      ],
+      "references": [
+        "v-dag"
+      ],
+      "code": "def earliest_finish(adj: Sequence[Sequence[int]], duration: Sequence[int]) -> list[int]:\n    \"\"\"Earliest finishes with unlimited processors and zero communication time.\"\"\"\n    if len(duration) != len(adj) or any(t < 0 for t in duration):\n        raise ValueError(\"One nonnegative duration is required per task\")\n    finish = list(duration)\n    for u in kahn(adj):\n        for v in adj[u]:\n            finish[v] = max(finish[v], finish[u] + duration[v])\n    return finish",
+      "code_label": "Independent Python teaching code · standard method, not a proposed contribution",
+      "example": {
+        "headers": [
+          "Task",
+          "Duration",
+          "Earliest finish"
+        ],
+        "rows": [
+          [
+            "A",
+            2,
+            2
+          ],
+          [
+            "B",
+            3,
+            3
+          ],
+          [
+            "C",
+            4,
+            7
+          ],
+          [
+            "D",
+            1,
+            8
+          ],
+          [
+            "E",
+            2,
+            2
+          ]
+        ],
+        "caption": "A → C, B → C, C → D; E is independent."
+      },
+      "optional": true
+    },
+    {
+      "id": "counting",
+      "title": "Reference counts and memory-aware list scheduling",
+      "why": "Read the actual mechanism our early proposal overlapped with.",
+      "video_id": "v-heaps",
+      "video_match": "Prerequisite video only; exact XLA algorithm is in the pinned source",
+      "watch_for": "Heap selection and update mechanics first. Then read BytesFreedIfScheduled and CreateSchedule in the actual XLA source.",
+      "steps": [
+        "Count each distinct unfinished task that consumes an intermediate file.",
+        "Credit a ready task only when it is the file’s last unfinished consumer.",
+        "After one completion, a count changing from two to one identifies a possible new release credit."
+      ],
+      "formula": "score_D(v) = −created(v) + Σ_f bytes(f) · 1[v ∈ C_f and |C_f ∖ D| = 1]",
+      "proof": "For a surviving consumer, the predicate “only unfinished consumer” can switch from false to true only at a two-to-one transition. Initial single-consumer cases need credit at initialization.",
+      "cost": "An optimized counter pass touches I = Σ_f |C_f| consumer incidences. This teaching trace also sorts and stores each remaining set: for k users of one file, up to O(k² log(k+1)) time and O(k²) output space. Those display costs are not a scheduler bound. Full scheduling also includes initialization and queue operations.",
+      "warning": "No dedicated XLA memory-scheduler walkthrough was verified. The code below is an isolated counting example, not the full scheduler. Reference counting, the priority formula and this event trigger already exist.",
+      "exercise": "What information must remain exact for the next ready-task choice, and what would an experiment have to show before claiming less maintenance work?",
+      "methods": [
+        "E20",
+        "E29",
+        "E30",
+        "P0",
+        "P1",
+        "M8"
+      ],
+      "references": [
+        "d-xla-scheduler",
+        "d-heap"
+      ],
+      "code": "def consumer_events(consumers: Iterable[int], completion_order: Sequence[int],\n                    size: int) -> list[dict]:\n    \"\"\"Illustrate a single file. All initial consumers are already eligible.\n\n    Sets make the surviving consumer visible; this is not an optimized scheduler.\n    The empty-set transition is lifetime accounting, not a second credit event.\n    \"\"\"\n    if size < 0:\n        raise ValueError(\"Negative file size\")\n    remaining = set(consumers)\n    if len(completion_order) != len(remaining) or set(completion_order) != remaining:\n        raise ValueError(\"Complete each distinct consumer exactly once\")\n    initial = next(iter(remaining)) if len(remaining) == 1 else None\n    rows = [{\"finished\": None, \"remaining\": sorted(remaining),\n             \"credit_to\": initial, \"credit\": size if initial is not None else 0}]\n    for u in completion_order:\n        old = len(remaining)\n        remaining.remove(u)\n        credit_to = next(iter(remaining)) if old == 2 else None\n        rows.append({\"finished\": u, \"remaining\": sorted(remaining),\n                     \"credit_to\": credit_to, \"credit\": size if credit_to is not None else 0})\n    return rows",
+      "code_label": "Independent Python teaching code · standard method, not a proposed contribution",
+      "example": {
+        "headers": [
+          "Completion",
+          "Unfinished consumers",
+          "New credit"
+        ],
+        "rows": [
+          [
+            "Start",
+            "[0, 1, 2]",
+            "none"
+          ],
+          [
+            0,
+            "[1, 2]",
+            "none"
+          ],
+          [
+            1,
+            "[2]",
+            "2 gets 8"
+          ],
+          [
+            2,
+            "[]",
+            "none"
+          ]
+        ],
+        "caption": "One 8-byte file; consumers 0, 1 and 2. All are initially ready. Credits in bytes; no storage-speedup claim."
+      },
+      "optional": false
+    },
+    {
+      "id": "incremental",
+      "title": "When an edge changes the order",
+      "why": "Distinguish incremental graph ordering from incremental score maintenance.",
+      "video_id": "v-dfs",
+      "video_match": "Prerequisite video only; no dedicated Pearce–Kelly video verified",
+      "watch_for": "Reachability and cycles. The actual incremental repair method remains in its paper, not this DFS lecture.",
+      "steps": [
+        "Given a valid order, a new edge u → v already fits if u precedes v.",
+        "For a backward edge, a pre-existing path v → u proves that the insertion creates a cycle.",
+        "Otherwise repair the order. The teaching baseline below recomputes; Pearce–Kelly instead searches and reassigns affected vertices."
+      ],
+      "formula": "A new u → v creates a cycle iff u = v or v already reaches u.",
+      "proof": "Any newly introduced cycle must use the new edge; removing that edge leaves a path v → u. Conversely, such a path together with u → v is a cycle.",
+      "cost": "Teaching baseline: O(n + m) per call, including validity checking and copying. It does not achieve Pearce–Kelly’s update behavior or the constant-time fast path of a maintained production index.",
+      "warning": "Completing a task in a fixed workflow does not insert an edge. Do not transfer incremental-edge complexity bounds to priority bookkeeping.",
+      "exercise": "Does your intended application change graph edges, task states, or only priority metadata? Which existing methods truly share that input model?",
+      "methods": [
+        "D1",
+        "D2",
+        "D3",
+        "D4",
+        "D5",
+        "D10",
+        "D11",
+        "D7",
+        "D8",
+        "D9"
+      ],
+      "references": [
+        "v-bfs"
+      ],
+      "code": "def insert_edge_reference(adj: Sequence[Sequence[int]], order: Sequence[int],\n                          u: int, v: int) -> tuple[list[list[int]], list[int]]:\n    \"\"\"An insertion baseline, NOT the Pearce-Kelly algorithm.\n\n    Accept a forward edge without reordering. Otherwise check for a cycle and\n    recompute. The caller supplies a valid order; input is not mutated.\n    \"\"\"\n    n = len(adj)\n    if not (0 <= u < n and 0 <= v < n):\n        raise ValueError(\"Unknown vertex\")\n    if not is_topological(adj, order):\n        raise ValueError(\"The supplied order is invalid\")\n    updated = [list(row) for row in adj]\n    if v in updated[u]:\n        return updated, list(order)\n    pos = {x: i for i, x in enumerate(order)}\n    if u == v or (pos[u] >= pos[v] and reachable(adj, v, u)):\n        raise ValueError(\"The new edge creates a cycle\")\n    updated[u].append(v)\n    return (updated, list(order)) if pos[u] < pos[v] else (updated, kahn(updated))",
+      "code_label": "Independent Python teaching code · standard method, not a proposed contribution",
+      "example": {
+        "headers": [
+          "Existing order",
+          "New edge",
+          "Consequence"
+        ],
+        "rows": [
+          [
+            "A, B, C with A → B → C",
+            "A → C",
+            "Order remains valid"
+          ],
+          [
+            "A, B, C with A → B → C",
+            "C → A",
+            "Creates a cycle"
+          ]
+        ],
+        "caption": "A graph-update example, not the fixed-Montage experiment."
+      },
+      "optional": true
+    },
+    {
+      "id": "proof",
+      "title": "Prove the invariant and check the code",
+      "why": "Use mathematics and an independent check for different purposes.",
+      "video_id": "v-induction",
+      "video_match": "Proof foundation, not a proof of the students’ future method",
+      "watch_for": "Base case, induction hypothesis, preserved step and termination.",
+      "steps": [
+        "State exactly which property must stay unchanged after each step.",
+        "Prove the initial state and one transition, then show that the process terminates.",
+        "Test an implementation against an independent reference and intentionally invalid cases."
+      ],
+      "formula": "Same prefix + same ready priorities + same tie-break ⇒ same next task.",
+      "proof": "Induction yields the same complete sequence only when all three conditions hold. Valid topological order alone does not establish equivalence to a particular priority policy.",
+      "cost": "Checking one completed order takes O(n + m) time and O(n) auxiliary space. The cost of a proof is not an empirical runtime metric.",
+      "warning": "Passing random tests is not a universal proof, and a correct standard implementation is not novel merely because students implement it.",
+      "exercise": "What is the smallest input that could falsify your claim, and is your checker independent of the proposed implementation?",
+      "methods": [
+        "S1",
+        "S5",
+        "P0",
+        "P1",
+        "P4"
+      ],
+      "references": [
+        "v-states",
+        "v-nptel-checking",
+        "d-tests"
+      ],
+      "code": "def is_topological(adj: Sequence[Sequence[int]], order: Sequence[int]) -> bool:\n    if len(order) != len(adj) or set(order) != set(range(len(adj))):\n        return False\n    pos = {v: i for i, v in enumerate(order)}\n    return all(pos[u] < pos[v] for u, row in enumerate(adj) for v in row)",
+      "code_label": "Independent Python teaching code · standard method, not a proposed contribution",
+      "example": {
+        "headers": [
+          "Claim",
+          "Required check"
+        ],
+        "rows": [
+          [
+            "Valid order",
+            "All vertices exactly once; all edges forward"
+          ],
+          [
+            "Equivalent policy",
+            "Same ready priorities and fixed tie-break"
+          ],
+          [
+            "Historical novelty",
+            "Exact mechanism compared with closest prior art"
+          ]
+        ],
+        "caption": "These are three distinct claims; none substitutes for the others."
+      },
+      "optional": false
+    },
+    {
+      "id": "measure",
+      "title": "Analyze and measure the complete cost",
+      "why": "Derive improvements from a measured bottleneck instead of a renamed algorithm.",
+      "video_id": "v-measure",
+      "video_match": "Measurement foundation; not an algorithm-specific performance result",
+      "watch_for": "Setup cost, timing variability and the boundary around the operation being measured.",
+      "steps": [
+        "Count graph work, preprocessing and priority maintenance separately.",
+        "Measure the complete operation under the same representation and input assumptions.",
+        "Include cases with no opportunity for the modification and cases where overhead dominates."
+      ],
+      "formula": "T_preparation + T_modified ordering < T_reference ordering",
+      "proof": "The inequality is the condition for a one-shot runtime benefit. Reducing one internal counter does not imply it. A better Big-O bound and a measured constant-factor improvement are separate claims.",
+      "cost": "Two thesis metrics: complete order-construction time and a precisely defined operation count. Correctness remains mandatory.",
+      "warning": "No GPU is needed for these metadata experiments. Do not claim faster image processing, guaranteed novelty, or Montage speedups from a synthetic trace.",
+      "exercise": "Which baseline could make your improvement disappear? Include that baseline before selecting the final rule.",
+      "methods": [
+        "P1",
+        "P2",
+        "P3",
+        "P4",
+        "P5",
+        "E29",
+        "E30"
+      ],
+      "references": [
+        "v-work",
+        "d-pyperf",
+        "d-timeit"
+      ],
+      "code": "",
+      "code_label": "Independent Python teaching code · standard method, not a proposed contribution",
+      "example": {
+        "headers": [
+          "Measure",
+          "Include"
+        ],
+        "rows": [
+          [
+            "Ordering time",
+            "All method-specific preprocessing and initialization"
+          ],
+          [
+            "Counter updates",
+            "Define decrements, inspections and queue updates separately"
+          ],
+          [
+            "Evidence",
+            "Per-instance differences, variability and regressions"
+          ]
+        ],
+        "caption": "A study plan, not measured performance."
+      },
+      "optional": false
+    }
+  ]
+}

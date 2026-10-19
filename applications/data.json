@@ -1,0 +1,1944 @@
+{
+  "version": 1,
+  "updated": "2026-10-15",
+  "profiles": [
+    {
+      "id": "fifo",
+      "engine": "fifo",
+      "title": "Load website scripts in the right order",
+      "product": "Django form assets",
+      "status": "In software",
+      "problem": "A calendar widget fails if its script runs before jQuery. Several widgets can request overlapping scripts.",
+      "role": "Django merges ordered asset lists with Python TopologicalSorter. Ready items have no unfinished prerequisites: the Kahn source-removal pattern.",
+      "benefit": "Preserves required script order and warns when the requested order is cyclic. This is a correctness benefit, not a reported speedup.",
+      "limit": "Does not minimize page-load time or replace a browser’s script loader.",
+      "match": "Core source-removal mechanism verified through Django and graphlib.",
+      "refs": [
+        "django-media",
+        "django-code",
+        "graphlib",
+        "kahn"
+      ],
+      "scenario": "app-web",
+      "input": "Two widgets require jQuery; both must come before noConflict.",
+      "output": "jQuery first, calendar and time in a valid middle order, noConflict last.",
+      "question": "Which part would dominate for large asset lists: graph construction, duplicate handling, or ordering?"
+    },
+    {
+      "id": "lifo",
+      "engine": "lifo",
+      "title": "Finish one image branch before starting another",
+      "product": "Dask local scheduling",
+      "status": "Documented policy",
+      "problem": "Starting every chunk first can keep many intermediate results alive.",
+      "role": "The documented local scheduler favors recently ready tasks with a LIFO policy, helping finish existing work.",
+      "benefit": "Explains a practical reason to choose a stack rather than a queue among eligible tasks.",
+      "limit": "No minimum-memory guarantee; the entire Dask policy includes more than a stack.",
+      "match": "Shared ready-stack policy, not a reproduction of every Dask scheduler.",
+      "refs": [
+        "dask"
+      ],
+      "scenario": "app-photos",
+      "input": "Two independent load → filter → save branches.",
+      "output": "A valid order that tends to finish one branch before the other.",
+      "question": "When does this policy help data lifetime, and when does it reduce available parallelism?"
+    },
+    {
+      "id": "priority",
+      "engine": "priority",
+      "title": "Choose useful build work first",
+      "product": "Ninja build system",
+      "status": "In software",
+      "problem": "Many source files are ready to compile, but some belong to longer remaining build chains.",
+      "role": "Ninja compares ready build edges using critical-path weights and an ID tie-break.",
+      "benefit": "A concrete use of priority selection inside dependency-respecting execution.",
+      "limit": "Priority alone does not establish an optimal build time. Real resource pools and durations matter.",
+      "match": "The demo uses fixed illustrative scores, not Ninja’s full priority calculation.",
+      "refs": [
+        "ninja",
+        "ninja-calc"
+      ],
+      "scenario": "app-build",
+      "input": "Header generation precedes two compilation tasks; both feed linking and testing.",
+      "output": "Only eligible tasks are selected, with the higher supplied priority first.",
+      "question": "Can an improvement retain the same decisions while reducing the cost of maintaining the queue?"
+    },
+    {
+      "id": "lexical",
+      "engine": "lexical",
+      "title": "Produce a repeatable dependency list",
+      "product": "NetworkX ordering API",
+      "status": "Related application",
+      "problem": "Two valid asset orders can differ just because input enumeration changed.",
+      "role": "A lexicographical topological sort chooses a stable key among eligible nodes.",
+      "benefit": "Provides a documented algorithm for reproducible dependency-respecting output.",
+      "limit": "The website use is an adaptation. No separate production adoption or speedup was verified for this exact policy.",
+      "match": "Library algorithm verified; asset-manifest example is illustrative.",
+      "refs": [
+        "lexical",
+        "django-media"
+      ],
+      "scenario": "app-web",
+      "input": "The same script dependencies, with task names used as tie-break keys.",
+      "output": "A deterministic valid order for this chosen key.",
+      "question": "Does the study need identical output, or merely any valid order? That changes its correctness target."
+    },
+    {
+      "id": "generations",
+      "engine": "generations",
+      "title": "Run a pipeline in dependency stages",
+      "product": "Python graphlib and NetworkX",
+      "status": "Related application",
+      "problem": "A batch system must know which jobs can start before their results are consumed.",
+      "role": "Topological generations expose layers of eligible work; graphlib separately exposes batches of currently ready tasks.",
+      "benefit": "Helps visualize parallel opportunities and dependency barriers.",
+      "limit": "Strict layers add a barrier; graphlib ready batches need not be executed as synchronous generations.",
+      "match": "Exact generation operation in NetworkX; practical dispatch motivation in graphlib.",
+      "refs": [
+        "generations",
+        "graphlib"
+      ],
+      "scenario": "app-photos",
+      "input": "Two independent image-processing chains.",
+      "output": "Loads form one generation, then filters, then saves.",
+      "question": "Is waiting for a whole generation necessary, or is it extra delay introduced by the executor?"
+    },
+    {
+      "id": "dfs",
+      "engine": "dfs",
+      "title": "Apply database updates safely",
+      "product": "Django migrations",
+      "status": "In software",
+      "problem": "A foreign-key update cannot run before both required tables exist.",
+      "role": "Django uses iterative DFS to construct forward and backward migration plans.",
+      "benefit": "Finds prerequisites before applying a requested migration, and dependents before removing one.",
+      "limit": "Real migration graphs may include replaced migrations and target-specific traversal.",
+      "match": "DFS family verified. The example visits the whole graph, whereas Django plans around a target.",
+      "refs": [
+        "django-migrate",
+        "migrations-doc"
+      ],
+      "scenario": "app-db",
+      "input": "Create users and posts, add their relationship, then add its index.",
+      "output": "A dependency-valid migration sequence, with AddAuthor before AddIndex.",
+      "question": "Would a target-specific traversal avoid work that a whole-graph ordering performs unnecessarily?"
+    },
+    {
+      "id": "bfs",
+      "engine": "bfs",
+      "title": "Explain a possible lock-order problem",
+      "product": "Linux lockdep",
+      "status": "In software",
+      "problem": "Different code paths acquire locks in conflicting orders and may hang.",
+      "role": "Linux lockdep includes breadth-first graph searches in its dependency checks.",
+      "benefit": "A graph path can explain the chain connecting one lock class to another.",
+      "limit": "Real lock modes and annotations exceed this example; finding a path is not itself proof of an observed deadlock.",
+      "match": "BFS routine is present in lockdep; the simplified path example is not a kernel trace.",
+      "refs": [
+        "lockdep",
+        "lockdep-code"
+      ],
+      "scenario": "app-lockpath",
+      "input": "CacheLock → UserLock → LogLock; ask whether CacheLock reaches LogLock.",
+      "output": "The two-edge lock-dependency path.",
+      "question": "Can an explanation remain short without silently ignoring relevant dependency types?"
+    },
+    {
+      "id": "bounded",
+      "engine": "bounded",
+      "title": "Keep an interactive dependency check responsive",
+      "product": "Dependency-checking tools",
+      "status": "Teaching extension",
+      "problem": "A search may be too expensive to finish within an interactive work budget.",
+      "role": "The demonstration limits edge inspections and preserves UNKNOWN when it has not proved an answer.",
+      "benefit": "Makes the cost-versus-certainty trade-off explicit.",
+      "limit": "No named product was verified to use this exact cutoff rule. A truncated search cannot certify no path.",
+      "match": "Related to dependency checks; this particular budgeted procedure is a local teaching mechanism.",
+      "refs": [
+        "lockdep",
+        "pk"
+      ],
+      "scenario": "app-lockpath",
+      "input": "The lock path needs two edges; the initial search budget is one.",
+      "output": "UNKNOWN, not “no dependency”; increasing the budget finds the path.",
+      "question": "Which inexpensive certificate could avoid an unnecessary search while remaining exact?"
+    },
+    {
+      "id": "reduction",
+      "engine": "reduction",
+      "title": "Remove distracting arrows from a build diagram",
+      "product": "Graphviz tred; Pegasus cleanup research",
+      "status": "In software",
+      "problem": "A diagram contains both Compile → Test → Package and an extra Compile → Package arrow.",
+      "role": "Transitive reduction removes an edge only when another path preserves its reachability.",
+      "benefit": "Graphviz provides a real reduction tool; workflow research uses related dependency removal for cleanup planning.",
+      "limit": "Not safe when an edge has extra semantics beyond ordering. Finding redundancy can cost more than processing it.",
+      "match": "Graphviz operation is exact; the deployment pipeline and reference implementation are illustrative.",
+      "refs": [
+        "tred",
+        "footprint"
+      ],
+      "scenario": "app-ci",
+      "input": "A four-step deployment DAG with three redundant shortcuts.",
+      "output": "Three necessary chain edges remain, with the same reachability.",
+      "question": "How much work is worth spending to prove that an edge is redundant?"
+    },
+    {
+      "id": "enumeration",
+      "engine": "enumeration",
+      "title": "Check all legal orders of a tiny test case",
+      "product": "NetworkX exhaustive ordering",
+      "status": "Library operation",
+      "problem": "A new scheduler seems correct on one output, but another valid order may expose a bug or a smaller peak.",
+      "role": "Enumerate every valid order of a small DAG and check each against the proposed invariant.",
+      "benefit": "Provides an exact local oracle when the graph is tiny.",
+      "limit": "Output count can grow factorially. This is a testing use, not a scalable production scheduler.",
+      "match": "Documented enumeration function; our test-fixture use is local.",
+      "refs": [
+        "allorders"
+      ],
+      "scenario": "app-enum",
+      "input": "MakeSchema must precede LoadData and BuildIndex.",
+      "output": "Exactly two valid orders for the two independent final tasks.",
+      "question": "Can a tiny exhaustive counterexample disprove a broad claim before a large experiment is built?"
+    },
+    {
+      "id": "critical",
+      "engine": "critical",
+      "title": "Identify the build chain that limits completion",
+      "product": "Ninja build scheduling",
+      "status": "In software",
+      "problem": "Parallel compilation cannot bypass a long chain ending in the final executable.",
+      "role": "A reverse dependency traversal computes critical-path priorities; the demo shows longest-path dynamic programming with known toy durations.",
+      "benefit": "Explains why critical-path information is useful to a real build tool.",
+      "limit": "The 10-unit toy bound assumes enough processors and no extra transfers. It is not a measured Ninja build time.",
+      "match": "Critical-path mechanism verified; cost assumptions are simplified.",
+      "refs": [
+        "ninja-calc",
+        "ninja"
+      ],
+      "scenario": "app-build",
+      "input": "Header generation 2, UI compile 3, core compile 5, link 2, test 1 time units.",
+      "output": "Critical dependency-chain length 10 toy time units.",
+      "question": "Are inaccurate duration estimates more important than the cost of computing the ranking?"
+    },
+    {
+      "id": "insertion",
+      "engine": "insertion",
+      "title": "Recheck a pipeline after a dependency edit",
+      "product": "Dependency editors; comparison to Abseil",
+      "status": "Reference method",
+      "problem": "A user adds a prerequisite after a valid order has already been constructed.",
+      "role": "Add the edge and recompute an order, rejecting the graph if a cycle appears.",
+      "benefit": "Simple correctness reference for evaluating a genuine incremental method.",
+      "limit": "Recomputes unaffected work. Abseil is evidence for the incremental problem, not adoption of this reference routine.",
+      "match": "A locally implemented baseline, not a product claim.",
+      "refs": [
+        "abseil",
+        "pk",
+        "graphlib"
+      ],
+      "scenario": "app-lockinsert",
+      "input": "Existing lock dependencies plus the new ConfigLock → CacheLock constraint.",
+      "output": "A repaired valid order that moves ConfigLock before CacheLock.",
+      "question": "How often are edits already consistent with the stored order, requiring no repair?"
+    },
+    {
+      "id": "pk",
+      "engine": "pk",
+      "title": "Catch dangerous lock acquisition orders",
+      "product": "Abseil GraphCycles and Mutex",
+      "status": "In software",
+      "problem": "A newly observed lock order may contradict a previously recorded chain.",
+      "role": "Abseil explicitly implements Pearce–Kelly ranks and restricted repair for incremental cycle detection.",
+      "benefit": "Connects a named research algorithm to a concrete debugging feature in a maintained C++ library.",
+      "limit": "Debugging overhead remains; a potential lock-order cycle is not a guaranteed live deadlock.",
+      "match": "Named algorithm match verified in pinned source; demo covers core insertion repair only.",
+      "refs": [
+        "abseil",
+        "mutex",
+        "pk"
+      ],
+      "scenario": "app-lockinsert",
+      "input": "A backward but acyclic ConfigLock → CacheLock insertion.",
+      "output": "Only the necessary order relationship is repaired; a cyclic alternative is rejected.",
+      "question": "Which affected-region shape makes local repair cheaper or more expensive than recomputation?"
+    },
+    {
+      "id": "scc",
+      "engine": "scc",
+      "title": "Group mutually recursive functions",
+      "product": "LLVM graph utilities and compiler passes",
+      "status": "In software",
+      "problem": "Two functions call one another, so treating each as an independent acyclic step is incorrect.",
+      "role": "Tarjan SCC groups vertices that can reach one another; LLVM’s generic iterator explicitly uses Tarjan.",
+      "benefit": "Lets compiler analyses process cycles as components rather than pretending the call graph is a DAG.",
+      "limit": "SCC membership alone does not prove that a function will loop forever or establish a legal task-execution order.",
+      "match": "Tarjan utility and CGSCC analysis context verified; the tiny call graph is illustrative.",
+      "refs": [
+        "llvm-scc",
+        "llvm-pass"
+      ],
+      "scenario": "app-callgraph",
+      "input": "ParseCfg calls ExpandVar and ExpandVar calls ParseCfg.",
+      "output": "One recursive component containing ParseCfg and ExpandVar.",
+      "question": "Can a transformation change component boundaries and invalidate cached analysis?"
+    },
+    {
+      "id": "heap",
+      "engine": "heap",
+      "title": "Select the next event or urgent job",
+      "product": "SimPy and Python heapq",
+      "status": "Related application",
+      "problem": "A simulation or job dispatcher repeatedly selects one pending item, sometimes after its priority changes.",
+      "role": "Heap queues support inexpensive selection; invalidated entries can be skipped when removed.",
+      "benefit": "SimPy documents a time-ordered heap; Python documents changed-priority handling.",
+      "limit": "The demo’s max-priority jobs and version stamps are not SimPy’s exact time-based event loop.",
+      "match": "Heap usage verified; mutable-priority demonstration is independently written.",
+      "refs": [
+        "heapq",
+        "simpy"
+      ],
+      "scenario": "app-jobs",
+      "input": "Email, Backup and Index jobs; Email becomes more urgent.",
+      "output": "Email is selected first; its old stale entry is not executed later.",
+      "question": "Do stale entries accumulate enough to outweigh the benefit of avoiding in-place updates?"
+    },
+    {
+      "id": "fullscore",
+      "engine": "fullscore",
+      "title": "Check a storage-aware task ordering",
+      "product": "XLA scheduling as the practical reference",
+      "status": "Reference method",
+      "problem": "A compiler must choose among instructions whose intermediates consume memory.",
+      "role": "The local oracle recomputes released bytes minus created bytes for every ready task.",
+      "benefit": "Provides a straightforward check of the same simplified score used by the incremental demos.",
+      "limit": "This deliberately direct oracle is not the shipped XLA scheduler and is not the strongest runtime baseline.",
+      "match": "Score motivation matches XLA; full recomputation is our independent reference.",
+      "refs": [
+        "xla",
+        "xla-overview"
+      ],
+      "scenario": "app-photo-files",
+      "input": "An image buffer feeds preview and filter tasks before export.",
+      "output": "A valid order according to the declared release-minus-production score.",
+      "question": "Which oracle checks correctness without becoming an artificially weak performance competitor?"
+    },
+    {
+      "id": "counters",
+      "engine": "counters",
+      "title": "Maintain memory-related scheduling priorities",
+      "product": "XLA list memory scheduler",
+      "status": "In software",
+      "problem": "Recalculating every ready instruction’s release benefit repeats work after each completed instruction.",
+      "role": "The source tracks unfinished uses and revisits affected priorities when one use remains.",
+      "benefit": "Verifies that the core update mechanism already has a real compiler application.",
+      "limit": "The file model omits aliases and special instructions. These simulations prove no compiler or inference speedup.",
+      "match": "Core event mechanism verified, not an exact full XLA reproduction.",
+      "refs": [
+        "xla",
+        "xla-overview"
+      ],
+      "scenario": "app-photo-files",
+      "input": "Preview and Filter share Pixels and Alpha; the last consumer receives release credit.",
+      "output": "The same simplified priority order as full recomputation, with selective updates.",
+      "question": "Where is the remaining cost after competent incremental updates are already implemented?"
+    },
+    {
+      "id": "grouped",
+      "engine": "grouped",
+      "title": "Avoid duplicate bookkeeping for shared image files",
+      "product": "Workflow cleanup and compiler metadata context",
+      "status": "Teaching extension",
+      "problem": "Several files have identical consumers, so their remaining-consumer counts move together.",
+      "role": "The local example shares counters for equal consumer sets while keeping creation costs separate.",
+      "benefit": "Illustrates an exact representation change relevant to data-intensive task graphs.",
+      "limit": "No separate deployed system was verified to use this exact grouping rule. Preprocessing may eliminate its runtime benefit.",
+      "match": "Related application evidence only; do not present this local variant as a published or novel algorithm.",
+      "refs": [
+        "footprint",
+        "xla",
+        "montage"
+      ],
+      "scenario": "app-photo-files",
+      "input": "Pixels and Alpha are both consumed by Preview and Filter.",
+      "output": "A shared consumer group with unchanged ready-task score decisions.",
+      "question": "Does grouping still help after excluding trivially static final consumers?"
+    },
+    {
+      "id": "maximal",
+      "engine": "maximal",
+      "title": "Recognize when the last file user is already known",
+      "product": "Pegasus cleanup dependency reduction",
+      "status": "Teaching extension",
+      "problem": "A file has several users, but dependencies already force one user to finish last.",
+      "role": "The local proof retains only consumers that may be last; singleton release credit can be fixed in advance.",
+      "benefit": "Shows how ordering information can replace some dynamic bookkeeping.",
+      "limit": "Pegasus reduces cleanup dependencies, not this exact score metadata. Reachability preprocessing is not free.",
+      "match": "Closely related prior structural idea, not a verified deployment of this local priority representation.",
+      "refs": [
+        "footprint",
+        "pegasus"
+      ],
+      "scenario": "app-forced",
+      "input": "Preview must precede Filter; both consume Pixels and Alpha.",
+      "output": "Filter is the forced last consumer, so release credit does not need those dynamic counters.",
+      "question": "Can the required dependency certificate be cheaper than maintaining the original counters?"
+    },
+    {
+      "id": "lifetime",
+      "engine": "lifetime",
+      "title": "Delete temporary images only after their final use",
+      "product": "Pegasus and Montage workflows",
+      "status": "Research and software",
+      "problem": "Large image pipelines retain temporary files and can exhaust their working storage.",
+      "role": "Cleanup jobs and last-use reasoning release intermediates after all required consumers have finished.",
+      "benefit": "The 2007 study evaluates Montage and LIGO, including real execution; Pegasus documents cleanup support.",
+      "limit": "Staging, grouped cleanup and parallelism affect results. File bytes are not process RAM.",
+      "match": "Real application verified; our one-task-at-a-time replay is not a Montage execution.",
+      "refs": [
+        "footprint",
+        "pegasus",
+        "montage"
+      ],
+      "scenario": "app-photo-files",
+      "input": "Pixels and Alpha must survive until both Preview and Filter finish.",
+      "output": "Files are released after their last use; the final exported image is retained.",
+      "question": "What does the trace omit, such as temporary files inside a task or data staging?"
+    },
+    {
+      "id": "heft",
+      "engine": "heft",
+      "title": "Assign image-processing tasks to different processors",
+      "product": "HEFT-family image and video scheduling research",
+      "status": "Research evaluation",
+      "problem": "A filter runs faster on one processor while another operation favors a different processor.",
+      "role": "HEFT combines dependency ranking with estimated finish-time placement on processors.",
+      "benefit": "PHEFT evaluates application-shaped LIGO and Montage workloads; embedded scheduling research motivates video and image use.",
+      "limit": "PHEFT uses simulated workloads and is a variant. No claim that a named consumer app deploys stock HEFT or that our example measures hardware.",
+      "match": "Core HEFT teaching model; application evidence is family-level research.",
+      "refs": [
+        "heft",
+        "pheft",
+        "arras"
+      ],
+      "scenario": "app-video",
+      "input": "Decode, Filter, Thumb, Encode and Upload have different costs on two processors.",
+      "output": "A dependency-valid processor assignment and a modeled completion time.",
+      "question": "Would a better schedule still be worthwhile after the scheduler’s own runtime is counted?"
+    },
+    {
+      "id": "sortscan",
+      "engine": "sortscan",
+      "title": "Maintain task order after a small dependency change",
+      "product": "Incremental graph maintenance context",
+      "status": "Teaching extension",
+      "problem": "A few affected tasks may lie close together or be spread across a long order interval.",
+      "role": "Recover their previous order by sorting affected positions or scanning the interval.",
+      "benefit": "Makes the two operation costs visible on the same affected set.",
+      "limit": "No verified deployment or originality claim for this exact switch. It is one subroutine, not a complete dynamic sorter.",
+      "match": "Inspired by reassignment work in incremental ordering; local mechanism only.",
+      "refs": [
+        "pk",
+        "abseil"
+      ],
+      "scenario": "app-positions",
+      "input": "Three affected build tasks are scattered through an eight-task order.",
+      "output": "Both procedures recover the same previous relative order.",
+      "question": "Can a cheap observable condition choose a method without costing more than the choice saves?"
+    },
+    {
+      "id": "lrc",
+      "engine": "lrc",
+      "title": "Keep cached data that future tasks will use",
+      "product": "LRC Spark research prototype",
+      "status": "Research prototype",
+      "problem": "A data-analysis job has limited cache space and may evict data that later tasks need.",
+      "role": "LRC uses dependency information rather than recency alone when deciding which cached data to remove.",
+      "benefit": "The authors implemented and evaluated a Spark-based prototype; it is not just a hypothetical cache application.",
+      "limit": "Not the default policy of all Spark deployments. The demo isolates one count-based eviction, not the full distributed policy.",
+      "match": "Core dependency-count motivation; limited eviction demonstration.",
+      "refs": [
+        "lrc"
+      ],
+      "scenario": "app-cache",
+      "input": "Users data has three pending consumers, Products two, Temp one.",
+      "output": "The count-based demo selects Temp for eviction.",
+      "question": "Is this workload limited by cache misses, or does another cost dominate?"
+    }
+  ],
+  "sources": {
+    "django-media": {
+      "id": "django-media",
+      "title": "Django form assets — dependency order",
+      "url": "https://docs.djangoproject.com/en/5.2/topics/forms/media/",
+      "kind": "Official documentation",
+      "locator": "Order of assets",
+      "support": "Documents why jQuery must precede its dependent scripts and shows merging two asset lists.",
+      "limit": "A correctness use case; the page does not report a speedup.",
+      "year": 2025,
+      "checked": "2026-10-15"
+    },
+    "django-code": {
+      "id": "django-code",
+      "title": "Django Media.merge implementation",
+      "url": "https://github.com/django/django/blob/stable/5.2.x/django/forms/widgets.py",
+      "kind": "Source code",
+      "locator": "Media.merge; TopologicalSorter import",
+      "support": "The inspected implementation constructs a graph with TopologicalSorter and requests static_order.",
+      "limit": "A maintenance branch, not an immutable snapshot. Kahn linkage is through CPython graphlib, not a Django claim of a new sorter.",
+      "year": 2025,
+      "checked": "2026-10-15"
+    },
+    "graphlib": {
+      "id": "graphlib",
+      "title": "Python graphlib — topological task processing",
+      "url": "https://docs.python.org/3/library/graphlib.html",
+      "kind": "Official documentation",
+      "locator": "TopologicalSorter; get_ready; done; static_order",
+      "support": "Tracks unfinished predecessors, releases eligible tasks, and supports concurrent task dispatch.",
+      "limit": "The graph is fixed after preparation. Availability of several tasks is not a guarantee of parallel speedup.",
+      "year": null,
+      "checked": "2026-10-15"
+    },
+    "kahn": {
+      "id": "kahn",
+      "title": "Kahn — Topological Sorting of Large Networks",
+      "url": "https://doi.org/10.1145/368996.369025",
+      "kind": "Research paper",
+      "locator": "1962 publication record",
+      "support": "Historical source-removal foundation.",
+      "limit": "Used as an algorithm anchor, not evidence for a modern software speedup.",
+      "year": 1962,
+      "checked": "2026-10-15"
+    },
+    "dask": {
+      "id": "dask",
+      "title": "Dask scheduling policy",
+      "url": "https://docs.dask.org/en/stable/scheduling-policy.html",
+      "kind": "Official documentation",
+      "locator": "Last in first out; Break ties with depth-first search",
+      "support": "Documents a local scheduler policy that favors finishing recently started work.",
+      "limit": "Do not transfer this policy to every distributed scheduler or infer an optimal memory schedule.",
+      "year": null,
+      "checked": "2026-10-15"
+    },
+    "ninja": {
+      "id": "ninja",
+      "title": "Ninja critical-path priority comparator",
+      "url": "https://github.com/ninja-build/ninja/blob/b81e306232dfa644e92145c7d2871690017969e8/src/graph.h",
+      "kind": "Pinned source code",
+      "locator": "EdgePriorityLess; critical_path_weight",
+      "support": "Ready-edge comparison uses critical-path weights with an ID tie-break.",
+      "limit": "Toy durations in this guide do not reproduce Ninja estimates or a measured build speedup.",
+      "year": null,
+      "checked": "2026-10-15"
+    },
+    "ninja-calc": {
+      "id": "ninja-calc",
+      "title": "Ninja critical-path weight construction",
+      "url": "https://github.com/ninja-build/ninja/blob/b81e306232dfa644e92145c7d2871690017969e8/src/build.cc",
+      "kind": "Pinned source code",
+      "locator": "Plan priority computation; reverse traversal of sorted edges",
+      "support": "Computes critical-path weights for build edges.",
+      "limit": "Real build scheduling also handles dirty outputs, resource pools and command execution.",
+      "year": null,
+      "checked": "2026-10-15"
+    },
+    "lexical": {
+      "id": "lexical",
+      "title": "NetworkX lexicographical topological sort",
+      "url": "https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.dag.lexicographical_topological_sort.html",
+      "kind": "Official implementation documentation",
+      "locator": "Function behavior and examples",
+      "support": "Combines dependency validity with a deterministic key order.",
+      "limit": "The illustrated asset-manifest use is our adaptation, not a verified named deployment.",
+      "year": null,
+      "checked": "2026-10-15"
+    },
+    "generations": {
+      "id": "generations",
+      "title": "NetworkX topological generations",
+      "url": "https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.dag.topological_generations.html",
+      "kind": "Official implementation documentation",
+      "locator": "Function definition",
+      "support": "Partitions a DAG into generations consistent with prerequisites.",
+      "limit": "A phase-by-phase executor may impose barriers absent from a ready-as-soon-as-possible scheduler.",
+      "year": null,
+      "checked": "2026-10-15"
+    },
+    "django-migrate": {
+      "id": "django-migrate",
+      "title": "Django migration dependency traversal",
+      "url": "https://github.com/django/django/blob/5.2/django/db/migrations/graph.py",
+      "kind": "Pinned release source",
+      "locator": "MigrationGraph.forwards_plan, backwards_plan, iterative_dfs",
+      "support": "Uses iterative depth-first search to construct migration plans.",
+      "limit": "Django traverses parent links for a requested target; our whole-graph DFS demonstration is not a byte-for-byte implementation.",
+      "year": 2025,
+      "checked": "2026-10-15"
+    },
+    "migrations-doc": {
+      "id": "migrations-doc",
+      "title": "Django migrations — dependencies",
+      "url": "https://docs.djangoproject.com/en/6.0/topics/migrations/",
+      "kind": "Official documentation",
+      "locator": "Dependencies; migration graph",
+      "support": "Database operations must respect relationships such as a referenced table existing before a foreign key.",
+      "limit": "No speedup measurement is stated for DFS itself.",
+      "year": null,
+      "checked": "2026-10-15"
+    },
+    "lockdep": {
+      "id": "lockdep",
+      "title": "Linux lock dependency validator",
+      "url": "https://docs.kernel.org/locking/lockdep-design.html",
+      "kind": "Official documentation",
+      "locator": "Dependency graph; multi-lock dependency rules",
+      "support": "Detects inconsistent lock acquisition orders that can lead to deadlock.",
+      "limit": "Kernel lock modes and annotations make the actual validation more involved than a plain directed graph.",
+      "year": null,
+      "checked": "2026-10-15"
+    },
+    "lockdep-code": {
+      "id": "lockdep-code",
+      "title": "Linux lockdep breadth-first search",
+      "url": "https://github.com/torvalds/linux/blob/0fcb05b72344f40806cbe810de8872f1698bf053/kernel/locking/lockdep.c",
+      "kind": "Pinned source code",
+      "locator": "__bfs; check_noncircular",
+      "support": "The inspected source uses BFS routines in lock-dependency validation.",
+      "limit": "The teaching path is a simplified graph witness, not a kernel trace or a complete lockdep implementation.",
+      "year": null,
+      "checked": "2026-10-15"
+    },
+    "tred": {
+      "id": "tred",
+      "title": "Graphviz tred — transitive reduction",
+      "url": "https://graphviz.org/docs/cli/tred/",
+      "kind": "Official tool documentation",
+      "locator": "Transitive reduction filter for directed graphs",
+      "support": "Provides a concrete graph simplification tool that removes reachability-redundant edges.",
+      "limit": "Our deployment pipeline is illustrative. Edge labels may encode semantics beyond reachability.",
+      "year": null,
+      "checked": "2026-10-15"
+    },
+    "allorders": {
+      "id": "allorders",
+      "title": "NetworkX all_topological_sorts",
+      "url": "https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.dag.all_topological_sorts.html",
+      "kind": "Official implementation documentation",
+      "locator": "Algorithm reference to Knuth and Szwarcfiter; function output",
+      "support": "Enumerates valid topological orders.",
+      "limit": "Exhaustive checking of tiny fixtures is a local testing application, not a verified large production system.",
+      "year": null,
+      "checked": "2026-10-15"
+    },
+    "pk": {
+      "id": "pk",
+      "title": "Pearce and Kelly — A Dynamic Topological Sort Algorithm for DAGs",
+      "url": "https://whileydave.com/publications/pk07_jea/",
+      "kind": "Author publication page",
+      "locator": "Abstract; implementations and use",
+      "support": "Gives the dynamic algorithm and identifies implementations including Abseil.",
+      "limit": "Reported comparisons are workload-dependent. No universal advantage over recomputation.",
+      "year": 2007,
+      "checked": "2026-10-15"
+    },
+    "abseil": {
+      "id": "abseil",
+      "title": "Abseil GraphCycles source",
+      "url": "https://github.com/abseil/abseil-cpp/blob/20250127.0/absl/synchronization/internal/graphcycles.cc",
+      "kind": "Pinned release source",
+      "locator": "File introduction and rank maintenance",
+      "support": "Explicitly identifies the Pearce–Kelly algorithm for incremental cycle detection.",
+      "limit": "The teaching repair is narrower than the full GraphCycles API and its allocation machinery.",
+      "year": 2025,
+      "checked": "2026-10-15"
+    },
+    "mutex": {
+      "id": "mutex",
+      "title": "Abseil synchronization guide",
+      "url": "https://abseil.io/docs/cpp/guides/synchronization",
+      "kind": "Official documentation",
+      "locator": "Deadlock detection",
+      "support": "Tracks acquired-before lock relationships and reports potential lock-order cycles.",
+      "limit": "Detection carries overhead; the guide treats it as a debugging aid, not a proof that a deadlock will occur.",
+      "year": null,
+      "checked": "2026-10-15"
+    },
+    "llvm-scc": {
+      "id": "llvm-scc",
+      "title": "LLVM SCCIterator source",
+      "url": "https://llvm.org/doxygen/SCCIterator_8h_source.html",
+      "kind": "Official source documentation",
+      "locator": "File introduction",
+      "support": "Explicitly names Tarjan DFS for enumerating strongly connected components in linear graph time.",
+      "limit": "The sample call graph omits the full compiler IR and pass pipeline.",
+      "year": null,
+      "checked": "2026-10-15"
+    },
+    "llvm-pass": {
+      "id": "llvm-pass",
+      "title": "LLVM new pass manager",
+      "url": "https://llvm.org/docs/NewPassManager.html",
+      "kind": "Official documentation",
+      "locator": "Adding passes; CGSCC pass hierarchy",
+      "support": "Compiler passes can operate on call-graph strongly connected components.",
+      "limit": "The existence of this hierarchy is not a claim that every pass uses the identical generic SCCIterator.",
+      "year": null,
+      "checked": "2026-10-15"
+    },
+    "heapq": {
+      "id": "heapq",
+      "title": "Python heapq — changing task priorities",
+      "url": "https://docs.python.org/3/library/heapq.html",
+      "kind": "Official documentation",
+      "locator": "Priority Queue Implementation Notes",
+      "support": "Describes replacement entries and removal markers for changed priorities.",
+      "limit": "A version stamp in the teaching engine is an equivalent local technique, not new priority-queue research.",
+      "year": null,
+      "checked": "2026-10-15"
+    },
+    "simpy": {
+      "id": "simpy",
+      "title": "SimPy — time and scheduling",
+      "url": "https://simpy.readthedocs.io/en/latest/topical_guides/time_and_scheduling.html",
+      "kind": "Official documentation",
+      "locator": "SimPy events and time",
+      "support": "Uses a heap queue of time, event ID and event to process events deterministically.",
+      "limit": "The mutable-priority demonstration is not SimPy’s exact event loop.",
+      "year": null,
+      "checked": "2026-10-15"
+    },
+    "xla": {
+      "id": "xla",
+      "title": "XLA list memory scheduler",
+      "url": "https://github.com/tensorflow/tensorflow/blob/v2.10.0/tensorflow/compiler/xla/service/hlo_memory_scheduler.cc",
+      "kind": "Pinned release source",
+      "locator": "ListScheduler; BytesFreedIfScheduled; CreateSchedule",
+      "support": "Uses ready instructions, release-minus-created-byte priorities and unfinished-use counts.",
+      "limit": "Compiler buffers include aliases and special instruction rules absent from the file model. No new benchmark performed here.",
+      "year": 2022,
+      "checked": "2026-10-15"
+    },
+    "xla-overview": {
+      "id": "xla-overview",
+      "title": "OpenXLA — compiler overview",
+      "url": "https://openxla.org/xla",
+      "kind": "Official documentation",
+      "locator": "Overview",
+      "support": "XLA compiles machine-learning computations and targets multiple hardware backends.",
+      "limit": "The JavaScript simulation does not execute a trained model or measure inference speed.",
+      "year": null,
+      "checked": "2026-10-15"
+    },
+    "footprint": {
+      "id": "footprint",
+      "title": "Singh et al. — Optimizing Workflow Data Footprint",
+      "url": "https://dcc.ligo.org/public/0006/P070017/000/P070017-00.pdf",
+      "kind": "Research paper",
+      "locator": "Cleanup dependency reduction; experiments with Montage and LIGO",
+      "support": "Studies cleanup placement and dependency reduction on scientific workflows, including real executions.",
+      "limit": "Cleanup alone does not resolve the staging behavior of every workflow; changing structure can affect parallelism. Parsed narrative inspected; PDF screenshot retrieval failed in this update.",
+      "year": 2007,
+      "checked": "2026-10-15"
+    },
+    "pegasus": {
+      "id": "pegasus",
+      "title": "Pegasus workflow data management",
+      "url": "https://pegasus.isi.edu/documentation/reference-guide/data-management.html",
+      "kind": "Official documentation",
+      "locator": "In-place cleanup",
+      "support": "Workflow planning can insert cleanup jobs for data no longer needed.",
+      "limit": "Grouped cleanup may delay release. The file-lifetime demo does not implement all Pegasus staging and recovery rules.",
+      "year": null,
+      "checked": "2026-10-15"
+    },
+    "montage": {
+      "id": "montage",
+      "title": "WfCommons Montage execution instances",
+      "url": "https://github.com/wfcommons/WfInstances/blob/main/pegasus/montage/README.md",
+      "kind": "Benchmark documentation",
+      "locator": "Workflow tasks; execution-instance table",
+      "support": "Provides task dependencies and file metadata for Montage image mosaics.",
+      "limit": "New interactive inputs are hand-authored teaching examples, not these recorded traces.",
+      "year": null,
+      "checked": "2026-10-15"
+    },
+    "heft": {
+      "id": "heft",
+      "title": "Topcuoglu, Hariri and Wu — Performance-Effective and Low-Complexity Task Scheduling",
+      "url": "https://doi.org/10.1109/71.993206",
+      "kind": "Research paper",
+      "locator": "HEFT task ranking and processor-selection phases",
+      "support": "HEFT ranks DAG tasks and chooses processors using estimated finish times.",
+      "limit": "A heuristic rather than a global optimum; depends on execution and communication estimates.",
+      "year": 2002,
+      "checked": "2026-10-15"
+    },
+    "pheft": {
+      "id": "pheft",
+      "title": "Drozdov et al. — PHEFT: Pessimistic Image Processing Workflow Scheduling for DSP Clusters",
+      "url": "https://www.mdpi.com/1999-4893/11/5/76",
+      "kind": "Research evaluation",
+      "locator": "Workload generation and simulation experiments",
+      "support": "Evaluates scheduling strategies using LIGO- and Montage-shaped workloads and modeled DSP clusters.",
+      "limit": "This is a simulation study of a HEFT-family variant, not proof that stock HEFT was deployed in a consumer video app.",
+      "year": 2018,
+      "checked": "2026-10-15"
+    },
+    "arras": {
+      "id": "arras",
+      "title": "Arras et al. — List Scheduling in Embedded Systems Under Memory Constraints",
+      "url": "https://link.springer.com/article/10.1007/s10766-014-0338-1",
+      "kind": "Research paper — abstract inspected",
+      "locator": "Publisher abstract",
+      "support": "Studies memory-aware extensions of list scheduling for video decoding and image processing.",
+      "limit": "Only primary abstract inspected here; numerical or device-specific claims are not reproduced. Online 2014, journal issue 2015.",
+      "year": 2015,
+      "checked": "2026-10-15"
+    },
+    "lrc": {
+      "id": "lrc",
+      "title": "Yu et al. — LRC: Dependency-Aware Cache Management for Data Analytics Clusters",
+      "url": "https://arxiv.org/abs/1703.08280",
+      "kind": "Research prototype",
+      "locator": "Abstract; Spark prototype",
+      "support": "Uses unfinished-dependent information to improve data caching in the authors’ Spark-based evaluation.",
+      "limit": "Not the standard policy of every Spark installation. Benefits depend on cache-sensitive workloads.",
+      "year": 2017,
+      "checked": "2026-10-15"
+    }
+  },
+  "routes": {
+    "S0": {
+      "id": "S0",
+      "name": "Lasser",
+      "engine": "fifo",
+      "application": "Ordering network elements.",
+      "mechanism": "An early published treatment of topological ordering of numbered network elements.",
+      "research_result": "Source-supported summary; no independent experiment in this edition.",
+      "limit": "Only its bibliographic role is used here; no unverified complexity or priority claim.",
+      "sources": [
+        {
+          "title": "Lasser (1961), Topological ordering of a list of randomly-numbered elements of a network",
+          "url": "https://doi.org/10.1145/355578.366314"
+        },
+        {
+          "title": "Kahn (1962), Topological sorting of large networks",
+          "url": "https://doi.org/10.1145/368996.369025"
+        }
+      ],
+      "demonstration_level": "Prerequisite",
+      "demonstration_note": "Shows Kahn source removal, not Lasser’s historical procedure.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "S1": {
+      "id": "S1",
+      "name": "Kahn’s algorithm",
+      "engine": "fifo",
+      "application": "Dependency networks",
+      "mechanism": "Select tasks with no unfinished prerequisites, then update their successors.",
+      "research_result": "Foundational eligibility mechanism; linear traversal in the standard adjacency-list implementation.",
+      "limit": "A valid order is not necessarily the best order for storage or runtime.",
+      "sources": [
+        {
+          "title": "Topological Sorting of Large Networks",
+          "url": "https://doi.org/10.1145/368996.369025"
+        }
+      ],
+      "demonstration_level": "Direct teaching implementation",
+      "demonstration_note": "Independent Kahn source removal.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "S2": {
+      "id": "S2",
+      "name": "FIFO and LIFO",
+      "engine": "lifo",
+      "application": "Sequential dependency processing.",
+      "mechanism": "Select the oldest or newest eligible vertex.",
+      "research_result": "Source-supported summary; no independent experiment in this edition.",
+      "limit": "Different orders can result; neither optimizes every secondary objective.",
+      "sources": [
+        {
+          "title": "Python, graphlib documentation",
+          "url": "https://docs.python.org/3/library/graphlib.html"
+        },
+        {
+          "title": "Dask, Scheduling Policy documentation",
+          "url": "https://docs.dask.org/en/stable/scheduling-policy.html"
+        }
+      ],
+      "demonstration_level": "Direct teaching implementation",
+      "demonstration_note": "Switch between FIFO and LIFO on the same input.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "S3": {
+      "id": "S3",
+      "name": "Priority Kahn",
+      "engine": "priority",
+      "application": "Deterministic task ordering and dependency tools.",
+      "mechanism": "Choose an eligible vertex by a deterministic key, commonly with a heap.",
+      "research_result": "Source-supported summary; no independent experiment in this edition.",
+      "limit": "Heap operations cost more than a FIFO queue; the quality depends on the key.",
+      "sources": [
+        {
+          "title": "NetworkX, lexicographical_topological_sort documentation",
+          "url": "https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.dag.lexicographical_topological_sort.html"
+        },
+        {
+          "title": "Python, heapq, Priority Queue Implementation Notes",
+          "url": "https://docs.python.org/3/library/heapq.html"
+        }
+      ],
+      "demonstration_level": "Direct teaching implementation",
+      "demonstration_note": "Fixed-priority and alphabetical variants are both available.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "S4": {
+      "id": "S4",
+      "name": "Topological generations",
+      "engine": "generations",
+      "application": "Staged task execution and dependency inspection.",
+      "mechanism": "Produce layers whose predecessors occur in earlier layers.",
+      "research_result": "Source-supported summary; no independent experiment in this edition.",
+      "limit": "Eligibility does not imply enough processors or memory; layer barriers can be restrictive.",
+      "sources": [
+        {
+          "title": "NetworkX, topological_generations documentation",
+          "url": "https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.dag.topological_generations.html"
+        },
+        {
+          "title": "Python, graphlib documentation",
+          "url": "https://docs.python.org/3/library/graphlib.html"
+        }
+      ],
+      "demonstration_level": "Direct teaching implementation",
+      "demonstration_note": "Dependency rounds only.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "S5": {
+      "id": "S5",
+      "name": "DFS ordering",
+      "engine": "dfs",
+      "application": "Dependency traversal and compiler graph processing.",
+      "mechanism": "Reverse DFS completion order on a DAG.",
+      "research_result": "Source-supported summary; no independent experiment in this edition.",
+      "limit": "Does not directly expose the same dynamic ready-set priority policy.",
+      "sources": [
+        {
+          "title": "Sedgewick and Wayne, Algorithms, Directed Graphs companion material",
+          "url": "https://algs4.cs.princeton.edu/42digraph/"
+        }
+      ],
+      "demonstration_level": "Direct teaching implementation",
+      "demonstration_note": "Reverse DFS finish order with cycle detection.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "S6": {
+      "id": "S6",
+      "name": "Order enumeration",
+      "engine": "enumeration",
+      "application": "Combinatorial generation and exhaustive small-case validation.",
+      "mechanism": "Knuth and Szwarcfiter generate multiple valid topological arrangements.",
+      "research_result": "Source-supported summary; no independent experiment in this edition.",
+      "limit": "The number of orders can be enormous.",
+      "sources": [
+        {
+          "title": "Knuth and Szwarcfiter (1974), A structured program to generate all topological sorting arrangements",
+          "url": "https://doi.org/10.1016/0020-0190(74)90001-5"
+        }
+      ],
+      "demonstration_level": "Prerequisite",
+      "demonstration_note": "Generic backtracking, not the optimized original enumeration program.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "S7": {
+      "id": "S7",
+      "name": "Linear extensions",
+      "engine": "enumeration",
+      "application": "Combinatorial generation.",
+      "mechanism": "Pruesse and Ruskey develop efficient generation of linear extensions.",
+      "research_result": "Source-supported summary; no independent experiment in this edition.",
+      "limit": "Explicitly writing every complete order still has an output cost; total enumeration can remain infeasible.",
+      "sources": [
+        {
+          "title": "Pruesse and Ruskey (1994), Generating Linear Extensions Fast",
+          "url": "https://webhome.cs.uvic.ca/~ruskey/Publications/ExtensionFast/ExtensionFast.html"
+        }
+      ],
+      "demonstration_level": "Prerequisite",
+      "demonstration_note": "Does not implement the Pruesse–Ruskey generation algorithm.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "D1": {
+      "id": "D1",
+      "name": "AHRSZ",
+      "engine": "insertion",
+      "application": "Interactive circuit analysis and semantic checking",
+      "mechanism": "Maintain the affected portion after graph or circuit changes.",
+      "research_result": "Change-sensitive maintenance avoids treating every update as a new static problem.",
+      "limit": "The update model controls both the method and its cost.",
+      "sources": [
+        {
+          "title": "Incremental Evaluation of Computational Circuits",
+          "url": "https://research.ibm.com/publications/incremental-evaluation-of-computational-circuits"
+        }
+      ],
+      "demonstration_level": "Prerequisite",
+      "demonstration_note": "Shows the edge-insertion problem, not AHRSZ discovery or order labels.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "D2": {
+      "id": "D2",
+      "name": "Depth-First Discovery",
+      "engine": "dfs",
+      "application": "Incremental DAG maintenance.",
+      "mechanism": "Use depth-first discovery to reduce temporary storage.",
+      "research_result": "Source-supported summary; no independent experiment in this edition.",
+      "limit": "Still a changing-graph method; not a priority-update algorithm on a fixed DAG.",
+      "sources": [
+        {
+          "title": "Zhou and Müller (2003), Depth-First Discovery Algorithm for incremental topological sorting of directed acyclic graphs",
+          "url": "https://www.sciencedirect.com/science/article/pii/S0020019003004071"
+        }
+      ],
+      "demonstration_level": "Prerequisite",
+      "demonstration_note": "DFS foundation, not the full Depth-First Discovery incremental algorithm.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "D10": {
+      "id": "D10",
+      "name": "Katriel–Bodlaender",
+      "engine": "insertion",
+      "application": "Online dependency-order maintenance.",
+      "mechanism": "Refine the earlier discovery method and its update analysis.",
+      "research_result": "Source-supported summary; no independent experiment in this edition.",
+      "limit": "More machinery than the static algorithm; favorable graph regimes still matter.",
+      "sources": [
+        {
+          "title": "Katriel and Bodlaender (2006), Online Topological Ordering; relationship documented by the 2007 tight analysis",
+          "url": "https://www.sciencedirect.com/science/article/pii/S0304397507006573"
+        }
+      ],
+      "demonstration_level": "Prerequisite",
+      "demonstration_note": "No Katriel–Bodlaender order-maintenance mechanism is implemented.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "D3": {
+      "id": "D3",
+      "name": "MNR",
+      "engine": "insertion",
+      "application": "Dependency structures that receive new edges.",
+      "mechanism": "Maintain an existing order under edge insertions.",
+      "research_result": "Source-supported summary; no independent experiment in this edition.",
+      "limit": "A bound across insertions differs from the cost of one static sort.",
+      "sources": [
+        {
+          "title": "Marchetti-Spaccamela, Nanni and Rohnert (1996), Maintaining a topological order under edge insertions",
+          "url": "https://www.sciencedirect.com/science/article/pii/0020019096000750"
+        }
+      ],
+      "demonstration_level": "Prerequisite",
+      "demonstration_note": "Full recomputation is a reference, not MNR.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "D4": {
+      "id": "D4",
+      "name": "Pearce–Kelly",
+      "engine": "pk",
+      "application": "Online dependency changes",
+      "mechanism": "Search the affected region and reassign its vertices after an edge update.",
+      "research_result": "Best among tested alternatives on sparse random graphs despite weaker asymptotic bounds.",
+      "limit": "Not universally fastest on dense graphs; the journal account corrected an earlier comparator defect.",
+      "sources": [
+        {
+          "title": "A Dynamic Topological Sort Algorithm for Directed Acyclic Graphs",
+          "url": "https://whileydave.com/publications/PK07_JEA_preprint.pdf"
+        }
+      ],
+      "demonstration_level": "Repair-rule demonstration",
+      "demonstration_note": "Independent single-edge core; array collection costs differ from the paper.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "D5": {
+      "id": "D5",
+      "name": "Batch Pearce–Kelly",
+      "engine": "pk",
+      "application": "Batched dependency changes",
+      "mechanism": "Repair overlapping affected regions together.",
+      "research_result": "Author reports favorable performance when insertion batches are sufficiently large.",
+      "limit": "The benefit depends on batch characteristics.",
+      "sources": [
+        {
+          "title": "A Batch Algorithm for Maintaining a Topological Order",
+          "url": "https://whileydave.com/publications/pk10_acsc/"
+        }
+      ],
+      "demonstration_level": "Prerequisite",
+      "demonstration_note": "Single-edge repair, not batch processing.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "D6": {
+      "id": "D6",
+      "name": "Temporary cycles",
+      "engine": "scc",
+      "application": "Dependency graph editing.",
+      "mechanism": "Recover topological order when a graph becomes acyclic again after temporary cycles.",
+      "research_result": "Source-supported summary; no independent experiment in this edition.",
+      "limit": "A cyclic graph still has no valid topological order.",
+      "sources": [
+        {
+          "title": "Smith (2023), Robust Topological Orderings for Directed Graphs, preprint",
+          "url": "https://arxiv.org/abs/2306.05475"
+        }
+      ],
+      "demonstration_level": "Prerequisite",
+      "demonstration_note": "Static cycle components, not the robust temporary-cycle method.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "D11": {
+      "id": "D11",
+      "name": "Ajwani–Friedrich–Meyer",
+      "engine": "insertion",
+      "application": "Dense evolving DAGs.",
+      "mechanism": "Maintain an order with O(n^2.75) total time over insertions in the stated model.",
+      "research_result": "Source-supported summary; no independent experiment in this edition.",
+      "limit": "Later bounds supersede the historical guarantee; this is total insertion cost, not static-sort runtime.",
+      "sources": [
+        {
+          "title": "Ajwani, Friedrich and Meyer (2006), An O(n^2.75) algorithm for online topological ordering",
+          "url": "https://arxiv.org/abs/cs/0602073"
+        }
+      ],
+      "demonstration_level": "Prerequisite",
+      "demonstration_note": "No dense-graph incremental data structure is reproduced.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "D7": {
+      "id": "D7",
+      "name": "Insertion-bound milestones",
+      "engine": "insertion",
+      "application": "Large dynamically growing dependency graphs.",
+      "mechanism": "Haeupler et al. 2012; Bender et al. 2016; Bernstein–Chechik 2018; Bhattacharya–Kulkarni 2020 improve maintenance bounds in different regimes.",
+      "research_result": "Source-supported summary; no independent experiment in this edition.",
+      "limit": "Search structures and proofs are considerably more involved; graph density and randomization assumptions differ.",
+      "sources": [
+        {
+          "title": "Haeupler et al. (2012), Incremental Cycle Detection, Topological Ordering, and Strong Component Maintenance",
+          "url": "https://doi.org/10.1145/2071379.2071382"
+        },
+        {
+          "title": "Bender et al. (2016), A New Approach to Incremental Cycle Detection and Related Problems",
+          "url": "https://arxiv.org/abs/1112.0784"
+        },
+        {
+          "title": "Bernstein and Chechik (2018), Incremental Topological Sort and Cycle Detection in Õ(m√n) Expected Total Time",
+          "url": "https://doi.org/10.1137/1.9781611975031.2"
+        },
+        {
+          "title": "Bhattacharya and Kulkarni (2020), An Improved Algorithm for Incremental Cycle Detection and Topological Ordering in Sparse Graphs",
+          "url": "https://doi.org/10.1137/1.9781611975994.153"
+        }
+      ],
+      "demonstration_level": "Prerequisite",
+      "demonstration_note": "No advanced insertion-sequence complexity bound is reproduced.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "D8": {
+      "id": "D8",
+      "name": "Ordering with predictions",
+      "engine": "insertion",
+      "application": "Graphs receiving edges over time",
+      "mechanism": "Use predictions while bounding the effects of prediction error.",
+      "research_result": "The paper reports guarantees and empirical acceleration with useful predictions.",
+      "limit": "Needs a prediction and update model; detailed results are not reproduced here.",
+      "sources": [
+        {
+          "title": "Incremental Topological Ordering and Cycle Detection with Predictions",
+          "url": "https://proceedings.mlr.press/v235/mccauley24a.html"
+        }
+      ],
+      "demonstration_level": "Prerequisite",
+      "demonstration_note": "No predictions or learned data structure are used.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "D9": {
+      "id": "D9",
+      "name": "Strong components with predictions",
+      "engine": "scc",
+      "application": "Incremental strongly connected components",
+      "mechanism": "Use predictions to maintain strongly connected components.",
+      "research_result": "Reported theoretical and empirical results for the component-maintenance problem.",
+      "limit": "Its output includes cyclic components, not only a DAG task order.",
+      "sources": [
+        {
+          "title": "Incremental Strongly Connected Components with Predictions",
+          "url": "https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.SWAT.2026.17"
+        }
+      ],
+      "demonstration_level": "Prerequisite",
+      "demonstration_note": "Static Tarjan, not incremental components with predictions.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "R1": {
+      "id": "R1",
+      "name": "Parallel sorting",
+      "engine": "generations",
+      "application": "Parallel network analysis.",
+      "mechanism": "Distribute topological-order computation across processing resources.",
+      "research_result": "Source-supported summary; no independent experiment in this edition.",
+      "limit": "Synchronization and dependency depth constrain benefit.",
+      "sources": [
+        {
+          "title": "Er (1983), A Parallel Computation Approach to Topological Sorting",
+          "url": "https://doi.org/10.1093/comjnl/26.4.293"
+        }
+      ],
+      "demonstration_level": "Prerequisite",
+      "demonstration_note": "Shows eligible layers, not Er’s parallel algorithm or hardware.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "R2": {
+      "id": "R2",
+      "name": "External-memory sorting",
+      "engine": "fifo",
+      "application": "Graphs larger than practical internal-memory capacity.",
+      "mechanism": "Cao et al. optimize input-output costs for topological sorting and related directed-graph problems.",
+      "research_result": "Source-supported summary; no independent experiment in this edition.",
+      "limit": "A storage-transfer bound is not an ordinary CPU-operation bound.",
+      "sources": [
+        {
+          "title": "Cao et al. (2019), I/O-Efficient Algorithms for Topological Sort and Related Problems",
+          "url": "https://doi.org/10.1137/1.9781611975482.124"
+        }
+      ],
+      "demonstration_level": "Prerequisite",
+      "demonstration_note": "In-memory example; does not model block transfers or external-memory sorting.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "R3": {
+      "id": "R3",
+      "name": "Streaming topological order",
+      "engine": "fifo",
+      "application": "Graph streams, SCC and 2-SAT",
+      "mechanism": "Use structural parameters to trade storage against the number of passes.",
+      "research_result": "Improved pass-space results under the stated parameters, including dense random DAGs.",
+      "limit": "Stream access and graph parameters differ from ordinary in-memory processing.",
+      "sources": [
+        {
+          "title": "Parameterized Streaming Algorithms for Topological Sorting",
+          "url": "https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.WADS.2025.18"
+        }
+      ],
+      "demonstration_level": "Prerequisite",
+      "demonstration_note": "Full input is in memory. No streaming pass-space algorithm is reproduced.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "M1": {
+      "id": "M1",
+      "name": "Tree pebbling",
+      "engine": "lifetime",
+      "application": "Sparse matrix factorization.",
+      "mechanism": "Liu uses tree structure to optimize traversal memory.",
+      "research_result": "Source-supported summary; no independent experiment in this edition.",
+      "limit": "Tree-specific reasoning does not directly solve arbitrary DAGs.",
+      "sources": [
+        {
+          "title": "Liu (1987), An Application of Generalized Tree Pebbling to Sparse Matrix Factorization",
+          "url": "https://doi.org/10.1137/0608031"
+        }
+      ],
+      "demonstration_level": "Problem illustration",
+      "demonstration_note": "Not Liu’s tree-pebbling optimum or exact buffer model.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "M2": {
+      "id": "M2",
+      "name": "Series-parallel scheduling",
+      "engine": "lifetime",
+      "application": "Series-parallel scientific task graphs",
+      "mechanism": "Use series-parallel structure to obtain an exact solution under the paper’s model.",
+      "research_result": "Polynomial-time solution under the stated model and graph restrictions.",
+      "limit": "Edge-specific outputs are not the same as one shared output with several consumers. Transforming between memory models can destroy series-parallel structure; do not transfer the polynomial-time guarantee without proving the mapping.",
+      "sources": [
+        {
+          "title": "Scheduling Series-Parallel Task Graphs to Minimize Peak Memory",
+          "url": "https://www.sciencedirect.com/science/article/pii/S0304397517307053"
+        }
+      ],
+      "demonstration_level": "Problem illustration",
+      "demonstration_note": "Not the series-parallel optimization algorithm; check its edge-output model.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "M3": {
+      "id": "M3",
+      "name": "Sequential dataflow scheduling",
+      "engine": "lifetime",
+      "application": "Embedded task graphs and synchronous dataflow",
+      "mechanism": "Transform the graph and use branch-and-bound on the remaining structure.",
+      "research_result": "Author reports improvements on classic benchmarks.",
+      "limit": "Dataflow expansion can make the graph large. Partial expansion trades exactness for tractability.",
+      "sources": [
+        {
+          "title": "Sequential Scheduling of Dataflow Graphs for Memory Peak Minimization",
+          "url": "https://pop-art.inrialpes.fr/~fradet/abstracts.html"
+        }
+      ],
+      "demonstration_level": "Problem illustration",
+      "demonstration_note": "No exact dataflow search or author-specific reductions are reproduced.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "M4": {
+      "id": "M4",
+      "name": "Graph transformations",
+      "engine": "lifetime",
+      "application": "Task graphs and synchronous dataflow",
+      "mechanism": "Apply four optimality-preserving transformations, then search the remaining graph.",
+      "research_result": "Can collapse structured graphs to one scheduled unit; reports solving residual graphs up to about 100 tasks.",
+      "limit": "Residual search and dataflow expansion can remain expensive.",
+      "sources": [
+        {
+          "title": "Graph Transformations for Memory Peak Minimization by Scheduling",
+          "url": "https://pop-art.inrialpes.fr/~fradet/abstracts.html"
+        }
+      ],
+      "demonstration_level": "Problem illustration",
+      "demonstration_note": "No optimal-peak-preserving graph transformation is claimed.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "M5": {
+      "id": "M5",
+      "name": "HEFT",
+      "engine": "heft",
+      "application": "Heterogeneous computing.",
+      "mechanism": "Rank tasks and assign them to heterogeneous processors.",
+      "research_result": "Source-supported summary; no independent experiment in this edition.",
+      "limit": "Requires processor and cost assumptions; does not optimize just order-construction overhead.",
+      "sources": [
+        {
+          "title": "Topcuoglu, Hariri and Wu (2002), Performance-effective and low-complexity task scheduling for heterogeneous computing",
+          "url": "https://doi.org/10.1109/71.993206"
+        }
+      ],
+      "demonstration_level": "Core algorithm demonstration",
+      "demonstration_note": "Independent two-processor HEFT with insertion and uniform communication.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "M6": {
+      "id": "M6",
+      "name": "Memory-aware HEFT",
+      "engine": "heft",
+      "application": "Heterogeneous processors with memory and communication buffers",
+      "mechanism": "Adapt HEFT to memory constraints and runtime information.",
+      "research_result": "Memory-aware variants succeed where ordinary HEFT violates memory constraints.",
+      "limit": "Some variants are costly to construct; changing the eviction order gave comparable results.",
+      "sources": [
+        {
+          "title": "Memory-aware Adaptive Scheduling of Scientific Workflows on Heterogeneous Architectures",
+          "url": "https://arxiv.org/html/2503.22365v1"
+        }
+      ],
+      "demonstration_level": "Prerequisite",
+      "demonstration_note": "No memory-constrained adaptive HEFT extensions.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "M7": {
+      "id": "M7",
+      "name": "Dask ordering",
+      "engine": "priority",
+      "application": "Task graph execution",
+      "mechanism": "Choose priorities from task-graph structure to influence data retention.",
+      "research_result": "Maintained practical system recognizes effects of order on retained data.",
+      "limit": "Static ordering and distributed scheduling differ; neither implies global optimality.",
+      "sources": [
+        {
+          "title": "Dask Ordering",
+          "url": "https://docs.dask.org/en/stable/order.html"
+        }
+      ],
+      "demonstration_level": "Prerequisite",
+      "demonstration_note": "Generic fixed-priority Kahn, not Dask’s production ordering policy.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "M8": {
+      "id": "M8",
+      "name": "Least Reference Count",
+      "engine": "lrc",
+      "application": "Spark analytics on EC2 clusters",
+      "mechanism": "Count unfinished dependent computations to choose which cached data to retain.",
+      "research_result": "Reports substantial benefits on selected memory-sensitive workloads relative to LRU.",
+      "limit": "Some tested workloads gained little from caching; the experiment also controlled page caching.",
+      "sources": [
+        {
+          "title": "LRC: Dependency-Aware Cache Management for Data Analytics Clusters",
+          "url": "https://arxiv.org/pdf/1703.08280"
+        }
+      ],
+      "demonstration_level": "Mechanism illustration",
+      "demonstration_note": "Eviction priority only, not the full LRC caching system.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "M9": {
+      "id": "M9",
+      "name": "Pegasus cleanup",
+      "engine": "lifetime",
+      "application": "Scientific workflow execution",
+      "mechanism": "Plan file cleanup after required uses and transfers complete.",
+      "research_result": "Practical support for cleanup across workflows and resources.",
+      "limit": "Per-file planning may be costly; transfers and declared dependencies matter.",
+      "sources": [
+        {
+          "title": "Pegasus Data Management",
+          "url": "https://pegasus.isi.edu/documentation/reference-guide/data-management.html"
+        }
+      ],
+      "demonstration_level": "Mechanism illustration",
+      "demonstration_note": "Last-use cleanup under a simple model, not the Pegasus planner.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "P0": {
+      "id": "P0",
+      "name": "Local score model",
+      "engine": "fullscore",
+      "application": "Sequential ordering of recorded Montage workflows.",
+      "mechanism": "For ready v, priority equals releasable generated-file bytes minus its original output bytes.",
+      "research_result": "Earlier synthetic checks only; no real Montage timing result.",
+      "limit": "The score is a heuristic, not an optimal-memory guarantee; full recomputation is a correctness oracle, not a strong runtime baseline.",
+      "sources": [
+        {
+          "title": "Kahn (1962), Topological sorting of large networks",
+          "url": "https://doi.org/10.1145/368996.369025"
+        },
+        {
+          "title": "NetworkX, lexicographical_topological_sort documentation",
+          "url": "https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.dag.lexicographical_topological_sort.html"
+        },
+        {
+          "title": "WfCommons, Montage execution instances and task counts",
+          "url": "https://github.com/wfcommons/WfInstances/blob/main/pegasus/montage/README.md"
+        }
+      ],
+      "demonstration_level": "Local teaching example",
+      "demonstration_note": "The simplified score policy used by the retained proof companion.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "P1": {
+      "id": "P1",
+      "name": "Incremental counters",
+      "engine": "counters",
+      "application": "Same fixed Montage application and score.",
+      "mechanism": "Use incremental counters, initialize singleton release credits, and batch heap refreshes by affected task.",
+      "research_result": "Earlier synthetic checks only; no real Montage timing result.",
+      "limit": "Still updates separate counters for files whose state may be redundant.",
+      "sources": [
+        {
+          "title": "Yu et al. (2017), LRC: Dependency-Aware Cache Management for Data Analytics Clusters",
+          "url": "https://arxiv.org/abs/1703.08280"
+        },
+        {
+          "title": "Python, heapq, Priority Queue Implementation Notes",
+          "url": "https://docs.python.org/3/library/heapq.html"
+        },
+        {
+          "title": "Dask, Scheduling Policy documentation",
+          "url": "https://docs.dask.org/en/stable/scheduling-policy.html"
+        }
+      ],
+      "demonstration_level": "Local teaching example",
+      "demonstration_note": "Priority counters stop at one; not deletion counters.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "P2": {
+      "id": "P2",
+      "name": "Equal consumer sets",
+      "engine": "grouped",
+      "application": "Montage files with repeated consumer sets.",
+      "mechanism": "Share a counter across files with identical consumer sets; sum release bytes but retain original producer costs.",
+      "research_result": "Earlier synthetic checks only; no real Montage timing result.",
+      "limit": "Grouping has a cost; generic aggregation is old; dependency-forced final consumers can be a stronger simplification.",
+      "sources": [
+        {
+          "title": "WfCommons, Montage execution instances and task counts",
+          "url": "https://github.com/wfcommons/WfInstances/blob/main/pegasus/montage/README.md"
+        },
+        {
+          "title": "Mt-KaHyPar, parallel hyperedge deduplication implementation",
+          "url": "https://github.com/kahypar/mt-kahypar/blob/master/mt-kahypar/partition/refinement/flows/parallel_construction.cpp"
+        }
+      ],
+      "demonstration_level": "Local teaching example",
+      "demonstration_note": "Identical original consumer sets share one weighted counter.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "P3": {
+      "id": "P3",
+      "name": "Forced final consumer",
+      "engine": "maximal",
+      "application": "Files whose consumers have a dependency-determined last use.",
+      "mechanism": "When all other consumers precede one consumer, assign its release credit statically and remove the dynamic counter.",
+      "research_result": "Earlier synthetic checks only; no real Montage timing result.",
+      "limit": "Checking the condition costs work; arbitrary consumer sets need not have a forced final consumer.",
+      "sources": [
+        {
+          "title": "WfCommons, Montage execution instances and task counts",
+          "url": "https://github.com/wfcommons/WfInstances/blob/main/pegasus/montage/README.md"
+        }
+      ],
+      "demonstration_level": "Local teaching example",
+      "demonstration_note": "Static credit emerges when dependencies force one final consumer.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "P4": {
+      "id": "P4",
+      "name": "Consumer reduction",
+      "engine": "maximal",
+      "application": "Fixed Montage file-consumption graphs.",
+      "mechanism": "Track only consumers with no later consumer reachable through dependencies; fold a singleton into static release credit.",
+      "research_result": "Earlier synthetic checks only; no real Montage timing result.",
+      "limit": "Reachability preprocessing may cost more than the updates removed; exact prior-art search remains necessary.",
+      "sources": [
+        {
+          "title": "WfCommons, Montage execution instances and task counts",
+          "url": "https://github.com/wfcommons/WfInstances/blob/main/pegasus/montage/README.md"
+        },
+        {
+          "title": "Fradet, Girault and Honorat (2025), Graph Transformations for Memory Peak Minimization by Scheduling",
+          "url": "https://doi.org/10.1145/3707206"
+        },
+        {
+          "title": "Yu et al. (2017), LRC: Dependency-Aware Cache Management for Data Analytics Clusters",
+          "url": "https://arxiv.org/abs/1703.08280"
+        }
+      ],
+      "demonstration_level": "Local teaching example",
+      "demonstration_note": "Exact reachability reduction of priority metadata, not graph dependencies.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "P5": {
+      "id": "P5",
+      "name": "Sort or scan (example)",
+      "engine": "sortscan",
+      "application": "Build-dependency order maintenance.",
+      "mechanism": "Recover affected vertices in prior order by sorting k vertices or scanning an interval of length L.",
+      "research_result": "Earlier synthetic checks only; no real Montage timing result.",
+      "limit": "Same optimization may exist; the study requires credible edge-update traces.",
+      "sources": [
+        {
+          "title": "Pearce and Kelly, A Dynamic Topological Sort Algorithm for Directed Acyclic Graphs, journal version listed as 2007 by the author",
+          "url": "https://whileydave.com/publications/pk07_jea/"
+        },
+        {
+          "title": "Ninja manual, graph tool",
+          "url": "https://ninja-build.org/manual.html"
+        }
+      ],
+      "demonstration_level": "Local teaching example",
+      "demonstration_note": "Equivalent subroutine outputs; no speedup or novelty assumed.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "E08": {
+      "id": "E08",
+      "name": "Workflow data footprint",
+      "engine": "reduction",
+      "application": "Montage and LIGO workflows on Open Science Grid",
+      "mechanism": "Add cleanup tasks, group cleanup work, and remove dependencies implied by reachability.",
+      "research_result": "Reports 48% footprint reduction for a two-degree Montage case; LIGO needs restructuring for substantial savings.",
+      "limit": "Grouping can delay cleanup. Data staging limited the transfer of simulated LIGO benefits.",
+      "sources": [
+        {
+          "title": "Optimizing Workflow Data Footprint",
+          "url": "https://dcc.ligo.org/public/0006/P070017/000/P070017-00.pdf"
+        }
+      ],
+      "demonstration_level": "Related mechanism",
+      "demonstration_note": "Alternate-path reasoning only, not the full cleanup-graph planner.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "E10": {
+      "id": "E10",
+      "name": "Dependency-aware caching",
+      "engine": "lrc",
+      "application": "Data analytics caching",
+      "mechanism": "Extend dependency-aware caching to account for coordinated input requirements.",
+      "research_result": "Author reports benefits over named cache baselines.",
+      "limit": "Versions, workloads, and baselines differ from the earlier LRC study.",
+      "sources": [
+        {
+          "title": "Towards Dependency-Aware Cache Management for Data Analytics Applications",
+          "url": "https://marcoszh.github.io/publication/lrc/"
+        }
+      ],
+      "demonstration_level": "Prerequisite",
+      "demonstration_note": "Least-reference-count rule only; not later coordinated cache extensions.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "E14": {
+      "id": "E14",
+      "name": "Parallel low-memory scheduling",
+      "engine": "lifetime",
+      "application": "Parallel task graphs with tight shared memory",
+      "mechanism": "Use a sequential low-memory order to guide parallel execution.",
+      "research_result": "Author reports feasible schedules under tight budgets and speedups on evaluated cases.",
+      "limit": "Benefits depend on graph structure and the memory budget.",
+      "sources": [
+        {
+          "title": "Parallel Scheduling of Task Graphs with Minimal Memory Requirements",
+          "url": "https://pop-art.inrialpes.fr/~fradet/abstracts.html"
+        }
+      ],
+      "demonstration_level": "Problem illustration",
+      "demonstration_note": "Sequential file-lifetime model; not parallel low-memory scheduling.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "E15": {
+      "id": "E15",
+      "name": "Average-memory scheduling",
+      "engine": "lifetime",
+      "application": "Several task-graph applications executing concurrently",
+      "mechanism": "Optimize average consumption through exact special cases and general heuristics.",
+      "research_result": "Simulations support average-oriented schedules when multiple applications share memory.",
+      "limit": "Average and peak memory are different objectives with different assumptions.",
+      "sources": [
+        {
+          "title": "Minimizing Memory in Parallel Task Graph Scheduling: Focusing on Average Consumption",
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0743731526000778"
+        }
+      ],
+      "demonstration_level": "Problem illustration",
+      "demonstration_note": "Peak file bytes only, not the paper’s average-memory objective or optimization.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "E17": {
+      "id": "E17",
+      "name": "Space-bounded schedulers",
+      "engine": "generations",
+      "application": "Nested parallel kernels on a 32-core Xeon",
+      "mechanism": "Use structure-aware schedules to improve locality.",
+      "research_result": "Fewer cache misses can outweigh scheduler costs on memory-intensive kernels.",
+      "limit": "Scheduling overhead and load balancing can erase the benefit.",
+      "sources": [
+        {
+          "title": "Experimental Analysis of Space-Bounded Schedulers",
+          "url": "https://www.cs.cmu.edu/~guyb/papers/SBFGK14.pdf"
+        }
+      ],
+      "demonstration_level": "Prerequisite",
+      "demonstration_note": "Dependency layers, not cache-locality or space-bounded scheduler implementation.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "E18": {
+      "id": "E18",
+      "name": "Taskiter",
+      "engine": "generations",
+      "application": "Iterative HPC task runtimes",
+      "mechanism": "Reuse repeated task-graph structure and bypass some scheduling work.",
+      "research_result": "Reports benefits at small task granularities in eight iterative benchmarks.",
+      "limit": "Requires repeated structure. Large task bodies can dominate scheduling overhead.",
+      "sources": [
+        {
+          "title": "Accelerating Task-based Iterative Applications",
+          "url": "https://arxiv.org/pdf/2208.06332"
+        }
+      ],
+      "demonstration_level": "Prerequisite",
+      "demonstration_note": "No task-graph reuse or Taskiter runtime is reproduced.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "E19": {
+      "id": "E19",
+      "name": "DAG scheduling benchmark",
+      "engine": "fifo",
+      "application": "Simulated heterogeneous workflow execution",
+      "mechanism": "Compare algorithms under common workload and machine definitions.",
+      "research_result": "Provides a controlled comparison framework rather than one selectively chosen workload.",
+      "limit": "Its broad campaign is larger than this undergraduate scope.",
+      "sources": [
+        {
+          "title": "Benchmarking DAG Scheduling Algorithms on Scientific Workflow Instances",
+          "url": "https://link.springer.com/chapter/10.1007/978-3-031-49435-2_1"
+        }
+      ],
+      "demonstration_level": "Benchmark context",
+      "demonstration_note": "This is a benchmark study, not a distinct algorithm. The example is synthetic.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "E20": {
+      "id": "E20",
+      "name": "XLA · 2022",
+      "engine": "counters",
+      "application": "Compiler instruction ordering",
+      "mechanism": "Rank ready instructions by released bytes minus created bytes. Update affected priorities when one user remains.",
+      "research_result": "The core mechanism of the original proposed thesis is already implemented.",
+      "limit": "The greedy order is not globally optimal. Compiler aliases and live-out buffers complicate a workflow adaptation.",
+      "sources": [
+        {
+          "title": "XLA HLO Memory List Scheduler",
+          "url": "https://github.com/tensorflow/tensorflow/blob/v2.10.0/tensorflow/compiler/xla/service/hlo_memory_scheduler.cc"
+        }
+      ],
+      "demonstration_level": "Mechanism illustration",
+      "demonstration_note": "Release credit and remaining-use events; compiler aliasing and special instructions are omitted.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "E23": {
+      "id": "E23",
+      "name": "Priority queue updates",
+      "engine": "heap",
+      "application": "General task queues",
+      "mechanism": "Replace outdated priority entries and discard stale entries when reading the queue.",
+      "research_result": "Demonstrates a standard way to maintain task priorities.",
+      "limit": "Stale entries still use time and memory. Tie-breaking must stay fixed.",
+      "sources": [
+        {
+          "title": "Python Priority Queue Implementation Notes",
+          "url": "https://docs.python.org/3/library/heapq.html"
+        }
+      ],
+      "demonstration_level": "Direct teaching implementation",
+      "demonstration_note": "Versioned replacement entries demonstrate established heap guidance.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "E24": {
+      "id": "E24",
+      "name": "Montage benchmark files",
+      "engine": "lifetime",
+      "application": "Montage 2MASS and DSS workflows",
+      "mechanism": "Provide task dependencies, file relationships, and byte sizes as public JSON data.",
+      "research_result": "Eight selected 2MASS cases support a small fixed-application study.",
+      "limit": "File bytes are not peak RAM. These records do not contain our algorithm’s timing results.",
+      "sources": [
+        {
+          "title": "WfCommons Montage Execution Instances",
+          "url": "https://github.com/wfcommons/WfInstances/blob/main/pegasus/montage/README.md"
+        }
+      ],
+      "demonstration_level": "Benchmark context",
+      "demonstration_note": "Small synthetic files, not a downloaded Montage instance or measured result.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "E26": {
+      "id": "E26",
+      "name": "Tanaka and Tatebe",
+      "engine": "lrc",
+      "application": "Montage and copyfile workflows on Pwrake with Gfarm; 12 worker nodes and up to 96 cores.",
+      "mechanism": "Compare FIFO, LIFO, LIFO with Highest Rank First, and Rank with Highest Rank First.",
+      "research_result": "The tested hybrids improve on plain LIFO in the high-core-count Montage setting; the paper connects the difference to utilization.",
+      "limit": "Section IV-B selects the better half of repeated runs and excludes several sequential tasks. Effects depend on cache residency and processor count.",
+      "sources": [
+        {
+          "title": "Disk Cache-Aware Task Scheduling for Data-Intensive and Many-Task Workflow",
+          "url": "https://www.hpcs.cs.tsukuba.ac.jp/~tanaka/publications/open/Cluster2014-tanaka-paper.pdf"
+        }
+      ],
+      "demonstration_level": "Prerequisite",
+      "demonstration_note": "Caching concept only, not the paper’s disk-cache-aware scheduling policy.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "E27": {
+      "id": "E27",
+      "name": "Ceballos and colleagues",
+      "engine": "critical",
+      "application": "Multithreaded task applications from Montblanc benchmarks.",
+      "mechanism": "Trace task scheduling decisions and examine how data reuse explains performance differences.",
+      "research_result": "The authors report that tracing helps identify when locality-aware choices matter.",
+      "limit": "Some workloads or phases gain little; the publisher abstract alone does not support detailed effect sizes or full experimental reconstruction.",
+      "sources": [
+        {
+          "title": "Exploring Scheduling Effects on Task Performance with TaskInsight",
+          "url": "https://superfri.org/index.php/superfri/article/view/146"
+        }
+      ],
+      "demonstration_level": "Measurement context",
+      "demonstration_note": "Shows dependency timing; not a reproduction of TaskInsight measurements.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "E28": {
+      "id": "E28",
+      "name": "Al-Haboobi and Kecskemeti",
+      "engine": "generations",
+      "application": "Small and large Montage workflows using DEWE v3 on AWS Lambda.",
+      "mechanism": "Alter job dispatch so dependent work can execute within the same function invocation.",
+      "research_result": "The publisher abstract reports about 10% lower workflow execution time than the original DEWE v3 algorithm in the tested Lambda setting.",
+      "limit": "The result includes platform and transfer effects; the full statistical methods were not audited here.",
+      "sources": [
+        {
+          "title": "Execution Time Reduction in Function Oriented Scientific Workflows",
+          "url": "https://cyber.bibl.u-szeged.hu/index.php/actcybern/article/view/4181"
+        }
+      ],
+      "demonstration_level": "Prerequisite",
+      "demonstration_note": "Readiness only, not the function-dispatch method.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "E30": {
+      "id": "E30",
+      "name": "XLA · before indexing",
+      "engine": "counters",
+      "application": "Compiler instruction ordering inside one HLO computation.",
+      "mechanism": "Cache flattened value sets, store pointer-keyed use counts and per-ready-entry vectors referencing count-map entries.",
+      "research_result": "Reuses flattened values rather than recomputing every query; count-map entries update referenced values.",
+      "limit": "The later commit identifies repeated pair hashing and copied use lists, particularly for wide tuples. No performance result reproduced here.",
+      "sources": [
+        {
+          "title": "XLA list scheduler before per-computation indexing",
+          "url": "https://github.com/openxla/xla/blob/6f691ec5e9f4e8c900a1cde65ed27df02d04f4c5/xla/hlo/transforms/simplifiers/hlo_memory_scheduler.cc"
+        }
+      ],
+      "demonstration_level": "Mechanism illustration",
+      "demonstration_note": "Shared priority rule only, not compiler storage layout or exact code cost.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "E29": {
+      "id": "E29",
+      "name": "XLA · indexed state",
+      "engine": "counters",
+      "application": "Compiler instruction ordering inside one HLO computation.",
+      "mechanism": "Assign dense value indices, share flattened value ranges, and let ready entries reference spans.",
+      "research_result": "The change removes repeated representation work identified by the author. Code confirms the indexed and shared-range representation.",
+      "limit": "Setup, union construction and scheduling work remain. No timing comparison is supplied in the inspected commit metadata.",
+      "sources": [
+        {
+          "title": "Index list scheduler buffer uses per computation, not per use",
+          "url": "https://github.com/openxla/xla/commit/6ecede672c8177bce1580bb3b60d9f6766e8994e"
+        }
+      ],
+      "demonstration_level": "Mechanism illustration",
+      "demonstration_note": "Not a reproduction of the indexed XLA change; use the code comparison for that.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "E31": {
+      "id": "E31",
+      "name": "Horizons",
+      "engine": "generations",
+      "application": "Command-graph construction in the Celerity runtime.",
+      "mechanism": "Coalesce older tracking information using horizons while retaining a precise recent window.",
+      "research_result": "Author experiments include CPU-only command-graph dry runs and a separate real application.",
+      "limit": "An excessively high threshold was detrimental in a reported case; another workload changed little.",
+      "sources": [
+        {
+          "title": "Balancing Tracking Granularity and Parallelism in Many-Task Systems: The Horizons Approach",
+          "url": "https://link.springer.com/article/10.1007/s42979-024-02749-w"
+        }
+      ],
+      "demonstration_level": "Prerequisite",
+      "demonstration_note": "No Horizons tracking horizons or granularity control.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "E32": {
+      "id": "E32",
+      "name": "Dominant schedules",
+      "engine": "lifetime",
+      "application": "Peak-memory scheduling of computation graphs.",
+      "mechanism": "Dominant schedules support graph decomposition and parameterized algorithms.",
+      "research_result": "Provides theoretical results, including an out-degree-parameterized algorithm for series-parallel computation graphs.",
+      "limit": "Strong NP-completeness holds even for restricted graph families in this memory model.",
+      "sources": [
+        {
+          "title": "New Tools for Peak Memory Scheduling",
+          "url": "https://arxiv.org/abs/2312.13526"
+        }
+      ],
+      "demonstration_level": "Problem illustration",
+      "demonstration_note": "No dominant-schedule transformations or optimal-memory guarantee.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "E33": {
+      "id": "E33",
+      "name": "Joint memory scheduling",
+      "engine": "heft",
+      "application": "Computational DAGs on several processors with two-level memory.",
+      "mechanism": "Formulate the joint problem and solve instances with an integer linear program.",
+      "research_result": "The authors report better joint solutions on a small benchmark.",
+      "limit": "Separately optimizing parallelization and memory can be a linear factor from the joint optimum.",
+      "sources": [
+        {
+          "title": "Multiprocessor Scheduling with Memory Constraints: Fundamental Properties and Finding Optimal Solutions",
+          "url": "https://arxiv.org/abs/2507.17411"
+        }
+      ],
+      "demonstration_level": "Prerequisite",
+      "demonstration_note": "No joint multiprocessor memory-constraint solver.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "E34": {
+      "id": "E34",
+      "name": "LATTICE",
+      "engine": "heft",
+      "application": "NPU operator DAG replay.",
+      "mechanism": "A three-stage deterministic procedure combines memory-pressure scheduling, repacking and overlap.",
+      "research_result": "The authors evaluate six trace-derived DAGs in their replay setting.",
+      "limit": "The inspected evidence does not establish a general hardware result or an identical-order guarantee.",
+      "sources": [
+        {
+          "title": "LATTICE: Constraint-Directed Scheduling, Memory Planning, and Pipeline Refinement for NPUs",
+          "url": "https://arxiv.org/abs/2607.17422"
+        }
+      ],
+      "demonstration_level": "Prerequisite",
+      "demonstration_note": "No NPU pipeline or memory-layout co-optimization.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "E35": {
+      "id": "E35",
+      "name": "MoSAIC",
+      "engine": "heft",
+      "application": "Learning scheduling heuristics from computational DAGs.",
+      "mechanism": "Use optimal schedules and structural motifs to recover candidate heuristics.",
+      "research_result": "The authors report evaluation on benchmark-derived and synthetic DAGs.",
+      "limit": "Very recent preprint; transfer to this workload and full training cost were not independently validated here.",
+      "sources": [
+        {
+          "title": "MoSAIC: Learning DAG Scheduling Heuristics from Optimal Schedules through Motif-Aware Recovery and LLM-Guided Reasoning",
+          "url": "https://arxiv.org/abs/2610.15205"
+        }
+      ],
+      "demonstration_level": "Prerequisite",
+      "demonstration_note": "No learned heuristic, motif recovery or LLM method is reproduced.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    },
+    "E36": {
+      "id": "E36",
+      "name": "Updating literature reviews",
+      "engine": "fifo",
+      "application": "Updating software-engineering literature reviews.",
+      "mechanism": "Use the earlier review and primary studies as seeds for forward citation searching.",
+      "research_result": "The authors evaluated update strategies in more than one software-engineering area.",
+      "limit": "Their findings do not certify the coverage of this particular review.",
+      "sources": [
+        {
+          "title": "Guidelines for the Search Strategy to Update Systematic Literature Reviews in Software Engineering",
+          "url": "https://arxiv.org/abs/2006.05542"
+        }
+      ],
+      "demonstration_level": "Review context",
+      "demonstration_note": "Review-methodology paper, not an algorithm implementation. This is a basic exercise only.",
+      "notice": "The application of a prerequisite or family-level demonstration is not evidence that this exact research variant was deployed in that system."
+    }
+  },
+  "scenarios": [
+    "app-web",
+    "app-photos",
+    "app-db",
+    "app-lockpath",
+    "app-lockinsert",
+    "app-lockcycle",
+    "app-callgraph",
+    "app-build",
+    "app-ci",
+    "app-enum",
+    "app-photo-files",
+    "app-forced",
+    "app-video",
+    "app-jobs",
+    "app-cache",
+    "app-positions"
+  ],
+  "notice": "Software use, author-reported experiments and local teaching examples are separate evidence categories. No production speedups were reproduced in this update.",
+  "coverage": {
+    "engines": 23,
+    "method_routes": 58,
+    "new_scenarios": 16,
+    "sources": 31
+  }
+}

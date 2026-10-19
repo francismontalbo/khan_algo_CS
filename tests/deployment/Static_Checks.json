@@ -1,0 +1,1515 @@
+{
+  "executed_at": "2026-10-19T00:40:40.469529+00:00",
+  "passed": 301,
+  "checks": 301,
+  "pages": 10,
+  "local_destinations": 10,
+  "details": [
+    {
+      "check": "Required file: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Required file: Workflow_Research_Guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Required file: .nojekyll",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Required file: code/APACHE-2.0.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Required file: code/SOURCE_ATTRIBUTION.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Required file: reference/Original_Research_Package.zip",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "No active sandbox or local-machine URL: Algorithm_Applications.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Repository subpath preserved: Algorithm_Applications.html index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Algorithm_Applications.html index.html",
+      "passed": true,
+      "detail": "index.html"
+    },
+    {
+      "check": "Repository subpath preserved: Algorithm_Applications.html Workflow_Research_Guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Algorithm_Applications.html Workflow_Research_Guide.html",
+      "passed": true,
+      "detail": "Workflow_Research_Guide.html"
+    },
+    {
+      "check": "No active sandbox or local-machine URL: Algorithm_Lessons.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Repository subpath preserved: Algorithm_Lessons.html index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Algorithm_Lessons.html index.html",
+      "passed": true,
+      "detail": "index.html"
+    },
+    {
+      "check": "Repository subpath preserved: Algorithm_Lessons.html Workflow_Research_Guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Algorithm_Lessons.html Workflow_Research_Guide.html",
+      "passed": true,
+      "detail": "Workflow_Research_Guide.html"
+    },
+    {
+      "check": "Repository subpath preserved: Algorithm_Lessons.html Algorithm_Lessons.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Algorithm_Lessons.html Algorithm_Lessons.html",
+      "passed": true,
+      "detail": "Algorithm_Lessons.html"
+    },
+    {
+      "check": "No active sandbox or local-machine URL: Algorithm_Simulations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Repository subpath preserved: Algorithm_Simulations.html index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Algorithm_Simulations.html index.html",
+      "passed": true,
+      "detail": "index.html"
+    },
+    {
+      "check": "Repository subpath preserved: Algorithm_Simulations.html Workflow_Research_Guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Algorithm_Simulations.html Workflow_Research_Guide.html",
+      "passed": true,
+      "detail": "Workflow_Research_Guide.html"
+    },
+    {
+      "check": "No active sandbox or local-machine URL: Audit_Report.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Repository subpath preserved: Audit_Report.html index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Audit_Report.html index.html",
+      "passed": true,
+      "detail": "index.html"
+    },
+    {
+      "check": "Repository subpath preserved: Audit_Report.html Workflow_Research_Guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Audit_Report.html Workflow_Research_Guide.html",
+      "passed": true,
+      "detail": "Workflow_Research_Guide.html"
+    },
+    {
+      "check": "Repository subpath preserved: Audit_Report.html release/Release_Notes.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Audit_Report.html release/Release_Notes.md",
+      "passed": true,
+      "detail": "release/Release_Notes.md"
+    },
+    {
+      "check": "Safe link scheme: Audit_Report.html https://arxiv.org/abs/2607.17422",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Audit_Report.html https://github.com/openxla/xla/commit/6ecede672c8177bce1580bb3b60d9f67",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Audit_Report.html https://docs.python.org/3/library/graphlib.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Audit_Report.html https://link.springer.com/article/10.1007/s42979-024-02749-w",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Audit_Report.html https://docs.dask.org/en/stable/order.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Audit_Report.html https://github.com/wfcommons/WfInstances/tree/main/pegasus/montage",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Audit_Report.html https://arxiv.org/abs/2610.15205",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Repository subpath preserved: Audit_Report.html README.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Audit_Report.html README.md",
+      "passed": true,
+      "detail": "README.md"
+    },
+    {
+      "check": "Repository subpath preserved: Audit_Report.html Workflow_Research_Guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Audit_Report.html Workflow_Research_Guide.html",
+      "passed": true,
+      "detail": "Workflow_Research_Guide.html"
+    },
+    {
+      "check": "No active sandbox or local-machine URL: Verification.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Repository subpath preserved: Verification.html index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Verification.html index.html",
+      "passed": true,
+      "detail": "index.html"
+    },
+    {
+      "check": "Repository subpath preserved: Verification.html index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Verification.html index.html",
+      "passed": true,
+      "detail": "index.html"
+    },
+    {
+      "check": "Repository subpath preserved: Verification.html Home_Page_Notes.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Verification.html Home_Page_Notes.md",
+      "passed": true,
+      "detail": "Home_Page_Notes.md"
+    },
+    {
+      "check": "Repository subpath preserved: Verification.html Workflow_Research_Guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Verification.html Workflow_Research_Guide.html",
+      "passed": true,
+      "detail": "Workflow_Research_Guide.html"
+    },
+    {
+      "check": "Repository subpath preserved: Verification.html release/Release_Notes.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Verification.html release/Release_Notes.md",
+      "passed": true,
+      "detail": "release/Release_Notes.md"
+    },
+    {
+      "check": "Repository subpath preserved: Verification.html release/GitHub_Packaging_Checks.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Verification.html release/GitHub_Packaging_Checks.json",
+      "passed": true,
+      "detail": "release/GitHub_Packaging_Checks.json"
+    },
+    {
+      "check": "Repository subpath preserved: Verification.html DEPLOY.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Verification.html DEPLOY.md",
+      "passed": true,
+      "detail": "DEPLOY.md"
+    },
+    {
+      "check": "Repository subpath preserved: Verification.html reference/Original_Research_Package.zip",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Verification.html reference/Original_Research_Package.zip",
+      "passed": true,
+      "detail": "reference/Original_Research_Package.zip"
+    },
+    {
+      "check": "Safe link scheme: Verification.html https://arxiv.org/abs/2607.17422",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Verification.html https://github.com/openxla/xla/commit/6ecede672c8177bce1580bb3b60d9f67",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Verification.html https://docs.python.org/3/library/graphlib.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Verification.html https://link.springer.com/article/10.1007/s42979-024-02749-w",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Verification.html https://docs.dask.org/en/stable/order.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Verification.html https://github.com/wfcommons/WfInstances/tree/main/pegasus/montage",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Verification.html https://arxiv.org/abs/2610.15205",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Repository subpath preserved: Verification.html README.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Verification.html README.md",
+      "passed": true,
+      "detail": "README.md"
+    },
+    {
+      "check": "Repository subpath preserved: Verification.html Workflow_Research_Guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Verification.html Workflow_Research_Guide.html",
+      "passed": true,
+      "detail": "Workflow_Research_Guide.html"
+    },
+    {
+      "check": "No active sandbox or local-machine URL: Workflow_Learning_Resources.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Repository subpath preserved: Workflow_Learning_Resources.html index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Workflow_Learning_Resources.html index.html",
+      "passed": true,
+      "detail": "index.html"
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://ocw.mit.edu/courses/6-1200j-mathematics-for-computer-science-s",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://ocw.mit.edu/courses/6-1200j-mathematics-for-computer-science-s",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://ocw.mit.edu/courses/6-1200j-mathematics-for-computer-science-s",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://ocw.mit.edu/courses/6-1200j-mathematics-for-computer-science-s",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://ocw.mit.edu/courses/6-1200j-mathematics-for-computer-science-s",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://ocw.mit.edu/courses/6-1200j-mathematics-for-computer-science-s",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://ocw.mit.edu/courses/6-1200j-mathematics-for-computer-science-s",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-20",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-20",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-20",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-20",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-20",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-20",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://docs.python.org/3/library/graphlib.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://networkx.org/documentation/stable/tutorial.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://ocw.mit.edu/courses/6-172-performance-engineering-of-software-",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://ocw.mit.edu/courses/6-172-performance-engineering-of-software-",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://ocw.mit.edu/courses/6-172-performance-engineering-of-software-",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://missing.csail.mit.edu/2020/debugging-profiling/",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://missing.csail.mit.edu/2020/version-control/",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://docs.python.org/3/library/unittest.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://docs.python.org/3/library/profile.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://docs.python.org/3/library/timeit.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://pyperf.readthedocs.io/en/latest/run_benchmark.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://docs.dask.org/en/latest/presentations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://pegasus.isi.edu/documentation/tutorials/",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://tutorial.dask.org/03_dask.delayed.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://docs.dask.org/en/stable/order.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://pegasus.isi.edu/documentation/user-guide/tutorial.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://pegasus.isi.edu/documentation/reference-guide/data-management.",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://pegasus.isi.edu/documentation/tutorials/",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://aws.amazon.com/lambda/",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://openxla.org/events/fall_devlab_2024",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://openxla.org/events/fall_devlab_2024",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://openxla.org/xla",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://openxla.org/xla/architecture",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://openxla.org/xla/terminology",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://openxla.org/xla/aliasing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://openxla.org/xla/tools",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://llvm.org/docs/tutorial/",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://docs.python.org/3/library/heapq.html#priority-queue-implementa",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://docs.python.org/3/tutorial/datastructures.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://docs.python.org/3/library/collections.html#collections.deque",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://docs.python.org/3/library/stdtypes.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://abseil.io/docs/cpp/guides/container",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://abseil.io/docs/cpp/guides/types",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://docs.python.org/3/library/json.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://docs.wfcommons.org/en/stable/",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://wfcommons.org/instances",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://wfcommons.org/format",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://wfcommons.org/simulation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://irsa.ipac.caltech.edu/Montage/docs/m101tutorial.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://docs.astropy.org/en/stable/io/fits/index.html#opening-a-fits-f",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://irsa.ipac.caltech.edu/Missions/2mass.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://online.vtu.ac.in/v1/course-details/Design-and-Analysis-of-Algo",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://online.vtu.ac.in/v1/course-details/Design-and-Analysis-of-Algo",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://networkx.org/documentation/stable/reference/algorithms/generat",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://online.vtu.ac.in/v1/course-details/Design-and-Analysis-of-Algo",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://online.vtu.ac.in/v1/course-details/Design-and-Analysis-of-Algo",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://online.vtu.ac.in/v1/course-details/Design-and-Analysis-of-Algo",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://networkx.org/documentation/stable/reference/algorithms/generat",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Learning_Resources.html https://github.com/tensorflow/tensorflow/blob/v2.10.0/tensorflow/compi",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Repository subpath preserved: Workflow_Learning_Resources.html Workflow_Research_Guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Workflow_Learning_Resources.html Workflow_Research_Guide.html",
+      "passed": true,
+      "detail": "Workflow_Research_Guide.html"
+    },
+    {
+      "check": "Repository subpath preserved: Workflow_Learning_Resources.html Algorithm_Lessons.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Workflow_Learning_Resources.html Algorithm_Lessons.html",
+      "passed": true,
+      "detail": "Algorithm_Lessons.html"
+    },
+    {
+      "check": "No active sandbox or local-machine URL: Workflow_Research_Guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Repository subpath preserved: Workflow_Research_Guide.html index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Workflow_Research_Guide.html index.html",
+      "passed": true,
+      "detail": "index.html"
+    },
+    {
+      "check": "Repository subpath preserved: Workflow_Research_Guide.html index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Workflow_Research_Guide.html index.html",
+      "passed": true,
+      "detail": "index.html"
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://doi.org/10.1007/978-3-031-29927-8_12",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://doi.org/10.1145/2638554",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://doi.org/10.1109/RTSS66672.2025.00019",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://doi.org/10.1109/ICPADS67057.2025.11323065",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://doi.org/10.1145/3680278",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://doi.org/10.1145/3770858",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://doi.org/10.1145/3796315.3796318",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://doi.org/10.1016/j.sysarc.2026.103775",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://doi.org/10.1016/j.sysarc.2026.103696",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://jurnal.polgan.ac.id/index.php/sinkron/article/view/15788",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://link.springer.com/article/10.1007/s42979-024-02749-w",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://github.com/tensorflow/tensorflow/blob/v2.10.0/tensorflow/compi",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://dcc.ligo.org/public/0006/P070017/000/P070017-00.pdf",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://docs.dask.org/en/stable/order.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://pegasus.isi.edu/documentation/reference-guide/data-management.",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://docs.python.org/3/library/heapq.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://github.com/openxla/xla/blob/6f691ec5e9f4e8c900a1cde65ed27df02d",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://github.com/openxla/xla/commit/6ecede672c8177bce1580bb3b60d9f67",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://whileydave.com/publications/PK07_JEA_preprint.pdf",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://whileydave.com/publications/pk10_acsc/",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://arxiv.org/pdf/1703.08280",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://marcoszh.github.io/publication/lrc/",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://arxiv.org/html/2503.22365v1",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://www.cs.cmu.edu/~guyb/papers/SBFGK14.pdf",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://arxiv.org/pdf/2208.06332",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://link.springer.com/chapter/10.1007/978-3-031-49435-2_1",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://www.hpcs.cs.tsukuba.ac.jp/~tanaka/publications/open/Cluster201",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://superfri.org/index.php/superfri/article/view/146",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://cyber.bibl.u-szeged.hu/index.php/actcybern/article/view/4181",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://doi.org/10.1145/368996.369025",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://research.ibm.com/publications/incremental-evaluation-of-comput",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://proceedings.mlr.press/v235/mccauley24a.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.WADS.2025.1",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.SWAT.2026.1",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://www.sciencedirect.com/science/article/pii/S0304397517307053",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://pop-art.inrialpes.fr/~fradet/abstracts.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://pop-art.inrialpes.fr/~fradet/abstracts.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://pop-art.inrialpes.fr/~fradet/abstracts.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://www.sciencedirect.com/science/article/abs/pii/S074373152600077",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://github.com/wfcommons/WfInstances/blob/main/pegasus/montage/REA",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://link.springer.com/article/10.1007/s42979-024-02749-w",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://arxiv.org/abs/2312.13526",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://arxiv.org/abs/2507.17411",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://arxiv.org/abs/2607.17422v3",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://arxiv.org/abs/2610.15205",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Research_Guide.html https://arxiv.org/abs/2006.05542",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Repository subpath preserved: Workflow_Research_Guide.html release/Release_Notes.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Workflow_Research_Guide.html release/Release_Notes.md",
+      "passed": true,
+      "detail": "release/Release_Notes.md"
+    },
+    {
+      "check": "Repository subpath preserved: Workflow_Research_Guide.html README.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Workflow_Research_Guide.html README.md",
+      "passed": true,
+      "detail": "README.md"
+    },
+    {
+      "check": "No active sandbox or local-machine URL: Workflow_Terms_and_Nomenclature.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Repository subpath preserved: Workflow_Terms_and_Nomenclature.html index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Workflow_Terms_and_Nomenclature.html index.html",
+      "passed": true,
+      "detail": "index.html"
+    },
+    {
+      "check": "Repository subpath preserved: Workflow_Terms_and_Nomenclature.html Workflow_Research_Guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Workflow_Terms_and_Nomenclature.html Workflow_Research_Guide.html",
+      "passed": true,
+      "detail": "Workflow_Research_Guide.html"
+    },
+    {
+      "check": "Repository subpath preserved: Workflow_Terms_and_Nomenclature.html Algorithm_Lessons.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Workflow_Terms_and_Nomenclature.html Algorithm_Lessons.html",
+      "passed": true,
+      "detail": "Algorithm_Lessons.html"
+    },
+    {
+      "check": "No active sandbox or local-machine URL: Workflow_Visual_Comparison.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Repository subpath preserved: Workflow_Visual_Comparison.html index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Workflow_Visual_Comparison.html index.html",
+      "passed": true,
+      "detail": "index.html"
+    },
+    {
+      "check": "Repository subpath preserved: Workflow_Visual_Comparison.html index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Workflow_Visual_Comparison.html index.html",
+      "passed": true,
+      "detail": "index.html"
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://doi.org/10.1007/978-3-031-29927-8_12",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://doi.org/10.1145/2638554",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://doi.org/10.1109/RTSS66672.2025.00019",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://doi.org/10.1109/ICPADS67057.2025.11323065",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://doi.org/10.1145/3680278",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://doi.org/10.1145/3770858",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://doi.org/10.1145/3796315.3796318",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://doi.org/10.1016/j.sysarc.2026.103775",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://doi.org/10.1016/j.sysarc.2026.103696",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://jurnal.polgan.ac.id/index.php/sinkron/article/view/15788",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://link.springer.com/article/10.1007/s42979-024-02749-w",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://github.com/tensorflow/tensorflow/blob/v2.10.0/tensorflow/compi",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://dcc.ligo.org/public/0006/P070017/000/P070017-00.pdf",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://docs.dask.org/en/stable/order.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://pegasus.isi.edu/documentation/reference-guide/data-management.",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://docs.python.org/3/library/heapq.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://github.com/openxla/xla/blob/6f691ec5e9f4e8c900a1cde65ed27df02d",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://github.com/openxla/xla/commit/6ecede672c8177bce1580bb3b60d9f67",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://whileydave.com/publications/PK07_JEA_preprint.pdf",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://whileydave.com/publications/pk10_acsc/",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://arxiv.org/pdf/1703.08280",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://marcoszh.github.io/publication/lrc/",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://arxiv.org/html/2503.22365v1",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://www.cs.cmu.edu/~guyb/papers/SBFGK14.pdf",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://arxiv.org/pdf/2208.06332",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://link.springer.com/chapter/10.1007/978-3-031-49435-2_1",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://www.hpcs.cs.tsukuba.ac.jp/~tanaka/publications/open/Cluster201",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://superfri.org/index.php/superfri/article/view/146",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://cyber.bibl.u-szeged.hu/index.php/actcybern/article/view/4181",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://doi.org/10.1145/368996.369025",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://research.ibm.com/publications/incremental-evaluation-of-comput",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://proceedings.mlr.press/v235/mccauley24a.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.WADS.2025.1",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.SWAT.2026.1",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://www.sciencedirect.com/science/article/pii/S0304397517307053",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://pop-art.inrialpes.fr/~fradet/abstracts.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://pop-art.inrialpes.fr/~fradet/abstracts.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://pop-art.inrialpes.fr/~fradet/abstracts.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://www.sciencedirect.com/science/article/abs/pii/S074373152600077",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://github.com/wfcommons/WfInstances/blob/main/pegasus/montage/REA",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://link.springer.com/article/10.1007/s42979-024-02749-w",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://arxiv.org/abs/2312.13526",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://arxiv.org/abs/2507.17411",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://arxiv.org/abs/2607.17422v3",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://arxiv.org/abs/2610.15205",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Safe link scheme: Workflow_Visual_Comparison.html https://arxiv.org/abs/2006.05542",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Repository subpath preserved: Workflow_Visual_Comparison.html release/Release_Notes.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Workflow_Visual_Comparison.html release/Release_Notes.md",
+      "passed": true,
+      "detail": "release/Release_Notes.md"
+    },
+    {
+      "check": "Repository subpath preserved: Workflow_Visual_Comparison.html README.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: Workflow_Visual_Comparison.html README.md",
+      "passed": true,
+      "detail": "README.md"
+    },
+    {
+      "check": "No active sandbox or local-machine URL: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Repository subpath preserved: index.html index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: index.html index.html",
+      "passed": true,
+      "detail": "index.html"
+    },
+    {
+      "check": "Repository subpath preserved: index.html Workflow_Research_Guide.html?open=algorithms",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: index.html Workflow_Research_Guide.html?open=algorithms",
+      "passed": true,
+      "detail": "Workflow_Research_Guide.html"
+    },
+    {
+      "check": "Repository subpath preserved: index.html Workflow_Research_Guide.html#compare",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: index.html Workflow_Research_Guide.html#compare",
+      "passed": true,
+      "detail": "Workflow_Research_Guide.html"
+    },
+    {
+      "check": "Cross-page section exists: index.html Workflow_Research_Guide.html#compare",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Repository subpath preserved: index.html Workflow_Research_Guide.html#questions",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: index.html Workflow_Research_Guide.html#questions",
+      "passed": true,
+      "detail": "Workflow_Research_Guide.html"
+    },
+    {
+      "check": "Cross-page section exists: index.html Workflow_Research_Guide.html#questions",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Repository subpath preserved: index.html Workflow_Research_Guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: index.html Workflow_Research_Guide.html",
+      "passed": true,
+      "detail": "Workflow_Research_Guide.html"
+    },
+    {
+      "check": "Repository subpath preserved: index.html Workflow_Research_Guide.html?open=lesson&id=kahn",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: index.html Workflow_Research_Guide.html?open=lesson&id=kahn",
+      "passed": true,
+      "detail": "Workflow_Research_Guide.html"
+    },
+    {
+      "check": "Repository subpath preserved: index.html Workflow_Research_Guide.html#compare",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: index.html Workflow_Research_Guide.html#compare",
+      "passed": true,
+      "detail": "Workflow_Research_Guide.html"
+    },
+    {
+      "check": "Cross-page section exists: index.html Workflow_Research_Guide.html#compare",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Repository subpath preserved: index.html Workflow_Research_Guide.html?open=simulation&id=fifo",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: index.html Workflow_Research_Guide.html?open=simulation&id=fifo",
+      "passed": true,
+      "detail": "Workflow_Research_Guide.html"
+    },
+    {
+      "check": "Safe link scheme: index.html data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABAUAAAF7CAIAAAAli6U1AAAQ",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Repository subpath preserved: index.html Workflow_Research_Guide.html?open=algorithms",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: index.html Workflow_Research_Guide.html?open=algorithms",
+      "passed": true,
+      "detail": "Workflow_Research_Guide.html"
+    },
+    {
+      "check": "Repository subpath preserved: index.html Workflow_Research_Guide.html#compare",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: index.html Workflow_Research_Guide.html#compare",
+      "passed": true,
+      "detail": "Workflow_Research_Guide.html"
+    },
+    {
+      "check": "Cross-page section exists: index.html Workflow_Research_Guide.html#compare",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Repository subpath preserved: index.html Workflow_Research_Guide.html#questions",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: index.html Workflow_Research_Guide.html#questions",
+      "passed": true,
+      "detail": "Workflow_Research_Guide.html"
+    },
+    {
+      "check": "Cross-page section exists: index.html Workflow_Research_Guide.html#questions",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Repository subpath preserved: index.html Workflow_Research_Guide.html#lineage-tree",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: index.html Workflow_Research_Guide.html#lineage-tree",
+      "passed": true,
+      "detail": "Workflow_Research_Guide.html"
+    },
+    {
+      "check": "Cross-page section exists: index.html Workflow_Research_Guide.html#lineage-tree",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Repository subpath preserved: index.html Workflow_Research_Guide.html?open=applications&id=fifo",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: index.html Workflow_Research_Guide.html?open=applications&id=fifo",
+      "passed": true,
+      "detail": "Workflow_Research_Guide.html"
+    },
+    {
+      "check": "Repository subpath preserved: index.html Workflow_Research_Guide.html?open=terms",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: index.html Workflow_Research_Guide.html?open=terms",
+      "passed": true,
+      "detail": "Workflow_Research_Guide.html"
+    },
+    {
+      "check": "Repository subpath preserved: index.html Workflow_Research_Guide.html?open=videos",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: index.html Workflow_Research_Guide.html?open=videos",
+      "passed": true,
+      "detail": "Workflow_Research_Guide.html"
+    },
+    {
+      "check": "Repository subpath preserved: index.html Workflow_Research_Guide.html#references",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: index.html Workflow_Research_Guide.html#references",
+      "passed": true,
+      "detail": "Workflow_Research_Guide.html"
+    },
+    {
+      "check": "Cross-page section exists: index.html Workflow_Research_Guide.html#references",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Repository subpath preserved: index.html Verification.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local destination exists: index.html Verification.html",
+      "passed": true,
+      "detail": "Verification.html"
+    },
+    {
+      "check": "Each file is below the browser upload limit",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Main entry and compatibility entry are identical",
+      "passed": true,
+      "detail": ""
+    }
+  ],
+  "scope": "Local destination, scheme and repository-subpath checks. Not a live GitHub Pages test or external-link verification."
+}

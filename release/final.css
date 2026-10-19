@@ -1,0 +1,40 @@
+/* Final presentation layer. No algorithm behavior is changed. */
+:root{--release-ink:#213747;--release-muted:#4d6275;--release-line:#d6e0e8}
+#top h1{font-size:30px;line-height:1.18;letter-spacing:-.6px;max-width:610px}
+#top .lead{max-width:640px;font-size:16px;line-height:1.55}
+#top .eyebrow{letter-spacing:.45px}
+#top .audit-status{font-size:12px;line-height:1.55}
+#ui-header .ux-main-menu .ux-nav-item{gap:7px}
+#ui-header .ux-brand strong{font-size:17px}
+#compare-scroll{scrollbar-gutter:stable}
+button:focus-visible,a:focus-visible,summary:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:3px solid #1b57bd!important;outline-offset:3px!important}
+button:disabled{cursor:not-allowed!important;opacity:.52}
+summary{cursor:pointer}
+.release-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin:20px 0}
+.release-grid h3{font-size:17px;margin:0 0 9px}.release-grid p{font-size:14px;line-height:1.6;margin:0}
+.release-edition>p{max-width:850px}.release-edition h2{font-size:27px}
+.release-edition details{border-top:1px solid var(--release-line);padding-top:12px}
+.release-edition summary{font-weight:650;padding:10px 0;min-height:44px}
+.release-footer{font-size:12px;color:var(--release-muted);margin-top:20px}
+.release-version-note{font-size:13px;line-height:1.6;border-left:3px solid #a75b0d;background:#fff9ed;padding:10px 14px}
+.release-toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:9990;max-width:min(600px,calc(100vw - 28px));background:#18364a;color:#fff;padding:12px 18px;border-radius:8px;font:500 14px/1.5 system-ui;box-shadow:0 5px 20px #11293b30}
+.release-toast[hidden]{display:none}
+@media(max-width:1000px){.ux-main-menu{grid-template-columns:repeat(4,minmax(0,1fr))!important}.release-grid{gap:16px}}
+@media(max-width:760px){
+ #ui-header .ux-header-inner{gap:8px;padding:8px 12px}
+ #ui-header .ux-main-menu{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:5px}
+ #ui-header .ux-main-menu .ux-nav-item{flex-direction:column;gap:3px;padding:7px 3px!important;font-size:11.5px!important;white-space:normal;line-height:1.2;min-height:57px!important;text-align:center}
+ #ui-header .ux-main-menu svg{width:17px;height:17px}
+ #ui-header .ux-brand strong{font-size:15px}
+ #top{padding-top:23px!important;gap:13px}
+ #top h1{font-size:27px;max-width:400px;letter-spacing:-.4px}
+ #top .lead{font-size:15px!important;line-height:1.5}
+ #top .ux-start-actions{grid-template-columns:1fr 1fr;gap:8px}
+ #top .ux-start-actions .ux-btn{font-size:13px!important;line-height:1.3;min-height:48px!important;padding:10px 8px!important}
+ .release-grid{grid-template-columns:1fr;gap:20px}
+ .release-edition h2{font-size:24px}
+ .release-edition p{font-size:14px}
+ #sim-dialog .sim-body,#app-dialog .app-main{overscroll-behavior:contain}
+}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+@media print{.release-toast,#ui-back-top{display:none!important}.release-grid{display:block}.release-grid>div{margin:15px 0}.release-edition{break-before:page}.release-edition h2{break-after:avoid}}

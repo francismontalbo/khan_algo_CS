@@ -1,0 +1,216 @@
+{
+  "cutoff": "2026-10-15",
+  "review_type": "Retrospective audit and targeted update",
+  "original_search_history": "Not recoverable in full from the retained artifact",
+  "dual_screening": false,
+  "queries": [
+    {
+      "id": "Q01",
+      "date": "2026-10-15",
+      "channel": "Web search",
+      "query": "2026 memory scheduling DAG topological ordering schedule construction overhead",
+      "purpose": "Discovery, conflicting evidence, date or bibliographic verification",
+      "limit": "Search results are ranked and not a complete database export; a zero result is not evidence of absence."
+    },
+    {
+      "id": "Q02",
+      "date": "2026-10-15",
+      "channel": "Web search",
+      "query": "2026 \"XLA\" \"memory scheduler\"",
+      "purpose": "Discovery, conflicting evidence, date or bibliographic verification",
+      "limit": "Search results are ranked and not a complete database export; a zero result is not evidence of absence."
+    },
+    {
+      "id": "Q03",
+      "date": "2026-10-15",
+      "channel": "Web search",
+      "query": "2026 \"workflow\" \"reference counting\"",
+      "purpose": "Discovery, conflicting evidence, date or bibliographic verification",
+      "limit": "Search results are ranked and not a complete database export; a zero result is not evidence of absence."
+    },
+    {
+      "id": "Q04",
+      "date": "2026-10-15",
+      "channel": "Web search",
+      "query": "2026 \"incremental topological\"",
+      "purpose": "Discovery, conflicting evidence, date or bibliographic verification",
+      "limit": "Search results are ranked and not a complete database export; a zero result is not evidence of absence."
+    },
+    {
+      "id": "Q05",
+      "date": "2026-10-15",
+      "channel": "Web search",
+      "query": "\"memory\" \"scheduling\" \"2026\" \"peak\"",
+      "purpose": "Discovery, conflicting evidence, date or bibliographic verification",
+      "limit": "Search results are ranked and not a complete database export; a zero result is not evidence of absence."
+    },
+    {
+      "id": "Q06",
+      "date": "2026-10-15",
+      "channel": "Web search",
+      "query": "\"topological ordering\" \"2026\" algorithm",
+      "purpose": "Discovery, conflicting evidence, date or bibliographic verification",
+      "limit": "Search results are ranked and not a complete database export; a zero result is not evidence of absence."
+    },
+    {
+      "id": "Q07",
+      "date": "2026-10-15",
+      "channel": "Web search",
+      "query": "\"scheduling\" \"metadata\" \"overhead\" \"2026\"",
+      "purpose": "Discovery, conflicting evidence, date or bibliographic verification",
+      "limit": "Search results are ranked and not a complete database export; a zero result is not evidence of absence."
+    },
+    {
+      "id": "Q08",
+      "date": "2026-10-15",
+      "channel": "Web search",
+      "query": "\"Balancing Tracking Granularity and Parallelism\"",
+      "purpose": "Discovery, conflicting evidence, date or bibliographic verification",
+      "limit": "Search results are ranked and not a complete database export; a zero result is not evidence of absence."
+    },
+    {
+      "id": "Q09",
+      "date": "2026-10-15",
+      "channel": "Web search",
+      "query": "\"dominant schedules\" \"memory\"",
+      "purpose": "Discovery, conflicting evidence, date or bibliographic verification",
+      "limit": "Search results are ranked and not a complete database export; a zero result is not evidence of absence."
+    },
+    {
+      "id": "Q10",
+      "date": "2026-10-15",
+      "channel": "Web search",
+      "query": "\"memory\" \"scheduling\" \"2026\" \"DAG\" \"minimization\"",
+      "purpose": "Discovery, conflicting evidence, date or bibliographic verification",
+      "limit": "Search results are ranked and not a complete database export; a zero result is not evidence of absence."
+    },
+    {
+      "id": "Q11",
+      "date": "2026-10-15",
+      "channel": "Web search",
+      "query": "\"workflow\" \"counter\" \"scheduling\" \"overhead\"",
+      "purpose": "Discovery, conflicting evidence, date or bibliographic verification",
+      "limit": "Search results are ranked and not a complete database export; a zero result is not evidence of absence."
+    },
+    {
+      "id": "Q12",
+      "date": "2026-10-15",
+      "channel": "Web search",
+      "query": "\"dag scheduling\" \"benchmarking\" evaluation reproducibility",
+      "purpose": "Discovery, conflicting evidence, date or bibliographic verification",
+      "limit": "Search results are ranked and not a complete database export; a zero result is not evidence of absence."
+    },
+    {
+      "id": "Q13",
+      "date": "2026-10-15",
+      "channel": "Web search",
+      "query": "\"New Tools for Peak Memory Scheduling\" publication",
+      "purpose": "Discovery, conflicting evidence, date or bibliographic verification",
+      "limit": "Search results are ranked and not a complete database export; a zero result is not evidence of absence."
+    },
+    {
+      "id": "Q14",
+      "date": "2026-10-15",
+      "channel": "Web search",
+      "query": "\"Dependency-Aware Cache Management for Data Analytics Clusters\" 2022",
+      "purpose": "Discovery, conflicting evidence, date or bibliographic verification",
+      "limit": "Search results are ranked and not a complete database export; a zero result is not evidence of absence."
+    },
+    {
+      "id": "Q15",
+      "date": "2026-10-15",
+      "channel": "Web search",
+      "query": "\"Scheduling series-parallel task graphs to minimize peak memory\" authors",
+      "purpose": "Discovery, conflicting evidence, date or bibliographic verification",
+      "limit": "Search results are ranked and not a complete database export; a zero result is not evidence of absence."
+    },
+    {
+      "id": "Q16",
+      "date": "2026-10-15",
+      "channel": "Web search",
+      "query": "\"Benchmarking DAG Scheduling Algorithms\" authors 2024",
+      "purpose": "Discovery, conflicting evidence, date or bibliographic verification",
+      "limit": "Search results are ranked and not a complete database export; a zero result is not evidence of absence."
+    },
+    {
+      "id": "Q17",
+      "date": "2026-10-15",
+      "channel": "Web search",
+      "query": "\"New Tools for Peak Memory Scheduling\" Jin",
+      "purpose": "Discovery, conflicting evidence, date or bibliographic verification",
+      "limit": "Search results are ranked and not a complete database export; a zero result is not evidence of absence."
+    },
+    {
+      "id": "Q18",
+      "date": "2026-10-15",
+      "channel": "Web search",
+      "query": "\"Benchmarking DAG Scheduling Algorithms\"",
+      "purpose": "Discovery, conflicting evidence, date or bibliographic verification",
+      "limit": "Search results are ranked and not a complete database export; a zero result is not evidence of absence."
+    },
+    {
+      "id": "Q19",
+      "date": "2026-10-15",
+      "channel": "Web search",
+      "query": "\"Dependency-Aware Cache Management\" \"2022\"",
+      "purpose": "Discovery, conflicting evidence, date or bibliographic verification",
+      "limit": "Search results are ranked and not a complete database export; a zero result is not evidence of absence."
+    },
+    {
+      "id": "Q20",
+      "date": "2026-10-15",
+      "channel": "Web search",
+      "query": "\"Guidelines for snowballing\" Wohlin 2014",
+      "purpose": "Discovery, conflicting evidence, date or bibliographic verification",
+      "limit": "Search results are ranked and not a complete database export; a zero result is not evidence of absence."
+    },
+    {
+      "id": "Q21",
+      "date": "2026-10-15",
+      "channel": "Web search",
+      "query": "\"Scheduling series-parallel task graphs\" \"Kayaaslan\"",
+      "purpose": "Discovery, conflicting evidence, date or bibliographic verification",
+      "limit": "Search results are ranked and not a complete database export; a zero result is not evidence of absence."
+    },
+    {
+      "id": "Q22",
+      "date": "2026-10-15",
+      "channel": "Web search",
+      "query": "\"Towards Dependency-Aware Cache Management\" \"10.\"",
+      "purpose": "Discovery, conflicting evidence, date or bibliographic verification",
+      "limit": "Search results are ranked and not a complete database export; a zero result is not evidence of absence."
+    },
+    {
+      "id": "Q23",
+      "date": "2026-10-15",
+      "channel": "Web search",
+      "query": "\"Topological Sorting of Large Networks\" \"Kahn\" 1962",
+      "purpose": "Discovery, conflicting evidence, date or bibliographic verification",
+      "limit": "Search results are ranked and not a complete database export; a zero result is not evidence of absence."
+    },
+    {
+      "id": "Q24",
+      "date": "2026-10-15",
+      "channel": "Web search",
+      "query": "\"Optimizing Workflow Data Footprint\" \"Scientific Programming\"",
+      "purpose": "Discovery, conflicting evidence, date or bibliographic verification",
+      "limit": "Search results are ranked and not a complete database export; a zero result is not evidence of absence."
+    },
+    {
+      "id": "S01",
+      "date": "2026-10-15",
+      "channel": "SciSpace",
+      "query": "What primary studies from 2024 through 15 October 2026 investigate the computational overhead of constructing or maintaining dependency-respecting task schedules, especially memory-aware list scheduling, remaining-use counters, reachability-based reductions, or scheduling metadata, and what negative results or preprocessing costs do they report?",
+      "purpose": "Semantic discovery; metadata checked against primary sources before use.",
+      "limit": "One returned page of ten candidates; no exhaustive index retrieval. Index metadata is not authoritative."
+    },
+    {
+      "id": "G01",
+      "date": "2026-10-15",
+      "channel": "GitHub connector",
+      "query": "https://api.github.com/repos/openxla/xla/commits?path=xla/hlo/transforms/simplifiers/hlo_memory_scheduler.cc&per_page=10&until=2026-10-15T23:59:59Z",
+      "purpose": "Check latest changes to the particular scheduler file by the cutoff.",
+      "limit": "One file and ten commits, not the complete compiler history. The day is a date filter, not a claim to know later events."
+    }
+  ]
+}

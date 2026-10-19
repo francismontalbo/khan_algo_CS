@@ -1,0 +1,3673 @@
+[
+  {
+    "kind": "term",
+    "id": "dag",
+    "name": "DAG",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "v-dag",
+      "d-graphlib"
+    ],
+    "scope_note": "Start with the graph model; read the local definition for its exact use in this study."
+  },
+  {
+    "kind": "term",
+    "id": "graph-g",
+    "name": "G = (V, E)",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "v-dag",
+      "d-graphlib"
+    ],
+    "scope_note": "Start with the graph model; read the local definition for its exact use in this study."
+  },
+  {
+    "kind": "term",
+    "id": "vertex",
+    "name": "Vertex",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "v-dag",
+      "d-graphlib"
+    ],
+    "scope_note": "Start with the graph model; read the local definition for its exact use in this study."
+  },
+  {
+    "kind": "term",
+    "id": "edge",
+    "name": "Edge",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "v-dag",
+      "d-graphlib"
+    ],
+    "scope_note": "Start with the graph model; read the local definition for its exact use in this study."
+  },
+  {
+    "kind": "term",
+    "id": "indegree",
+    "name": "Indegree",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "v-dag",
+      "d-graphlib"
+    ],
+    "scope_note": "Start with the graph model; read the local definition for its exact use in this study."
+  },
+  {
+    "kind": "term",
+    "id": "predecessor",
+    "name": "Predecessor",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "v-dag",
+      "d-graphlib"
+    ],
+    "scope_note": "Start with the graph model; read the local definition for its exact use in this study."
+  },
+  {
+    "kind": "term",
+    "id": "successor",
+    "name": "Successor",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "v-dag",
+      "d-graphlib"
+    ],
+    "scope_note": "Start with the graph model; read the local definition for its exact use in this study."
+  },
+  {
+    "kind": "term",
+    "id": "ancestor",
+    "name": "Ancestor",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "v-dag",
+      "d-graphlib"
+    ],
+    "scope_note": "Start with the graph model; read the local definition for its exact use in this study."
+  },
+  {
+    "kind": "term",
+    "id": "descendant",
+    "name": "Descendant",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "v-dag",
+      "d-graphlib"
+    ],
+    "scope_note": "Start with the graph model; read the local definition for its exact use in this study."
+  },
+  {
+    "kind": "term",
+    "id": "cycle",
+    "name": "Directed cycle",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "v-dag",
+      "d-graphlib"
+    ],
+    "scope_note": "Start with the graph model; read the local definition for its exact use in this study."
+  },
+  {
+    "kind": "term",
+    "id": "ready-set",
+    "name": "Ready set",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "v-dag",
+      "d-graphlib"
+    ],
+    "scope_note": "Start with the graph model; read the local definition for its exact use in this study."
+  },
+  {
+    "kind": "term",
+    "id": "workflow",
+    "name": "Workflow",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "v-dag",
+      "d-graphlib"
+    ],
+    "scope_note": "Start with the graph model; read the local definition for its exact use in this study."
+  },
+  {
+    "kind": "term",
+    "id": "task",
+    "name": "Task",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "v-dag",
+      "d-graphlib"
+    ],
+    "scope_note": "Start with the graph model; read the local definition for its exact use in this study."
+  },
+  {
+    "kind": "term",
+    "id": "topological-order",
+    "name": "Topological order",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "v-dag",
+      "d-graphlib"
+    ],
+    "scope_note": "Start with the graph model; read the local definition for its exact use in this study."
+  },
+  {
+    "kind": "term",
+    "id": "order-edge",
+    "name": "u → v",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "v-dag",
+      "d-graphlib"
+    ],
+    "scope_note": "Start with the graph model; read the local definition for its exact use in this study."
+  },
+  {
+    "kind": "term",
+    "id": "kahn",
+    "name": "Kahn’s algorithm",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-graphlib",
+      "v-dag",
+      "d-deque"
+    ],
+    "scope_note": "Python documents ready-task eligibility. The MIT graph lecture is background, not a claim that it teaches this storage-aware variant."
+  },
+  {
+    "kind": "term",
+    "id": "fifo",
+    "name": "FIFO",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-graphlib",
+      "v-dag",
+      "d-deque"
+    ],
+    "scope_note": "Python documents ready-task eligibility. The MIT graph lecture is background, not a claim that it teaches this storage-aware variant."
+  },
+  {
+    "kind": "term",
+    "id": "lifo",
+    "name": "LIFO",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "v-dfs",
+      "d-structures"
+    ],
+    "scope_note": "DFS and stack behavior are distinct from a priority-based Kahn selection rule."
+  },
+  {
+    "kind": "term",
+    "id": "stack",
+    "name": "Stack",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "v-dfs",
+      "d-structures"
+    ],
+    "scope_note": "DFS and stack behavior are distinct from a priority-based Kahn selection rule."
+  },
+  {
+    "kind": "term",
+    "id": "reverse-postorder",
+    "name": "Reverse postorder",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "v-dfs",
+      "d-structures"
+    ],
+    "scope_note": "DFS and stack behavior are distinct from a priority-based Kahn selection rule."
+  },
+  {
+    "kind": "term",
+    "id": "bfs",
+    "name": "BFS",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "v-bfs",
+      "d-networkx"
+    ],
+    "scope_note": "A university lecture explains BFS. The library tutorial provides graph-construction practice."
+  },
+  {
+    "kind": "term",
+    "id": "reachability",
+    "name": "Reachability",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-bfs",
+      "v-dfs",
+      "v-states"
+    ],
+    "scope_note": "Traversal and state reasoning explain the prerequisites. No tutorial of the local search-budget rule was verified."
+  },
+  {
+    "kind": "term",
+    "id": "certificate",
+    "name": "Dependency certificate",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-bfs",
+      "v-dfs",
+      "v-states"
+    ],
+    "scope_note": "Traversal and state reasoning explain the prerequisites. No tutorial of the local search-budget rule was verified."
+  },
+  {
+    "kind": "term",
+    "id": "found",
+    "name": "FOUND",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-bfs",
+      "v-dfs",
+      "v-states"
+    ],
+    "scope_note": "Traversal and state reasoning explain the prerequisites. No tutorial of the local search-budget rule was verified."
+  },
+  {
+    "kind": "term",
+    "id": "absent",
+    "name": "ABSENT",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-bfs",
+      "v-dfs",
+      "v-states"
+    ],
+    "scope_note": "Traversal and state reasoning explain the prerequisites. No tutorial of the local search-budget rule was verified."
+  },
+  {
+    "kind": "term",
+    "id": "unknown",
+    "name": "UNKNOWN",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-bfs",
+      "v-dfs",
+      "v-states"
+    ],
+    "scope_note": "Traversal and state reasoning explain the prerequisites. No tutorial of the local search-budget rule was verified."
+  },
+  {
+    "kind": "term",
+    "id": "search-budget",
+    "name": "Search budget",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-bfs",
+      "v-dfs",
+      "v-states"
+    ],
+    "scope_note": "Traversal and state reasoning explain the prerequisites. No tutorial of the local search-budget rule was verified."
+  },
+  {
+    "kind": "term",
+    "id": "budget-b",
+    "name": "B",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-bfs",
+      "v-dfs",
+      "v-states"
+    ],
+    "scope_note": "Traversal and state reasoning explain the prerequisites. No tutorial of the local search-budget rule was verified."
+  },
+  {
+    "kind": "term",
+    "id": "charge-edge",
+    "name": "charge_edge",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-bfs",
+      "v-dfs",
+      "v-states"
+    ],
+    "scope_note": "Traversal and state reasoning explain the prerequisites. No tutorial of the local search-budget rule was verified."
+  },
+  {
+    "kind": "term",
+    "id": "dfs",
+    "name": "DFS",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "v-dfs",
+      "d-networkx"
+    ],
+    "scope_note": "A university lecture explains DFS and traversal-based topological sorting, not the Kahn implementation."
+  },
+  {
+    "kind": "term",
+    "id": "scc",
+    "name": "SCC",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-dfs",
+      "v-dag"
+    ],
+    "scope_note": "Traversal and directed-graph background. Specialist strong-component maintenance requires its own paper."
+  },
+  {
+    "kind": "term",
+    "id": "queue",
+    "name": "Queue",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-deque",
+      "d-structures",
+      "v-bfs"
+    ],
+    "scope_note": "Container behavior and queue-based traversal."
+  },
+  {
+    "kind": "term",
+    "id": "deque",
+    "name": "deque",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-deque",
+      "d-structures",
+      "v-bfs"
+    ],
+    "scope_note": "Container behavior and queue-based traversal."
+  },
+  {
+    "kind": "term",
+    "id": "priority-queue",
+    "name": "Priority queue",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-heap",
+      "v-heaps"
+    ],
+    "scope_note": "Mutable-priority guidance is directly relevant; exact local variable names remain defined by the supplied code."
+  },
+  {
+    "kind": "term",
+    "id": "heap",
+    "name": "Heap",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-heap",
+      "v-heaps"
+    ],
+    "scope_note": "Mutable-priority guidance is directly relevant; exact local variable names remain defined by the supplied code."
+  },
+  {
+    "kind": "term",
+    "id": "tie-break",
+    "name": "Tie-breaking",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-heap",
+      "v-heaps"
+    ],
+    "scope_note": "Mutable-priority guidance is directly relevant; exact local variable names remain defined by the supplied code."
+  },
+  {
+    "kind": "term",
+    "id": "heappush",
+    "name": "heappush",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-heap",
+      "v-heaps"
+    ],
+    "scope_note": "Mutable-priority guidance is directly relevant; exact local variable names remain defined by the supplied code."
+  },
+  {
+    "kind": "term",
+    "id": "heappop",
+    "name": "heappop",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-heap",
+      "v-heaps"
+    ],
+    "scope_note": "Mutable-priority guidance is directly relevant; exact local variable names remain defined by the supplied code."
+  },
+  {
+    "kind": "term",
+    "id": "stale-entry",
+    "name": "Stale queue entry",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-heap",
+      "v-heaps"
+    ],
+    "scope_note": "Mutable-priority guidance is directly relevant; exact local variable names remain defined by the supplied code."
+  },
+  {
+    "kind": "term",
+    "id": "version-code",
+    "name": "version",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-heap",
+      "v-heaps"
+    ],
+    "scope_note": "Mutable-priority guidance is directly relevant; exact local variable names remain defined by the supplied code."
+  },
+  {
+    "kind": "term",
+    "id": "stamp-code",
+    "name": "stamp",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-heap",
+      "v-heaps"
+    ],
+    "scope_note": "Mutable-priority guidance is directly relevant; exact local variable names remain defined by the supplied code."
+  },
+  {
+    "kind": "term",
+    "id": "dirty-code",
+    "name": "dirty",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-heap",
+      "v-heaps"
+    ],
+    "scope_note": "Mutable-priority guidance is directly relevant; exact local variable names remain defined by the supplied code."
+  },
+  {
+    "kind": "term",
+    "id": "neg-score",
+    "name": "neg_score",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-heap",
+      "v-heaps"
+    ],
+    "scope_note": "Mutable-priority guidance is directly relevant; exact local variable names remain defined by the supplied code."
+  },
+  {
+    "kind": "term",
+    "id": "hash-map",
+    "name": "Hash map",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-arrays",
+      "v-hashing",
+      "d-types",
+      "d-abslcontainers"
+    ],
+    "scope_note": "The data structures are established. Their scheduling benefit still needs a controlled comparison."
+  },
+  {
+    "kind": "term",
+    "id": "dense-index",
+    "name": "Dense indexing",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-arrays",
+      "v-hashing",
+      "d-types",
+      "d-abslcontainers"
+    ],
+    "scope_note": "The data structures are established. Their scheduling benefit still needs a controlled comparison."
+  },
+  {
+    "kind": "term",
+    "id": "array",
+    "name": "Array",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-arrays",
+      "v-hashing",
+      "d-types",
+      "d-abslcontainers"
+    ],
+    "scope_note": "The data structures are established. Their scheduling benefit still needs a controlled comparison."
+  },
+  {
+    "kind": "term",
+    "id": "index-pool",
+    "name": "value_index_pool_",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-arrays",
+      "v-hashing",
+      "d-types",
+      "d-abslcontainers"
+    ],
+    "scope_note": "The data structures are established. Their scheduling benefit still needs a controlled comparison."
+  },
+  {
+    "kind": "term",
+    "id": "metadata",
+    "name": "Metadata",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-arrays",
+      "v-hashing",
+      "d-types",
+      "d-abslcontainers"
+    ],
+    "scope_note": "The data structures are established. Their scheduling benefit still needs a controlled comparison."
+  },
+  {
+    "kind": "term",
+    "id": "immutable",
+    "name": "Immutable",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-arrays",
+      "v-hashing",
+      "d-types",
+      "d-abslcontainers"
+    ],
+    "scope_note": "The data structures are established. Their scheduling benefit still needs a controlled comparison."
+  },
+  {
+    "kind": "term",
+    "id": "id",
+    "name": "ID",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-arrays",
+      "v-hashing",
+      "d-types",
+      "d-abslcontainers"
+    ],
+    "scope_note": "The data structures are established. Their scheduling benefit still needs a controlled comparison."
+  },
+  {
+    "kind": "term",
+    "id": "frozenset",
+    "name": "frozenset",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-arrays",
+      "v-hashing",
+      "d-types",
+      "d-abslcontainers"
+    ],
+    "scope_note": "The data structures are established. Their scheduling benefit still needs a controlled comparison."
+  },
+  {
+    "kind": "term",
+    "id": "xor",
+    "name": "XOR",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-types",
+      "v-states"
+    ],
+    "scope_note": "The Python reference explains XOR; the local invariant, not the language manual, justifies survivor tracking."
+  },
+  {
+    "kind": "term",
+    "id": "remaining-xor",
+    "name": "remaining_xor",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-types",
+      "v-states"
+    ],
+    "scope_note": "The Python reference explains XOR; the local invariant, not the language manual, justifies survivor tracking."
+  },
+  {
+    "kind": "term",
+    "id": "consumer",
+    "name": "Consumer",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-cleanup",
+      "d-daskorder",
+      "v-dag"
+    ],
+    "scope_note": "Workflow and retention background. OS reference counts are not workflow consumer counts; use the local proof for exact counter semantics."
+  },
+  {
+    "kind": "term",
+    "id": "consumer-set",
+    "name": "Consumer set",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-cleanup",
+      "d-daskorder",
+      "v-dag"
+    ],
+    "scope_note": "Workflow and retention background. OS reference counts are not workflow consumer counts; use the local proof for exact counter semantics."
+  },
+  {
+    "kind": "term",
+    "id": "producer",
+    "name": "Producer",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-cleanup",
+      "d-daskorder",
+      "v-dag"
+    ],
+    "scope_note": "Workflow and retention background. OS reference counts are not workflow consumer counts; use the local proof for exact counter semantics."
+  },
+  {
+    "kind": "term",
+    "id": "release-credit",
+    "name": "Release credit",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-cleanup",
+      "d-daskorder",
+      "v-dag"
+    ],
+    "scope_note": "Workflow and retention background. OS reference counts are not workflow consumer counts; use the local proof for exact counter semantics."
+  },
+  {
+    "kind": "term",
+    "id": "production-cost",
+    "name": "Production cost",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-cleanup",
+      "d-daskorder",
+      "v-dag"
+    ],
+    "scope_note": "Workflow and retention background. OS reference counts are not workflow consumer counts; use the local proof for exact counter semantics."
+  },
+  {
+    "kind": "term",
+    "id": "final-consumer",
+    "name": "Final consumer",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-cleanup",
+      "d-daskorder",
+      "v-dag"
+    ],
+    "scope_note": "Workflow and retention background. OS reference counts are not workflow consumer counts; use the local proof for exact counter semantics."
+  },
+  {
+    "kind": "term",
+    "id": "forced-consumer",
+    "name": "Forced final consumer",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-cleanup",
+      "d-daskorder",
+      "v-dag"
+    ],
+    "scope_note": "Workflow and retention background. OS reference counts are not workflow consumer counts; use the local proof for exact counter semantics."
+  },
+  {
+    "kind": "term",
+    "id": "reference-count",
+    "name": "Reference counting",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-cleanup",
+      "d-daskorder",
+      "v-dag"
+    ],
+    "scope_note": "Workflow and retention background. OS reference counts are not workflow consumer counts; use the local proof for exact counter semantics."
+  },
+  {
+    "kind": "term",
+    "id": "aggregation",
+    "name": "Aggregation",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-cleanup",
+      "d-daskorder",
+      "v-dag"
+    ],
+    "scope_note": "Workflow and retention background. OS reference counts are not workflow consumer counts; use the local proof for exact counter semantics."
+  },
+  {
+    "kind": "term",
+    "id": "maximal-consumer",
+    "name": "Precedence-maximal consumer",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-cleanup",
+      "d-daskorder",
+      "v-dag"
+    ],
+    "scope_note": "Workflow and retention background. OS reference counts are not workflow consumer counts; use the local proof for exact counter semantics."
+  },
+  {
+    "kind": "term",
+    "id": "coverage",
+    "name": "Coverage condition",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-cleanup",
+      "d-daskorder",
+      "v-dag"
+    ],
+    "scope_note": "Workflow and retention background. OS reference counts are not workflow consumer counts; use the local proof for exact counter semantics."
+  },
+  {
+    "kind": "term",
+    "id": "retained-bytes",
+    "name": "Retained-file bytes",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-cleanup",
+      "d-daskorder",
+      "v-dag"
+    ],
+    "scope_note": "Workflow and retention background. OS reference counts are not workflow consumer counts; use the local proof for exact counter semantics."
+  },
+  {
+    "kind": "term",
+    "id": "final-output",
+    "name": "Final output",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-cleanup",
+      "d-daskorder",
+      "v-dag"
+    ],
+    "scope_note": "Workflow and retention background. OS reference counts are not workflow consumer counts; use the local proof for exact counter semantics."
+  },
+  {
+    "kind": "term",
+    "id": "file-size",
+    "name": "File size",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-cleanup",
+      "d-daskorder",
+      "v-dag"
+    ],
+    "scope_note": "Workflow and retention background. OS reference counts are not workflow consumer counts; use the local proof for exact counter semantics."
+  },
+  {
+    "kind": "term",
+    "id": "data-footprint",
+    "name": "Data footprint",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-cleanup",
+      "d-daskorder",
+      "v-dag"
+    ],
+    "scope_note": "Workflow and retention background. OS reference counts are not workflow consumer counts; use the local proof for exact counter semantics."
+  },
+  {
+    "kind": "term",
+    "id": "cleanup",
+    "name": "Cleanup",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-cleanup",
+      "d-daskorder",
+      "v-dag"
+    ],
+    "scope_note": "Workflow and retention background. OS reference counts are not workflow consumer counts; use the local proof for exact counter semantics."
+  },
+  {
+    "kind": "term",
+    "id": "staging",
+    "name": "Data staging",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-cleanup",
+      "d-daskorder",
+      "v-dag"
+    ],
+    "scope_note": "Workflow and retention background. OS reference counts are not workflow consumer counts; use the local proof for exact counter semantics."
+  },
+  {
+    "kind": "term",
+    "id": "incremental-priority",
+    "name": "Incremental priority maintenance",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-heap",
+      "v-states",
+      "d-cleanup"
+    ],
+    "scope_note": "These are ingredients and local identifiers, not a verified tutorial of the supplied reduction."
+  },
+  {
+    "kind": "term",
+    "id": "count-code",
+    "name": "count",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-heap",
+      "v-states",
+      "d-cleanup"
+    ],
+    "scope_note": "These are ingredients and local identifiers, not a verified tutorial of the supplied reduction."
+  },
+  {
+    "kind": "term",
+    "id": "score-code",
+    "name": "score",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-heap",
+      "v-states",
+      "d-cleanup"
+    ],
+    "scope_note": "These are ingredients and local identifiers, not a verified tutorial of the supplied reduction."
+  },
+  {
+    "kind": "term",
+    "id": "incident-code",
+    "name": "incident",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-heap",
+      "v-states",
+      "d-cleanup"
+    ],
+    "scope_note": "These are ingredients and local identifiers, not a verified tutorial of the supplied reduction."
+  },
+  {
+    "kind": "term",
+    "id": "weights-code",
+    "name": "weights",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-heap",
+      "v-states",
+      "d-cleanup"
+    ],
+    "scope_note": "These are ingredients and local identifiers, not a verified tutorial of the supplied reduction."
+  },
+  {
+    "kind": "term",
+    "id": "produced-code",
+    "name": "produced_bytes",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-heap",
+      "v-states",
+      "d-cleanup"
+    ],
+    "scope_note": "These are ingredients and local identifiers, not a verified tutorial of the supplied reduction."
+  },
+  {
+    "kind": "term",
+    "id": "kept-code",
+    "name": "kept",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-heap",
+      "v-states",
+      "d-cleanup"
+    ],
+    "scope_note": "These are ingredients and local identifiers, not a verified tutorial of the supplied reduction."
+  },
+  {
+    "kind": "term",
+    "id": "witnesses-code",
+    "name": "witnesses",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-heap",
+      "v-states",
+      "d-cleanup"
+    ],
+    "scope_note": "These are ingredients and local identifiers, not a verified tutorial of the supplied reduction."
+  },
+  {
+    "kind": "term",
+    "id": "saturation",
+    "name": "Saturated counter",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-heap",
+      "v-states",
+      "d-cleanup"
+    ],
+    "scope_note": "These are ingredients and local identifiers, not a verified tutorial of the supplied reduction."
+  },
+  {
+    "kind": "term",
+    "id": "group-k",
+    "name": "k",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-heap",
+      "v-states",
+      "d-cleanup"
+    ],
+    "scope_note": "These are ingredients and local identifiers, not a verified tutorial of the supplied reduction."
+  },
+  {
+    "kind": "term",
+    "id": "incremental-order",
+    "name": "Incremental topological ordering",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-dfs",
+      "v-dag",
+      "v-algorithms"
+    ],
+    "scope_note": "No exact tutorial of this incremental-ordering variant was verified. Read its original source in the method profile."
+  },
+  {
+    "kind": "term",
+    "id": "pearce-kelly",
+    "name": "Pearce–Kelly",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-dfs",
+      "v-dag",
+      "v-algorithms"
+    ],
+    "scope_note": "No exact tutorial of this incremental-ordering variant was verified. Read its original source in the method profile."
+  },
+  {
+    "kind": "term",
+    "id": "ahrsz",
+    "name": "AHRSZ",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-dfs",
+      "v-dag",
+      "v-algorithms"
+    ],
+    "scope_note": "No exact tutorial of this incremental-ordering variant was verified. Read its original source in the method profile."
+  },
+  {
+    "kind": "term",
+    "id": "mnr",
+    "name": "MNR",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-dfs",
+      "v-dag",
+      "v-algorithms"
+    ],
+    "scope_note": "No exact tutorial of this incremental-ordering variant was verified. Read its original source in the method profile."
+  },
+  {
+    "kind": "term",
+    "id": "affected-interval",
+    "name": "Affected interval",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-dfs",
+      "v-dag",
+      "v-algorithms"
+    ],
+    "scope_note": "No exact tutorial of this incremental-ordering variant was verified. Read its original source in the method profile."
+  },
+  {
+    "kind": "term",
+    "id": "partial-order",
+    "name": "Partial order",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-dag",
+      "v-relations"
+    ],
+    "scope_note": "Relations and DAGs explain the setting; enumeration algorithms and their bounds require the named paper."
+  },
+  {
+    "kind": "term",
+    "id": "linear-extension",
+    "name": "Linear extension",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-dag",
+      "v-relations"
+    ],
+    "scope_note": "Relations and DAGs explain the setting; enumeration algorithms and their bounds require the named paper."
+  },
+  {
+    "kind": "term",
+    "id": "enumeration",
+    "name": "Enumeration",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-dag",
+      "v-relations"
+    ],
+    "scope_note": "Relations and DAGs explain the setting; enumeration algorithms and their bounds require the named paper."
+  },
+  {
+    "kind": "term",
+    "id": "hlo",
+    "name": "HLO",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-xla",
+      "d-architecture",
+      "v-stablehlo",
+      "d-llvm"
+    ],
+    "scope_note": "Official compiler introductions. The video is advanced adjacent background, not the XLA list-scheduler algorithm."
+  },
+  {
+    "kind": "term",
+    "id": "xla",
+    "name": "XLA",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-xla",
+      "d-architecture",
+      "v-stablehlo",
+      "d-llvm"
+    ],
+    "scope_note": "Official compiler introductions. The video is advanced adjacent background, not the XLA list-scheduler algorithm."
+  },
+  {
+    "kind": "term",
+    "id": "ir",
+    "name": "IR",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-xla",
+      "d-architecture",
+      "v-stablehlo",
+      "d-llvm"
+    ],
+    "scope_note": "Official compiler introductions. The video is advanced adjacent background, not the XLA list-scheduler algorithm."
+  },
+  {
+    "kind": "term",
+    "id": "compiler",
+    "name": "Compiler",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-xla",
+      "d-architecture",
+      "v-stablehlo",
+      "d-llvm"
+    ],
+    "scope_note": "Official compiler introductions. The video is advanced adjacent background, not the XLA list-scheduler algorithm."
+  },
+  {
+    "kind": "term",
+    "id": "buffer",
+    "name": "Buffer",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-alias",
+      "d-xlaterms",
+      "d-architecture",
+      "v-offload"
+    ],
+    "scope_note": "Compiler semantics are broader than the simplified immutable-file model."
+  },
+  {
+    "kind": "term",
+    "id": "live-out",
+    "name": "Live-out value",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-alias",
+      "d-xlaterms",
+      "d-architecture",
+      "v-offload"
+    ],
+    "scope_note": "Compiler semantics are broader than the simplified immutable-file model."
+  },
+  {
+    "kind": "term",
+    "id": "aliasing",
+    "name": "Aliasing",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-alias",
+      "d-xlaterms",
+      "d-architecture",
+      "v-offload"
+    ],
+    "scope_note": "Compiler semantics are broader than the simplified immutable-file model."
+  },
+  {
+    "kind": "term",
+    "id": "dataflow",
+    "name": "Dataflow",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-alias",
+      "d-xlaterms",
+      "d-architecture",
+      "v-offload"
+    ],
+    "scope_note": "Compiler semantics are broader than the simplified immutable-file model."
+  },
+  {
+    "kind": "term",
+    "id": "control-dependency",
+    "name": "Control dependency",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-alias",
+      "d-xlaterms",
+      "d-architecture",
+      "v-offload"
+    ],
+    "scope_note": "Compiler semantics are broader than the simplified immutable-file model."
+  },
+  {
+    "kind": "term",
+    "id": "hlo-value",
+    "name": "HloValue",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-alias",
+      "d-xlaterms",
+      "d-architecture",
+      "v-offload"
+    ],
+    "scope_note": "Compiler semantics are broader than the simplified immutable-file model."
+  },
+  {
+    "kind": "term",
+    "id": "logical-buffer",
+    "name": "LogicalBuffer",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-alias",
+      "d-xlaterms",
+      "d-architecture",
+      "v-offload"
+    ],
+    "scope_note": "Compiler semantics are broader than the simplified immutable-file model."
+  },
+  {
+    "kind": "term",
+    "id": "hlo-instruction",
+    "name": "HloInstruction",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-alias",
+      "d-xlaterms",
+      "d-architecture",
+      "v-offload"
+    ],
+    "scope_note": "Compiler semantics are broader than the simplified immutable-file model."
+  },
+  {
+    "kind": "term",
+    "id": "alluses",
+    "name": "AllUses",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-architecture",
+      "d-xlaterms",
+      "d-absltypes"
+    ],
+    "scope_note": "No exact tutorial of these source identifiers was verified. Their pinned implementation is the authoritative reference."
+  },
+  {
+    "kind": "term",
+    "id": "value-index",
+    "name": "ValueIndex",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-architecture",
+      "d-xlaterms",
+      "d-absltypes"
+    ],
+    "scope_note": "No exact tutorial of these source identifiers was verified. Their pinned implementation is the authoritative reference."
+  },
+  {
+    "kind": "term",
+    "id": "use-count",
+    "name": "UseCount",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-architecture",
+      "d-xlaterms",
+      "d-absltypes"
+    ],
+    "scope_note": "No exact tutorial of these source identifiers was verified. Their pinned implementation is the authoritative reference."
+  },
+  {
+    "kind": "term",
+    "id": "use-range",
+    "name": "UseRange",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-architecture",
+      "d-xlaterms",
+      "d-absltypes"
+    ],
+    "scope_note": "No exact tutorial of these source identifiers was verified. Their pinned implementation is the authoritative reference."
+  },
+  {
+    "kind": "term",
+    "id": "ready-list-entry",
+    "name": "ReadyListEntry",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-architecture",
+      "d-xlaterms",
+      "d-absltypes"
+    ],
+    "scope_note": "No exact tutorial of these source identifiers was verified. Their pinned implementation is the authoritative reference."
+  },
+  {
+    "kind": "term",
+    "id": "buffer-uses",
+    "name": "buffer_uses_",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-architecture",
+      "d-xlaterms",
+      "d-absltypes"
+    ],
+    "scope_note": "No exact tutorial of these source identifiers was verified. Their pinned implementation is the authoritative reference."
+  },
+  {
+    "kind": "term",
+    "id": "unscheduled-use-count",
+    "name": "unscheduled_use_count_",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-architecture",
+      "d-xlaterms",
+      "d-absltypes"
+    ],
+    "scope_note": "No exact tutorial of these source identifiers was verified. Their pinned implementation is the authoritative reference."
+  },
+  {
+    "kind": "term",
+    "id": "unscheduled-pred-count",
+    "name": "unscheduled_pred_count",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-architecture",
+      "d-xlaterms",
+      "d-absltypes"
+    ],
+    "scope_note": "No exact tutorial of these source identifiers was verified. Their pinned implementation is the authoritative reference."
+  },
+  {
+    "kind": "term",
+    "id": "adjust-ready",
+    "name": "adjust_ready_queue",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-architecture",
+      "d-xlaterms",
+      "d-absltypes"
+    ],
+    "scope_note": "No exact tutorial of these source identifiers was verified. Their pinned implementation is the authoritative reference."
+  },
+  {
+    "kind": "term",
+    "id": "bytes-defined",
+    "name": "bytes_defined",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-architecture",
+      "d-xlaterms",
+      "d-absltypes"
+    ],
+    "scope_note": "No exact tutorial of these source identifiers was verified. Their pinned implementation is the authoritative reference."
+  },
+  {
+    "kind": "term",
+    "id": "get-priority",
+    "name": "GetPriority",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-architecture",
+      "d-xlaterms",
+      "d-absltypes"
+    ],
+    "scope_note": "No exact tutorial of these source identifiers was verified. Their pinned implementation is the authoritative reference."
+  },
+  {
+    "kind": "term",
+    "id": "best-code",
+    "name": "best",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-architecture",
+      "d-xlaterms",
+      "d-absltypes"
+    ],
+    "scope_note": "No exact tutorial of these source identifiers was verified. Their pinned implementation is the authoritative reference."
+  },
+  {
+    "kind": "term",
+    "id": "accounted-uses",
+    "name": "accounted_uses",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-architecture",
+      "d-xlaterms",
+      "d-absltypes"
+    ],
+    "scope_note": "No exact tutorial of these source identifiers was verified. Their pinned implementation is the authoritative reference."
+  },
+  {
+    "kind": "term",
+    "id": "values-code",
+    "name": "values_",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-architecture",
+      "d-xlaterms",
+      "d-absltypes"
+    ],
+    "scope_note": "No exact tutorial of these source identifiers was verified. Their pinned implementation is the authoritative reference."
+  },
+  {
+    "kind": "term",
+    "id": "bytes-defined-map",
+    "name": "bytes_defined_",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-architecture",
+      "d-xlaterms",
+      "d-absltypes"
+    ],
+    "scope_note": "No exact tutorial of these source identifiers was verified. Their pinned implementation is the authoritative reference."
+  },
+  {
+    "kind": "term",
+    "id": "check-gt",
+    "name": "CHECK_GT",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-architecture",
+      "d-xlaterms",
+      "d-absltypes"
+    ],
+    "scope_note": "No exact tutorial of these source identifiers was verified. Their pinned implementation is the authoritative reference."
+  },
+  {
+    "kind": "term",
+    "id": "int32",
+    "name": "int32_t",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-abslcontainers",
+      "d-absltypes",
+      "v-heaps"
+    ],
+    "scope_note": "C++ containers and views are prerequisites. Inspect the declared types and lifetime rules in the pinned source."
+  },
+  {
+    "kind": "term",
+    "id": "int64",
+    "name": "int64_t",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-abslcontainers",
+      "d-absltypes",
+      "v-heaps"
+    ],
+    "scope_note": "C++ containers and views are prerequisites. Inspect the declared types and lifetime rules in the pinned source."
+  },
+  {
+    "kind": "term",
+    "id": "std-multimap",
+    "name": "std::multimap",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-abslcontainers",
+      "d-absltypes",
+      "v-heaps"
+    ],
+    "scope_note": "C++ containers and views are prerequisites. Inspect the declared types and lifetime rules in the pinned source."
+  },
+  {
+    "kind": "term",
+    "id": "absl-span",
+    "name": "absl::Span",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-abslcontainers",
+      "d-absltypes",
+      "v-heaps"
+    ],
+    "scope_note": "C++ containers and views are prerequisites. Inspect the declared types and lifetime rules in the pinned source."
+  },
+  {
+    "kind": "term",
+    "id": "span",
+    "name": "Span",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-abslcontainers",
+      "d-absltypes",
+      "v-heaps"
+    ],
+    "scope_note": "C++ containers and views are prerequisites. Inspect the declared types and lifetime rules in the pinned source."
+  },
+  {
+    "kind": "term",
+    "id": "cpu",
+    "name": "CPU",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-cache",
+      "v-work",
+      "d-architecture"
+    ],
+    "scope_note": "Hardware and performance background. These resources do not reproduce every parallel or external-memory algorithm in the lineage."
+  },
+  {
+    "kind": "term",
+    "id": "gpu",
+    "name": "GPU",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-cache",
+      "v-work",
+      "d-architecture"
+    ],
+    "scope_note": "Hardware and performance background. These resources do not reproduce every parallel or external-memory algorithm in the lineage."
+  },
+  {
+    "kind": "term",
+    "id": "ram",
+    "name": "RAM",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-cache",
+      "v-work",
+      "d-architecture"
+    ],
+    "scope_note": "Hardware and performance background. These resources do not reproduce every parallel or external-memory algorithm in the lineage."
+  },
+  {
+    "kind": "term",
+    "id": "hpc",
+    "name": "HPC",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-cache",
+      "v-work",
+      "d-architecture"
+    ],
+    "scope_note": "Hardware and performance background. These resources do not reproduce every parallel or external-memory algorithm in the lineage."
+  },
+  {
+    "kind": "term",
+    "id": "io",
+    "name": "I/O",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-cache",
+      "v-work",
+      "d-architecture"
+    ],
+    "scope_note": "Hardware and performance background. These resources do not reproduce every parallel or external-memory algorithm in the lineage."
+  },
+  {
+    "kind": "term",
+    "id": "external-memory",
+    "name": "External-memory model",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-cache",
+      "v-work",
+      "d-architecture"
+    ],
+    "scope_note": "Hardware and performance background. These resources do not reproduce every parallel or external-memory algorithm in the lineage."
+  },
+  {
+    "kind": "term",
+    "id": "parallel",
+    "name": "Parallel execution",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-cache",
+      "v-work",
+      "d-architecture"
+    ],
+    "scope_note": "Hardware and performance background. These resources do not reproduce every parallel or external-memory algorithm in the lineage."
+  },
+  {
+    "kind": "term",
+    "id": "heterogeneous",
+    "name": "Heterogeneous platform",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-cache",
+      "v-work",
+      "d-architecture"
+    ],
+    "scope_note": "Hardware and performance background. These resources do not reproduce every parallel or external-memory algorithm in the lineage."
+  },
+  {
+    "kind": "term",
+    "id": "cache",
+    "name": "Cache",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-cache",
+      "v-work",
+      "d-architecture"
+    ],
+    "scope_note": "Hardware and performance background. These resources do not reproduce every parallel or external-memory algorithm in the lineage."
+  },
+  {
+    "kind": "term",
+    "id": "eviction",
+    "name": "Eviction",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-cache",
+      "v-work",
+      "d-architecture"
+    ],
+    "scope_note": "Hardware and performance background. These resources do not reproduce every parallel or external-memory algorithm in the lineage."
+  },
+  {
+    "kind": "term",
+    "id": "locality",
+    "name": "Locality",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-cache",
+      "v-work",
+      "d-architecture"
+    ],
+    "scope_note": "Hardware and performance background. These resources do not reproduce every parallel or external-memory algorithm in the lineage."
+  },
+  {
+    "kind": "term",
+    "id": "streaming",
+    "name": "Streaming model",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-algorithms",
+      "v-asymptotics"
+    ],
+    "scope_note": "Use the original streaming paper for its pass and memory model; no exact tutorial was verified."
+  },
+  {
+    "kind": "term",
+    "id": "cloud",
+    "name": "Cloud computing",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-ec2",
+      "v-dask"
+    ],
+    "scope_note": "Cloud and distributed-computing context only; the local thesis requires neither."
+  },
+  {
+    "kind": "term",
+    "id": "aws",
+    "name": "AWS",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-ec2",
+      "v-dask"
+    ],
+    "scope_note": "Cloud and distributed-computing context only; the local thesis requires neither."
+  },
+  {
+    "kind": "term",
+    "id": "ec2",
+    "name": "EC2",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-ec2",
+      "v-dask"
+    ],
+    "scope_note": "Cloud and distributed-computing context only; the local thesis requires neither."
+  },
+  {
+    "kind": "term",
+    "id": "vm",
+    "name": "VM",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-ec2",
+      "v-dask"
+    ],
+    "scope_note": "Cloud and distributed-computing context only; the local thesis requires neither."
+  },
+  {
+    "kind": "term",
+    "id": "cluster",
+    "name": "Cluster",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-ec2",
+      "v-dask"
+    ],
+    "scope_note": "Cloud and distributed-computing context only; the local thesis requires neither."
+  },
+  {
+    "kind": "term",
+    "id": "serverless",
+    "name": "Serverless execution",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-lambda",
+      "d-ec2"
+    ],
+    "scope_note": "Provider introductions to function execution and virtual servers; not tutorials of the research dispatch method."
+  },
+  {
+    "kind": "term",
+    "id": "lambda",
+    "name": "AWS Lambda",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-lambda",
+      "d-ec2"
+    ],
+    "scope_note": "Provider introductions to function execution and virtual servers; not tutorials of the research dispatch method."
+  },
+  {
+    "kind": "term",
+    "id": "faas",
+    "name": "FaaS",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-lambda",
+      "d-ec2"
+    ],
+    "scope_note": "Provider introductions to function execution and virtual servers; not tutorials of the research dispatch method."
+  },
+  {
+    "kind": "term",
+    "id": "dewe",
+    "name": "DEWE",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-lambda",
+      "d-ec2"
+    ],
+    "scope_note": "Execution-environment background only. Read the DEWE source for its exact dispatch algorithm."
+  },
+  {
+    "kind": "term",
+    "id": "peak-memory",
+    "name": "Peak memory",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-measure",
+      "d-daskorder",
+      "v-cache"
+    ],
+    "scope_note": "Understand the objectives and measurement boundary; different scheduling objectives are not interchangeable."
+  },
+  {
+    "kind": "term",
+    "id": "average-memory",
+    "name": "Average memory",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-measure",
+      "d-daskorder",
+      "v-cache"
+    ],
+    "scope_note": "Understand the objectives and measurement boundary; different scheduling objectives are not interchangeable."
+  },
+  {
+    "kind": "term",
+    "id": "makespan",
+    "name": "Makespan",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-measure",
+      "d-daskorder",
+      "v-cache"
+    ],
+    "scope_note": "Understand the objectives and measurement boundary; different scheduling objectives are not interchangeable."
+  },
+  {
+    "kind": "term",
+    "id": "scheduling-time",
+    "name": "Scheduling overhead",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-measure",
+      "d-daskorder",
+      "v-cache"
+    ],
+    "scope_note": "Understand the objectives and measurement boundary; different scheduling objectives are not interchangeable."
+  },
+  {
+    "kind": "term",
+    "id": "runtime",
+    "name": "Runtime",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-measure",
+      "d-daskorder",
+      "v-cache"
+    ],
+    "scope_note": "Understand the objectives and measurement boundary; different scheduling objectives are not interchangeable."
+  },
+  {
+    "kind": "term",
+    "id": "ordering-time",
+    "name": "Ordering time",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-measure",
+      "d-daskorder",
+      "v-cache"
+    ],
+    "scope_note": "Understand the objectives and measurement boundary; different scheduling objectives are not interchangeable."
+  },
+  {
+    "kind": "term",
+    "id": "preprocessing",
+    "name": "Preprocessing",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-measure",
+      "d-daskorder",
+      "v-cache"
+    ],
+    "scope_note": "Understand the objectives and measurement boundary; different scheduling objectives are not interchangeable."
+  },
+  {
+    "kind": "term",
+    "id": "break-even",
+    "name": "Break-even point",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-measure",
+      "d-daskorder",
+      "v-cache"
+    ],
+    "scope_note": "Understand the objectives and measurement boundary; different scheduling objectives are not interchangeable."
+  },
+  {
+    "kind": "term",
+    "id": "time-t",
+    "name": "T",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-measure",
+      "d-daskorder",
+      "v-cache"
+    ],
+    "scope_note": "Understand the objectives and measurement boundary; different scheduling objectives are not interchangeable."
+  },
+  {
+    "kind": "term",
+    "id": "delta",
+    "name": "Δ",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-measure",
+      "d-daskorder",
+      "v-cache"
+    ],
+    "scope_note": "Understand the objectives and measurement boundary; different scheduling objectives are not interchangeable."
+  },
+  {
+    "kind": "term",
+    "id": "heft",
+    "name": "HEFT",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-dag",
+      "v-dask"
+    ],
+    "scope_note": "Dependency and scheduling background, not a HEFT implementation tutorial. Use the paper for rank and processor-selection equations."
+  },
+  {
+    "kind": "term",
+    "id": "upward-rank",
+    "name": "Upward rank",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-dag",
+      "v-dask"
+    ],
+    "scope_note": "Dependency and scheduling background, not a HEFT implementation tutorial. Use the paper for rank and processor-selection equations."
+  },
+  {
+    "kind": "term",
+    "id": "critical-path",
+    "name": "Critical path",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-dag",
+      "v-dask"
+    ],
+    "scope_note": "Dependency and scheduling background, not a HEFT implementation tutorial. Use the paper for rank and processor-selection equations."
+  },
+  {
+    "kind": "term",
+    "id": "lrc",
+    "name": "LRC",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-cache",
+      "d-cleanup"
+    ],
+    "scope_note": "Cache background only. LRC dependency counts and LRU recency are different policies; read the named original paper."
+  },
+  {
+    "kind": "term",
+    "id": "lru",
+    "name": "LRU",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-cache",
+      "d-cleanup"
+    ],
+    "scope_note": "Cache background only. LRC dependency counts and LRU recency are different policies; read the named original paper."
+  },
+  {
+    "kind": "term",
+    "id": "dask",
+    "name": "Dask",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "v-dask",
+      "d-delayed",
+      "d-daskorder"
+    ],
+    "scope_note": "The older introduction is paired with current official written guidance."
+  },
+  {
+    "kind": "term",
+    "id": "pegasus",
+    "name": "Pegasus",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-pegasustutorial",
+      "v-pegasus",
+      "d-cleanup"
+    ],
+    "scope_note": "The webcast is historical; use the official written tutorial for current commands."
+  },
+  {
+    "kind": "term",
+    "id": "montage",
+    "name": "Montage",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-montage",
+      "d-wfinstances",
+      "d-wfformat"
+    ],
+    "scope_note": "Application workflow background; image execution is not required for the graph experiment."
+  },
+  {
+    "kind": "term",
+    "id": "wfcommons",
+    "name": "WfCommons",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-wfcommons",
+      "d-wfinstances",
+      "d-wfformat",
+      "d-json",
+      "d-simulation"
+    ],
+    "scope_note": "Validate the instance schema and distinguish metadata replay from application execution."
+  },
+  {
+    "kind": "term",
+    "id": "wfinstances",
+    "name": "WfInstances",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-wfcommons",
+      "d-wfinstances",
+      "d-wfformat",
+      "d-json",
+      "d-simulation"
+    ],
+    "scope_note": "Validate the instance schema and distinguish metadata replay from application execution."
+  },
+  {
+    "kind": "term",
+    "id": "wf-format",
+    "name": "WfFormat",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-wfcommons",
+      "d-wfinstances",
+      "d-wfformat",
+      "d-json",
+      "d-simulation"
+    ],
+    "scope_note": "Validate the instance schema and distinguish metadata replay from application execution."
+  },
+  {
+    "kind": "term",
+    "id": "json",
+    "name": "JSON",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-json",
+      "d-wfformat"
+    ],
+    "scope_note": "Start with the Python JSON guide, then validate each workflow against its own schemaVersion."
+  },
+  {
+    "kind": "term",
+    "id": "trace",
+    "name": "Trace",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-wfcommons",
+      "d-wfinstances",
+      "d-wfformat",
+      "d-json",
+      "d-simulation"
+    ],
+    "scope_note": "Validate the instance schema and distinguish metadata replay from application execution."
+  },
+  {
+    "kind": "term",
+    "id": "replay",
+    "name": "Replay",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-wfcommons",
+      "d-wfinstances",
+      "d-wfformat",
+      "d-json",
+      "d-simulation"
+    ],
+    "scope_note": "Validate the instance schema and distinguish metadata replay from application execution."
+  },
+  {
+    "kind": "term",
+    "id": "synthetic",
+    "name": "Synthetic test",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-wfcommons",
+      "d-wfinstances",
+      "d-wfformat",
+      "d-json",
+      "d-simulation"
+    ],
+    "scope_note": "Validate the instance schema and distinguish metadata replay from application execution."
+  },
+  {
+    "kind": "term",
+    "id": "fits",
+    "name": "FITS",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-fits",
+      "d-montage"
+    ],
+    "scope_note": "The official file-handling introduction explains the format and file access. It is not needed to run the metadata-only benchmark."
+  },
+  {
+    "kind": "term",
+    "id": "2mass",
+    "name": "2MASS",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-2mass",
+      "d-montage"
+    ],
+    "scope_note": "Survey provenance for the selected workflow family; not an algorithm tutorial."
+  },
+  {
+    "kind": "term",
+    "id": "dss",
+    "name": "DSS",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-wfinstances",
+      "d-pegasusindex"
+    ],
+    "scope_note": "Workflow application context only; the existing source references explain the scientific dataset."
+  },
+  {
+    "kind": "term",
+    "id": "ligo",
+    "name": "LIGO",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-wfinstances",
+      "d-pegasusindex"
+    ],
+    "scope_note": "Workflow application context only; the existing source references explain the scientific dataset."
+  },
+  {
+    "kind": "term",
+    "id": "taskiter",
+    "name": "Taskiter",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-work",
+      "v-cache",
+      "v-dask"
+    ],
+    "scope_note": "Task overhead and locality background. No exact method tutorial was verified; use the named source."
+  },
+  {
+    "kind": "term",
+    "id": "taskinsight",
+    "name": "TaskInsight",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-work",
+      "v-cache",
+      "v-dask"
+    ],
+    "scope_note": "Task overhead and locality background. No exact method tutorial was verified; use the named source."
+  },
+  {
+    "kind": "term",
+    "id": "benchmark",
+    "name": "Benchmark",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-measure",
+      "v-git",
+      "d-tests",
+      "d-pyperf"
+    ],
+    "scope_note": "These teach measurement and verification practices, not proof of a novel contribution."
+  },
+  {
+    "kind": "term",
+    "id": "reproducibility",
+    "name": "Reproducibility",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-measure",
+      "v-git",
+      "d-tests",
+      "d-pyperf"
+    ],
+    "scope_note": "These teach measurement and verification practices, not proof of a novel contribution."
+  },
+  {
+    "kind": "term",
+    "id": "execution-model",
+    "name": "Execution model",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-measure",
+      "v-git",
+      "d-tests",
+      "d-pyperf"
+    ],
+    "scope_note": "These teach measurement and verification practices, not proof of a novel contribution."
+  },
+  {
+    "kind": "term",
+    "id": "evidence-level",
+    "name": "Evidence level",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-measure",
+      "v-git",
+      "d-tests",
+      "d-pyperf"
+    ],
+    "scope_note": "These teach measurement and verification practices, not proof of a novel contribution."
+  },
+  {
+    "kind": "term",
+    "id": "novelty",
+    "name": "Novelty",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-measure",
+      "v-git",
+      "d-tests",
+      "d-pyperf"
+    ],
+    "scope_note": "These teach measurement and verification practices, not proof of a novel contribution."
+  },
+  {
+    "kind": "term",
+    "id": "baseline",
+    "name": "Baseline",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-measure",
+      "v-git",
+      "d-tests",
+      "d-pyperf"
+    ],
+    "scope_note": "These teach measurement and verification practices, not proof of a novel contribution."
+  },
+  {
+    "kind": "term",
+    "id": "ablation",
+    "name": "Ablation",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-measure",
+      "v-git",
+      "d-tests",
+      "d-pyperf"
+    ],
+    "scope_note": "These teach measurement and verification practices, not proof of a novel contribution."
+  },
+  {
+    "kind": "term",
+    "id": "confounder",
+    "name": "Confounder",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-measure",
+      "v-git",
+      "d-tests",
+      "d-pyperf"
+    ],
+    "scope_note": "These teach measurement and verification practices, not proof of a novel contribution."
+  },
+  {
+    "kind": "term",
+    "id": "deterministic",
+    "name": "Deterministic",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-measure",
+      "v-git",
+      "d-tests",
+      "d-pyperf"
+    ],
+    "scope_note": "These teach measurement and verification practices, not proof of a novel contribution."
+  },
+  {
+    "kind": "term",
+    "id": "commit",
+    "name": "Commit",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "v-git"
+    ],
+    "scope_note": "Version-control history helps pin the exact code used in a comparison."
+  },
+  {
+    "kind": "term",
+    "id": "heuristic",
+    "name": "Heuristic",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-induction",
+      "v-states",
+      "v-algorithms",
+      "d-tests"
+    ],
+    "scope_note": "Proof and testing prerequisites. A matching output on test cases is not a general theorem."
+  },
+  {
+    "kind": "term",
+    "id": "exact-method",
+    "name": "Exact method",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-induction",
+      "v-states",
+      "v-algorithms",
+      "d-tests"
+    ],
+    "scope_note": "Proof and testing prerequisites. A matching output on test cases is not a general theorem."
+  },
+  {
+    "kind": "term",
+    "id": "optimality",
+    "name": "Optimality",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-induction",
+      "v-states",
+      "v-algorithms",
+      "d-tests"
+    ],
+    "scope_note": "Proof and testing prerequisites. A matching output on test cases is not a general theorem."
+  },
+  {
+    "kind": "term",
+    "id": "equivalence",
+    "name": "Order equivalence",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-induction",
+      "v-states",
+      "v-algorithms",
+      "d-tests"
+    ],
+    "scope_note": "Proof and testing prerequisites. A matching output on test cases is not a general theorem."
+  },
+  {
+    "kind": "term",
+    "id": "ready-score",
+    "name": "Ready-score equivalence",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-induction",
+      "v-states",
+      "v-algorithms",
+      "d-tests"
+    ],
+    "scope_note": "Proof and testing prerequisites. A matching output on test cases is not a general theorem."
+  },
+  {
+    "kind": "term",
+    "id": "invariant",
+    "name": "Invariant",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-induction",
+      "v-states",
+      "v-algorithms",
+      "d-tests"
+    ],
+    "scope_note": "Proof and testing prerequisites. A matching output on test cases is not a general theorem."
+  },
+  {
+    "kind": "term",
+    "id": "induction",
+    "name": "Induction",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-induction",
+      "v-states",
+      "v-algorithms",
+      "d-tests"
+    ],
+    "scope_note": "Proof and testing prerequisites. A matching output on test cases is not a general theorem."
+  },
+  {
+    "kind": "term",
+    "id": "oracle",
+    "name": "Correctness oracle",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-induction",
+      "v-states",
+      "v-algorithms",
+      "d-tests"
+    ],
+    "scope_note": "Proof and testing prerequisites. A matching output on test cases is not a general theorem."
+  },
+  {
+    "kind": "term",
+    "id": "counterexample",
+    "name": "Counterexample",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-induction",
+      "v-states",
+      "v-algorithms",
+      "d-tests"
+    ],
+    "scope_note": "Proof and testing prerequisites. A matching output on test cases is not a general theorem."
+  },
+  {
+    "kind": "term",
+    "id": "amortized",
+    "name": "Amortized cost",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-asymptotics",
+      "v-arrays",
+      "v-algorithms"
+    ],
+    "scope_note": "Read each method’s computational model before interpreting its bound."
+  },
+  {
+    "kind": "term",
+    "id": "big-o",
+    "name": "Big O",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-asymptotics",
+      "v-arrays",
+      "v-algorithms"
+    ],
+    "scope_note": "Read each method’s computational model before interpreting its bound."
+  },
+  {
+    "kind": "term",
+    "id": "theta",
+    "name": "Θ",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-asymptotics",
+      "v-arrays",
+      "v-algorithms"
+    ],
+    "scope_note": "Read each method’s computational model before interpreting its bound."
+  },
+  {
+    "kind": "term",
+    "id": "soft-o",
+    "name": "Õ, Õ",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-asymptotics",
+      "v-arrays",
+      "v-algorithms"
+    ],
+    "scope_note": "Read each method’s computational model before interpreting its bound."
+  },
+  {
+    "kind": "term",
+    "id": "auxiliary-space",
+    "name": "Auxiliary space",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-asymptotics",
+      "v-arrays",
+      "v-algorithms"
+    ],
+    "scope_note": "Read each method’s computational model before interpreting its bound."
+  },
+  {
+    "kind": "term",
+    "id": "n-m",
+    "name": "n, m",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-asymptotics",
+      "v-arrays",
+      "v-algorithms"
+    ],
+    "scope_note": "Read each method’s computational model before interpreting its bound."
+  },
+  {
+    "kind": "term",
+    "id": "k-l",
+    "name": "k, L",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-asymptotics",
+      "v-arrays",
+      "v-algorithms"
+    ],
+    "scope_note": "Read each method’s computational model before interpreting its bound."
+  },
+  {
+    "kind": "term",
+    "id": "d-set",
+    "name": "D",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-logic",
+      "v-induction",
+      "v-sums"
+    ],
+    "scope_note": "These lectures explain notation. The precise symbols and score formula are local to this guide, not attributed to the lecturers."
+  },
+  {
+    "kind": "term",
+    "id": "r-d",
+    "name": "R(D)",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-logic",
+      "v-induction",
+      "v-sums"
+    ],
+    "scope_note": "These lectures explain notation. The precise symbols and score formula are local to this guide, not attributed to the lecturers."
+  },
+  {
+    "kind": "term",
+    "id": "pred-v",
+    "name": "pred(v)",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-logic",
+      "v-induction",
+      "v-sums"
+    ],
+    "scope_note": "These lectures explain notation. The precise symbols and score formula are local to this guide, not attributed to the lecturers."
+  },
+  {
+    "kind": "term",
+    "id": "p-v",
+    "name": "P(v)",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-logic",
+      "v-induction",
+      "v-sums"
+    ],
+    "scope_note": "These lectures explain notation. The precise symbols and score formula are local to this guide, not attributed to the lecturers."
+  },
+  {
+    "kind": "term",
+    "id": "c-f",
+    "name": "C_f",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-logic",
+      "v-induction",
+      "v-sums"
+    ],
+    "scope_note": "These lectures explain notation. The precise symbols and score formula are local to this guide, not attributed to the lecturers."
+  },
+  {
+    "kind": "term",
+    "id": "c-g",
+    "name": "C_g",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-logic",
+      "v-induction",
+      "v-sums"
+    ],
+    "scope_note": "These lectures explain notation. The precise symbols and score formula are local to this guide, not attributed to the lecturers."
+  },
+  {
+    "kind": "term",
+    "id": "s-f",
+    "name": "S_f",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-logic",
+      "v-induction",
+      "v-sums"
+    ],
+    "scope_note": "These lectures explain notation. The precise symbols and score formula are local to this guide, not attributed to the lecturers."
+  },
+  {
+    "kind": "term",
+    "id": "b-f",
+    "name": "b_f",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-logic",
+      "v-induction",
+      "v-sums"
+    ],
+    "scope_note": "These lectures explain notation. The precise symbols and score formula are local to this guide, not attributed to the lecturers."
+  },
+  {
+    "kind": "term",
+    "id": "b-g",
+    "name": "b_g",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-logic",
+      "v-induction",
+      "v-sums"
+    ],
+    "scope_note": "These lectures explain notation. The precise symbols and score formula are local to this guide, not attributed to the lecturers."
+  },
+  {
+    "kind": "term",
+    "id": "remaining-count",
+    "name": "r_f(D)",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-logic",
+      "v-induction",
+      "v-sums"
+    ],
+    "scope_note": "These lectures explain notation. The precise symbols and score formula are local to this guide, not attributed to the lecturers."
+  },
+  {
+    "kind": "term",
+    "id": "score-formula",
+    "name": "s_D(v)",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-logic",
+      "v-induction",
+      "v-sums"
+    ],
+    "scope_note": "These lectures explain notation. The precise symbols and score formula are local to this guide, not attributed to the lecturers."
+  },
+  {
+    "kind": "term",
+    "id": "indicator",
+    "name": "1[condition]",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-logic",
+      "v-induction",
+      "v-sums"
+    ],
+    "scope_note": "These lectures explain notation. The precise symbols and score formula are local to this guide, not attributed to the lecturers."
+  },
+  {
+    "kind": "term",
+    "id": "pi",
+    "name": "π",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-logic",
+      "v-induction",
+      "v-sums"
+    ],
+    "scope_note": "These lectures explain notation. The precise symbols and score formula are local to this guide, not attributed to the lecturers."
+  },
+  {
+    "kind": "term",
+    "id": "positions",
+    "name": "position(v)",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-logic",
+      "v-induction",
+      "v-sums"
+    ],
+    "scope_note": "These lectures explain notation. The precise symbols and score formula are local to this guide, not attributed to the lecturers."
+  },
+  {
+    "kind": "term",
+    "id": "membership",
+    "name": "∈, ∉",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-logic",
+      "v-induction",
+      "v-sums"
+    ],
+    "scope_note": "These lectures explain notation. The precise symbols and score formula are local to this guide, not attributed to the lecturers."
+  },
+  {
+    "kind": "term",
+    "id": "subset",
+    "name": "⊆",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-logic",
+      "v-induction",
+      "v-sums"
+    ],
+    "scope_note": "These lectures explain notation. The precise symbols and score formula are local to this guide, not attributed to the lecturers."
+  },
+  {
+    "kind": "term",
+    "id": "empty",
+    "name": "∅",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-logic",
+      "v-induction",
+      "v-sums"
+    ],
+    "scope_note": "These lectures explain notation. The precise symbols and score formula are local to this guide, not attributed to the lecturers."
+  },
+  {
+    "kind": "term",
+    "id": "quantifiers",
+    "name": "∀, ∃",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-logic",
+      "v-induction",
+      "v-sums"
+    ],
+    "scope_note": "These lectures explain notation. The precise symbols and score formula are local to this guide, not attributed to the lecturers."
+  },
+  {
+    "kind": "term",
+    "id": "set-difference",
+    "name": "C_f \\ D",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-logic",
+      "v-induction",
+      "v-sums"
+    ],
+    "scope_note": "These lectures explain notation. The precise symbols and score formula are local to this guide, not attributed to the lecturers."
+  },
+  {
+    "kind": "term",
+    "id": "cardinality",
+    "name": "|S|",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-logic",
+      "v-induction",
+      "v-sums"
+    ],
+    "scope_note": "These lectures explain notation. The precise symbols and score formula are local to this guide, not attributed to the lecturers."
+  },
+  {
+    "kind": "term",
+    "id": "sum",
+    "name": "∑, Σ",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-logic",
+      "v-induction",
+      "v-sums"
+    ],
+    "scope_note": "These lectures explain notation. The precise symbols and score formula are local to this guide, not attributed to the lecturers."
+  },
+  {
+    "kind": "term",
+    "id": "implication",
+    "name": "⇒",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-logic",
+      "v-induction",
+      "v-sums"
+    ],
+    "scope_note": "These lectures explain notation. The precise symbols and score formula are local to this guide, not attributed to the lecturers."
+  },
+  {
+    "kind": "term",
+    "id": "reach-symbol",
+    "name": "u ↝ v",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-logic",
+      "v-induction",
+      "v-sums"
+    ],
+    "scope_note": "These lectures explain notation. The precise symbols and score formula are local to this guide, not attributed to the lecturers."
+  },
+  {
+    "kind": "term",
+    "id": "neq",
+    "name": "≠",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-logic",
+      "v-induction",
+      "v-sums"
+    ],
+    "scope_note": "These lectures explain notation. The precise symbols and score formula are local to this guide, not attributed to the lecturers."
+  },
+  {
+    "kind": "term",
+    "id": "leq",
+    "name": "≤",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-logic",
+      "v-induction",
+      "v-sums"
+    ],
+    "scope_note": "These lectures explain notation. The precise symbols and score formula are local to this guide, not attributed to the lecturers."
+  },
+  {
+    "kind": "term",
+    "id": "u-v",
+    "name": "u, v",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-logic",
+      "v-induction",
+      "v-sums"
+    ],
+    "scope_note": "These lectures explain notation. The precise symbols and score formula are local to this guide, not attributed to the lecturers."
+  },
+  {
+    "kind": "term",
+    "id": "ready-code",
+    "name": "ready",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-graphlib",
+      "v-dag",
+      "d-structures"
+    ],
+    "scope_note": "Official eligibility API and basic containers; the local Python variable names are not library functions."
+  },
+  {
+    "kind": "term",
+    "id": "degree-code",
+    "name": "degree",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-graphlib",
+      "v-dag",
+      "d-structures"
+    ],
+    "scope_note": "Official eligibility API and basic containers; the local Python variable names are not library functions."
+  },
+  {
+    "kind": "term",
+    "id": "successors-code",
+    "name": "successors",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-graphlib",
+      "v-dag",
+      "d-structures"
+    ],
+    "scope_note": "Official eligibility API and basic containers; the local Python variable names are not library functions."
+  },
+  {
+    "kind": "term",
+    "id": "bscs",
+    "name": "BSCS",
+    "coverage": "Definition and sources",
+    "learning_resources": [],
+    "scope_note": "Use the full definition and linked original reference below. No directly relevant standalone tutorial was verified for this label."
+  },
+  {
+    "kind": "term",
+    "id": "pert",
+    "name": "PERT",
+    "coverage": "Definition and sources",
+    "learning_resources": [],
+    "scope_note": "Use the full definition and linked original reference below. No directly relevant standalone tutorial was verified for this label."
+  },
+  {
+    "kind": "term",
+    "id": "sat",
+    "name": "SAT",
+    "coverage": "Definition and sources",
+    "learning_resources": [],
+    "scope_note": "Use the full definition and linked original reference below. No directly relevant standalone tutorial was verified for this label."
+  },
+  {
+    "kind": "term",
+    "id": "doi",
+    "name": "DOI",
+    "coverage": "Definition and sources",
+    "learning_resources": [],
+    "scope_note": "Use the full definition and linked original reference below. No directly relevant standalone tutorial was verified for this label."
+  },
+  {
+    "kind": "term",
+    "id": "html",
+    "name": "HTML",
+    "coverage": "Definition and sources",
+    "learning_resources": [],
+    "scope_note": "Use the full definition and linked original reference below. No directly relevant standalone tutorial was verified for this label."
+  },
+  {
+    "kind": "term",
+    "id": "pdf",
+    "name": "PDF",
+    "coverage": "Definition and sources",
+    "learning_resources": [],
+    "scope_note": "Use the full definition and linked original reference below. No directly relevant standalone tutorial was verified for this label."
+  },
+  {
+    "kind": "term",
+    "id": "acm",
+    "name": "ACM",
+    "coverage": "Definition and sources",
+    "learning_resources": [],
+    "scope_note": "Use the full definition and linked original reference below. No directly relevant standalone tutorial was verified for this label."
+  },
+  {
+    "kind": "term",
+    "id": "ieee",
+    "name": "IEEE",
+    "coverage": "Definition and sources",
+    "learning_resources": [],
+    "scope_note": "Use the full definition and linked original reference below. No directly relevant standalone tutorial was verified for this label."
+  },
+  {
+    "kind": "term",
+    "id": "ibm",
+    "name": "IBM",
+    "coverage": "Definition and sources",
+    "learning_resources": [],
+    "scope_note": "Use the full definition and linked original reference below. No directly relevant standalone tutorial was verified for this label."
+  },
+  {
+    "kind": "term",
+    "id": "pmlr",
+    "name": "PMLR",
+    "coverage": "Definition and sources",
+    "learning_resources": [],
+    "scope_note": "Use the full definition and linked original reference below. No directly relevant standalone tutorial was verified for this label."
+  },
+  {
+    "kind": "term",
+    "id": "soda",
+    "name": "SODA",
+    "coverage": "Definition and sources",
+    "learning_resources": [],
+    "scope_note": "Use the full definition and linked original reference below. No directly relevant standalone tutorial was verified for this label."
+  },
+  {
+    "kind": "term",
+    "id": "swat",
+    "name": "SWAT",
+    "coverage": "Definition and sources",
+    "learning_resources": [],
+    "scope_note": "Use the full definition and linked original reference below. No directly relevant standalone tutorial was verified for this label."
+  },
+  {
+    "kind": "term",
+    "id": "wads",
+    "name": "WADS",
+    "coverage": "Definition and sources",
+    "learning_resources": [],
+    "scope_note": "Use the full definition and linked original reference below. No directly relevant standalone tutorial was verified for this label."
+  },
+  {
+    "kind": "term",
+    "id": "ipdps",
+    "name": "IPDPS",
+    "coverage": "Definition and sources",
+    "learning_resources": [],
+    "scope_note": "Use the full definition and linked original reference below. No directly relevant standalone tutorial was verified for this label."
+  },
+  {
+    "kind": "term",
+    "id": "lctes",
+    "name": "LCTES",
+    "coverage": "Definition and sources",
+    "learning_resources": [],
+    "scope_note": "Use the full definition and linked original reference below. No directly relevant standalone tutorial was verified for this label."
+  },
+  {
+    "kind": "term",
+    "id": "tecs",
+    "name": "TECS",
+    "coverage": "Definition and sources",
+    "learning_resources": [],
+    "scope_note": "Use the full definition and linked original reference below. No directly relevant standalone tutorial was verified for this label."
+  },
+  {
+    "kind": "term",
+    "id": "tcc",
+    "name": "TCC",
+    "coverage": "Definition and sources",
+    "learning_resources": [],
+    "scope_note": "Use the full definition and linked original reference below. No directly relevant standalone tutorial was verified for this label."
+  },
+  {
+    "kind": "term",
+    "id": "infocom",
+    "name": "INFOCOM",
+    "coverage": "Definition and sources",
+    "learning_resources": [],
+    "scope_note": "Use the full definition and linked original reference below. No directly relevant standalone tutorial was verified for this label."
+  },
+  {
+    "kind": "term",
+    "id": "record-labels",
+    "name": "Record labels",
+    "coverage": "Definition and sources",
+    "learning_resources": [],
+    "scope_note": "Use the full definition and linked original reference below. No directly relevant standalone tutorial was verified for this label."
+  },
+  {
+    "kind": "term",
+    "id": "networkx",
+    "name": "NetworkX",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-networkx",
+      "v-dag"
+    ],
+    "scope_note": "Official graph-library tutorial, paired with graph foundations."
+  },
+  {
+    "kind": "method",
+    "id": "S0",
+    "name": "Lasser",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-dag"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "S1",
+    "name": "Kahn’s algorithm",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-graphlib",
+      "v-dag",
+      "d-heap",
+      "v-heaps"
+    ],
+    "scope_note": "Official library and foundation lessons explain eligibility and selection. They do not introduce a new storage-aware variant."
+  },
+  {
+    "kind": "method",
+    "id": "S2",
+    "name": "FIFO and LIFO",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-graphlib",
+      "v-dag",
+      "d-heap",
+      "v-heaps"
+    ],
+    "scope_note": "Official library and foundation lessons explain eligibility and selection. They do not introduce a new storage-aware variant."
+  },
+  {
+    "kind": "method",
+    "id": "S3",
+    "name": "Priority Kahn",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-graphlib",
+      "v-dag",
+      "d-heap",
+      "v-heaps"
+    ],
+    "scope_note": "Official library and foundation lessons explain eligibility and selection. They do not introduce a new storage-aware variant."
+  },
+  {
+    "kind": "method",
+    "id": "S4",
+    "name": "Topological generations",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-graphlib",
+      "v-dag",
+      "d-heap",
+      "v-heaps"
+    ],
+    "scope_note": "Official library and foundation lessons explain eligibility and selection. They do not introduce a new storage-aware variant."
+  },
+  {
+    "kind": "method",
+    "id": "S5",
+    "name": "DFS ordering",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "v-dfs",
+      "d-networkx"
+    ],
+    "scope_note": "The lecture explains the DFS approach; it is not Kahn source removal."
+  },
+  {
+    "kind": "method",
+    "id": "S6",
+    "name": "Order enumeration",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-relations",
+      "v-dag"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "S7",
+    "name": "Linear extensions",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-relations",
+      "v-dag"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "D1",
+    "name": "AHRSZ",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-dag",
+      "v-dfs",
+      "v-asymptotics"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "D2",
+    "name": "Depth-First Discovery",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-dag",
+      "v-dfs",
+      "v-asymptotics"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "D10",
+    "name": "Katriel–Bodlaender",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-dag",
+      "v-dfs",
+      "v-asymptotics"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "D3",
+    "name": "MNR",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-dag",
+      "v-dfs",
+      "v-asymptotics"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "D4",
+    "name": "Pearce–Kelly",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-dag",
+      "v-dfs",
+      "v-asymptotics"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "D5",
+    "name": "Batch Pearce–Kelly",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-dag",
+      "v-dfs",
+      "v-asymptotics"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "D6",
+    "name": "Temporary cycles",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-dag",
+      "v-dfs",
+      "v-asymptotics"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "D11",
+    "name": "Ajwani–Friedrich–Meyer",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-dag",
+      "v-dfs",
+      "v-asymptotics"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "D7",
+    "name": "Insertion-bound milestones",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-dag",
+      "v-dfs",
+      "v-asymptotics"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "D8",
+    "name": "Ordering with predictions",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-dag",
+      "v-dfs",
+      "v-asymptotics"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "D9",
+    "name": "Strong components with predictions",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-dag",
+      "v-dfs",
+      "v-asymptotics"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "R1",
+    "name": "Parallel sorting",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-dask",
+      "v-algorithms"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "R2",
+    "name": "External-memory sorting",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-cache",
+      "v-asymptotics"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "R3",
+    "name": "Streaming topological order",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-algorithms",
+      "v-asymptotics"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "M1",
+    "name": "Tree pebbling",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-dag",
+      "d-daskorder",
+      "v-induction"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "M2",
+    "name": "Series-parallel scheduling",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-dag",
+      "d-daskorder",
+      "v-induction"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "M3",
+    "name": "Sequential dataflow scheduling",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-dag",
+      "d-daskorder",
+      "v-induction"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "M4",
+    "name": "Graph transformations",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-dag",
+      "d-daskorder",
+      "v-induction"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "M5",
+    "name": "HEFT",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-dag",
+      "v-dask",
+      "v-measure"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "M6",
+    "name": "Memory-aware HEFT",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-dag",
+      "v-dask",
+      "v-measure"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "M7",
+    "name": "Dask ordering",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-daskorder",
+      "d-delayed",
+      "v-dask"
+    ],
+    "scope_note": "Official Dask guidance and platform tutorial; execution policies still depend on the scheduler."
+  },
+  {
+    "kind": "method",
+    "id": "M8",
+    "name": "Least Reference Count",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-cache",
+      "d-cleanup"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "E10",
+    "name": "Dependency-aware caching",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-cache",
+      "d-cleanup"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "M9",
+    "name": "Pegasus cleanup",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-cleanup",
+      "d-pegasustutorial",
+      "v-pegasus"
+    ],
+    "scope_note": "Official cleanup guidance. A production file-cleanup policy is not the local reduced priority metadata."
+  },
+  {
+    "kind": "method",
+    "id": "P0",
+    "name": "Local score model",
+    "coverage": "Local example",
+    "learning_resources": [
+      "d-heap",
+      "v-states",
+      "v-induction",
+      "v-dag"
+    ],
+    "scope_note": "Independent teaching code, not a published novel algorithm. Use the existing proof beside code; these links teach prerequisites."
+  },
+  {
+    "kind": "method",
+    "id": "P1",
+    "name": "Incremental counters",
+    "coverage": "Local example",
+    "learning_resources": [
+      "d-heap",
+      "v-states",
+      "v-induction",
+      "v-dag"
+    ],
+    "scope_note": "Independent teaching code, not a published novel algorithm. Use the existing proof beside code; these links teach prerequisites."
+  },
+  {
+    "kind": "method",
+    "id": "P2",
+    "name": "Equal consumer sets",
+    "coverage": "Local example",
+    "learning_resources": [
+      "d-heap",
+      "v-states",
+      "v-induction",
+      "v-dag"
+    ],
+    "scope_note": "Independent teaching code, not a published novel algorithm. Use the existing proof beside code; these links teach prerequisites."
+  },
+  {
+    "kind": "method",
+    "id": "P3",
+    "name": "Forced final consumer",
+    "coverage": "Local example",
+    "learning_resources": [
+      "d-heap",
+      "v-states",
+      "v-induction",
+      "v-dag"
+    ],
+    "scope_note": "Independent teaching code, not a published novel algorithm. Use the existing proof beside code; these links teach prerequisites."
+  },
+  {
+    "kind": "method",
+    "id": "P4",
+    "name": "Consumer reduction",
+    "coverage": "Local example",
+    "learning_resources": [
+      "d-heap",
+      "v-states",
+      "v-induction",
+      "v-dag"
+    ],
+    "scope_note": "Independent teaching code, not a published novel algorithm. Use the existing proof beside code; these links teach prerequisites."
+  },
+  {
+    "kind": "method",
+    "id": "P5",
+    "name": "Sort or scan (example)",
+    "coverage": "Local example",
+    "learning_resources": [
+      "v-asymptotics",
+      "v-arrays",
+      "v-dfs"
+    ],
+    "scope_note": "A teaching comparison, not a verified new Pearce–Kelly implementation."
+  },
+  {
+    "kind": "method",
+    "id": "E08",
+    "name": "Workflow data footprint",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-cleanup",
+      "v-dag",
+      "v-pegasus"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "E14",
+    "name": "Parallel low-memory scheduling",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-daskorder",
+      "v-dag",
+      "v-measure"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "E15",
+    "name": "Average-memory scheduling",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-daskorder",
+      "v-dag",
+      "v-measure"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "E17",
+    "name": "Space-bounded schedulers",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-cache",
+      "v-measure"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "E18",
+    "name": "Taskiter",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-work",
+      "v-cache",
+      "v-profile"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "E27",
+    "name": "Ceballos and colleagues",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-work",
+      "v-cache",
+      "v-profile"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "E19",
+    "name": "DAG scheduling benchmark",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-measure",
+      "d-pyperf",
+      "d-tests"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "E20",
+    "name": "XLA · 2022",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-xla",
+      "d-architecture",
+      "d-xlaterms",
+      "v-stablehlo"
+    ],
+    "scope_note": "Official XLA introductions. No dedicated walkthrough of these exact list-scheduler revisions was verified; inspect the pinned source."
+  },
+  {
+    "kind": "method",
+    "id": "E29",
+    "name": "XLA · indexed state",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-xla",
+      "d-architecture",
+      "d-xlaterms",
+      "v-stablehlo"
+    ],
+    "scope_note": "Official XLA introductions. No dedicated walkthrough of these exact list-scheduler revisions was verified; inspect the pinned source."
+  },
+  {
+    "kind": "method",
+    "id": "E30",
+    "name": "XLA · before indexing",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-xla",
+      "d-architecture",
+      "d-xlaterms",
+      "v-stablehlo"
+    ],
+    "scope_note": "Official XLA introductions. No dedicated walkthrough of these exact list-scheduler revisions was verified; inspect the pinned source."
+  },
+  {
+    "kind": "method",
+    "id": "E23",
+    "name": "Priority queue updates",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-heap",
+      "v-heaps"
+    ],
+    "scope_note": "Read the official mutable-priority examples; this is established queue maintenance."
+  },
+  {
+    "kind": "method",
+    "id": "E24",
+    "name": "Montage benchmark files",
+    "coverage": "Direct topic",
+    "learning_resources": [
+      "d-wfinstances",
+      "d-wfformat",
+      "d-wfcommons",
+      "d-json"
+    ],
+    "scope_note": "Official benchmark and schema guidance. The learning resources do not replace the actual JSON input files."
+  },
+  {
+    "kind": "method",
+    "id": "E26",
+    "name": "Tanaka and Tatebe",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-montage",
+      "v-cache",
+      "v-measure"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "E28",
+    "name": "Al-Haboobi and Kecskemeti",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-lambda",
+      "d-ec2",
+      "v-measure"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "F0",
+    "name": "Static ordering",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-dag",
+      "d-graphlib",
+      "v-algorithms"
+    ],
+    "scope_note": "Start here for the graph model. Individual methods retain their original-source requirements."
+  },
+  {
+    "kind": "method",
+    "id": "ROOT",
+    "name": "Workflow ordering",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-dag",
+      "d-graphlib",
+      "v-algorithms"
+    ],
+    "scope_note": "Start here for the graph model. Individual methods retain their original-source requirements."
+  },
+  {
+    "kind": "method",
+    "id": "F1",
+    "name": "Changing graphs",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-dfs",
+      "v-asymptotics"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "F2",
+    "name": "Other input models",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-cache",
+      "v-dask",
+      "v-asymptotics"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "F3",
+    "name": "Scheduling and data",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-daskorder",
+      "d-cleanup",
+      "v-dask"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "F4",
+    "name": "Priority maintenance",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-heap",
+      "v-states",
+      "v-heaps"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "F5",
+    "name": "Evidence and benchmarks",
+    "coverage": "Background",
+    "learning_resources": [
+      "d-wfinstances",
+      "v-measure",
+      "d-tests"
+    ],
+    "scope_note": "No exact tutorial of this research method was verified. Use these prerequisites, then read the linked original source."
+  },
+  {
+    "kind": "method",
+    "id": "F6",
+    "name": "Local examples",
+    "coverage": "Local example",
+    "learning_resources": [
+      "v-induction",
+      "v-states",
+      "d-tests"
+    ],
+    "scope_note": "The local proofs remain the source for the supplied teaching code; these are prerequisites."
+  },
+  {
+    "kind": "method",
+    "id": "OWN",
+    "name": "Our idea",
+    "coverage": "Background",
+    "learning_resources": [
+      "v-measure",
+      "v-induction",
+      "d-tests"
+    ],
+    "scope_note": "Use these to plan a proof and a fair experiment. The resources do not supply or certify the proposed algorithm."
+  },
+  {
+    "kind": "method",
+    "id": "E31",
+    "name": "Horizons",
+    "coverage": "Primary source only",
+    "learning_resources": [],
+    "scope_note": "No dedicated tutorial verified. Read the linked primary source; this is not a teaching-video substitute."
+  },
+  {
+    "kind": "method",
+    "id": "E32",
+    "name": "Dominant schedules",
+    "coverage": "Primary source only",
+    "learning_resources": [],
+    "scope_note": "No dedicated tutorial verified. Read the linked primary source; this is not a teaching-video substitute."
+  },
+  {
+    "kind": "method",
+    "id": "E33",
+    "name": "Joint memory scheduling",
+    "coverage": "Primary source only",
+    "learning_resources": [],
+    "scope_note": "No dedicated tutorial verified. Read the linked primary source; this is not a teaching-video substitute."
+  },
+  {
+    "kind": "method",
+    "id": "E34",
+    "name": "LATTICE",
+    "coverage": "Primary source only",
+    "learning_resources": [],
+    "scope_note": "No dedicated tutorial verified. Read the linked primary source; this is not a teaching-video substitute."
+  },
+  {
+    "kind": "method",
+    "id": "E35",
+    "name": "MoSAIC",
+    "coverage": "Primary source only",
+    "learning_resources": [],
+    "scope_note": "No dedicated tutorial verified. Read the linked primary source; this is not a teaching-video substitute."
+  },
+  {
+    "kind": "method",
+    "id": "E36",
+    "name": "Updating literature reviews",
+    "coverage": "Primary source only",
+    "learning_resources": [],
+    "scope_note": "No dedicated tutorial verified. Read the linked primary source; this is not a teaching-video substitute."
+  }
+]

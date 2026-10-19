@@ -1,0 +1,524 @@
+{
+  "version": 1,
+  "profiles": {
+    "E30": {
+      "input": [
+        "Compiler graph",
+        "Instructions, buffers and control dependencies.",
+        "xla-input"
+      ],
+      "state": [
+        "Pointer-keyed state",
+        "Maps hold counts; ready entries carry pointer lists.",
+        "xla-pointers"
+      ],
+      "choose": [
+        "Release benefit",
+        "Freed bytes − created bytes, with compiler exceptions.",
+        "xla-score"
+      ],
+      "update": [
+        "A use count reaches one",
+        "Refresh affected ready priorities.",
+        "xla-event"
+      ],
+      "output": [
+        "HLO instruction order",
+        "Same policy claimed for the indexing change; not replayed here.",
+        "xla-output"
+      ],
+      "plus": [
+        "Cached values",
+        "Reuses computed value sets.",
+        "old-plus"
+      ],
+      "minus": [
+        "Repeated bookkeeping",
+        "The later commit identifies repeated hashing and copied lists.",
+        "old-minus"
+      ]
+    },
+    "E29": {
+      "input": [
+        "Compiler graph",
+        "Instructions, buffers and control dependencies.",
+        "xla-input"
+      ],
+      "state": [
+        "Indexed, shared state",
+        "Dense indices, vector counts and shared spans.",
+        "xla-indices"
+      ],
+      "choose": [
+        "Release benefit",
+        "Freed bytes − created bytes, with compiler exceptions.",
+        "xla-score"
+      ],
+      "update": [
+        "A use count reaches one",
+        "Refresh affected ready priorities.",
+        "xla-event"
+      ],
+      "output": [
+        "HLO instruction order",
+        "Same policy claimed for the indexing change; not replayed here.",
+        "xla-output"
+      ],
+      "plus": [
+        "Less representation work",
+        "Code changes storage and access, not the stated policy.",
+        "new-plus"
+      ],
+      "minus": [
+        "Benefit not timed here",
+        "Setup and scheduling costs remain; no local speedup established.",
+        "new-minus"
+      ]
+    },
+    "E20": {
+      "input": [
+        "Compiler graph",
+        "Instructions, buffers and control dependencies.",
+        "xla-input"
+      ],
+      "state": [
+        "Pointer-keyed state",
+        "Logical buffers and references into a count map.",
+        "xla-2022-state"
+      ],
+      "choose": [
+        "Release benefit",
+        "Freed bytes − created bytes, with compiler exceptions.",
+        "xla-score"
+      ],
+      "update": [
+        "A use count reaches one",
+        "Refresh affected ready priorities.",
+        "xla-event"
+      ],
+      "output": [
+        "Greedy HLO order",
+        "Earlier snapshot; other changes separate it from 2026.",
+        "xla-2022-output"
+      ],
+      "plus": [
+        "Mechanism already present",
+        "The count-to-one priority trigger predates this proposal.",
+        "2022-plus"
+      ],
+      "minus": [
+        "Compiler-specific semantics",
+        "Aliases, live-out buffers and instruction rules need care.",
+        "2022-minus"
+      ]
+    },
+    "S1": {
+      "input": [
+        "Fixed dependency graph",
+        "Each prerequisite must precede its dependent.",
+        "static-dag"
+      ],
+      "state": [
+        "Indegrees + ready queue",
+        "Use the supplied FIFO teaching implementation.",
+        "kahn-state"
+      ],
+      "choose": [
+        "First ready task",
+        "FIFO is the selected implementation, not Kahn’s only policy.",
+        "fifo"
+      ],
+      "update": [
+        "Release successors",
+        "Decrement indegrees; enqueue when zero.",
+        "kahn-update"
+      ],
+      "output": [
+        "A valid task order",
+        "A cycle prevents a complete topological order.",
+        "topo-output"
+      ],
+      "plus": [
+        "Linear traversal",
+        "Simple eligibility checks with adjacency lists.",
+        "kahn-plus"
+      ],
+      "minus": [
+        "No storage objective",
+        "A legal order need not have a small storage peak.",
+        "kahn-minus"
+      ]
+    },
+    "S3": {
+      "input": [
+        "Fixed dependency graph",
+        "Each prerequisite must precede its dependent.",
+        "static-dag"
+      ],
+      "state": [
+        "Indegrees + keyed ready set",
+        "A heap can maintain a deterministic selection key.",
+        "priority-state"
+      ],
+      "choose": [
+        "Smallest chosen key",
+        "Lexicographical choice under the supplied key.",
+        "lexicographical"
+      ],
+      "update": [
+        "Release successors",
+        "Decrement indegrees; admit newly ready tasks.",
+        "kahn-update"
+      ],
+      "output": [
+        "A key-ordered valid order",
+        "Changing the key can change the resulting order.",
+        "priority-output"
+      ],
+      "plus": [
+        "Controlled selection",
+        "Produces a reproducible order under fixed keys.",
+        "priority-plus"
+      ],
+      "minus": [
+        "Extra queue work",
+        "Heap maintenance costs more than a FIFO queue.",
+        "priority-minus"
+      ]
+    },
+    "P0": {
+      "input": [
+        "Fixed workflow metadata",
+        "One completion at a time; fixed file sizes and consumers.",
+        "local-input"
+      ],
+      "state": [
+        "Original consumer sets",
+        "Keep the original inputs as the correctness oracle.",
+        "full-state"
+      ],
+      "choose": [
+        "Release benefit + fixed tie-break",
+        "Same declared score; no global memory optimum implied.",
+        "local-choose"
+      ],
+      "update": [
+        "Recompute scores",
+        "Scan the original file consumers after a completion.",
+        "full-update"
+      ],
+      "output": [
+        "Reference task order",
+        "Equality must hold for every ready task and the complete order.",
+        "local-output"
+      ],
+      "plus": [
+        "Independent specification",
+        "Directly checks the declared rule.",
+        "oracle-plus"
+      ],
+      "minus": [
+        "Repeated work",
+        "Not a strong runtime baseline.",
+        "oracle-minus"
+      ]
+    },
+    "P1": {
+      "input": [
+        "Fixed workflow metadata",
+        "One completion at a time; fixed file sizes and consumers.",
+        "local-input"
+      ],
+      "state": [
+        "One counter per file",
+        "Cache scores; batch queue refreshes by affected task.",
+        "per-file"
+      ],
+      "choose": [
+        "Release benefit + fixed tie-break",
+        "Same declared score; no global memory optimum implied.",
+        "local-choose"
+      ],
+      "update": [
+        "Update the affected score",
+        "At two → one, credit the remaining consumer.",
+        "local-event"
+      ],
+      "output": [
+        "Reference task order",
+        "Equality must hold for every ready task and the complete order.",
+        "local-output"
+      ],
+      "plus": [
+        "Avoids full rescoring",
+        "A competent incremental control.",
+        "incremental-plus"
+      ],
+      "minus": [
+        "Per-file visits remain",
+        "Reference counting itself is established prior work.",
+        "incremental-minus"
+      ]
+    },
+    "P2": {
+      "input": [
+        "Fixed workflow metadata",
+        "One completion at a time; fixed file sizes and consumers.",
+        "local-input"
+      ],
+      "state": [
+        "One counter per equal consumer set",
+        "Sum release sizes; keep producer costs unchanged.",
+        "equal-set"
+      ],
+      "choose": [
+        "Release benefit + fixed tie-break",
+        "Same declared score; no global memory optimum implied.",
+        "local-choose"
+      ],
+      "update": [
+        "Update the affected score",
+        "At two → one, credit the remaining consumer.",
+        "local-event"
+      ],
+      "output": [
+        "Reference task order",
+        "Equality must hold for every ready task and the complete order.",
+        "local-output"
+      ],
+      "plus": [
+        "Fewer duplicate counts",
+        "Only when files share identical consumer identities.",
+        "group-plus"
+      ],
+      "minus": [
+        "Grouping costs time",
+        "No benefit when repeated sets are absent.",
+        "group-minus"
+      ]
+    },
+    "P3": {
+      "input": [
+        "Fixed workflow metadata",
+        "One completion at a time; fixed file sizes and consumers.",
+        "local-input"
+      ],
+      "state": [
+        "A certified final consumer",
+        "Static credit when dependencies force the final user.",
+        "forced-final"
+      ],
+      "choose": [
+        "Release benefit + fixed tie-break",
+        "Same declared score; no global memory optimum implied.",
+        "local-choose"
+      ],
+      "update": [
+        "Track unresolved cases",
+        "Do not infer final use from an unproved relationship.",
+        "forced-update"
+      ],
+      "output": [
+        "Reference task order",
+        "Equality must hold for every ready task and the complete order.",
+        "local-output"
+      ],
+      "plus": [
+        "Can remove a counter",
+        "For a file with a provably fixed final user.",
+        "forced-plus"
+      ],
+      "minus": [
+        "Certification has a cost",
+        "The local excerpt uses a shared general reduction routine.",
+        "forced-minus"
+      ]
+    },
+    "P4": {
+      "input": [
+        "Fixed workflow metadata",
+        "One completion at a time; fixed file sizes and consumers.",
+        "local-input"
+      ],
+      "state": [
+        "Retain possible final consumers",
+        "Every removed consumer needs a dependency witness.",
+        "maximal-consumer"
+      ],
+      "choose": [
+        "Release benefit + fixed tie-break",
+        "Same declared score; no global memory optimum implied.",
+        "local-choose"
+      ],
+      "update": [
+        "Track the reduced set",
+        "Only certified removals; unchanged original producer costs.",
+        "reduced-update"
+      ],
+      "output": [
+        "Reference task order",
+        "Equality must hold for every ready task and the complete order.",
+        "local-output"
+      ],
+      "plus": [
+        "Less dynamic state",
+        "An exact local-model reduction if the coverage condition holds.",
+        "reduced-plus"
+      ],
+      "minus": [
+        "Search may dominate",
+        "Closely related reachability reduction already exists.",
+        "reduced-minus"
+      ]
+    },
+    "E08": {
+      "input": [
+        "Mapped workflow + files",
+        "Cleanup and staging are part of the application.",
+        "cleanup-input"
+      ],
+      "state": [
+        "Cleanup jobs and links",
+        "Group cleanup work and inspect dependency reachability.",
+        "cleanup-state"
+      ],
+      "choose": [
+        "Cleanup placement",
+        "Not the same greedy next-task priority.",
+        "cleanup-choice"
+      ],
+      "update": [
+        "Prune redundant cleanup links",
+        "A path can make a direct cleanup dependency unnecessary.",
+        "cleanup-update"
+      ],
+      "output": [
+        "Workflow with cleanup tasks",
+        "The output is not an unchanged priority-ordered sequence.",
+        "cleanup-output"
+      ],
+      "plus": [
+        "Same application context",
+        "Reported Montage results make it relevant prior art.",
+        "cleanup-plus"
+      ],
+      "minus": [
+        "Cleanup can be delayed",
+        "Grouping and staging affect retained data.",
+        "cleanup-minus"
+      ]
+    },
+    "D4": {
+      "input": [
+        "New dependency edges",
+        "The input graph changes over time.",
+        "changing-input"
+      ],
+      "state": [
+        "Existing order + affected region",
+        "Restrict forward and backward discovery.",
+        "pk-state"
+      ],
+      "choose": [
+        "Repair a violated order",
+        "Reassign affected vertices; detect cycle creation.",
+        "pk-choice"
+      ],
+      "update": [
+        "Process an update",
+        "Repair after a newly inserted dependency.",
+        "pk-update"
+      ],
+      "output": [
+        "Updated topological order",
+        "Different problem from finishing tasks on a fixed graph.",
+        "dynamic-output"
+      ],
+      "plus": [
+        "Practical local repair",
+        "Reported strengths depend on graph structure.",
+        "pk-plus"
+      ],
+      "minus": [
+        "No universal winner",
+        "Dense cases and baseline correctness matter.",
+        "pk-minus"
+      ]
+    },
+    "D5": {
+      "input": [
+        "Batches of new edges",
+        "Updates are grouped before the repair.",
+        "batch-input"
+      ],
+      "state": [
+        "Overlapping affected regions",
+        "Treat shared repair work together.",
+        "batch-state"
+      ],
+      "choose": [
+        "Repair the batch",
+        "Retain dependency validity after the batch.",
+        "batch-choice"
+      ],
+      "update": [
+        "Process several insertions",
+        "Benefit depends on the supplied batch.",
+        "batch-update"
+      ],
+      "output": [
+        "Updated topological order",
+        "Different problem from finishing tasks on a fixed graph.",
+        "dynamic-output"
+      ],
+      "plus": [
+        "Avoid overlapping work",
+        "Can help sufficiently large batches.",
+        "batch-plus"
+      ],
+      "minus": [
+        "Batch-sensitive benefit",
+        "Not automatically better for single updates.",
+        "batch-minus"
+      ]
+    },
+    "D6": {
+      "input": [
+        "Editable dependency graph",
+        "Temporary cycles may occur.",
+        "cycle-input"
+      ],
+      "state": [
+        "Modified Pearce–Kelly state",
+        "The precise data structure is not reproduced here.",
+        "cycle-state"
+      ],
+      "choose": [
+        "Recover when acyclic",
+        "A cyclic graph still has no topological order.",
+        "cycle-choice"
+      ],
+      "update": [
+        "Tolerate temporary cycles",
+        "Check the source for full update semantics.",
+        "cycle-update"
+      ],
+      "output": [
+        "Order after acyclicity returns",
+        "No order is claimed while a cycle remains.",
+        "cycle-output"
+      ],
+      "plus": [
+        "Editing support",
+        "Extends the operational setting.",
+        "cycle-plus"
+      ],
+      "minus": [
+        "Different output condition",
+        "Not a faster static sort by default.",
+        "cycle-minus"
+      ]
+    }
+  },
+  "provenance": "Presentation summaries of the retained reviewed records. No new performance experiments or literature search in this revision."
+}

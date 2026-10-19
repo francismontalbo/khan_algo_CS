@@ -1,0 +1,2 @@
+# Only for the optional algorithm tests; not needed by the website.
+networkx==3.6.1

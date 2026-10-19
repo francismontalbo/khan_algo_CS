@@ -1,0 +1,56 @@
+{
+  "checked_on": "2026-10-15",
+  "scope": "Targeted final source and version checks. Most source records retain their earlier audit level; this is not a new systematic review.",
+  "sources": [
+    {
+      "record": "E34",
+      "url": "https://arxiv.org/abs/2607.17422",
+      "pinned_version": "https://arxiv.org/abs/2607.17422v3",
+      "evidence": "Primary abstract, author list and submission history",
+      "result": "Version 3 is titled LATTICE. Updated current title, authors and glossary; retained original DAN-Scheduler version history.",
+      "limit": "Full v3 methods and results not reproduced. The version-specific URL produced a cache miss in the retrieval tool; the base arXiv page explicitly identifies current version v3."
+    },
+    {
+      "record": "E29",
+      "url": "https://github.com/openxla/xla/commit/6ecede672c8177bce1580bb3b60d9f6766e8994e",
+      "evidence": "Official commit metadata and diff retrieved through GitHub",
+      "result": "Dense indexing and shared metadata change confirmed in source.",
+      "limit": "The unchanged-schedule statement is an author claim; no local compiler benchmark."
+    },
+    {
+      "record": "foundation",
+      "url": "https://docs.python.org/3/library/graphlib.html",
+      "evidence": "Official documentation",
+      "result": "TopologicalSorter eligibility, prepare, get_ready, done and cycle behavior checked.",
+      "limit": "No separate CPython implementation regression test performed."
+    },
+    {
+      "record": "Horizons",
+      "url": "https://link.springer.com/article/10.1007/s42979-024-02749-w",
+      "evidence": "Primary full HTML and metadata",
+      "result": "Authors, venue and tracking-granularity objective checked.",
+      "limit": "Published performance is not independently reproduced."
+    },
+    {
+      "record": "Dask",
+      "url": "https://docs.dask.org/en/stable/order.html",
+      "evidence": "Official ordering documentation",
+      "result": "Ordering objective and documented limitations checked.",
+      "limit": "Not a claim that Dask exactly implements the local priority model."
+    },
+    {
+      "record": "Montage metadata",
+      "url": "https://github.com/wfcommons/WfInstances/tree/main/pegasus/montage",
+      "evidence": "Official directory and retained repository documentation",
+      "result": "Benchmark source and documented task-size selection retained.",
+      "limit": "Complete selected trace bytes and real Montage timing runs not available here."
+    },
+    {
+      "record": "MoSAIC",
+      "url": "https://arxiv.org/abs/2610.15205",
+      "evidence": "Indexed primary abstract",
+      "result": "Metadata retained as a 2026 preprint with abstract-level coverage.",
+      "limit": "The complete paper and implementation were not audited during this final pass."
+    }
+  ]
+}

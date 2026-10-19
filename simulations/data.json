@@ -1,0 +1,3462 @@
+{
+  "version": 1,
+  "updated": "2026-10-15",
+  "engines": [
+    {
+      "id": "fifo",
+      "name": "Kahn · FIFO queue",
+      "group": "Ordering",
+      "family": "ordering",
+      "examples": [
+        "branch",
+        "chain",
+        "cycle",
+        "wide",
+        "app-web"
+      ],
+      "purpose": "Build an order that respects every prerequisite.",
+      "equation": "d(v) = # unfinished predecessors; choose only d(v) = 0",
+      "symbols": "d(v): remaining indegree · V: tasks · E: dependencies",
+      "steps": [
+        [
+          "init",
+          "Count incoming edges"
+        ],
+        [
+          "pick",
+          "Take the first ready task"
+        ],
+        [
+          "decrement",
+          "Release its outgoing dependencies"
+        ],
+        [
+          "finish",
+          "Check for a cyclic remainder"
+        ]
+      ],
+      "invariant": "Every task in the output had no unfinished prerequisite when selected.",
+      "cost": "The core queue algorithm is O(|V| + |E|) time and O(|V|) auxiliary space. Frame creation is excluded.",
+      "limit": "A valid order does not minimize storage or completion time. The cyclic remainder may also contain tasks downstream of a cycle.",
+      "question": "Does changing only the ready-task selection alter the order, the work, or both?",
+      "refs": [
+        {
+          "title": "Python graphlib — ready tasks and dependency ordering",
+          "url": "https://docs.python.org/3/library/graphlib.html",
+          "checked": "2026-10-15"
+        },
+        {
+          "title": "NetworkX — DAG algorithms and source code",
+          "url": "https://networkx.org/documentation/stable/_modules/networkx/algorithms/dag.html",
+          "checked": "2026-10-15"
+        }
+      ],
+      "kind": "Algorithm demonstration"
+    },
+    {
+      "id": "lifo",
+      "name": "Kahn · LIFO stack",
+      "group": "Ordering",
+      "family": "ordering",
+      "examples": [
+        "branch",
+        "wide",
+        "chain",
+        "cycle",
+        "app-photos"
+      ],
+      "purpose": "See how taking the newest ready task changes a valid order.",
+      "equation": "u = most recently added ready task",
+      "symbols": "LIFO: last in, first out",
+      "steps": [
+        [
+          "init",
+          "Initialize ready tasks"
+        ],
+        [
+          "pick",
+          "Take the newest ready task"
+        ],
+        [
+          "decrement",
+          "Update successor counts"
+        ],
+        [
+          "finish",
+          "Verify the order"
+        ]
+      ],
+      "invariant": "Only zero-indegree tasks may be popped.",
+      "cost": "O(|V| + |E|) core time; O(|V|) auxiliary space.",
+      "limit": "LIFO does not guarantee depth-first-search order or a better application result.",
+      "question": "Which input structures make FIFO and LIFO diverge?",
+      "refs": [
+        {
+          "title": "Python graphlib — ready tasks and dependency ordering",
+          "url": "https://docs.python.org/3/library/graphlib.html",
+          "checked": "2026-10-15"
+        },
+        {
+          "title": "NetworkX — DAG algorithms and source code",
+          "url": "https://networkx.org/documentation/stable/_modules/networkx/algorithms/dag.html",
+          "checked": "2026-10-15"
+        }
+      ],
+      "kind": "Algorithm demonstration"
+    },
+    {
+      "id": "priority",
+      "name": "Kahn · fixed priorities",
+      "group": "Ordering",
+      "family": "ordering",
+      "examples": [
+        "branch",
+        "wide",
+        "chain",
+        "cycle",
+        "app-build"
+      ],
+      "purpose": "Prefer the highest-scoring task among the eligible tasks.",
+      "equation": "u = arg max ready priority(v); smallest task ID breaks ties",
+      "symbols": "priority(v): fixed input score; not a memory estimate",
+      "steps": [
+        [
+          "init",
+          "Build the ready heap"
+        ],
+        [
+          "pick",
+          "Extract the highest priority"
+        ],
+        [
+          "decrement",
+          "Add newly eligible tasks"
+        ],
+        [
+          "finish",
+          "Verify the order"
+        ]
+      ],
+      "invariant": "The heap contains only eligible tasks, ordered by fixed priority.",
+      "cost": "O(|E| + |V| log |V|) with a binary heap, excluding tracing.",
+      "limit": "Fixed priorities do not demonstrate changing file-release credits.",
+      "question": "Does maintaining a dynamic score cost more than selecting by a fixed one?",
+      "refs": [
+        {
+          "title": "Python heapq — priority updates and stale entries",
+          "url": "https://docs.python.org/3/library/heapq.html",
+          "checked": "2026-10-15"
+        },
+        {
+          "title": "NetworkX — DAG algorithms and source code",
+          "url": "https://networkx.org/documentation/stable/_modules/networkx/algorithms/dag.html",
+          "checked": "2026-10-15"
+        }
+      ],
+      "kind": "Algorithm demonstration"
+    },
+    {
+      "id": "lexical",
+      "name": "Kahn · alphabetical tie-breaking",
+      "group": "Ordering",
+      "family": "ordering",
+      "examples": [
+        "branch",
+        "wide",
+        "chain",
+        "cycle",
+        "app-web"
+      ],
+      "purpose": "Produce a deterministic alphabetical topological order.",
+      "equation": "u = smallest task ID in the ready set",
+      "symbols": "Task IDs are ordered as strings in this lesson.",
+      "steps": [
+        [
+          "init",
+          "Build a min-heap of ready IDs"
+        ],
+        [
+          "pick",
+          "Take the smallest eligible ID"
+        ],
+        [
+          "decrement",
+          "Insert newly eligible IDs"
+        ],
+        [
+          "finish",
+          "Verify the order"
+        ]
+      ],
+      "invariant": "The smallest currently eligible ID is always selected.",
+      "cost": "O(|E| + |V| log |V|) core time using a binary heap.",
+      "limit": "A deterministic order is not necessarily a good scheduling order.",
+      "question": "Which parts of a claimed improvement are only tie-breaking changes?",
+      "refs": [
+        {
+          "title": "NetworkX — DAG algorithms and source code",
+          "url": "https://networkx.org/documentation/stable/_modules/networkx/algorithms/dag.html",
+          "checked": "2026-10-15"
+        },
+        {
+          "title": "Python heapq — priority updates and stale entries",
+          "url": "https://docs.python.org/3/library/heapq.html",
+          "checked": "2026-10-15"
+        }
+      ],
+      "kind": "Algorithm demonstration"
+    },
+    {
+      "id": "generations",
+      "name": "Topological generations",
+      "group": "Ordering",
+      "family": "ordering",
+      "examples": [
+        "branch",
+        "wide",
+        "chain",
+        "cycle",
+        "app-photos"
+      ],
+      "purpose": "Reveal dependency layers, one completed layer at a time.",
+      "equation": "g(v) = 0 for sources; otherwise 1 + max predecessor g(u)",
+      "symbols": "g(v): generation number",
+      "steps": [
+        [
+          "init",
+          "Find sources"
+        ],
+        [
+          "layer",
+          "Expose a full generation"
+        ],
+        [
+          "advance",
+          "Finish the generation"
+        ],
+        [
+          "finish",
+          "Check for remaining tasks"
+        ]
+      ],
+      "invariant": "Every predecessor of a task appears in an earlier generation.",
+      "cost": "O(|V| + |E|) core work.",
+      "limit": "This models eligibility rounds, not actual parallel workers or the historical parallel-sorting algorithm.",
+      "question": "How much parallelism is available before hardware constraints are considered?",
+      "refs": [
+        {
+          "title": "Python graphlib — ready tasks and dependency ordering",
+          "url": "https://docs.python.org/3/library/graphlib.html",
+          "checked": "2026-10-15"
+        },
+        {
+          "title": "NetworkX — DAG algorithms and source code",
+          "url": "https://networkx.org/documentation/stable/_modules/networkx/algorithms/dag.html",
+          "checked": "2026-10-15"
+        }
+      ],
+      "kind": "Algorithm demonstration"
+    },
+    {
+      "id": "dfs",
+      "name": "DFS topological ordering",
+      "group": "Ordering",
+      "family": "ordering",
+      "examples": [
+        "branch",
+        "cycle",
+        "chain",
+        "wide",
+        "app-db"
+      ],
+      "purpose": "Follow dependencies deeply and reverse their finishing order.",
+      "equation": "order = reverse(finish list)",
+      "symbols": "Active: on recursion stack · Finished: all successors explored",
+      "steps": [
+        [
+          "init",
+          "Mark every task unseen"
+        ],
+        [
+          "enter",
+          "Enter an unseen task"
+        ],
+        [
+          "inspect",
+          "Inspect outgoing edges"
+        ],
+        [
+          "finish_node",
+          "Finish after successors"
+        ],
+        [
+          "reverse",
+          "Reverse the finish list"
+        ]
+      ],
+      "invariant": "An edge to an active task proves a directed cycle; a DAG edge finishes its target first.",
+      "cost": "O(|V| + |E|) traversal; O(|V|) stack and state.",
+      "limit": "The recursive teaching version is limited to small graphs. Its finish list is not the output until reversed.",
+      "question": "Which errors are detectable by an independent DFS check of a Kahn implementation?",
+      "refs": [
+        {
+          "title": "NetworkX — DAG algorithms and source code",
+          "url": "https://networkx.org/documentation/stable/_modules/networkx/algorithms/dag.html",
+          "checked": "2026-10-15"
+        }
+      ],
+      "kind": "Algorithm demonstration"
+    },
+    {
+      "id": "bfs",
+      "name": "BFS reachability",
+      "group": "Graph search",
+      "family": "search",
+      "examples": [
+        "branch",
+        "chain",
+        "wide",
+        "cycle",
+        "redundant",
+        "app-lockpath"
+      ],
+      "purpose": "Find an unweighted path using a queue.",
+      "equation": "distance(v) = distance(parent(v)) + 1",
+      "symbols": "Source and target come from the editable input.",
+      "steps": [
+        [
+          "init",
+          "Visit the source"
+        ],
+        [
+          "pop",
+          "Expand the next task"
+        ],
+        [
+          "inspect",
+          "Discover unseen neighbors"
+        ],
+        [
+          "found",
+          "Reconstruct the path"
+        ],
+        [
+          "absent",
+          "Exhaust the reachable region"
+        ]
+      ],
+      "invariant": "The first discovery of a task gives its shortest unweighted distance from the source.",
+      "cost": "O(|V| + |E|) worst-case traversal; O(|V|) state.",
+      "limit": "A BFS traversal order is not generally a topological order.",
+      "question": "How many edges need inspection to certify one relevant reachability fact?",
+      "refs": [
+        {
+          "title": "NetworkX — breadth-first traversal",
+          "url": "https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.traversal.breadth_first_search.bfs_edges.html",
+          "checked": "2026-10-15"
+        }
+      ],
+      "kind": "Algorithm demonstration"
+    },
+    {
+      "id": "bounded",
+      "name": "BFS with an edge budget",
+      "group": "Graph search",
+      "family": "search",
+      "examples": [
+        "chain",
+        "branch",
+        "cycle",
+        "redundant",
+        "app-lockpath"
+      ],
+      "purpose": "See why stopping early must return UNKNOWN.",
+      "equation": "examined edges ≤ B; exhausted budget ⇒ UNKNOWN",
+      "symbols": "B: a limit on edge inspections, not on all runtime work.",
+      "steps": [
+        [
+          "init",
+          "Initialize the search budget"
+        ],
+        [
+          "pop",
+          "Expand a discovered task"
+        ],
+        [
+          "inspect",
+          "Spend one edge inspection"
+        ],
+        [
+          "unknown",
+          "Keep uncertainty when stopped"
+        ],
+        [
+          "found",
+          "Return a witnessed path"
+        ]
+      ],
+      "invariant": "Every FOUND result has a real path; UNKNOWN makes no absence claim.",
+      "cost": "At most B edge inspections. Queue setup, snapshots and other work are not bounded by B.",
+      "limit": "A budget can miss useful certificates. This teaching rule is not a claimed new algorithm.",
+      "question": "What evidence would justify a search budget without silently changing correctness?",
+      "refs": [
+        {
+          "title": "NetworkX — breadth-first traversal",
+          "url": "https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.traversal.breadth_first_search.bfs_edges.html",
+          "checked": "2026-10-15"
+        }
+      ],
+      "kind": "Local teaching example"
+    },
+    {
+      "id": "reduction",
+      "name": "Transitive reduction · reference",
+      "group": "Graph search",
+      "family": "reduction",
+      "examples": [
+        "redundant",
+        "branch",
+        "chain",
+        "app-ci"
+      ],
+      "purpose": "Remove direct dependencies already implied by a longer path.",
+      "equation": "remove u → v iff v remains reachable from u without that edge",
+      "symbols": "Reachability is preserved; edge metadata has no role in this example.",
+      "steps": [
+        [
+          "init",
+          "Keep the original DAG"
+        ],
+        [
+          "test",
+          "Search without one edge"
+        ],
+        [
+          "finish",
+          "Return the retained edges"
+        ]
+      ],
+      "invariant": "Every removed edge has an alternative path in the original DAG.",
+      "cost": "The clear reference performs one O(|V| + |E|) search per edge. Not an optimized implementation.",
+      "limit": "Requires a DAG here. Graph simplification is not automatically file-counter reduction.",
+      "question": "Could discovering a redundant relation cost more than maintaining the original state?",
+      "refs": [
+        {
+          "title": "NetworkX — transitive reduction",
+          "url": "https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.dag.transitive_reduction.html",
+          "checked": "2026-10-15"
+        }
+      ],
+      "kind": "Algorithm demonstration"
+    },
+    {
+      "id": "enumeration",
+      "name": "Enumerate all topological orders",
+      "group": "Ordering",
+      "family": "enumeration",
+      "examples": [
+        "small",
+        "branch",
+        "wide",
+        "app-enum"
+      ],
+      "purpose": "Try every legal next choice on a small DAG.",
+      "equation": "orders(G) = every permutation satisfying position(u) < position(v)",
+      "symbols": "Prefix: choices already made in the current branch.",
+      "steps": [
+        [
+          "init",
+          "Start with an empty prefix"
+        ],
+        [
+          "choose",
+          "Choose any eligible task"
+        ],
+        [
+          "complete",
+          "Save a complete order"
+        ],
+        [
+          "backtrack",
+          "Undo the choice"
+        ],
+        [
+          "finish",
+          "Report all orders"
+        ]
+      ],
+      "invariant": "Every saved order respects all edges; backtracking explores every eligible branch.",
+      "cost": "Output-sensitive and potentially factorial. Limited to 6 tasks in the viewer.",
+      "limit": "Generic backtracking, not a reproduction of the optimized Knuth–Szwarcfiter or Pruesse–Ruskey generation methods.",
+      "question": "Can exhaustive small cases serve as a correctness oracle rather than a production algorithm?",
+      "refs": [
+        {
+          "title": "NetworkX — DAG algorithms and source code",
+          "url": "https://networkx.org/documentation/stable/_modules/networkx/algorithms/dag.html",
+          "checked": "2026-10-15"
+        }
+      ],
+      "kind": "Algorithm demonstration"
+    },
+    {
+      "id": "critical",
+      "name": "Longest paths in a DAG",
+      "group": "Scheduling",
+      "family": "critical",
+      "examples": [
+        "branch",
+        "chain",
+        "wide",
+        "app-build"
+      ],
+      "purpose": "Compute earliest finishes under unlimited processors and zero transfer delay.",
+      "equation": "EF(v) ← max(EF(v), EF(u) + duration(v))",
+      "symbols": "EF: earliest finish · duration: fixed input execution time.",
+      "steps": [
+        [
+          "init",
+          "Initialize with task durations"
+        ],
+        [
+          "relax",
+          "Propagate finish constraints"
+        ],
+        [
+          "finish",
+          "Report a longest dependency path"
+        ]
+      ],
+      "invariant": "When a task is processed, every predecessor finish value is final.",
+      "cost": "O(|V| + |E|) after a topological traversal.",
+      "limit": "This is a dependency lower bound for more constrained systems, not a scheduler for a fixed number of processors.",
+      "question": "Are the experiments measuring ordering overhead or actual workflow completion?",
+      "refs": [
+        {
+          "title": "NetworkX — DAG algorithms and source code",
+          "url": "https://networkx.org/documentation/stable/_modules/networkx/algorithms/dag.html",
+          "checked": "2026-10-15"
+        }
+      ],
+      "kind": "Algorithm demonstration"
+    },
+    {
+      "id": "insertion",
+      "name": "Edge insertion · recompute reference",
+      "group": "Changing graphs",
+      "family": "insertion",
+      "examples": [
+        "insert",
+        "insert-cycle",
+        "insert-forward",
+        "app-lockinsert",
+        "app-lockcycle"
+      ],
+      "purpose": "Distinguish a harmless forward edge, a backward edge and a new cycle.",
+      "equation": "position(u) < position(v) ⇒ retain order; v ⇝ u ⇒ reject u → v",
+      "symbols": "The input includes an old order and one inserted edge.",
+      "steps": [
+        [
+          "init",
+          "Check the old order"
+        ],
+        [
+          "forward",
+          "Accept a forward edge"
+        ],
+        [
+          "cycle",
+          "Reject a cycle"
+        ],
+        [
+          "recompute",
+          "Recompute an acyclic backward insertion"
+        ],
+        [
+          "finish",
+          "Check the new order"
+        ]
+      ],
+      "invariant": "The accepted order respects all old edges and the new edge.",
+      "cost": "O(|V| + |E|) full-recomputation branch; this viewer also validates the old order.",
+      "limit": "Not AHRSZ, MNR, a predictive algorithm or Pearce–Kelly.",
+      "question": "Which updates actually invalidate the previous order?",
+      "refs": [
+        {
+          "title": "Pearce and Kelly — Figure 2 and Section 3.1",
+          "url": "https://whileydave.com/publications/PK07_JEA_preprint.pdf",
+          "checked": "2026-10-15",
+          "note": "Parsed Figure 2 and explanatory text; web PDF screenshot unavailable."
+        },
+        {
+          "title": "Python graphlib — ready tasks and dependency ordering",
+          "url": "https://docs.python.org/3/library/graphlib.html",
+          "checked": "2026-10-15"
+        }
+      ],
+      "kind": "Algorithm demonstration"
+    },
+    {
+      "id": "pk",
+      "name": "Pearce–Kelly · repair rule",
+      "group": "Changing graphs",
+      "family": "insertion",
+      "examples": [
+        "insert",
+        "insert-cycle",
+        "insert-forward",
+        "app-lockinsert",
+        "app-lockcycle"
+      ],
+      "purpose": "Discover affected forward and backward sets, then reuse their positions.",
+      "equation": "affected positions ← B in old order, followed by F in old order",
+      "symbols": "F: reached from new target inside interval · B: reaches new source inside interval.",
+      "steps": [
+        [
+          "init",
+          "Locate the invalidating edge"
+        ],
+        [
+          "discover",
+          "Search forward and backward"
+        ],
+        [
+          "cycle",
+          "Reject a detected cycle"
+        ],
+        [
+          "partition",
+          "Reassign only affected slots"
+        ],
+        [
+          "finish",
+          "Verify the repaired order"
+        ]
+      ],
+      "invariant": "Relative order inside F and inside B is preserved; all other task slots remain fixed.",
+      "cost": "The independent viewer scans the old array to collect sets and positions. It does not reproduce the paper’s exact operation counts.",
+      "limit": "Single insertion only. No batch optimization, predictions, or temporary-cycle tolerance.",
+      "question": "When are the discovery and reassignment stages each the dominant cost?",
+      "refs": [
+        {
+          "title": "Pearce and Kelly — Figure 2 and Section 3.1",
+          "url": "https://whileydave.com/publications/PK07_JEA_preprint.pdf",
+          "checked": "2026-10-15",
+          "note": "Parsed Figure 2 and explanatory text; web PDF screenshot unavailable."
+        }
+      ],
+      "kind": "Published repair rule · teaching implementation"
+    },
+    {
+      "id": "scc",
+      "name": "Tarjan strongly connected components",
+      "group": "Graph search",
+      "family": "components",
+      "examples": [
+        "cycle",
+        "branch",
+        "redundant",
+        "app-callgraph"
+      ],
+      "purpose": "Find mutually reachable groups and distinguish cycles from a DAG.",
+      "equation": "low(u) = smallest active index reachable under the DFS low-link rules",
+      "symbols": "Index: discovery order · Low link: earliest reachable active index.",
+      "steps": [
+        [
+          "init",
+          "Initialize indices"
+        ],
+        [
+          "enter",
+          "Push a newly visited task"
+        ],
+        [
+          "low",
+          "Update low links"
+        ],
+        [
+          "component",
+          "Pop a complete component"
+        ],
+        [
+          "finish",
+          "Report the partition"
+        ]
+      ],
+      "invariant": "A root with low(u) = index(u) closes exactly one active strongly connected component.",
+      "cost": "O(|V| + |E|) traversal; O(|V|) state.",
+      "limit": "Static Tarjan teaching version. Not incremental strong-component maintenance with predictions.",
+      "question": "Which parts of cycle diagnosis should be independent from ordering?",
+      "refs": [
+        {
+          "title": "NetworkX — strongly connected components and Tarjan references",
+          "url": "https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.components.strongly_connected_components.html",
+          "checked": "2026-10-15"
+        }
+      ],
+      "kind": "Algorithm demonstration"
+    },
+    {
+      "id": "heap",
+      "name": "Priority updates and stale entries",
+      "group": "Priority state",
+      "family": "heap",
+      "examples": [
+        "heap",
+        "app-jobs"
+      ],
+      "purpose": "Change a priority without letting an obsolete entry win.",
+      "equation": "valid entry ⇔ stored version = current task version",
+      "symbols": "Higher score wins; task ID breaks ties.",
+      "steps": [
+        [
+          "init",
+          "Create an empty heap"
+        ],
+        [
+          "push",
+          "Insert a current version"
+        ],
+        [
+          "stale",
+          "Ignore outdated entries"
+        ],
+        [
+          "pop",
+          "Return the best valid task"
+        ],
+        [
+          "finish",
+          "Inspect the extraction order"
+        ]
+      ],
+      "invariant": "Every returned entry is current, even if stale entries remain in the heap.",
+      "cost": "O(log H) per heap operation; H includes stale entries. Trace tables are extra work.",
+      "limit": "Stale entries consume memory and must eventually be popped or rebuilt.",
+      "question": "Do fewer score changes actually produce fewer queue operations?",
+      "refs": [
+        {
+          "title": "Python heapq — priority updates and stale entries",
+          "url": "https://docs.python.org/3/library/heapq.html",
+          "checked": "2026-10-15"
+        }
+      ],
+      "kind": "Algorithm demonstration"
+    },
+    {
+      "id": "fullscore",
+      "name": "Storage priority · full recomputation",
+      "group": "Priority state",
+      "family": "storage",
+      "examples": [
+        "files",
+        "forced",
+        "greedy-bad",
+        "app-photo-files"
+      ],
+      "purpose": "Choose ready tasks by release credit while preserving fixed producer costs.",
+      "equation": "s(v) = −created(v) + Σ size(f) · [v is the final unfinished consumer]",
+      "symbols": "s(v): ready-task priority · C(f): original consumer set · r*: priority counter, saturated at one.",
+      "steps": [
+        [
+          "init",
+          "Prepare file metadata"
+        ],
+        [
+          "recompute",
+          "Recompute original scores"
+        ],
+        [
+          "choose",
+          "Choose the best eligible task"
+        ],
+        [
+          "refresh",
+          "Refresh changed ready tasks"
+        ],
+        [
+          "finish",
+          "Verify the resulting order"
+        ]
+      ],
+      "invariant": "With the stated model, reduced metadata preserves scores of ready tasks and the same task order. Scores of blocked tasks need not match.",
+      "cost": "Exact operation counts are shown for the small input. Snapshot costs are not algorithm timings.",
+      "limit": "Simple correctness oracle, not the strongest runtime baseline. Fixed DAG; sequential completion; immutable files; no retries, aliases or in-place writes.",
+      "question": "Which bookkeeping actually changes a ready-task decision, and what is the complete cost of maintaining it?",
+      "refs": [
+        {
+          "title": "XLA memory scheduler — TensorFlow v2.10.0",
+          "url": "https://github.com/tensorflow/tensorflow/blob/v2.10.0/tensorflow/compiler/xla/service/hlo_memory_scheduler.cc",
+          "checked": "Retained source audit",
+          "note": "This update reuses the pinned reference; simulations do not reproduce compiler aliasing or special instruction rules."
+        },
+        {
+          "title": "Singh et al. — Optimizing Workflow Data Footprint",
+          "url": "https://dcc.ligo.org/public/0006/P070017/000/P070017-00.pdf",
+          "checked": "Retained source audit"
+        },
+        {
+          "title": "Python heapq — priority updates and stale entries",
+          "url": "https://docs.python.org/3/library/heapq.html",
+          "checked": "2026-10-15"
+        }
+      ],
+      "kind": "Local workflow model · not a full XLA port"
+    },
+    {
+      "id": "counters",
+      "name": "Storage priority · incremental counters",
+      "group": "Priority state",
+      "family": "storage",
+      "examples": [
+        "files",
+        "forced",
+        "greedy-bad",
+        "app-photo-files"
+      ],
+      "purpose": "Choose ready tasks by release credit while preserving fixed producer costs.",
+      "equation": "s(v) = −created(v) + Σ size(f) · [v is the final unfinished consumer]",
+      "symbols": "s(v): ready-task priority · C(f): original consumer set · r*: priority counter, saturated at one.",
+      "steps": [
+        [
+          "init",
+          "Prepare file metadata"
+        ],
+        [
+          "choose",
+          "Choose the best eligible task"
+        ],
+        [
+          "decrement",
+          "Update only relevant counters"
+        ],
+        [
+          "refresh",
+          "Refresh changed ready tasks"
+        ],
+        [
+          "finish",
+          "Verify the resulting order"
+        ]
+      ],
+      "invariant": "With the stated model, reduced metadata preserves scores of ready tasks and the same task order. Scores of blocked tasks need not match.",
+      "cost": "Exact operation counts are shown for the small input. Snapshot costs are not algorithm timings.",
+      "limit": "Counters stop at one for priority maintenance; do not use them for physical deletion. Fixed DAG; sequential completion; immutable files; no retries, aliases or in-place writes.",
+      "question": "Which bookkeeping actually changes a ready-task decision, and what is the complete cost of maintaining it?",
+      "refs": [
+        {
+          "title": "XLA memory scheduler — TensorFlow v2.10.0",
+          "url": "https://github.com/tensorflow/tensorflow/blob/v2.10.0/tensorflow/compiler/xla/service/hlo_memory_scheduler.cc",
+          "checked": "Retained source audit",
+          "note": "This update reuses the pinned reference; simulations do not reproduce compiler aliasing or special instruction rules."
+        },
+        {
+          "title": "Singh et al. — Optimizing Workflow Data Footprint",
+          "url": "https://dcc.ligo.org/public/0006/P070017/000/P070017-00.pdf",
+          "checked": "Retained source audit"
+        },
+        {
+          "title": "Python heapq — priority updates and stale entries",
+          "url": "https://docs.python.org/3/library/heapq.html",
+          "checked": "2026-10-15"
+        }
+      ],
+      "kind": "Local workflow model · not a full XLA port"
+    },
+    {
+      "id": "grouped",
+      "name": "Storage priority · equal consumer groups",
+      "group": "Priority state",
+      "family": "storage",
+      "examples": [
+        "files",
+        "forced",
+        "greedy-bad",
+        "app-photo-files"
+      ],
+      "purpose": "Choose ready tasks by release credit while preserving fixed producer costs.",
+      "equation": "s(v) = −created(v) + Σ size(f) · [v is the final unfinished consumer]",
+      "symbols": "s(v): ready-task priority · C(f): original consumer set · r*: priority counter, saturated at one.",
+      "steps": [
+        [
+          "init",
+          "Prepare file metadata"
+        ],
+        [
+          "choose",
+          "Choose the best eligible task"
+        ],
+        [
+          "decrement",
+          "Update only relevant counters"
+        ],
+        [
+          "refresh",
+          "Refresh changed ready tasks"
+        ],
+        [
+          "finish",
+          "Verify the resulting order"
+        ]
+      ],
+      "invariant": "With the stated model, reduced metadata preserves scores of ready tasks and the same task order. Scores of blocked tasks need not match.",
+      "cost": "Exact operation counts are shown for the small input. Snapshot costs are not algorithm timings.",
+      "limit": "Grouping may cost more than it saves. Consumer identities, not counts alone, must match. Fixed DAG; sequential completion; immutable files; no retries, aliases or in-place writes.",
+      "question": "Which bookkeeping actually changes a ready-task decision, and what is the complete cost of maintaining it?",
+      "refs": [
+        {
+          "title": "XLA memory scheduler — TensorFlow v2.10.0",
+          "url": "https://github.com/tensorflow/tensorflow/blob/v2.10.0/tensorflow/compiler/xla/service/hlo_memory_scheduler.cc",
+          "checked": "Retained source audit",
+          "note": "This update reuses the pinned reference; simulations do not reproduce compiler aliasing or special instruction rules."
+        },
+        {
+          "title": "Singh et al. — Optimizing Workflow Data Footprint",
+          "url": "https://dcc.ligo.org/public/0006/P070017/000/P070017-00.pdf",
+          "checked": "Retained source audit"
+        },
+        {
+          "title": "Python heapq — priority updates and stale entries",
+          "url": "https://docs.python.org/3/library/heapq.html",
+          "checked": "2026-10-15"
+        }
+      ],
+      "kind": "Local workflow model · not a full XLA port"
+    },
+    {
+      "id": "maximal",
+      "name": "Storage priority · possible final consumers",
+      "group": "Priority state",
+      "family": "storage",
+      "examples": [
+        "files",
+        "forced",
+        "greedy-bad",
+        "app-forced"
+      ],
+      "purpose": "Choose ready tasks by release credit while preserving fixed producer costs.",
+      "equation": "s(v) = −created(v) + Σ size(f) · [v is the final unfinished consumer]",
+      "symbols": "s(v): ready-task priority · C(f): original consumer set · r*: priority counter, saturated at one.",
+      "steps": [
+        [
+          "init",
+          "Prepare file metadata"
+        ],
+        [
+          "choose",
+          "Choose the best eligible task"
+        ],
+        [
+          "decrement",
+          "Update only relevant counters"
+        ],
+        [
+          "refresh",
+          "Refresh changed ready tasks"
+        ],
+        [
+          "finish",
+          "Verify the resulting order"
+        ]
+      ],
+      "invariant": "With the stated model, reduced metadata preserves scores of ready tasks and the same task order. Scores of blocked tasks need not match.",
+      "cost": "Exact operation counts are shown for the small input. Snapshot costs are not algorithm timings.",
+      "limit": "Reachability preprocessing is included in the displayed search count, but not wall-clock measurements. Fixed DAG; sequential completion; immutable files; no retries, aliases or in-place writes.",
+      "question": "Which bookkeeping actually changes a ready-task decision, and what is the complete cost of maintaining it?",
+      "refs": [
+        {
+          "title": "XLA memory scheduler — TensorFlow v2.10.0",
+          "url": "https://github.com/tensorflow/tensorflow/blob/v2.10.0/tensorflow/compiler/xla/service/hlo_memory_scheduler.cc",
+          "checked": "Retained source audit",
+          "note": "This update reuses the pinned reference; simulations do not reproduce compiler aliasing or special instruction rules."
+        },
+        {
+          "title": "Singh et al. — Optimizing Workflow Data Footprint",
+          "url": "https://dcc.ligo.org/public/0006/P070017/000/P070017-00.pdf",
+          "checked": "Retained source audit"
+        },
+        {
+          "title": "Python heapq — priority updates and stale entries",
+          "url": "https://docs.python.org/3/library/heapq.html",
+          "checked": "2026-10-15"
+        }
+      ],
+      "kind": "Local workflow model · not a full XLA port"
+    },
+    {
+      "id": "lifetime",
+      "name": "Intermediate-file lifetime and cleanup",
+      "group": "Scheduling",
+      "family": "lifetime",
+      "examples": [
+        "files",
+        "greedy-bad",
+        "better-order",
+        "forced",
+        "app-photo-files"
+      ],
+      "purpose": "See output allocation, last use, cleanup and retained final outputs.",
+      "equation": "peak = maxₜ Σ size(f) for generated files live at t",
+      "symbols": "Bytes are synthetic file sizes, not measured process RAM.",
+      "steps": [
+        [
+          "init",
+          "Exclude external inputs"
+        ],
+        [
+          "allocate",
+          "Create outputs while inputs are live"
+        ],
+        [
+          "release",
+          "Free final-use intermediate files"
+        ],
+        [
+          "finish",
+          "Report peak and retained outputs"
+        ]
+      ],
+      "invariant": "No intermediate file is released before all of its consumers finish.",
+      "cost": "One pass through the declared order and file incidences; the readable viewer rescans file records.",
+      "limit": "A declared sequential lifetime model, not the complete Pegasus cleanup planner or an optimal-memory scheduler.",
+      "question": "When does the same valid task order create different transient storage assumptions?",
+      "refs": [
+        {
+          "title": "Singh et al. — Optimizing Workflow Data Footprint",
+          "url": "https://dcc.ligo.org/public/0006/P070017/000/P070017-00.pdf",
+          "checked": "Retained source audit"
+        },
+        {
+          "title": "XLA memory scheduler — TensorFlow v2.10.0",
+          "url": "https://github.com/tensorflow/tensorflow/blob/v2.10.0/tensorflow/compiler/xla/service/hlo_memory_scheduler.cc",
+          "checked": "Retained source audit",
+          "note": "This update reuses the pinned reference; simulations do not reproduce compiler aliasing or special instruction rules."
+        }
+      ],
+      "kind": "Declared-model demonstration"
+    },
+    {
+      "id": "heft",
+      "name": "HEFT · two processors",
+      "group": "Scheduling",
+      "family": "heft",
+      "examples": [
+        "processors",
+        "app-video"
+      ],
+      "purpose": "Rank tasks, inspect processor gaps and minimize each chosen task’s earliest finish.",
+      "equation": "rank(u) = avg cost(u) + maxᵥ[comm + rank(v)]; choose min EFT(u,p)",
+      "symbols": "EFT: earliest finish time · comm: uniform transfer cost between different processors.",
+      "steps": [
+        [
+          "init",
+          "Read per-processor costs"
+        ],
+        [
+          "rank",
+          "Compute upward ranks"
+        ],
+        [
+          "estimate",
+          "Find feasible gaps"
+        ],
+        [
+          "assign",
+          "Choose earliest finish"
+        ],
+        [
+          "finish",
+          "Check processor schedules"
+        ]
+      ],
+      "invariant": "Every assigned task starts after all predecessor transfers and fits a free processor interval.",
+      "cost": "This two-processor implementation scans sorted intervals for insertion. Trace generation is not a timing benchmark.",
+      "limit": "No processor-memory limits, migration, replication, failures, or adaptive estimation. The heuristic is not globally optimal.",
+      "question": "Why can the best task order differ from the best processor assignment?",
+      "refs": [
+        {
+          "title": "Topcuoglu et al. — HEFT, primary institutional record",
+          "url": "https://openaccess.marmara.edu.tr/entities/publication/feba5344-0457-405a-8cb2-1d26f8963e33",
+          "checked": "2026-10-15",
+          "note": "Primary abstract confirms upward ranks and insertion-based earliest finish; recording is an independent teaching implementation under uniform communication."
+        }
+      ],
+      "kind": "HEFT core · stated two-processor model"
+    },
+    {
+      "id": "sortscan",
+      "name": "Sort affected tasks or scan the interval",
+      "group": "Changing graphs",
+      "family": "sortscan",
+      "examples": [
+        "positions",
+        "app-positions"
+      ],
+      "purpose": "Compare two ways to recover the same ordered affected-task list.",
+      "equation": "sort: O(k log k); scan: O(L) membership inspections",
+      "symbols": "k: affected tasks · L: span between earliest and latest affected position.",
+      "steps": [
+        [
+          "init",
+          "Locate affected positions"
+        ],
+        [
+          "sort",
+          "Sort affected task IDs by position"
+        ],
+        [
+          "scan",
+          "Inspect the occupied interval"
+        ],
+        [
+          "finish",
+          "Compare the identical lists"
+        ]
+      ],
+      "invariant": "Both lists contain exactly the affected tasks in their original relative order.",
+      "cost": "The chart counts scanned positions, not JavaScript sort comparisons or preprocessing time.",
+      "limit": "Independent subroutine example, not an already established new variant of Pearce–Kelly.",
+      "question": "At what affected-region density could scanning repay its extra inspections?",
+      "refs": [
+        {
+          "title": "Pearce and Kelly — Figure 2 and Section 3.1",
+          "url": "https://whileydave.com/publications/PK07_JEA_preprint.pdf",
+          "checked": "2026-10-15",
+          "note": "Parsed Figure 2 and explanatory text; web PDF screenshot unavailable."
+        }
+      ],
+      "kind": "Local teaching example"
+    },
+    {
+      "id": "lrc",
+      "name": "LRC · eviction priority",
+      "group": "Scheduling",
+      "family": "cache",
+      "examples": [
+        "cache",
+        "app-cache"
+      ],
+      "purpose": "Choose one cached item using unfinished-dependent counts.",
+      "equation": "victim = arg min reference count among resident items",
+      "symbols": "A file’s count is its number of unfinished dependent tasks.",
+      "steps": [
+        [
+          "init",
+          "Count unfinished dependents"
+        ],
+        [
+          "evict",
+          "Choose the smallest count"
+        ],
+        [
+          "complete",
+          "Update counts as tasks finish"
+        ],
+        [
+          "finish",
+          "Inspect the selected victim"
+        ]
+      ],
+      "invariant": "The selected victim has a minimum count at eviction time; IDs resolve ties here.",
+      "cost": "Small priority-rule demonstration, not a complete cache manager.",
+      "limit": "Does not simulate misses, reloads, object construction, capacity handling or the paper’s throughput results.",
+      "question": "Under what workload does reference count fail to describe the cost of evicting a file?",
+      "refs": [
+        {
+          "title": "LRC — Dependency-Aware Cache Management",
+          "url": "https://arxiv.org/abs/1703.08280",
+          "checked": "Retained source audit"
+        }
+      ],
+      "kind": "Eviction rule only"
+    }
+  ],
+  "scenarios": {
+    "branch": {
+      "name": "Branch and merge",
+      "input": {
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "edges": [
+          [
+            "A",
+            "C"
+          ],
+          [
+            "B",
+            "C"
+          ],
+          [
+            "B",
+            "D"
+          ],
+          [
+            "C",
+            "E"
+          ],
+          [
+            "D",
+            "E"
+          ]
+        ],
+        "priority": {
+          "A": 2,
+          "B": 5,
+          "C": 3,
+          "D": 1,
+          "E": 0
+        },
+        "duration": {
+          "A": 2,
+          "B": 3,
+          "C": 4,
+          "D": 2,
+          "E": 1
+        },
+        "source": "B",
+        "target": "E",
+        "budget": 2
+      }
+    },
+    "chain": {
+      "name": "One dependency chain",
+      "input": {
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "edges": [
+          [
+            "A",
+            "B"
+          ],
+          [
+            "B",
+            "C"
+          ],
+          [
+            "C",
+            "D"
+          ],
+          [
+            "D",
+            "E"
+          ]
+        ],
+        "source": "A",
+        "target": "E",
+        "budget": 2,
+        "duration": {
+          "A": 2,
+          "B": 1,
+          "C": 3,
+          "D": 2,
+          "E": 1
+        }
+      }
+    },
+    "cycle": {
+      "name": "Cycle and isolated task",
+      "input": {
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "edges": [
+          [
+            "A",
+            "B"
+          ],
+          [
+            "B",
+            "C"
+          ],
+          [
+            "C",
+            "A"
+          ]
+        ],
+        "source": "A",
+        "target": "D",
+        "budget": 1
+      }
+    },
+    "wide": {
+      "name": "Several ready tasks",
+      "input": {
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "edges": [
+          [
+            "A",
+            "E"
+          ],
+          [
+            "B",
+            "E"
+          ],
+          [
+            "C",
+            "E"
+          ],
+          [
+            "D",
+            "E"
+          ]
+        ],
+        "priority": {
+          "A": 1,
+          "B": 5,
+          "C": 3,
+          "D": 4,
+          "E": 0
+        },
+        "source": "A",
+        "target": "D",
+        "budget": 1
+      }
+    },
+    "redundant": {
+      "name": "Redundant dependency",
+      "input": {
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "edges": [
+          [
+            "A",
+            "B"
+          ],
+          [
+            "B",
+            "C"
+          ],
+          [
+            "A",
+            "C"
+          ],
+          [
+            "C",
+            "D"
+          ],
+          [
+            "A",
+            "D"
+          ],
+          [
+            "D",
+            "E"
+          ]
+        ],
+        "source": "A",
+        "target": "E",
+        "budget": 2
+      }
+    },
+    "small": {
+      "name": "Four tasks, two branches",
+      "input": {
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "edges": [
+          [
+            "A",
+            "C"
+          ],
+          [
+            "B",
+            "D"
+          ]
+        ]
+      }
+    },
+    "insert": {
+      "name": "Backward edge without a cycle",
+      "input": {
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "edges": [
+          [
+            "A",
+            "C"
+          ],
+          [
+            "B",
+            "D"
+          ],
+          [
+            "C",
+            "F"
+          ],
+          [
+            "D",
+            "F"
+          ]
+        ],
+        "order": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "insert": [
+          "E",
+          "B"
+        ]
+      }
+    },
+    "insert-cycle": {
+      "name": "Insertion that closes a cycle",
+      "input": {
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "edges": [
+          [
+            "A",
+            "B"
+          ],
+          [
+            "B",
+            "C"
+          ],
+          [
+            "C",
+            "D"
+          ]
+        ],
+        "order": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "insert": [
+          "D",
+          "B"
+        ]
+      }
+    },
+    "insert-forward": {
+      "name": "Forward insertion needs no repair",
+      "input": {
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "edges": [
+          [
+            "A",
+            "C"
+          ],
+          [
+            "B",
+            "D"
+          ]
+        ],
+        "order": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "insert": [
+          "A",
+          "D"
+        ]
+      }
+    },
+    "files": {
+      "name": "Shared intermediate files",
+      "input": {
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "edges": [
+          [
+            "A",
+            "B"
+          ],
+          [
+            "A",
+            "C"
+          ],
+          [
+            "B",
+            "D"
+          ],
+          [
+            "C",
+            "D"
+          ],
+          [
+            "D",
+            "E"
+          ]
+        ],
+        "files": [
+          {
+            "id": "image",
+            "producer": "A",
+            "consumers": [
+              "B",
+              "C"
+            ],
+            "bytes": 8
+          },
+          {
+            "id": "mask",
+            "producer": "A",
+            "consumers": [
+              "B",
+              "C"
+            ],
+            "bytes": 4
+          },
+          {
+            "id": "B_out",
+            "producer": "B",
+            "consumers": [
+              "D"
+            ],
+            "bytes": 2
+          },
+          {
+            "id": "C_out",
+            "producer": "C",
+            "consumers": [
+              "D"
+            ],
+            "bytes": 3
+          },
+          {
+            "id": "merged",
+            "producer": "D",
+            "consumers": [
+              "E"
+            ],
+            "bytes": 5
+          },
+          {
+            "id": "result",
+            "producer": "E",
+            "consumers": [],
+            "bytes": 1
+          }
+        ]
+      }
+    },
+    "forced": {
+      "name": "The final consumer is predetermined",
+      "input": {
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "edges": [
+          [
+            "A",
+            "B"
+          ],
+          [
+            "B",
+            "C"
+          ],
+          [
+            "C",
+            "D"
+          ]
+        ],
+        "files": [
+          {
+            "id": "data",
+            "producer": "A",
+            "consumers": [
+              "B",
+              "C"
+            ],
+            "bytes": 8
+          },
+          {
+            "id": "index",
+            "producer": "A",
+            "consumers": [
+              "B",
+              "C"
+            ],
+            "bytes": 2
+          },
+          {
+            "id": "result",
+            "producer": "D",
+            "consumers": [],
+            "bytes": 1
+          }
+        ]
+      }
+    },
+    "greedy-bad": {
+      "name": "Greedy storage counterexample",
+      "input": {
+        "nodes": [
+          "A",
+          "B",
+          "C"
+        ],
+        "edges": [
+          [
+            "B",
+            "C"
+          ]
+        ],
+        "order": [
+          "A",
+          "B",
+          "C"
+        ],
+        "files": [
+          {
+            "id": "A_final",
+            "producer": "A",
+            "consumers": [],
+            "bytes": 1
+          },
+          {
+            "id": "temporary",
+            "producer": "B",
+            "consumers": [
+              "C"
+            ],
+            "bytes": 2
+          },
+          {
+            "id": "C_final",
+            "producer": "C",
+            "consumers": [],
+            "bytes": 1
+          }
+        ]
+      }
+    },
+    "better-order": {
+      "name": "Same files, a better valid order",
+      "input": {
+        "nodes": [
+          "A",
+          "B",
+          "C"
+        ],
+        "edges": [
+          [
+            "B",
+            "C"
+          ]
+        ],
+        "order": [
+          "B",
+          "C",
+          "A"
+        ],
+        "files": [
+          {
+            "id": "A_final",
+            "producer": "A",
+            "consumers": [],
+            "bytes": 1
+          },
+          {
+            "id": "temporary",
+            "producer": "B",
+            "consumers": [
+              "C"
+            ],
+            "bytes": 2
+          },
+          {
+            "id": "C_final",
+            "producer": "C",
+            "consumers": [],
+            "bytes": 1
+          }
+        ]
+      }
+    },
+    "processors": {
+      "name": "Two processors with different speeds",
+      "input": {
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "edges": [
+          [
+            "A",
+            "C"
+          ],
+          [
+            "B",
+            "C"
+          ],
+          [
+            "B",
+            "D"
+          ],
+          [
+            "C",
+            "E"
+          ],
+          [
+            "D",
+            "E"
+          ]
+        ],
+        "costs": {
+          "A": [
+            4,
+            7
+          ],
+          "B": [
+            6,
+            3
+          ],
+          "C": [
+            5,
+            8
+          ],
+          "D": [
+            3,
+            6
+          ],
+          "E": [
+            4,
+            2
+          ]
+        },
+        "communication": 2
+      }
+    },
+    "heap": {
+      "name": "Replace a task priority",
+      "input": {
+        "nodes": [
+          "A",
+          "B",
+          "C"
+        ],
+        "edges": [],
+        "events": [
+          {
+            "op": "push",
+            "task": "A",
+            "priority": 1
+          },
+          {
+            "op": "push",
+            "task": "B",
+            "priority": 3
+          },
+          {
+            "op": "push",
+            "task": "C",
+            "priority": 2
+          },
+          {
+            "op": "update",
+            "task": "A",
+            "priority": 5
+          },
+          {
+            "op": "pop"
+          },
+          {
+            "op": "pop"
+          },
+          {
+            "op": "pop"
+          },
+          {
+            "op": "pop"
+          }
+        ]
+      }
+    },
+    "positions": {
+      "name": "Sparse affected positions",
+      "input": {
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G",
+          "H"
+        ],
+        "edges": [
+          [
+            "A",
+            "H"
+          ]
+        ],
+        "order": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G",
+          "H"
+        ],
+        "affected": [
+          "G",
+          "B",
+          "E"
+        ]
+      }
+    },
+    "cache": {
+      "name": "One cache eviction",
+      "input": {
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "edges": [
+          [
+            "A",
+            "C"
+          ],
+          [
+            "B",
+            "D"
+          ]
+        ],
+        "files": [
+          {
+            "id": "image",
+            "producer": null,
+            "consumers": [
+              "A",
+              "B",
+              "C"
+            ],
+            "bytes": 8
+          },
+          {
+            "id": "tile",
+            "producer": null,
+            "consumers": [
+              "D"
+            ],
+            "bytes": 4
+          },
+          {
+            "id": "mask",
+            "producer": null,
+            "consumers": [
+              "B",
+              "C"
+            ],
+            "bytes": 2
+          }
+        ]
+      }
+    },
+    "app-web": {
+      "name": "Website scripts · Django example",
+      "input": {
+        "nodes": [
+          "jQuery",
+          "calendar",
+          "time",
+          "noConflict"
+        ],
+        "edges": [
+          [
+            "jQuery",
+            "calendar"
+          ],
+          [
+            "jQuery",
+            "time"
+          ],
+          [
+            "calendar",
+            "noConflict"
+          ],
+          [
+            "time",
+            "noConflict"
+          ]
+        ]
+      },
+      "provenance": "Synthetic teaching input created for this guide; not a recorded production run."
+    },
+    "app-photos": {
+      "name": "Two image-processing branches",
+      "input": {
+        "nodes": [
+          "LoadA",
+          "FilterA",
+          "SaveA",
+          "LoadB",
+          "FilterB",
+          "SaveB"
+        ],
+        "edges": [
+          [
+            "LoadA",
+            "FilterA"
+          ],
+          [
+            "FilterA",
+            "SaveA"
+          ],
+          [
+            "LoadB",
+            "FilterB"
+          ],
+          [
+            "FilterB",
+            "SaveB"
+          ]
+        ]
+      },
+      "provenance": "Synthetic teaching input created for this guide; not a recorded production run."
+    },
+    "app-db": {
+      "name": "Database migration dependencies",
+      "input": {
+        "nodes": [
+          "CreateUsers",
+          "CreatePosts",
+          "AddAuthor",
+          "AddIndex"
+        ],
+        "edges": [
+          [
+            "CreateUsers",
+            "AddAuthor"
+          ],
+          [
+            "CreatePosts",
+            "AddAuthor"
+          ],
+          [
+            "AddAuthor",
+            "AddIndex"
+          ]
+        ]
+      },
+      "provenance": "Synthetic teaching input created for this guide; not a recorded production run."
+    },
+    "app-lockpath": {
+      "name": "Lock acquisition path",
+      "input": {
+        "nodes": [
+          "CacheLock",
+          "UserLock",
+          "LogLock",
+          "ConfigLock"
+        ],
+        "edges": [
+          [
+            "CacheLock",
+            "UserLock"
+          ],
+          [
+            "UserLock",
+            "LogLock"
+          ]
+        ],
+        "source": "CacheLock",
+        "target": "LogLock",
+        "budget": 1,
+        "edgeMeaning": "acquired before"
+      },
+      "provenance": "Synthetic teaching input created for this guide; not a recorded production run."
+    },
+    "app-lockinsert": {
+      "name": "Add a lock-order constraint",
+      "input": {
+        "nodes": [
+          "CacheLock",
+          "UserLock",
+          "LogLock",
+          "ConfigLock"
+        ],
+        "edges": [
+          [
+            "CacheLock",
+            "UserLock"
+          ],
+          [
+            "UserLock",
+            "LogLock"
+          ]
+        ],
+        "order": [
+          "CacheLock",
+          "UserLock",
+          "LogLock",
+          "ConfigLock"
+        ],
+        "insert": [
+          "ConfigLock",
+          "CacheLock"
+        ],
+        "edgeMeaning": "acquired before"
+      },
+      "provenance": "Synthetic teaching input created for this guide; not a recorded production run."
+    },
+    "app-lockcycle": {
+      "name": "Detect conflicting lock orders",
+      "input": {
+        "nodes": [
+          "CacheLock",
+          "UserLock",
+          "LogLock",
+          "ConfigLock"
+        ],
+        "edges": [
+          [
+            "CacheLock",
+            "UserLock"
+          ],
+          [
+            "UserLock",
+            "LogLock"
+          ]
+        ],
+        "order": [
+          "CacheLock",
+          "UserLock",
+          "LogLock",
+          "ConfigLock"
+        ],
+        "insert": [
+          "LogLock",
+          "CacheLock"
+        ],
+        "edgeMeaning": "acquired before"
+      },
+      "provenance": "Synthetic teaching input created for this guide; not a recorded production run."
+    },
+    "app-callgraph": {
+      "name": "Mutually recursive functions",
+      "input": {
+        "nodes": [
+          "StartApp",
+          "ReadCfg",
+          "ParseCfg",
+          "ExpandVar"
+        ],
+        "edges": [
+          [
+            "StartApp",
+            "ReadCfg"
+          ],
+          [
+            "ReadCfg",
+            "ParseCfg"
+          ],
+          [
+            "ParseCfg",
+            "ExpandVar"
+          ],
+          [
+            "ExpandVar",
+            "ParseCfg"
+          ]
+        ],
+        "edgeMeaning": "calls"
+      },
+      "provenance": "Synthetic teaching input created for this guide; not a recorded production run."
+    },
+    "app-build": {
+      "name": "Compile and test an application",
+      "input": {
+        "nodes": [
+          "GenHeaders",
+          "CompileUI",
+          "CompileCore",
+          "Link",
+          "Test"
+        ],
+        "edges": [
+          [
+            "GenHeaders",
+            "CompileUI"
+          ],
+          [
+            "GenHeaders",
+            "CompileCore"
+          ],
+          [
+            "CompileUI",
+            "Link"
+          ],
+          [
+            "CompileCore",
+            "Link"
+          ],
+          [
+            "Link",
+            "Test"
+          ]
+        ],
+        "duration": {
+          "GenHeaders": 2,
+          "CompileUI": 3,
+          "CompileCore": 5,
+          "Link": 2,
+          "Test": 1
+        },
+        "priority": {
+          "GenHeaders": 11,
+          "CompileUI": 6,
+          "CompileCore": 8,
+          "Link": 3,
+          "Test": 1
+        }
+      },
+      "provenance": "Synthetic teaching input created for this guide; not a recorded production run."
+    },
+    "app-ci": {
+      "name": "Simplify a deployment diagram",
+      "input": {
+        "nodes": [
+          "Compile",
+          "UnitTests",
+          "Package",
+          "Deploy"
+        ],
+        "edges": [
+          [
+            "Compile",
+            "UnitTests"
+          ],
+          [
+            "UnitTests",
+            "Package"
+          ],
+          [
+            "Package",
+            "Deploy"
+          ],
+          [
+            "Compile",
+            "Package"
+          ],
+          [
+            "Compile",
+            "Deploy"
+          ],
+          [
+            "UnitTests",
+            "Deploy"
+          ]
+        ]
+      },
+      "provenance": "Synthetic teaching input created for this guide; not a recorded production run."
+    },
+    "app-enum": {
+      "name": "All tiny migration plans",
+      "input": {
+        "nodes": [
+          "MakeSchema",
+          "LoadData",
+          "BuildIndex"
+        ],
+        "edges": [
+          [
+            "MakeSchema",
+            "LoadData"
+          ],
+          [
+            "MakeSchema",
+            "BuildIndex"
+          ]
+        ]
+      },
+      "provenance": "Synthetic teaching input created for this guide; not a recorded production run."
+    },
+    "app-photo-files": {
+      "name": "Shared image files and export",
+      "input": {
+        "nodes": [
+          "Load",
+          "Preview",
+          "Filter",
+          "Export"
+        ],
+        "edges": [
+          [
+            "Load",
+            "Preview"
+          ],
+          [
+            "Load",
+            "Filter"
+          ],
+          [
+            "Preview",
+            "Export"
+          ],
+          [
+            "Filter",
+            "Export"
+          ]
+        ],
+        "files": [
+          {
+            "id": "Pixels",
+            "producer": "Load",
+            "consumers": [
+              "Preview",
+              "Filter"
+            ],
+            "bytes": 800000
+          },
+          {
+            "id": "Alpha",
+            "producer": "Load",
+            "consumers": [
+              "Preview",
+              "Filter"
+            ],
+            "bytes": 200000
+          },
+          {
+            "id": "PreviewOut",
+            "producer": "Preview",
+            "consumers": [
+              "Export"
+            ],
+            "bytes": 40000
+          },
+          {
+            "id": "Filtered",
+            "producer": "Filter",
+            "consumers": [
+              "Export"
+            ],
+            "bytes": 200000
+          },
+          {
+            "id": "FinalImage",
+            "producer": "Export",
+            "consumers": [],
+            "bytes": 100000
+          }
+        ]
+      },
+      "provenance": "Synthetic teaching input created for this guide; not a recorded production run."
+    },
+    "app-forced": {
+      "name": "One image task must finish last",
+      "input": {
+        "nodes": [
+          "Load",
+          "Preview",
+          "Filter",
+          "Export"
+        ],
+        "edges": [
+          [
+            "Load",
+            "Preview"
+          ],
+          [
+            "Load",
+            "Filter"
+          ],
+          [
+            "Preview",
+            "Export"
+          ],
+          [
+            "Filter",
+            "Export"
+          ],
+          [
+            "Preview",
+            "Filter"
+          ]
+        ],
+        "files": [
+          {
+            "id": "Pixels",
+            "producer": "Load",
+            "consumers": [
+              "Preview",
+              "Filter"
+            ],
+            "bytes": 800000
+          },
+          {
+            "id": "Alpha",
+            "producer": "Load",
+            "consumers": [
+              "Preview",
+              "Filter"
+            ],
+            "bytes": 200000
+          },
+          {
+            "id": "PreviewOut",
+            "producer": "Preview",
+            "consumers": [
+              "Export"
+            ],
+            "bytes": 40000
+          },
+          {
+            "id": "Filtered",
+            "producer": "Filter",
+            "consumers": [
+              "Export"
+            ],
+            "bytes": 200000
+          },
+          {
+            "id": "FinalImage",
+            "producer": "Export",
+            "consumers": [],
+            "bytes": 100000
+          }
+        ]
+      },
+      "provenance": "Synthetic teaching input created for this guide; not a recorded production run."
+    },
+    "app-video": {
+      "name": "Video processing on two processors",
+      "input": {
+        "nodes": [
+          "Decode",
+          "Filter",
+          "Thumb",
+          "Encode",
+          "Upload"
+        ],
+        "edges": [
+          [
+            "Decode",
+            "Filter"
+          ],
+          [
+            "Decode",
+            "Thumb"
+          ],
+          [
+            "Filter",
+            "Encode"
+          ],
+          [
+            "Thumb",
+            "Encode"
+          ],
+          [
+            "Encode",
+            "Upload"
+          ]
+        ],
+        "costs": {
+          "Decode": [
+            4,
+            7
+          ],
+          "Filter": [
+            3,
+            8
+          ],
+          "Thumb": [
+            2,
+            1
+          ],
+          "Encode": [
+            6,
+            3
+          ],
+          "Upload": [
+            1,
+            1
+          ]
+        },
+        "communication": 1
+      },
+      "provenance": "Synthetic teaching input created for this guide; not a recorded production run."
+    },
+    "app-jobs": {
+      "name": "Change a queued job priority",
+      "input": {
+        "nodes": [
+          "Email",
+          "Backup",
+          "Index"
+        ],
+        "edges": [],
+        "events": [
+          {
+            "op": "push",
+            "task": "Email",
+            "priority": 1
+          },
+          {
+            "op": "push",
+            "task": "Backup",
+            "priority": 3
+          },
+          {
+            "op": "push",
+            "task": "Index",
+            "priority": 2
+          },
+          {
+            "op": "update",
+            "task": "Email",
+            "priority": 5
+          },
+          {
+            "op": "pop"
+          },
+          {
+            "op": "pop"
+          },
+          {
+            "op": "pop"
+          },
+          {
+            "op": "pop"
+          }
+        ]
+      },
+      "provenance": "Synthetic teaching input created for this guide; not a recorded production run."
+    },
+    "app-cache": {
+      "name": "Choose one cached dataset to evict",
+      "input": {
+        "nodes": [
+          "Parse",
+          "Join",
+          "Report",
+          "Archive"
+        ],
+        "edges": [
+          [
+            "Parse",
+            "Join"
+          ],
+          [
+            "Join",
+            "Report"
+          ]
+        ],
+        "files": [
+          {
+            "id": "Users",
+            "producer": null,
+            "consumers": [
+              "Parse",
+              "Join",
+              "Report"
+            ],
+            "bytes": 800000
+          },
+          {
+            "id": "Temp",
+            "producer": null,
+            "consumers": [
+              "Archive"
+            ],
+            "bytes": 400000
+          },
+          {
+            "id": "Products",
+            "producer": null,
+            "consumers": [
+              "Join",
+              "Report"
+            ],
+            "bytes": 200000
+          }
+        ]
+      },
+      "provenance": "Synthetic teaching input created for this guide; not a recorded production run."
+    },
+    "app-positions": {
+      "name": "Recover affected build positions",
+      "input": {
+        "nodes": [
+          "BuildA",
+          "BuildB",
+          "BuildC",
+          "BuildD",
+          "BuildE",
+          "BuildF",
+          "BuildG",
+          "BuildH"
+        ],
+        "edges": [
+          [
+            "BuildA",
+            "BuildH"
+          ]
+        ],
+        "order": [
+          "BuildA",
+          "BuildB",
+          "BuildC",
+          "BuildD",
+          "BuildE",
+          "BuildF",
+          "BuildG",
+          "BuildH"
+        ],
+        "affected": [
+          "BuildG",
+          "BuildB",
+          "BuildE"
+        ]
+      },
+      "provenance": "Synthetic teaching input created for this guide; not a recorded production run."
+    }
+  },
+  "methods": {
+    "S0": {
+      "name": "Lasser",
+      "engine": "fifo",
+      "level": "Prerequisite",
+      "note": "Shows Kahn source removal, not Lasser’s historical procedure.",
+      "sources": [
+        {
+          "title": "Lasser (1961), Topological ordering of a list of randomly-numbered elements of a network",
+          "url": "https://doi.org/10.1145/355578.366314"
+        },
+        {
+          "title": "Kahn (1962), Topological sorting of large networks",
+          "url": "https://doi.org/10.1145/368996.369025"
+        }
+      ],
+      "mechanism": "An early published treatment of topological ordering of numbered network elements.",
+      "limit": "Only its bibliographic role is used here; no unverified complexity or priority claim."
+    },
+    "S1": {
+      "name": "Kahn’s algorithm",
+      "engine": "fifo",
+      "level": "Direct teaching implementation",
+      "note": "Independent Kahn source removal.",
+      "sources": [
+        {
+          "title": "Topological Sorting of Large Networks",
+          "url": "https://doi.org/10.1145/368996.369025"
+        }
+      ],
+      "mechanism": "Select tasks with no unfinished prerequisites, then update their successors.",
+      "limit": "A valid order is not necessarily the best order for storage or runtime."
+    },
+    "S2": {
+      "name": "FIFO and LIFO",
+      "engine": "lifo",
+      "level": "Direct teaching implementation",
+      "note": "Switch between FIFO and LIFO on the same input.",
+      "sources": [
+        {
+          "title": "Python, graphlib documentation",
+          "url": "https://docs.python.org/3/library/graphlib.html"
+        },
+        {
+          "title": "Dask, Scheduling Policy documentation",
+          "url": "https://docs.dask.org/en/stable/scheduling-policy.html"
+        }
+      ],
+      "mechanism": "Select the oldest or newest eligible vertex.",
+      "limit": "Different orders can result; neither optimizes every secondary objective."
+    },
+    "S3": {
+      "name": "Priority Kahn",
+      "engine": "priority",
+      "level": "Direct teaching implementation",
+      "note": "Fixed-priority and alphabetical variants are both available.",
+      "sources": [
+        {
+          "title": "NetworkX, lexicographical_topological_sort documentation",
+          "url": "https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.dag.lexicographical_topological_sort.html"
+        },
+        {
+          "title": "Python, heapq, Priority Queue Implementation Notes",
+          "url": "https://docs.python.org/3/library/heapq.html"
+        }
+      ],
+      "mechanism": "Choose an eligible vertex by a deterministic key, commonly with a heap.",
+      "limit": "Heap operations cost more than a FIFO queue; the quality depends on the key."
+    },
+    "S4": {
+      "name": "Topological generations",
+      "engine": "generations",
+      "level": "Direct teaching implementation",
+      "note": "Dependency rounds only.",
+      "sources": [
+        {
+          "title": "NetworkX, topological_generations documentation",
+          "url": "https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.dag.topological_generations.html"
+        },
+        {
+          "title": "Python, graphlib documentation",
+          "url": "https://docs.python.org/3/library/graphlib.html"
+        }
+      ],
+      "mechanism": "Produce layers whose predecessors occur in earlier layers.",
+      "limit": "Eligibility does not imply enough processors or memory; layer barriers can be restrictive."
+    },
+    "S5": {
+      "name": "DFS ordering",
+      "engine": "dfs",
+      "level": "Direct teaching implementation",
+      "note": "Reverse DFS finish order with cycle detection.",
+      "sources": [
+        {
+          "title": "Sedgewick and Wayne, Algorithms, Directed Graphs companion material",
+          "url": "https://algs4.cs.princeton.edu/42digraph/"
+        }
+      ],
+      "mechanism": "Reverse DFS completion order on a DAG.",
+      "limit": "Does not directly expose the same dynamic ready-set priority policy."
+    },
+    "S6": {
+      "name": "Order enumeration",
+      "engine": "enumeration",
+      "level": "Prerequisite",
+      "note": "Generic backtracking, not the optimized original enumeration program.",
+      "sources": [
+        {
+          "title": "Knuth and Szwarcfiter (1974), A structured program to generate all topological sorting arrangements",
+          "url": "https://doi.org/10.1016/0020-0190(74)90001-5"
+        }
+      ],
+      "mechanism": "Knuth and Szwarcfiter generate multiple valid topological arrangements.",
+      "limit": "The number of orders can be enormous."
+    },
+    "S7": {
+      "name": "Linear extensions",
+      "engine": "enumeration",
+      "level": "Prerequisite",
+      "note": "Does not implement the Pruesse–Ruskey generation algorithm.",
+      "sources": [
+        {
+          "title": "Pruesse and Ruskey (1994), Generating Linear Extensions Fast",
+          "url": "https://webhome.cs.uvic.ca/~ruskey/Publications/ExtensionFast/ExtensionFast.html"
+        }
+      ],
+      "mechanism": "Pruesse and Ruskey develop efficient generation of linear extensions.",
+      "limit": "Explicitly writing every complete order still has an output cost; total enumeration can remain infeasible."
+    },
+    "D1": {
+      "name": "AHRSZ",
+      "engine": "insertion",
+      "level": "Prerequisite",
+      "note": "Shows the edge-insertion problem, not AHRSZ discovery or order labels.",
+      "sources": [
+        {
+          "title": "Incremental Evaluation of Computational Circuits",
+          "url": "https://research.ibm.com/publications/incremental-evaluation-of-computational-circuits"
+        }
+      ],
+      "mechanism": "Maintain the affected portion after graph or circuit changes.",
+      "limit": "The update model controls both the method and its cost."
+    },
+    "D2": {
+      "name": "Depth-First Discovery",
+      "engine": "dfs",
+      "level": "Prerequisite",
+      "note": "DFS foundation, not the full Depth-First Discovery incremental algorithm.",
+      "sources": [
+        {
+          "title": "Zhou and Müller (2003), Depth-First Discovery Algorithm for incremental topological sorting of directed acyclic graphs",
+          "url": "https://www.sciencedirect.com/science/article/pii/S0020019003004071"
+        }
+      ],
+      "mechanism": "Use depth-first discovery to reduce temporary storage.",
+      "limit": "Still a changing-graph method; not a priority-update algorithm on a fixed DAG."
+    },
+    "D10": {
+      "name": "Katriel–Bodlaender",
+      "engine": "insertion",
+      "level": "Prerequisite",
+      "note": "No Katriel–Bodlaender order-maintenance mechanism is implemented.",
+      "sources": [
+        {
+          "title": "Katriel and Bodlaender (2006), Online Topological Ordering; relationship documented by the 2007 tight analysis",
+          "url": "https://www.sciencedirect.com/science/article/pii/S0304397507006573"
+        }
+      ],
+      "mechanism": "Refine the earlier discovery method and its update analysis.",
+      "limit": "More machinery than the static algorithm; favorable graph regimes still matter."
+    },
+    "D3": {
+      "name": "MNR",
+      "engine": "insertion",
+      "level": "Prerequisite",
+      "note": "Full recomputation is a reference, not MNR.",
+      "sources": [
+        {
+          "title": "Marchetti-Spaccamela, Nanni and Rohnert (1996), Maintaining a topological order under edge insertions",
+          "url": "https://www.sciencedirect.com/science/article/pii/0020019096000750"
+        }
+      ],
+      "mechanism": "Maintain an existing order under edge insertions.",
+      "limit": "A bound across insertions differs from the cost of one static sort."
+    },
+    "D4": {
+      "name": "Pearce–Kelly",
+      "engine": "pk",
+      "level": "Repair-rule demonstration",
+      "note": "Independent single-edge core; array collection costs differ from the paper.",
+      "sources": [
+        {
+          "title": "A Dynamic Topological Sort Algorithm for Directed Acyclic Graphs",
+          "url": "https://whileydave.com/publications/PK07_JEA_preprint.pdf"
+        }
+      ],
+      "mechanism": "Search the affected region and reassign its vertices after an edge update.",
+      "limit": "Not universally fastest on dense graphs; the journal account corrected an earlier comparator defect."
+    },
+    "D5": {
+      "name": "Batch Pearce–Kelly",
+      "engine": "pk",
+      "level": "Prerequisite",
+      "note": "Single-edge repair, not batch processing.",
+      "sources": [
+        {
+          "title": "A Batch Algorithm for Maintaining a Topological Order",
+          "url": "https://whileydave.com/publications/pk10_acsc/"
+        }
+      ],
+      "mechanism": "Repair overlapping affected regions together.",
+      "limit": "The benefit depends on batch characteristics."
+    },
+    "D6": {
+      "name": "Temporary cycles",
+      "engine": "scc",
+      "level": "Prerequisite",
+      "note": "Static cycle components, not the robust temporary-cycle method.",
+      "sources": [
+        {
+          "title": "Smith (2023), Robust Topological Orderings for Directed Graphs, preprint",
+          "url": "https://arxiv.org/abs/2306.05475"
+        }
+      ],
+      "mechanism": "Recover topological order when a graph becomes acyclic again after temporary cycles.",
+      "limit": "A cyclic graph still has no valid topological order."
+    },
+    "D11": {
+      "name": "Ajwani–Friedrich–Meyer",
+      "engine": "insertion",
+      "level": "Prerequisite",
+      "note": "No dense-graph incremental data structure is reproduced.",
+      "sources": [
+        {
+          "title": "Ajwani, Friedrich and Meyer (2006), An O(n^2.75) algorithm for online topological ordering",
+          "url": "https://arxiv.org/abs/cs/0602073"
+        }
+      ],
+      "mechanism": "Maintain an order with O(n^2.75) total time over insertions in the stated model.",
+      "limit": "Later bounds supersede the historical guarantee; this is total insertion cost, not static-sort runtime."
+    },
+    "D7": {
+      "name": "Insertion-bound milestones",
+      "engine": "insertion",
+      "level": "Prerequisite",
+      "note": "No advanced insertion-sequence complexity bound is reproduced.",
+      "sources": [
+        {
+          "title": "Haeupler et al. (2012), Incremental Cycle Detection, Topological Ordering, and Strong Component Maintenance",
+          "url": "https://doi.org/10.1145/2071379.2071382"
+        },
+        {
+          "title": "Bender et al. (2016), A New Approach to Incremental Cycle Detection and Related Problems",
+          "url": "https://arxiv.org/abs/1112.0784"
+        },
+        {
+          "title": "Bernstein and Chechik (2018), Incremental Topological Sort and Cycle Detection in Õ(m√n) Expected Total Time",
+          "url": "https://doi.org/10.1137/1.9781611975031.2"
+        },
+        {
+          "title": "Bhattacharya and Kulkarni (2020), An Improved Algorithm for Incremental Cycle Detection and Topological Ordering in Sparse Graphs",
+          "url": "https://doi.org/10.1137/1.9781611975994.153"
+        }
+      ],
+      "mechanism": "Haeupler et al. 2012; Bender et al. 2016; Bernstein–Chechik 2018; Bhattacharya–Kulkarni 2020 improve maintenance bounds in different regimes.",
+      "limit": "Search structures and proofs are considerably more involved; graph density and randomization assumptions differ."
+    },
+    "D8": {
+      "name": "Ordering with predictions",
+      "engine": "insertion",
+      "level": "Prerequisite",
+      "note": "No predictions or learned data structure are used.",
+      "sources": [
+        {
+          "title": "Incremental Topological Ordering and Cycle Detection with Predictions",
+          "url": "https://proceedings.mlr.press/v235/mccauley24a.html"
+        }
+      ],
+      "mechanism": "Use predictions while bounding the effects of prediction error.",
+      "limit": "Needs a prediction and update model; detailed results are not reproduced here."
+    },
+    "D9": {
+      "name": "Strong components with predictions",
+      "engine": "scc",
+      "level": "Prerequisite",
+      "note": "Static Tarjan, not incremental components with predictions.",
+      "sources": [
+        {
+          "title": "Incremental Strongly Connected Components with Predictions",
+          "url": "https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.SWAT.2026.17"
+        }
+      ],
+      "mechanism": "Use predictions to maintain strongly connected components.",
+      "limit": "Its output includes cyclic components, not only a DAG task order."
+    },
+    "R1": {
+      "name": "Parallel sorting",
+      "engine": "generations",
+      "level": "Prerequisite",
+      "note": "Shows eligible layers, not Er’s parallel algorithm or hardware.",
+      "sources": [
+        {
+          "title": "Er (1983), A Parallel Computation Approach to Topological Sorting",
+          "url": "https://doi.org/10.1093/comjnl/26.4.293"
+        }
+      ],
+      "mechanism": "Distribute topological-order computation across processing resources.",
+      "limit": "Synchronization and dependency depth constrain benefit."
+    },
+    "R2": {
+      "name": "External-memory sorting",
+      "engine": "fifo",
+      "level": "Prerequisite",
+      "note": "In-memory example; does not model block transfers or external-memory sorting.",
+      "sources": [
+        {
+          "title": "Cao et al. (2019), I/O-Efficient Algorithms for Topological Sort and Related Problems",
+          "url": "https://doi.org/10.1137/1.9781611975482.124"
+        }
+      ],
+      "mechanism": "Cao et al. optimize input-output costs for topological sorting and related directed-graph problems.",
+      "limit": "A storage-transfer bound is not an ordinary CPU-operation bound."
+    },
+    "R3": {
+      "name": "Streaming topological order",
+      "engine": "fifo",
+      "level": "Prerequisite",
+      "note": "Full input is in memory. No streaming pass-space algorithm is reproduced.",
+      "sources": [
+        {
+          "title": "Parameterized Streaming Algorithms for Topological Sorting",
+          "url": "https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.WADS.2025.18"
+        }
+      ],
+      "mechanism": "Use structural parameters to trade storage against the number of passes.",
+      "limit": "Stream access and graph parameters differ from ordinary in-memory processing."
+    },
+    "M1": {
+      "name": "Tree pebbling",
+      "engine": "lifetime",
+      "level": "Problem illustration",
+      "note": "Not Liu’s tree-pebbling optimum or exact buffer model.",
+      "sources": [
+        {
+          "title": "Liu (1987), An Application of Generalized Tree Pebbling to Sparse Matrix Factorization",
+          "url": "https://doi.org/10.1137/0608031"
+        }
+      ],
+      "mechanism": "Liu uses tree structure to optimize traversal memory.",
+      "limit": "Tree-specific reasoning does not directly solve arbitrary DAGs."
+    },
+    "M2": {
+      "name": "Series-parallel scheduling",
+      "engine": "lifetime",
+      "level": "Problem illustration",
+      "note": "Not the series-parallel optimization algorithm; check its edge-output model.",
+      "sources": [
+        {
+          "title": "Scheduling Series-Parallel Task Graphs to Minimize Peak Memory",
+          "url": "https://www.sciencedirect.com/science/article/pii/S0304397517307053"
+        }
+      ],
+      "mechanism": "Use series-parallel structure to obtain an exact solution under the paper’s model.",
+      "limit": "Edge-specific outputs are not the same as one shared output with several consumers. Transforming between memory models can destroy series-parallel structure; do not transfer the polynomial-time guarantee without proving the mapping."
+    },
+    "M3": {
+      "name": "Sequential dataflow scheduling",
+      "engine": "lifetime",
+      "level": "Problem illustration",
+      "note": "No exact dataflow search or author-specific reductions are reproduced.",
+      "sources": [
+        {
+          "title": "Sequential Scheduling of Dataflow Graphs for Memory Peak Minimization",
+          "url": "https://pop-art.inrialpes.fr/~fradet/abstracts.html"
+        }
+      ],
+      "mechanism": "Transform the graph and use branch-and-bound on the remaining structure.",
+      "limit": "Dataflow expansion can make the graph large. Partial expansion trades exactness for tractability."
+    },
+    "M4": {
+      "name": "Graph transformations",
+      "engine": "lifetime",
+      "level": "Problem illustration",
+      "note": "No optimal-peak-preserving graph transformation is claimed.",
+      "sources": [
+        {
+          "title": "Graph Transformations for Memory Peak Minimization by Scheduling",
+          "url": "https://pop-art.inrialpes.fr/~fradet/abstracts.html"
+        }
+      ],
+      "mechanism": "Apply four optimality-preserving transformations, then search the remaining graph.",
+      "limit": "Residual search and dataflow expansion can remain expensive."
+    },
+    "M5": {
+      "name": "HEFT",
+      "engine": "heft",
+      "level": "Core algorithm demonstration",
+      "note": "Independent two-processor HEFT with insertion and uniform communication.",
+      "sources": [
+        {
+          "title": "Topcuoglu, Hariri and Wu (2002), Performance-effective and low-complexity task scheduling for heterogeneous computing",
+          "url": "https://doi.org/10.1109/71.993206"
+        }
+      ],
+      "mechanism": "Rank tasks and assign them to heterogeneous processors.",
+      "limit": "Requires processor and cost assumptions; does not optimize just order-construction overhead."
+    },
+    "M6": {
+      "name": "Memory-aware HEFT",
+      "engine": "heft",
+      "level": "Prerequisite",
+      "note": "No memory-constrained adaptive HEFT extensions.",
+      "sources": [
+        {
+          "title": "Memory-aware Adaptive Scheduling of Scientific Workflows on Heterogeneous Architectures",
+          "url": "https://arxiv.org/html/2503.22365v1"
+        }
+      ],
+      "mechanism": "Adapt HEFT to memory constraints and runtime information.",
+      "limit": "Some variants are costly to construct; changing the eviction order gave comparable results."
+    },
+    "M7": {
+      "name": "Dask ordering",
+      "engine": "priority",
+      "level": "Prerequisite",
+      "note": "Generic fixed-priority Kahn, not Dask’s production ordering policy.",
+      "sources": [
+        {
+          "title": "Dask Ordering",
+          "url": "https://docs.dask.org/en/stable/order.html"
+        }
+      ],
+      "mechanism": "Choose priorities from task-graph structure to influence data retention.",
+      "limit": "Static ordering and distributed scheduling differ; neither implies global optimality."
+    },
+    "M8": {
+      "name": "Least Reference Count",
+      "engine": "lrc",
+      "level": "Mechanism illustration",
+      "note": "Eviction priority only, not the full LRC caching system.",
+      "sources": [
+        {
+          "title": "LRC: Dependency-Aware Cache Management for Data Analytics Clusters",
+          "url": "https://arxiv.org/pdf/1703.08280"
+        }
+      ],
+      "mechanism": "Count unfinished dependent computations to choose which cached data to retain.",
+      "limit": "Some tested workloads gained little from caching; the experiment also controlled page caching."
+    },
+    "M9": {
+      "name": "Pegasus cleanup",
+      "engine": "lifetime",
+      "level": "Mechanism illustration",
+      "note": "Last-use cleanup under a simple model, not the Pegasus planner.",
+      "sources": [
+        {
+          "title": "Pegasus Data Management",
+          "url": "https://pegasus.isi.edu/documentation/reference-guide/data-management.html"
+        }
+      ],
+      "mechanism": "Plan file cleanup after required uses and transfers complete.",
+      "limit": "Per-file planning may be costly; transfers and declared dependencies matter."
+    },
+    "P0": {
+      "name": "Local score model",
+      "engine": "fullscore",
+      "level": "Local teaching example",
+      "note": "The simplified score policy used by the retained proof companion.",
+      "sources": [
+        {
+          "title": "Kahn (1962), Topological sorting of large networks",
+          "url": "https://doi.org/10.1145/368996.369025"
+        },
+        {
+          "title": "NetworkX, lexicographical_topological_sort documentation",
+          "url": "https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.dag.lexicographical_topological_sort.html"
+        },
+        {
+          "title": "WfCommons, Montage execution instances and task counts",
+          "url": "https://github.com/wfcommons/WfInstances/blob/main/pegasus/montage/README.md"
+        }
+      ],
+      "mechanism": "For ready v, priority equals releasable generated-file bytes minus its original output bytes.",
+      "limit": "The score is a heuristic, not an optimal-memory guarantee; full recomputation is a correctness oracle, not a strong runtime baseline."
+    },
+    "P1": {
+      "name": "Incremental counters",
+      "engine": "counters",
+      "level": "Local teaching example",
+      "note": "Priority counters stop at one; not deletion counters.",
+      "sources": [
+        {
+          "title": "Yu et al. (2017), LRC: Dependency-Aware Cache Management for Data Analytics Clusters",
+          "url": "https://arxiv.org/abs/1703.08280"
+        },
+        {
+          "title": "Python, heapq, Priority Queue Implementation Notes",
+          "url": "https://docs.python.org/3/library/heapq.html"
+        },
+        {
+          "title": "Dask, Scheduling Policy documentation",
+          "url": "https://docs.dask.org/en/stable/scheduling-policy.html"
+        }
+      ],
+      "mechanism": "Use incremental counters, initialize singleton release credits, and batch heap refreshes by affected task.",
+      "limit": "Still updates separate counters for files whose state may be redundant."
+    },
+    "P2": {
+      "name": "Equal consumer sets",
+      "engine": "grouped",
+      "level": "Local teaching example",
+      "note": "Identical original consumer sets share one weighted counter.",
+      "sources": [
+        {
+          "title": "WfCommons, Montage execution instances and task counts",
+          "url": "https://github.com/wfcommons/WfInstances/blob/main/pegasus/montage/README.md"
+        },
+        {
+          "title": "Mt-KaHyPar, parallel hyperedge deduplication implementation",
+          "url": "https://github.com/kahypar/mt-kahypar/blob/master/mt-kahypar/partition/refinement/flows/parallel_construction.cpp"
+        }
+      ],
+      "mechanism": "Share a counter across files with identical consumer sets; sum release bytes but retain original producer costs.",
+      "limit": "Grouping has a cost; generic aggregation is old; dependency-forced final consumers can be a stronger simplification."
+    },
+    "P3": {
+      "name": "Forced final consumer",
+      "engine": "maximal",
+      "level": "Local teaching example",
+      "note": "Static credit emerges when dependencies force one final consumer.",
+      "sources": [
+        {
+          "title": "WfCommons, Montage execution instances and task counts",
+          "url": "https://github.com/wfcommons/WfInstances/blob/main/pegasus/montage/README.md"
+        }
+      ],
+      "mechanism": "When all other consumers precede one consumer, assign its release credit statically and remove the dynamic counter.",
+      "limit": "Checking the condition costs work; arbitrary consumer sets need not have a forced final consumer."
+    },
+    "P4": {
+      "name": "Consumer reduction",
+      "engine": "maximal",
+      "level": "Local teaching example",
+      "note": "Exact reachability reduction of priority metadata, not graph dependencies.",
+      "sources": [
+        {
+          "title": "WfCommons, Montage execution instances and task counts",
+          "url": "https://github.com/wfcommons/WfInstances/blob/main/pegasus/montage/README.md"
+        },
+        {
+          "title": "Fradet, Girault and Honorat (2025), Graph Transformations for Memory Peak Minimization by Scheduling",
+          "url": "https://doi.org/10.1145/3707206"
+        },
+        {
+          "title": "Yu et al. (2017), LRC: Dependency-Aware Cache Management for Data Analytics Clusters",
+          "url": "https://arxiv.org/abs/1703.08280"
+        }
+      ],
+      "mechanism": "Track only consumers with no later consumer reachable through dependencies; fold a singleton into static release credit.",
+      "limit": "Reachability preprocessing may cost more than the updates removed; exact prior-art search remains necessary."
+    },
+    "P5": {
+      "name": "Sort or scan (example)",
+      "engine": "sortscan",
+      "level": "Local teaching example",
+      "note": "Equivalent subroutine outputs; no speedup or novelty assumed.",
+      "sources": [
+        {
+          "title": "Pearce and Kelly, A Dynamic Topological Sort Algorithm for Directed Acyclic Graphs, journal version listed as 2007 by the author",
+          "url": "https://whileydave.com/publications/pk07_jea/"
+        },
+        {
+          "title": "Ninja manual, graph tool",
+          "url": "https://ninja-build.org/manual.html"
+        }
+      ],
+      "mechanism": "Recover affected vertices in prior order by sorting k vertices or scanning an interval of length L.",
+      "limit": "Same optimization may exist; the study requires credible edge-update traces."
+    },
+    "E08": {
+      "name": "Workflow data footprint",
+      "engine": "reduction",
+      "level": "Related mechanism",
+      "note": "Alternate-path reasoning only, not the full cleanup-graph planner.",
+      "sources": [
+        {
+          "title": "Optimizing Workflow Data Footprint",
+          "url": "https://dcc.ligo.org/public/0006/P070017/000/P070017-00.pdf"
+        }
+      ],
+      "mechanism": "Add cleanup tasks, group cleanup work, and remove dependencies implied by reachability.",
+      "limit": "Grouping can delay cleanup. Data staging limited the transfer of simulated LIGO benefits."
+    },
+    "E10": {
+      "name": "Dependency-aware caching",
+      "engine": "lrc",
+      "level": "Prerequisite",
+      "note": "Least-reference-count rule only; not later coordinated cache extensions.",
+      "sources": [
+        {
+          "title": "Towards Dependency-Aware Cache Management for Data Analytics Applications",
+          "url": "https://marcoszh.github.io/publication/lrc/"
+        }
+      ],
+      "mechanism": "Extend dependency-aware caching to account for coordinated input requirements.",
+      "limit": "Versions, workloads, and baselines differ from the earlier LRC study."
+    },
+    "E14": {
+      "name": "Parallel low-memory scheduling",
+      "engine": "lifetime",
+      "level": "Problem illustration",
+      "note": "Sequential file-lifetime model; not parallel low-memory scheduling.",
+      "sources": [
+        {
+          "title": "Parallel Scheduling of Task Graphs with Minimal Memory Requirements",
+          "url": "https://pop-art.inrialpes.fr/~fradet/abstracts.html"
+        }
+      ],
+      "mechanism": "Use a sequential low-memory order to guide parallel execution.",
+      "limit": "Benefits depend on graph structure and the memory budget."
+    },
+    "E15": {
+      "name": "Average-memory scheduling",
+      "engine": "lifetime",
+      "level": "Problem illustration",
+      "note": "Peak file bytes only, not the paper’s average-memory objective or optimization.",
+      "sources": [
+        {
+          "title": "Minimizing Memory in Parallel Task Graph Scheduling: Focusing on Average Consumption",
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0743731526000778"
+        }
+      ],
+      "mechanism": "Optimize average consumption through exact special cases and general heuristics.",
+      "limit": "Average and peak memory are different objectives with different assumptions."
+    },
+    "E17": {
+      "name": "Space-bounded schedulers",
+      "engine": "generations",
+      "level": "Prerequisite",
+      "note": "Dependency layers, not cache-locality or space-bounded scheduler implementation.",
+      "sources": [
+        {
+          "title": "Experimental Analysis of Space-Bounded Schedulers",
+          "url": "https://www.cs.cmu.edu/~guyb/papers/SBFGK14.pdf"
+        }
+      ],
+      "mechanism": "Use structure-aware schedules to improve locality.",
+      "limit": "Scheduling overhead and load balancing can erase the benefit."
+    },
+    "E18": {
+      "name": "Taskiter",
+      "engine": "generations",
+      "level": "Prerequisite",
+      "note": "No task-graph reuse or Taskiter runtime is reproduced.",
+      "sources": [
+        {
+          "title": "Accelerating Task-based Iterative Applications",
+          "url": "https://arxiv.org/pdf/2208.06332"
+        }
+      ],
+      "mechanism": "Reuse repeated task-graph structure and bypass some scheduling work.",
+      "limit": "Requires repeated structure. Large task bodies can dominate scheduling overhead."
+    },
+    "E19": {
+      "name": "DAG scheduling benchmark",
+      "engine": "fifo",
+      "level": "Benchmark context",
+      "note": "This is a benchmark study, not a distinct algorithm. The example is synthetic.",
+      "sources": [
+        {
+          "title": "Benchmarking DAG Scheduling Algorithms on Scientific Workflow Instances",
+          "url": "https://link.springer.com/chapter/10.1007/978-3-031-49435-2_1"
+        }
+      ],
+      "mechanism": "Compare algorithms under common workload and machine definitions.",
+      "limit": "Its broad campaign is larger than this undergraduate scope."
+    },
+    "E20": {
+      "name": "XLA · 2022",
+      "engine": "counters",
+      "level": "Mechanism illustration",
+      "note": "Release credit and remaining-use events; compiler aliasing and special instructions are omitted.",
+      "sources": [
+        {
+          "title": "XLA HLO Memory List Scheduler",
+          "url": "https://github.com/tensorflow/tensorflow/blob/v2.10.0/tensorflow/compiler/xla/service/hlo_memory_scheduler.cc"
+        }
+      ],
+      "mechanism": "Rank ready instructions by released bytes minus created bytes. Update affected priorities when one user remains.",
+      "limit": "The greedy order is not globally optimal. Compiler aliases and live-out buffers complicate a workflow adaptation."
+    },
+    "E23": {
+      "name": "Priority queue updates",
+      "engine": "heap",
+      "level": "Direct teaching implementation",
+      "note": "Versioned replacement entries demonstrate established heap guidance.",
+      "sources": [
+        {
+          "title": "Python Priority Queue Implementation Notes",
+          "url": "https://docs.python.org/3/library/heapq.html"
+        }
+      ],
+      "mechanism": "Replace outdated priority entries and discard stale entries when reading the queue.",
+      "limit": "Stale entries still use time and memory. Tie-breaking must stay fixed."
+    },
+    "E24": {
+      "name": "Montage benchmark files",
+      "engine": "lifetime",
+      "level": "Benchmark context",
+      "note": "Small synthetic files, not a downloaded Montage instance or measured result.",
+      "sources": [
+        {
+          "title": "WfCommons Montage Execution Instances",
+          "url": "https://github.com/wfcommons/WfInstances/blob/main/pegasus/montage/README.md"
+        }
+      ],
+      "mechanism": "Provide task dependencies, file relationships, and byte sizes as public JSON data.",
+      "limit": "File bytes are not peak RAM. These records do not contain our algorithm’s timing results."
+    },
+    "E26": {
+      "name": "Tanaka and Tatebe",
+      "engine": "lrc",
+      "level": "Prerequisite",
+      "note": "Caching concept only, not the paper’s disk-cache-aware scheduling policy.",
+      "sources": [
+        {
+          "title": "Disk Cache-Aware Task Scheduling for Data-Intensive and Many-Task Workflow",
+          "url": "https://www.hpcs.cs.tsukuba.ac.jp/~tanaka/publications/open/Cluster2014-tanaka-paper.pdf"
+        }
+      ],
+      "mechanism": "Compare FIFO, LIFO, LIFO with Highest Rank First, and Rank with Highest Rank First.",
+      "limit": "Section IV-B selects the better half of repeated runs and excludes several sequential tasks. Effects depend on cache residency and processor count."
+    },
+    "E27": {
+      "name": "Ceballos and colleagues",
+      "engine": "critical",
+      "level": "Measurement context",
+      "note": "Shows dependency timing; not a reproduction of TaskInsight measurements.",
+      "sources": [
+        {
+          "title": "Exploring Scheduling Effects on Task Performance with TaskInsight",
+          "url": "https://superfri.org/index.php/superfri/article/view/146"
+        }
+      ],
+      "mechanism": "Trace task scheduling decisions and examine how data reuse explains performance differences.",
+      "limit": "Some workloads or phases gain little; the publisher abstract alone does not support detailed effect sizes or full experimental reconstruction."
+    },
+    "E28": {
+      "name": "Al-Haboobi and Kecskemeti",
+      "engine": "generations",
+      "level": "Prerequisite",
+      "note": "Readiness only, not the function-dispatch method.",
+      "sources": [
+        {
+          "title": "Execution Time Reduction in Function Oriented Scientific Workflows",
+          "url": "https://cyber.bibl.u-szeged.hu/index.php/actcybern/article/view/4181"
+        }
+      ],
+      "mechanism": "Alter job dispatch so dependent work can execute within the same function invocation.",
+      "limit": "The result includes platform and transfer effects; the full statistical methods were not audited here."
+    },
+    "E30": {
+      "name": "XLA · before indexing",
+      "engine": "counters",
+      "level": "Mechanism illustration",
+      "note": "Shared priority rule only, not compiler storage layout or exact code cost.",
+      "sources": [
+        {
+          "title": "XLA list scheduler before per-computation indexing",
+          "url": "https://github.com/openxla/xla/blob/6f691ec5e9f4e8c900a1cde65ed27df02d04f4c5/xla/hlo/transforms/simplifiers/hlo_memory_scheduler.cc"
+        }
+      ],
+      "mechanism": "Cache flattened value sets, store pointer-keyed use counts and per-ready-entry vectors referencing count-map entries.",
+      "limit": "The later commit identifies repeated pair hashing and copied use lists, particularly for wide tuples. No performance result reproduced here."
+    },
+    "E29": {
+      "name": "XLA · indexed state",
+      "engine": "counters",
+      "level": "Mechanism illustration",
+      "note": "Not a reproduction of the indexed XLA change; use the code comparison for that.",
+      "sources": [
+        {
+          "title": "Index list scheduler buffer uses per computation, not per use",
+          "url": "https://github.com/openxla/xla/commit/6ecede672c8177bce1580bb3b60d9f6766e8994e"
+        }
+      ],
+      "mechanism": "Assign dense value indices, share flattened value ranges, and let ready entries reference spans.",
+      "limit": "Setup, union construction and scheduling work remain. No timing comparison is supplied in the inspected commit metadata."
+    },
+    "E31": {
+      "name": "Horizons",
+      "engine": "generations",
+      "level": "Prerequisite",
+      "note": "No Horizons tracking horizons or granularity control.",
+      "sources": [
+        {
+          "title": "Balancing Tracking Granularity and Parallelism in Many-Task Systems: The Horizons Approach",
+          "url": "https://link.springer.com/article/10.1007/s42979-024-02749-w"
+        }
+      ],
+      "mechanism": "Coalesce older tracking information using horizons while retaining a precise recent window.",
+      "limit": "An excessively high threshold was detrimental in a reported case; another workload changed little."
+    },
+    "E32": {
+      "name": "Dominant schedules",
+      "engine": "lifetime",
+      "level": "Problem illustration",
+      "note": "No dominant-schedule transformations or optimal-memory guarantee.",
+      "sources": [
+        {
+          "title": "New Tools for Peak Memory Scheduling",
+          "url": "https://arxiv.org/abs/2312.13526"
+        }
+      ],
+      "mechanism": "Dominant schedules support graph decomposition and parameterized algorithms.",
+      "limit": "Strong NP-completeness holds even for restricted graph families in this memory model."
+    },
+    "E33": {
+      "name": "Joint memory scheduling",
+      "engine": "heft",
+      "level": "Prerequisite",
+      "note": "No joint multiprocessor memory-constraint solver.",
+      "sources": [
+        {
+          "title": "Multiprocessor Scheduling with Memory Constraints: Fundamental Properties and Finding Optimal Solutions",
+          "url": "https://arxiv.org/abs/2507.17411"
+        }
+      ],
+      "mechanism": "Formulate the joint problem and solve instances with an integer linear program.",
+      "limit": "Separately optimizing parallelization and memory can be a linear factor from the joint optimum."
+    },
+    "E34": {
+      "name": "LATTICE",
+      "engine": "heft",
+      "level": "Prerequisite",
+      "note": "No NPU pipeline or memory-layout co-optimization.",
+      "sources": [
+        {
+          "title": "LATTICE: Constraint-Directed Scheduling, Memory Planning, and Pipeline Refinement for NPUs",
+          "url": "https://arxiv.org/abs/2607.17422"
+        }
+      ],
+      "mechanism": "A three-stage deterministic procedure combines memory-pressure scheduling, repacking and overlap.",
+      "limit": "The inspected evidence does not establish a general hardware result or an identical-order guarantee."
+    },
+    "E35": {
+      "name": "MoSAIC",
+      "engine": "heft",
+      "level": "Prerequisite",
+      "note": "No learned heuristic, motif recovery or LLM method is reproduced.",
+      "sources": [
+        {
+          "title": "MoSAIC: Learning DAG Scheduling Heuristics from Optimal Schedules through Motif-Aware Recovery and LLM-Guided Reasoning",
+          "url": "https://arxiv.org/abs/2610.15205"
+        }
+      ],
+      "mechanism": "Use optimal schedules and structural motifs to recover candidate heuristics.",
+      "limit": "Very recent preprint; transfer to this workload and full training cost were not independently validated here."
+    },
+    "E36": {
+      "name": "Updating literature reviews",
+      "engine": "fifo",
+      "level": "Review context",
+      "note": "Review-methodology paper, not an algorithm implementation. This is a basic exercise only.",
+      "sources": [
+        {
+          "title": "Guidelines for the Search Strategy to Update Systematic Literature Reviews in Software Engineering",
+          "url": "https://arxiv.org/abs/2006.05542"
+        }
+      ],
+      "mechanism": "Use the earlier review and primary studies as seeds for forward citation searching.",
+      "limit": "Their findings do not certify the coverage of this particular review."
+    }
+  },
+  "lessons": {
+    "graph": "fifo",
+    "kahn": "fifo",
+    "dfs": "dfs",
+    "priority": "priority",
+    "reachability": "bfs",
+    "critical": "critical",
+    "counting": "counters",
+    "incremental": "pk",
+    "proof": "grouped",
+    "measure": "sortscan"
+  },
+  "default": "fifo",
+  "disclosure": "Independent CPU-only teaching simulations on small synthetic inputs. Not real Montage timings, novelty evidence, or full reproductions of every specialist paper.",
+  "validation": "Executable traces checked against independent Python oracles; see tests/simulations after final test run."
+}

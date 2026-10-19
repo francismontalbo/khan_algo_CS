@@ -1,0 +1,74 @@
+[
+  {
+    "file": "montage-chameleon-2mass-005d-001.json",
+    "tasks": 58,
+    "role": "Development",
+    "source_id": "E24",
+    "source_url": "https://github.com/wfcommons/WfInstances/blob/main/pegasus/montage/README.md",
+    "download_status": "Not downloaded in this validation session",
+    "sha256": null
+  },
+  {
+    "file": "montage-chameleon-2mass-015d-001.json",
+    "tasks": 310,
+    "role": "Development",
+    "source_id": "E24",
+    "source_url": "https://github.com/wfcommons/WfInstances/blob/main/pegasus/montage/README.md",
+    "download_status": "Not downloaded in this validation session",
+    "sha256": null
+  },
+  {
+    "file": "montage-chameleon-2mass-01d-001.json",
+    "tasks": 103,
+    "role": "Evaluation",
+    "source_id": "E24",
+    "source_url": "https://github.com/wfcommons/WfInstances/blob/main/pegasus/montage/README.md",
+    "download_status": "Not downloaded in this validation session",
+    "sha256": null
+  },
+  {
+    "file": "montage-chameleon-2mass-02d-001.json",
+    "tasks": 619,
+    "role": "Evaluation",
+    "source_id": "E24",
+    "source_url": "https://github.com/wfcommons/WfInstances/blob/main/pegasus/montage/README.md",
+    "download_status": "Not downloaded in this validation session",
+    "sha256": null
+  },
+  {
+    "file": "montage-chameleon-2mass-03d-001.json",
+    "tasks": 748,
+    "role": "Evaluation",
+    "source_id": "E24",
+    "source_url": "https://github.com/wfcommons/WfInstances/blob/main/pegasus/montage/README.md",
+    "download_status": "Not downloaded in this validation session",
+    "sha256": null
+  },
+  {
+    "file": "montage-chameleon-2mass-04d-001.json",
+    "tasks": 1312,
+    "role": "Evaluation",
+    "source_id": "E24",
+    "source_url": "https://github.com/wfcommons/WfInstances/blob/main/pegasus/montage/README.md",
+    "download_status": "Not downloaded in this validation session",
+    "sha256": null
+  },
+  {
+    "file": "montage-chameleon-2mass-05d-001.json",
+    "tasks": 1738,
+    "role": "Evaluation",
+    "source_id": "E24",
+    "source_url": "https://github.com/wfcommons/WfInstances/blob/main/pegasus/montage/README.md",
+    "download_status": "Not downloaded in this validation session",
+    "sha256": null
+  },
+  {
+    "file": "montage-chameleon-2mass-10d-001.json",
+    "tasks": 4846,
+    "role": "Evaluation",
+    "source_id": "E24",
+    "source_url": "https://github.com/wfcommons/WfInstances/blob/main/pegasus/montage/README.md",
+    "download_status": "Not downloaded in this validation session",
+    "sha256": null
+  }
+]

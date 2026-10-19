@@ -1,0 +1,241 @@
+{
+  "package": "Workflow Algorithm Research Guide \u2014 GitHub Pages release",
+  "packaged_at": "2026-10-19T00:40:39.531958+00:00",
+  "research_snapshot": "2026-10-15",
+  "repository_deployment": "Settings > Pages > Deploy from a branch > selected branch > /(root)",
+  "runtime": "Static HTML, CSS and JavaScript; no backend, API key, build process or student account.",
+  "source_history": "reference/Original_Research_Package.zip preserves the full unmodified preceding distribution.",
+  "changes": [
+    "Added GitHub Pages instructions, .nojekyll, source synchronization and package tests.",
+    "Aligned editable presentation assets with the preserved final browser implementation.",
+    "Fixed query links to open the requested simulator, application profile or glossary term.",
+    "Updated the standalone applications page to use the same current simulation UI as the main guide.",
+    "Made optional validation scripts create their own output directories in a clean checkout.",
+    "Preserved research records and byte-for-byte algorithm implementations."
+  ],
+  "checks": {
+    "static": {
+      "passed": 301,
+      "total": 301,
+      "pages": 10
+    },
+    "browser": {
+      "passed": 189,
+      "total": 189,
+      "javascript_errors": [],
+      "live_http_test": false
+    },
+    "simulator": {
+      "finite_cases": 8494,
+      "failures": []
+    },
+    "source_integrity": {
+      "executed_at": "2026-10-19T00:36:13.846049+00:00",
+      "checks": 45,
+      "passed": 45,
+      "details": [
+        {
+          "check": "58 selectable records preserved",
+          "passed": true
+        },
+        {
+          "check": "36 evidence records including local record",
+          "passed": true
+        },
+        {
+          "check": "35 external records preserved",
+          "passed": true
+        },
+        {
+          "check": "Original source identifiers preserved",
+          "passed": true
+        },
+        {
+          "check": "Displayed and exported records agree",
+          "passed": true
+        },
+        {
+          "check": "Embedded data matches data/Explorer_Data.json",
+          "passed": true
+        },
+        {
+          "check": "Embedded data matches data/Learning_Resources.json",
+          "passed": true
+        },
+        {
+          "check": "Embedded data matches data/Terminology.json",
+          "passed": true
+        },
+        {
+          "check": "Embedded data matches simulations/data.json",
+          "passed": true
+        },
+        {
+          "check": "Embedded data matches applications/data.json",
+          "passed": true
+        },
+        {
+          "check": "Original algorithm preserved simulations/engine.js",
+          "passed": true
+        },
+        {
+          "check": "Original algorithm preserved code/workflow_methods.py",
+          "passed": true
+        },
+        {
+          "check": "Original algorithm preserved code/algorithm_foundations.py",
+          "passed": true
+        },
+        {
+          "check": "Browser executes the tested simulator",
+          "passed": true
+        },
+        {
+          "check": "249 distinct definitions",
+          "passed": true
+        },
+        {
+          "check": "Related terminology resolves",
+          "passed": true
+        },
+        {
+          "check": "Every term has a learning route",
+          "passed": true
+        },
+        {
+          "check": "63 learning resources",
+          "passed": true
+        },
+        {
+          "check": "Learning counts agree",
+          "passed": true
+        },
+        {
+          "check": "23 simulators and 33 scenarios",
+          "passed": true
+        },
+        {
+          "check": "Every selectable method has a qualified simulation route",
+          "passed": true
+        },
+        {
+          "check": "Application catalog preserved",
+          "passed": true
+        },
+        {
+          "check": "All examples resolve",
+          "passed": true
+        },
+        {
+          "check": "Unique element IDs Workflow_Research_Guide.html",
+          "passed": true
+        },
+        {
+          "check": "No remote script required Workflow_Research_Guide.html",
+          "passed": true
+        },
+        {
+          "check": "No unsafe hyperlink schemes Workflow_Research_Guide.html",
+          "passed": true
+        },
+        {
+          "check": "Unique element IDs Workflow_Visual_Comparison.html",
+          "passed": true
+        },
+        {
+          "check": "No remote script required Workflow_Visual_Comparison.html",
+          "passed": true
+        },
+        {
+          "check": "No unsafe hyperlink schemes Workflow_Visual_Comparison.html",
+          "passed": true
+        },
+        {
+          "check": "Unique element IDs Algorithm_Applications.html",
+          "passed": true
+        },
+        {
+          "check": "No remote script required Algorithm_Applications.html",
+          "passed": true
+        },
+        {
+          "check": "No unsafe hyperlink schemes Algorithm_Applications.html",
+          "passed": true
+        },
+        {
+          "check": "Unique element IDs Algorithm_Simulations.html",
+          "passed": true
+        },
+        {
+          "check": "No remote script required Algorithm_Simulations.html",
+          "passed": true
+        },
+        {
+          "check": "No unsafe hyperlink schemes Algorithm_Simulations.html",
+          "passed": true
+        },
+        {
+          "check": "Unique element IDs Algorithm_Lessons.html",
+          "passed": true
+        },
+        {
+          "check": "No remote script required Algorithm_Lessons.html",
+          "passed": true
+        },
+        {
+          "check": "No unsafe hyperlink schemes Algorithm_Lessons.html",
+          "passed": true
+        },
+        {
+          "check": "Unique element IDs Workflow_Learning_Resources.html",
+          "passed": true
+        },
+        {
+          "check": "No remote script required Workflow_Learning_Resources.html",
+          "passed": true
+        },
+        {
+          "check": "No unsafe hyperlink schemes Workflow_Learning_Resources.html",
+          "passed": true
+        },
+        {
+          "check": "Unique element IDs Workflow_Terms_and_Nomenclature.html",
+          "passed": true
+        },
+        {
+          "check": "No remote script required Workflow_Terms_and_Nomenclature.html",
+          "passed": true
+        },
+        {
+          "check": "No unsafe hyperlink schemes Workflow_Terms_and_Nomenclature.html",
+          "passed": true
+        },
+        {
+          "check": "Compatible entry names are identical",
+          "passed": true
+        }
+      ],
+      "scope": "Internal artifact consistency and algorithm preservation; not independent validation of all scientific claims."
+    },
+    "python_proof_suite": {
+      "random_workflows": 5000,
+      "all_ready_scores_and_orders_equal": true,
+      "results": "tests/final/proof_checks.json"
+    },
+    "algorithm_foundations": "Fresh run of tests/check_algorithm_foundations.py.",
+    "application_examples": 33
+  },
+  "limits": [
+    "This packaging task did not refresh the literature corpus or establish novelty.",
+    "Finite synthetic algorithm checks are not Montage runtime benchmarks.",
+    "Browser host policy blocked live local HTTP and file-origin navigation. Content interactions, tested query routes and resolved relative links were checked separately.",
+    "Not deployed to the user repository; no live GitHub Pages, Safari, Firefox, physical-device or external video playback verification.",
+    "The original distribution contains earlier historical verification claims, source records and build snapshots; these remain historical, not newly reproduced literature results."
+  ],
+  "environment": {
+    "python": "3.13.5",
+    "node": "22.16.0",
+    "networkx": "3.6.1",
+    "browser": "Chromium through Playwright"
+  }
+}

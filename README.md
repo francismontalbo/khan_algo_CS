@@ -1,58 +1,68 @@
-# Publish for students
+# Workflow Algorithm Research Guide
 
-## Existing GitHub repository
+A browser-based teaching and research guide for graph algorithms and workflow scheduling, starting with Kahn's topological sort. Compare methods and step through executable examples with the assumptions and sources behind each record.
 
-1. Extract the delivered ZIP on your computer.
-2. Upload the **contents** of `workflow-research-guide` to your repository root. The root should contain `index.html`, `Workflow_Research_Guide.html`, `data`, `code`, and the other folders. Include the hidden `.nojekyll` file. Do not upload only the ZIP and do not nest everything inside another folder.
-3. Commit the upload to the branch you intend to publish. Do not replace an existing site's `index.html` without first backing it up or choosing a separate repository.
-4. In **Settings → Pages**, set **Source** to **Deploy from a branch**, choose your uploaded branch (usually **main**) and **/(root)**, then **Save**. No custom Actions workflow is needed.
-5. Use **Visit site** on the Pages settings page and share that address with students. A repository file-view URL is not the interactive website.
+The repository name retains its original spelling, `khan_algo_CS`. The algorithm is named after Arthur B. Kahn.
 
-GitHub Pages will give a project site an address in this form:
+## Open the guide
 
-```text
-https://YOUR-USERNAME.github.io/YOUR-REPOSITORY/
-```
+Clone or download this repository, then open [index.html](index.html) in a modern browser. The checked-in files are ready to use; there is no build step or archive to extract after cloning. External papers and recordings require internet access.
 
-The application uses relative paths. Your repository does not need a particular name and there is no base-URL configuration to edit.
-
-### Upload choice
-
-**GitHub Desktop or Git**: clone the existing repository, copy these files into its root, review the changes, commit, and push. Keep your existing `.git` directory.
-
-**Browser**: choose **Add file → Upload files**. Select the extracted files and folders, not the outer wrapper folder or ZIP. GitHub accepts at most 100 files per browser upload; use batches if necessary. Every file here is below the 25 MiB browser limit. On macOS, **Command + Shift + .** reveals hidden files such as `.nojekyll`. Alternatively, create an empty `.nojekyll` through **Add file → Create new file**.
-
-With GitHub Free, use a public repository. Other plans have different private-repository support. Do not publish private student notes; ordinary Pages sites are public. Organization policies or repository permissions can prevent enabling Pages.
-
-## Local preview
-
-From the extracted repository folder:
+For a local HTTP preview, run this command from the repository root and open the [local preview](http://localhost:8000/).
 
 ```bash
 python3 -m http.server 8000
 ```
 
-Open `http://localhost:8000/` on that computer. This server is for a local preview only. GitHub Pages hosts the published site; students do not run Python. For an offline copy, open `index.html`; external articles and videos still require internet.
+To publish the guide for a class, follow [DEPLOY.md](DEPLOY.md). GitHub's repository file viewer displays source files; GitHub Pages serves the interactive website.
 
-## Updates
+## Explore
 
-Edit and commit the files on the selected publishing branch. The selected branch is the deployment source; there is no separate build step. If a custom Pages Actions workflow already exists in your repository, disable that old workflow or adapt your existing deployment instead of running two competing publishing processes.
+| Page | What you can do |
+| --- | --- |
+| [Research guide](Workflow_Research_Guide.html) | Compare method records, inspect code and evidence, and save a comparison or notes. |
+| [Algorithm lessons](Algorithm_Lessons.html) | Study explanations and invariants with worked examples and source links. |
+| [Simulations](Algorithm_Simulations.html) | Step through 23 teaching implementations of graph algorithms and scheduling mechanisms. |
+| [Applications](Algorithm_Applications.html) | Connect the algorithms to application profiles with stated assumptions. |
+| [Learning resources](Workflow_Learning_Resources.html) | Find linked lectures and written tutorials. |
+| [Terms and nomenclature](Workflow_Terms_and_Nomenclature.html) | Look up definitions and related concepts. |
+| [Verification](Verification.html) and [source audit](Audit_Report.html) | Review the recorded checks and evidence limits. |
 
-For changes to the supplied editable JS, CSS or JSON assets, run `python3 tools/sync_assets.py` and commit the updated HTML pages too. Then run the optional checks in TESTING.md. Historic generators in the original reference ZIP are for provenance, not the production build command.
+`Workflow_Visual_Comparison.html` remains an identical compatibility entry for the main research guide.
 
-## Troubleshooting
+## Save your work
 
-- **404 at the homepage**: confirm `index.html` is directly in the configured branch and folder, and that Pages is enabled.
-- **A download instead of an app**: use the Pages address from **Visit site**, not a GitHub raw-file link.
-- **A build error**: confirm `.nojekyll` exists at the published root and inspect the Pages deployment under **Actions**.
-- **Some old material appears**: refresh the browser and confirm the latest commit is on the publishing branch. The guide uses no service worker.
-- **A lesson does not play**: use its official-page fallback. Videos are external and may be blocked by a school network or provider.
-- **Notes appear missing**: exports made from a local copy do not automatically transfer into the website's browser storage. Import the saved notes file.
+Notes and selections use the current browser's storage where available. Export notes before changing devices or clearing browser data, and keep a copy before moving the project. Import the saved file to restore them. The guide has no accounts or shared notes service, and a GitHub upload does not synchronize browser storage. See [NOTICE.md](NOTICE.md) for privacy and attribution details.
 
-## Official instructions
+## Maintain the project
 
-Documentation checked for this packaging task on 19 October 2026:
+The site runs JavaScript in static HTML pages with CSS. Python and Node.js support maintainer checks; students do not need them to open the downloaded guide.
 
-- [Configure a publishing source](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
-- [Create a Pages site](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site)
-- [Upload files](https://docs.github.com/en/repositories/working-with-files/managing-files/adding-a-file-to-a-repository)
+| Location | Purpose |
+| --- | --- |
+| `index.html` and root `*.html` pages | Ready-to-open application and companion pages. |
+| `code/`, `simulations/`, `applications/`, `release/` | Editable application assets and release records. |
+| `data/` | Structured method and learning records with evidence metadata. |
+| `tools/` | Asset synchronization and site/browser checks. |
+| `tests/` | Algorithm tests and verification reports. |
+| `archive/` and `reference/` | Preserved source snapshots and the original research package. |
+
+The HTML pages embed their modules and data so the teaching material can work offline. After editing the corresponding source modules or JSON data, synchronize the embedded copies and review the changes.
+
+```bash
+python3 tools/sync_assets.py
+python3 tools/sync_assets.py --check
+python3 tools/check_site.py
+python3 tools/check_manifest.py --write
+python3 tools/check_manifest.py
+```
+
+[TESTING.md](TESTING.md) explains the full algorithm suite and Chromium checks. The [Checks workflow](.github/workflows/checks.yml) runs them on pushes and pull requests and uploads their reports. It does not publish the site.
+
+Keep original packages and historical reports intact. The root `Workflow_Research_Guide_Local_Use.zip` and `reference/Original_Research_Package.zip` preserve earlier deliveries; use the checked-in working files for current changes. Historical setup notes may describe earlier packaging decisions. [DEPLOY.md](DEPLOY.md) and [TESTING.md](TESTING.md) contain the current operating instructions.
+
+## Evidence and reuse
+
+The retained literature snapshot is dated 15 October 2026. The automated suites check finite synthetic cases and internal consistency under the models declared in the guide. Research novelty and production speedups need separate evidence, and the examples do not establish scheduling optimality. Recheck the original papers and implementation versions before making a novelty claim.
+
+See [source attribution](code/SOURCE_ATTRIBUTION.md) for the third-party code excerpts and their [Apache 2.0 license](code/APACHE-2.0.txt). The repository does not assign a blanket license to the owner's original material or to linked publications.

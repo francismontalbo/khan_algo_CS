@@ -1,0 +1,27 @@
+# Local caches and environments
+.DS_Store
+Thumbs.db
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+node_modules/
+.env
+.env.*
+*.pem
+*.key
+# Private student notes and runtime exports: do not commit these.
+private-notes/
+local-exports/
+Workflow_Comparison_Notes*.json
+Algorithm_Simulation_Run*.json
+# Generated verification outputs
+tests/final/*
+!tests/final/check_integrity.py
+tests/algorithm_lessons/
+tests/applications/Example_Results.json
+tests/simulations/Algorithm_Validation.json
+*.log
+# Local browser diagnostics and recordings
+output/
+.playwright-cli/

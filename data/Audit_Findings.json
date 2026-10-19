@@ -1,0 +1,89 @@
+{
+  "scope": {
+    "cutoff": "2026-10-15",
+    "source_records": 36,
+    "external_records": 35,
+    "independent_study_count": "Not inferred from record count",
+    "compare_entries": 58,
+    "historical_lineage": 37,
+    "terms": 248,
+    "lessons": 55
+  },
+  "material_repairs": [
+    {
+      "issue": "No reproducible selection record",
+      "status": "Partially repaired",
+      "repair": "Added actual current queries, explicit borderline decisions, source families and inclusion rules. Original search history and independent screening remain missing."
+    },
+    {
+      "issue": "Relevant metadata-cost and model-boundary work missing",
+      "status": "Repaired for named omissions",
+      "repair": "Added Horizons, dominant schedules, joint scheduling and two 2026 preprints; no claim of exhaustive retrieval."
+    },
+    {
+      "issue": "XLA parent misattributed dense indexed representation",
+      "status": "Repaired",
+      "repair": "E30 not_new and linked records corrected; E29 is the indexed version."
+    },
+    {
+      "issue": "Bibliographic placeholders and ambiguous dates",
+      "status": "Partially repaired",
+      "repair": "Author and venue fields supplied from primary records; ambiguous final issue dates are explicit, not guessed."
+    },
+    {
+      "issue": "Local tests always recorded 14 October",
+      "status": "Repaired",
+      "repair": "Execution timestamp now comes from the UTC clock; original historical logs remain."
+    },
+    {
+      "issue": "Local validation source pointed at absent files",
+      "status": "Repaired",
+      "repair": "Source locator now names results/checks.json and the runnable test script."
+    },
+    {
+      "issue": "Embedded source export still held the pre-audit collection",
+      "status": "Repaired",
+      "repair": "Save reviewed source records now exports the same updated 36 records as the page; old page remains archived."
+    }
+  ],
+  "limits": [
+    "Single-assessor screening. No complete retrieval export or independent duplicate screening.",
+    "Not all primary sources fully read. Evidence depth recorded per source.",
+    "No faithful code reproduction for every paper. No real Montage timing.",
+    "Finite tests on intentionally structured synthetic workflows are not an unbiased performance sample.",
+    "External videos were not audited end to end. Four primary learning pages were re-opened, not all 55 resources.",
+    "PDF page screenshots were attempted for selected manuscript evidence but rendering failed; textual evidence only, no new plot extraction.",
+    "Interface exercised in Chromium with injected HTML and emulated narrow viewport. All cross-products and Safari not tested."
+  ],
+  "checked_source_metadata_examples": [
+    "Kahn publisher citation",
+    "Singh author institution record",
+    "Papp primary three-author list corrected relative to discovery index",
+    "RuSCDays 2023 versus January 2024 online date distinguished",
+    "LRC September 2019 author record versus unconfirmed final issue year"
+  ],
+  "tutorial_page_sample": [
+    "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/resources/lecture-14-depth-first-search-dfs-topological-sort/",
+    "https://openxla.org/xla",
+    "https://pyperf.readthedocs.io/en/latest/analyze.html",
+    "https://pegasus.isi.edu/documentation/user-guide/tutorial.html"
+  ],
+  "final_interface_check": {
+    "date": "2026-10-15",
+    "scope": "Final-state Chromium injected-HTML checks, not all possible comparison combinations. No external-video playback or Safari verification.",
+    "static_ids_anchors_and_embedded_data": "Pass",
+    "algorithm_code_and_original_excerpts_unchanged": true,
+    "selectable_records_full_specs_and_preview_checked": 58,
+    "new_records_search_tree_and_audit_record": "Pass",
+    "source_export_matches_all_36_records": true,
+    "saved_comparison_retains_evidence_status": true,
+    "mobile_main_audit_and_expanded_search_no_page_overflow": true,
+    "console_errors": [],
+    "synthetic_suite": true
+  },
+  "local_correctness_result": {
+    "path": "results/checks.json",
+    "run_date": "2026-10-15",
+    "not_a_real_workload_benchmark": true
+  }
+}

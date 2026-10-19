@@ -1,0 +1,32 @@
+{
+  "revision_date": "2026-10-19",
+  "purpose": "Replace deployment instructions with README for downloading and opening the complete app locally.",
+  "research_snapshot": "2026-10-15",
+  "changed_existing_files": [
+    "NOTICE.md",
+    "README.md",
+    "START_HERE.txt",
+    "TESTING.md",
+    "Verification.html",
+    "tools/check_site.py"
+  ],
+  "removed_files": [
+    ".nojekyll",
+    "DEPLOY.md"
+  ],
+  "unchanged_existing_files": 76,
+  "application_and_research_preserved_byte_for_byte": true,
+  "static_checks": {
+    "passed": 301,
+    "total": 301
+  },
+  "embedded_asset_consistency": "Passed: existing embedded assets match editable sources.",
+  "documentation_link_check": "All relative Markdown destinations in current user instructions exist.",
+  "browser_check": {
+    "checks": [],
+    "javascript_errors": [],
+    "scope": "Short local-file Chromium smoke test; no external media playback or all-browser claim.",
+    "unverified": "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at file:///mnt/data/workflow_local_app/workflow-research-guide/index.html\nCall log:\n  - navigating to \"file:///mnt/data/workflow_local_app/workflow-research-guide/index.html\", waiting until \"domcontentloaded\"\n"
+  },
+  "limits": "Documentation and packaging checks only. No new literature audit or performance benchmark. Local-file Chromium navigation was blocked by environment policy."
+}

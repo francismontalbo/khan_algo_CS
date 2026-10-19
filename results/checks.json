@@ -1,0 +1,471 @@
+{
+  "run_date": "2026-10-15",
+  "python": "3.13.5",
+  "random_workflows": 5000,
+  "seeds": [
+    0,
+    4999
+  ],
+  "tasks_per_random_workflow": [
+    2,
+    18
+  ],
+  "incremental_variants_per_workflow": 8,
+  "all_ready_scores_and_orders_equal": true,
+  "exhaustive_cover_checks": {
+    "forward_edge_graphs": 64,
+    "consumer_set_reductions": 1880,
+    "completed_set_configurations": 14030,
+    "ready_credit_equalities_checked": 17338,
+    "passed": true
+  },
+  "negative_controls": {
+    "equal_count_wrong_grouping_detected": true,
+    "uncertified_deletion_changes_order": true,
+    "valid_order_alone_is_insufficient": true,
+    "budget_exhaustion_is_unknown": true,
+    "cycle_and_missing_data_dependency_rejected": true
+  },
+  "fixtures": {
+    "different consumer sets": {
+      "per_file": {
+        "counter_decrements": 4,
+        "counter_visits": 8,
+        "search_edge_inspections": 0,
+        "queue_refreshes": 4,
+        "order": [
+          0,
+          4,
+          5,
+          1,
+          6,
+          7,
+          2,
+          8,
+          9,
+          3,
+          10,
+          11
+        ]
+      },
+      "equal_consumers": {
+        "counter_decrements": 4,
+        "counter_visits": 8,
+        "search_edge_inspections": 0,
+        "queue_refreshes": 4,
+        "order": [
+          0,
+          4,
+          5,
+          1,
+          6,
+          7,
+          2,
+          8,
+          9,
+          3,
+          10,
+          11
+        ]
+      },
+      "direct_certificates": {
+        "counter_decrements": 4,
+        "counter_visits": 8,
+        "search_edge_inspections": 0,
+        "queue_refreshes": 4,
+        "order": [
+          0,
+          4,
+          5,
+          1,
+          6,
+          7,
+          2,
+          8,
+          9,
+          3,
+          10,
+          11
+        ]
+      },
+      "budget_0": {
+        "counter_decrements": 4,
+        "counter_visits": 8,
+        "search_edge_inspections": 0,
+        "queue_refreshes": 4,
+        "order": [
+          0,
+          4,
+          5,
+          1,
+          6,
+          7,
+          2,
+          8,
+          9,
+          3,
+          10,
+          11
+        ]
+      },
+      "budget_2": {
+        "counter_decrements": 4,
+        "counter_visits": 8,
+        "search_edge_inspections": 0,
+        "queue_refreshes": 4,
+        "order": [
+          0,
+          4,
+          5,
+          1,
+          6,
+          7,
+          2,
+          8,
+          9,
+          3,
+          10,
+          11
+        ]
+      },
+      "budget_8": {
+        "counter_decrements": 4,
+        "counter_visits": 8,
+        "search_edge_inspections": 0,
+        "queue_refreshes": 4,
+        "order": [
+          0,
+          4,
+          5,
+          1,
+          6,
+          7,
+          2,
+          8,
+          9,
+          3,
+          10,
+          11
+        ]
+      },
+      "budget_32": {
+        "counter_decrements": 4,
+        "counter_visits": 8,
+        "search_edge_inspections": 0,
+        "queue_refreshes": 4,
+        "order": [
+          0,
+          4,
+          5,
+          1,
+          6,
+          7,
+          2,
+          8,
+          9,
+          3,
+          10,
+          11
+        ]
+      },
+      "full_maximal": {
+        "counter_decrements": 4,
+        "counter_visits": 8,
+        "search_edge_inspections": 0,
+        "queue_refreshes": 4,
+        "order": [
+          0,
+          4,
+          5,
+          1,
+          6,
+          7,
+          2,
+          8,
+          9,
+          3,
+          10,
+          11
+        ]
+      }
+    },
+    "independent equal consumers": {
+      "per_file": {
+        "counter_decrements": 4,
+        "counter_visits": 8,
+        "search_edge_inspections": 0,
+        "queue_refreshes": 1,
+        "order": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "equal_consumers": {
+        "counter_decrements": 1,
+        "counter_visits": 2,
+        "search_edge_inspections": 0,
+        "queue_refreshes": 1,
+        "order": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "direct_certificates": {
+        "counter_decrements": 4,
+        "counter_visits": 8,
+        "search_edge_inspections": 0,
+        "queue_refreshes": 1,
+        "order": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "budget_0": {
+        "counter_decrements": 4,
+        "counter_visits": 8,
+        "search_edge_inspections": 0,
+        "queue_refreshes": 1,
+        "order": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "budget_2": {
+        "counter_decrements": 4,
+        "counter_visits": 8,
+        "search_edge_inspections": 0,
+        "queue_refreshes": 1,
+        "order": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "budget_8": {
+        "counter_decrements": 4,
+        "counter_visits": 8,
+        "search_edge_inspections": 0,
+        "queue_refreshes": 1,
+        "order": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "budget_32": {
+        "counter_decrements": 4,
+        "counter_visits": 8,
+        "search_edge_inspections": 0,
+        "queue_refreshes": 1,
+        "order": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "full_maximal": {
+        "counter_decrements": 4,
+        "counter_visits": 8,
+        "search_edge_inspections": 0,
+        "queue_refreshes": 1,
+        "order": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    },
+    "ordered consumers": {
+      "per_file": {
+        "counter_decrements": 4,
+        "counter_visits": 8,
+        "search_edge_inspections": 0,
+        "queue_refreshes": 0,
+        "order": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "equal_consumers": {
+        "counter_decrements": 1,
+        "counter_visits": 2,
+        "search_edge_inspections": 0,
+        "queue_refreshes": 0,
+        "order": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "direct_certificates": {
+        "counter_decrements": 0,
+        "counter_visits": 0,
+        "search_edge_inspections": 4,
+        "queue_refreshes": 0,
+        "order": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "budget_0": {
+        "counter_decrements": 4,
+        "counter_visits": 8,
+        "search_edge_inspections": 0,
+        "queue_refreshes": 0,
+        "order": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "budget_2": {
+        "counter_decrements": 2,
+        "counter_visits": 4,
+        "search_edge_inspections": 2,
+        "queue_refreshes": 0,
+        "order": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "budget_8": {
+        "counter_decrements": 0,
+        "counter_visits": 0,
+        "search_edge_inspections": 4,
+        "queue_refreshes": 0,
+        "order": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "budget_32": {
+        "counter_decrements": 0,
+        "counter_visits": 0,
+        "search_edge_inspections": 4,
+        "queue_refreshes": 0,
+        "order": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "full_maximal": {
+        "counter_decrements": 0,
+        "counter_visits": 0,
+        "search_edge_inspections": 4,
+        "queue_refreshes": 0,
+        "order": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    }
+  },
+  "greedy_counterexample": {
+    "greedy_order": [
+      0,
+      1,
+      2
+    ],
+    "greedy_peak": 4,
+    "best_order": [
+      1,
+      2,
+      0
+    ],
+    "optimal_peak": 3,
+    "valid_orders_enumerated": 3,
+    "all_order_peaks": [
+      [
+        4,
+        [
+          0,
+          1,
+          2
+        ]
+      ],
+      [
+        4,
+        [
+          1,
+          0,
+          2
+        ]
+      ],
+      [
+        3,
+        [
+          1,
+          2,
+          0
+        ]
+      ]
+    ],
+    "model": "synthetic retained bytes; allocate outputs before input release"
+  },
+  "runtime_speedup_measured": false,
+  "montage_benchmark_run": false,
+  "notes": [
+    "New run of this companion's implementation, not a copied prior result.",
+    "Same workflows reused across variants; not independent datasets.",
+    "Counter decrements stop at one, unlike the previous eight-versus-two examples.",
+    "Grouping opportunities intentionally overrepresented in random correctness tests."
+  ]
+}
