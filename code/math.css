@@ -1,0 +1,17 @@
+/* Equation typography; all KaTeX fonts are embedded in the distributed pages. */
+.wf-math{font-style:normal;line-height:1.7;letter-spacing:normal;overflow-wrap:normal;word-break:normal}
+.wf-math .katex{font-size:1.1em;text-indent:0}
+.wf-math-display{display:block;max-width:100%;min-width:0;overflow-x:auto;overflow-y:hidden;padding:8px 2px;overscroll-behavior-x:contain;scrollbar-width:thin}
+.wf-math-display>.katex-display{margin:.35em 0;text-align:left}
+.wf-math-display>.katex-display>.katex{text-align:left}
+.wf-math-inline{display:inline-block;max-width:100%;vertical-align:baseline;overflow-x:auto;overflow-y:hidden}
+.algorithm-formula.wf-math,.sim-equation .math.wf-math{font-family:inherit;font-size:16px;overflow-wrap:normal}
+.algorithm-formula.wf-math{padding:16px 18px;margin:18px 0;background:#f7f9fc;line-height:1.8}
+.formula.wf-math{font-family:inherit;font-size:17px;padding:16px 18px}
+.formula-cell.wf-math{font-family:inherit;font-size:15px}
+.equation.wf-math{font-family:inherit}
+.term-select .katex,#term-heading .katex,.term-related .katex{font-size:1em}
+.sim-equation .math.wf-math{padding:5px 1px;min-height:36px}
+.sim-details-grid .wf-math-display{font-size:15px}
+@media(max-width:600px){.algorithm-formula.wf-math{font-size:14px;padding:12px 10px}.wf-math-display{font-size:14px;max-width:100%}.sim-equation .math.wf-math{font-size:15px}}
+@media print{.wf-math-display{overflow:visible;break-inside:avoid}}

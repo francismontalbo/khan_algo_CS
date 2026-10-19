@@ -4,7 +4,9 @@ Run from any directory. Uses Python's standard library. --check does not write.
 """
 from __future__ import annotations
 import argparse
+import base64
 import json
+import re
 from html.parser import HTMLParser
 from pathlib import Path
 
@@ -19,12 +21,29 @@ TEXT_ASSETS = {
     'simulation-engine': 'simulations/engine.js', 'simulation-ui': 'simulations/ui.js',
     'applications-style': 'applications/applications.css',
     'applications-ui': 'applications/applications.js', 'home-entry-routes': 'release/home_routes.js',
+    'math-vendor': 'vendor/katex/katex.min.js', 'math-style': 'code/math.css',
+    'math-app': 'code/math.js',
 }
 JSON_ASSETS = {
     'explorer-data': 'data/Explorer_Data.json', 'visual-data': 'data/Visual_Summaries.json',
     'learning-data': 'data/Learning_Resources.json', 'reference-data': 'data/Terminology.json',
     'simulation-data': 'simulations/data.json', 'applications-data': 'applications/data.json',
+    'math-catalog': 'code/math-catalog.json', 'math-reference': 'code/math-reference.json',
 }
+
+MATH_PAGES = {'index.html', 'Workflow_Research_Guide.html', 'Workflow_Visual_Comparison.html',
+              'Algorithm_Lessons.html', 'Algorithm_Simulations.html', 'Algorithm_Applications.html',
+              'Workflow_Learning_Resources.html', 'Workflow_Terms_and_Nomenclature.html'}
+
+def math_styles() -> str:
+    """Embed the required WOFF2 fonts so file:// and saved exports stay portable."""
+    folder = ROOT / 'vendor/katex'
+    css = (folder / 'katex.min.css').read_text(encoding='utf-8')
+    def font(match):
+        encoded = base64.b64encode((folder / match[1]).read_bytes()).decode('ascii')
+        return f'src:url(data:font/woff2;base64,{encoded}) format("woff2")'
+    css = re.sub(r'src:url\((fonts/[^)]+\.woff2)\)[^;}]+', font, css)
+    return '/* KaTeX 0.19.0; MIT License\n' + (folder / 'LICENSE').read_text() + '\n*/\n' + css
 
 class EmbeddedBlocks(HTMLParser):
     def __init__(self, text: str):
@@ -59,10 +78,19 @@ def main() -> int:
     if explorer['sources'] != sources:
         raise SystemExit('Source records differ. Update both Reviewed_Sources.json and Explorer_Data.json before syncing.')
     raw = {k: (ROOT / v).read_text(encoding='utf-8') for k, v in TEXT_ASSETS.items()}
+    raw['math-vendor-style'] = math_styles()
+    # The minified runtime retains its license in each self-contained export.
+    raw['math-vendor'] = '/* KaTeX 0.19.0; MIT License\n' + (ROOT/'vendor/katex/LICENSE').read_text() + '\n*/\n' + raw['math-vendor']
     structured = {k: json.loads((ROOT / v).read_text(encoding='utf-8')) for k, v in JSON_ASSETS.items()}
     changed = []
     for page in sorted(ROOT.glob('*.html')):
         original = page.read_text(encoding='utf-8')
+        if page.name in MATH_PAGES and 'id="math-app"' not in original:
+            changed.append(f'{page.name}: offline math support')
+            original = original.replace('</head>', '<style id="math-vendor-style"></style>\n<style id="math-style"></style>\n</head>', 1)
+            support = '<script id="math-vendor"></script>\n<script id="math-catalog" type="application/json">{}</script>\n<script id="math-reference" type="application/json">{}</script>\n<script id="math-app"></script>\n'
+            before, after = original.rsplit('</body>', 1)
+            original = before + support + '</body>' + after
         blocks = EmbeddedBlocks(original).blocks
         edits = []
         for ident, (start, end) in blocks.items():
