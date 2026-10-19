@@ -1,10 +1,13 @@
 """Verify content preservation, exports and local assets of the final reader."""
 from pathlib import Path
-import json, hashlib, re
+import argparse, json, hashlib, re
 from html.parser import HTMLParser
 from datetime import datetime,timezone
 from zipfile import ZipFile
 ROOT=Path(__file__).resolve().parents[2]
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--out',type=Path,default=ROOT/'output/ci/integrity-checks.json')
+args=parser.parse_args()
 class Document(HTMLParser):
  def __init__(self,t):
   super().__init__(convert_charrefs=True);self.ids=[];self.links=[];self.media=[];self.scripts={};self.current=None;self.template_depth=0;self.feed(t)
@@ -56,4 +59,5 @@ for fn in ['Workflow_Research_Guide.html','Workflow_Visual_Comparison.html','Alg
  ck('No unsafe hyperlink schemes '+fn,all(not x.lower().startswith(('javascript:','vbscript:','data:')) for x in doc.links))
 ck('Compatible entry names are identical',(ROOT/'Workflow_Research_Guide.html').read_bytes()==(ROOT/'Workflow_Visual_Comparison.html').read_bytes())
 report={'executed_at':datetime.now(timezone.utc).isoformat(),'checks':len(results),'passed':sum(x['passed'] for x in results),'details':results,'working_simulator_sha256':hashlib.sha256((ROOT/'simulations/engine.js').read_bytes()).hexdigest(),'original_simulator_sha256':old['simulations/engine.js'],'scope':'Internal artifact consistency and original algorithm retention in the reference ZIP. The working simulator includes maintenance fixes and is checked against the embedded browser engine; not independent validation of all scientific claims.'}
-(ROOT/'tests/final/Integrity_Results.json').write_text(json.dumps(report,indent=2)+'\n');print('PASS',len(results),'artifact integrity checks')
+args.out.parent.mkdir(parents=True,exist_ok=True)
+args.out.write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8');print('PASS',len(results),'artifact integrity checks')

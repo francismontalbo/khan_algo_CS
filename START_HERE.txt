@@ -1,18 +1,18 @@
 WORKFLOW ALGORITHM RESEARCH GUIDE
 
-1. Clone the repository or download its complete ZIP from GitHub.
-2. If downloaded as a ZIP, extract all files and folders.
-3. Open index.html from the project folder in a modern browser.
+1. On https://github.com/francismontalbo/khan_algo_CS choose Code > Download ZIP.
+2. Extract the downloaded ZIP once. Keep all files and folders together.
+3. Open index.html from the extracted folder in a modern browser.
 
-The repository already contains the complete application. You do not need
-to extract Workflow_Research_Guide_Local_Use.zip; it preserves an earlier delivery.
-Keep the companion HTML files and folders beside index.html.
-Do not open the app from inside a ZIP or GitHub's source-code viewer.
+No installation, build or server is required. The guide works offline.
+Linked papers and videos need internet access.
 
-Read README.md for the guide, DEPLOY.md for optional GitHub Pages hosting,
-and TESTING.md for maintainer checks. Students need no installation or server
-for a downloaded copy. External papers and videos require internet access.
-Export notes regularly and before changing browsers, origins or devices.
+Export notes regularly and before moving the guide or changing browsers or
+devices. Import the saved file to restore them.
 
-Research snapshot: 15 October 2026.
-Repository instructions updated: 19 October 2026.
+README.md introduces the pages. DEPLOY.md explains optional GitHub Pages
+hosting for the repository owner. TESTING.md contains maintainer checks.
+
+Earlier deliveries and records remain in archive/. The original research
+package remains in reference/Original_Research_Package.zip. Use the working
+files beside this note to run the current guide.

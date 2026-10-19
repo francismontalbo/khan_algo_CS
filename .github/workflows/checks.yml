@@ -41,12 +41,7 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: algorithm-check-reports
-          path: |
-            output/ci/static-checks.json
-            tests/final/*.json
-            tests/algorithm_lessons/*.json
-            tests/simulations/Algorithm_Validation.json
-            tests/applications/Example_Results.json
+          path: output/ci/*.json
           if-no-files-found: warn
 
   browser:
@@ -70,6 +65,8 @@ jobs:
         run: python tools/check_browser.py --require-http --out output/ci/browser-checks.json
       - name: Verify equation typesetting and offline exports
         run: python tools/check_math.py --out output/ci/math-checks.json
+      - name: Test download, extract and open setup
+        run: python tools/check_setup.py
       - name: Upload browser report
         if: always()
         uses: actions/upload-artifact@v7
@@ -78,4 +75,5 @@ jobs:
           path: |
             output/ci/browser-checks.json
             output/ci/math-checks.json
+            output/ci/setup-checks.json
           if-no-files-found: warn
