@@ -29,7 +29,7 @@ Notes and selections stay in the current browser's storage where available. Expo
 
 ## Publish or maintain
 
-To share a website with students, follow the short [GitHub Pages setup](DEPLOY.md). Maintainers can find asset synchronization commands and validation steps in [TESTING.md](TESTING.md).
+To publish the guide online, follow the [GitHub Pages setup](DEPLOY.md). Asset synchronization commands and validation steps are in [TESTING.md](TESTING.md).
 
 Use the working files at the repository root for current changes. [archive/](archive/) preserves earlier deliveries and maintenance records. [reference/Original_Research_Package.zip](reference/Original_Research_Package.zip) retains the original research package.
 
