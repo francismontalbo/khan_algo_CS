@@ -63,9 +63,15 @@ Install the separate browser test dependency and Chromium.
 python -m pip install -r requirements-browser.txt
 python -m playwright install chromium
 python tools/check_browser.py --require-http --out output/ci/browser-checks.json
+python tools/check_math.py --out output/ci/math-checks.json
 ```
 
 On a Linux CI runner, install Chromium's system dependencies with `python -m playwright install --with-deps chromium`. An existing Chromium executable can be selected through `CHROMIUM_PATH`.
+
+The equation suite checks strict LaTeX parsing, lesson formulas, simulator steps,
+glossary symbols, narrow layouts and offline HTML exports. KaTeX and its fonts are
+bundled locally. Edit `code/math-catalog.json` or `code/math-reference.json` to
+maintain notation, then run `tools/sync_assets.py` to update the HTML copies.
 
 The script starts a temporary local HTTP server and exercises the main application routes and comparison views. It checks responsive layouts and note import/export while stepping through simulations. It records JavaScript errors and reports its coverage limits. The `--require-http` flag makes an unavailable local HTTP route fail the run. Without that flag, the script may test local HTML contents and disclose that fallback in its report.
 

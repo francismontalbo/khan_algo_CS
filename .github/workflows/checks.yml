@@ -68,10 +68,14 @@ jobs:
         run: python -m playwright install --with-deps chromium
       - name: Run browser smoke checks
         run: python tools/check_browser.py --require-http --out output/ci/browser-checks.json
+      - name: Verify equation typesetting and offline exports
+        run: python tools/check_math.py --out output/ci/math-checks.json
       - name: Upload browser report
         if: always()
         uses: actions/upload-artifact@v7
         with:
           name: browser-check-report
-          path: output/ci/browser-checks.json
+          path: |
+            output/ci/browser-checks.json
+            output/ci/math-checks.json
           if-no-files-found: warn
