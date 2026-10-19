@@ -14,6 +14,7 @@ No installation, build or server is required. The guide works offline; linked pa
 
 | Page | What it offers |
 | --- | --- |
+| [Thesis research library](Thesis_Research.html) | Organized papers through 19 October 2026, candidate thesis directions, proposal planning, and BibTeX citations. |
 | [Research guide](Workflow_Research_Guide.html) | Method comparisons, code excerpts and evidence. |
 | [Algorithm lessons](Algorithm_Lessons.html) | Explanations and worked examples. |
 | [Simulations](Algorithm_Simulations.html) | Interactive steps through 23 teaching implementations. |
@@ -34,6 +35,6 @@ Use the working files at the repository root for current changes. [archive/](arc
 
 ## Evidence and reuse
 
-The literature snapshot is dated 15 October 2026. Automated checks cover finite synthetic cases under the guide's declared models. They do not establish scheduling optimality or research novelty. Recheck the original papers and implementation versions before making novelty or production-performance claims.
+The original literature snapshot is dated 15 October 2026. The additive [thesis research library](Thesis_Research.html) has a separate search update dated 19 October 2026, including clearly labeled 2026 publications and preprints. Automated checks cover finite synthetic cases under the guide's declared models. They do not establish scheduling optimality or research novelty. Recheck the original papers and implementation versions before making novelty or production-performance claims.
 
 See [source attribution](code/SOURCE_ATTRIBUTION.md) for third-party excerpts and their [Apache 2.0 license](code/APACHE-2.0.txt). The repository does not assign a blanket license to the owner's original material or linked publications.

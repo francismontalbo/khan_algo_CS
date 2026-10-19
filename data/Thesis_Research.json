@@ -1,0 +1,731 @@
+{
+  "reviewed_on": "2026-10-19",
+  "coverage_note": "Targeted primary-source reading from 1962 through material available on 19 October 2026. The 2026 set includes published SWAT and JPDC work plus a versioned, unreviewed LATTICE preprint. This is not a complete review of the calendar year or evidence that an unlisted method does not exist.",
+  "themes": [
+    {
+      "id": "foundations",
+      "title": "Foundations and baseline policies",
+      "description": "Read Kahn first. The scheduling papers then establish why changing ready-task priority is an old idea, and why any guarantee depends on the execution model."
+    },
+    {
+      "id": "updates",
+      "title": "Dynamic ordering and graph access",
+      "description": "For changing dependencies or restricted graph storage. Separate update costs and stream passes from the cost of sorting one in-memory DAG."
+    },
+    {
+      "id": "memory",
+      "title": "Memory-aware ordering",
+      "description": "For live-data objectives. Distinguish trees from general DAGs, shared outputs from edge-specific data, peak from average memory, and sequential from parallel execution."
+    },
+    {
+      "id": "priorities",
+      "title": "Learned priorities and recent Kahn variants",
+      "description": "Closest mechanism checks for a new ready-set rule. Published learning methods and the explicitly labeled 2026 preprint already cover several apparently new combinations."
+    },
+    {
+      "id": "parallel",
+      "title": "Parallel dependency release",
+      "description": "For multicore implementation work. Isolate readiness bookkeeping from task execution and the surrounding runtime."
+    },
+    {
+      "id": "evaluation",
+      "title": "Workloads and fair evaluation",
+      "description": "Use realistic workflow families as well as controlled DAGs. A good schedule and a cheaply computed schedule are separate outcomes."
+    }
+  ],
+  "papers": [
+    {
+      "id": "kahn1962",
+      "title": "Topological sorting of large networks",
+      "authors": [
+        "Kahn, A. B."
+      ],
+      "year": 1962,
+      "venue": "Communications of the ACM",
+      "status": "peer-reviewed",
+      "doi": "10.1145/368996.369025",
+      "url": "https://doi.org/10.1145/368996.369025",
+      "access_url": "",
+      "theme": "foundations",
+      "relation": "foundation",
+      "finding": "Introduces a procedure for topologically ordering dependency networks. The modern indegree/ready-set formulation provides the eligibility invariant for the extensions in this library.",
+      "proposal_use": "Define baseline pseudocode, the ready-set invariant, cycle behavior, and the precise operation your method changes.",
+      "limit": "A new application, heap, tie-break rule, or visualization is not by itself a new algorithm. Standard static traversal already has a linear worst-case bound in the explicit input model.",
+      "evidence_scope": "Publisher metadata and abstract inspected. Original 7090 implementation and original performance measurement were not independently reproduced. Modern adjacency-list interpretation is identified as standard formulation, not a transcription of the historical implementation.",
+      "bibtex_type": "article",
+      "existing_source_id": "E01",
+      "version": "Published 1 November 1962.",
+      "volume": "5",
+      "number": "11",
+      "pages": "558--562"
+    },
+    {
+      "id": "graham1966",
+      "title": "Bounds for Certain Multiprocessing Anomalies",
+      "authors": [
+        "Graham, R. L."
+      ],
+      "year": 1966,
+      "venue": "Bell System Technical Journal",
+      "status": "peer-reviewed",
+      "doi": "10.1002/j.1538-7305.1966.tb01709.x",
+      "url": "https://onlinelibrary.wiley.com/doi/10.1002/j.1538-7305.1966.tb01709.x",
+      "access_url": "",
+      "theme": "foundations",
+      "relation": "foundation",
+      "finding": "Studies timing anomalies in precedence-constrained multiprocessing: intuitively helpful changes, including more processors, can worsen completion time under a scheduling rule.",
+      "proposal_use": "Measure makespan and overhead rather than assuming a wider ready frontier or higher processor count must improve performance.",
+      "limit": "Guarantees require the original task, duration, precedence, processor, and scheduling assumptions; they do not transfer automatically to heterogeneous or memory-limited execution.",
+      "evidence_scope": "Publisher abstract/metadata and Bell Labs archive introduction inspected; numerical theorem bounds were not independently reconstructed and are not claimed here.",
+      "bibtex_type": "article",
+      "version": "Distinct from Graham’s 1969 paper on multiprocessing timing anomalies.",
+      "volume": "45",
+      "number": "9",
+      "pages": "1563--1581"
+    },
+    {
+      "id": "coffman1972",
+      "title": "Optimal scheduling for two-processor systems",
+      "authors": [
+        "Coffman, Jr., E. G.",
+        "Graham, R. L."
+      ],
+      "year": 1972,
+      "venue": "Acta Informatica",
+      "status": "peer-reviewed",
+      "doi": "10.1007/BF00288685",
+      "url": "https://link.springer.com/article/10.1007/BF00288685",
+      "access_url": "",
+      "theme": "foundations",
+      "relation": "foundation",
+      "finding": "Provides a specialized optimal scheduling result for two-processor systems under its computation model. Priority-based scheduling and restricted-model optimality have a long history.",
+      "proposal_use": "Use as a novelty check for lexicographic priorities and processor assignment. Reproduce the full model before using its theorem or algorithm.",
+      "limit": "The two-processor result does not establish optimality for arbitrary weighted DAGs, memory budgets, heterogeneous machines, or general processor counts.",
+      "evidence_scope": "Primary publisher summary and metadata inspected. Author-hosted scanned PDF located but text extraction was unavailable; full proof and labeling mechanism were not independently audited.",
+      "bibtex_type": "article",
+      "volume": "1",
+      "pages": "200--213"
+    },
+    {
+      "id": "heft2002",
+      "title": "Performance-effective and low-complexity task scheduling for heterogeneous computing",
+      "authors": [
+        "Topcuoglu, Haluk",
+        "Hariri, Salim",
+        "Wu, Min-You"
+      ],
+      "year": 2002,
+      "venue": "IEEE Transactions on Parallel and Distributed Systems",
+      "status": "peer-reviewed",
+      "doi": "10.1109/71.993206",
+      "url": "https://ieeexplore.ieee.org/document/993206/",
+      "access_url": "",
+      "theme": "foundations",
+      "relation": "foundation",
+      "finding": "Introduces HEFT and CPOP for heterogeneous DAG scheduling. HEFT uses upward ranks and earliest-finish processor selection; scheduling time and resulting schedule quality are distinct concerns.",
+      "proposal_use": "Use HEFT when studying heterogeneous assignment and communication. It is not a matched comparator for purely sequential exact-score maintenance.",
+      "limit": "A critical-path score alone is established prior art. Original benchmark advantages are not evidence of universal superiority on current workloads.",
+      "evidence_scope": "Primary IEEE abstract, authors, DOI, volume, pages, publication date inspected. An institutional PDF was located but had corrupted text extraction; algorithm implementation requires a clean full-text copy.",
+      "bibtex_type": "article",
+      "volume": "13",
+      "number": "3",
+      "pages": "260--274"
+    },
+    {
+      "id": "pearce2006",
+      "title": "A Dynamic Topological Sort Algorithm for Directed Acyclic Graphs",
+      "authors": [
+        "Pearce, David J.",
+        "Kelly, Paul H. J."
+      ],
+      "year": 2006,
+      "venue": "ACM Journal of Experimental Algorithmics",
+      "status": "peer-reviewed",
+      "doi": "10.1145/1187436.1210590",
+      "url": "https://doi.org/10.1145/1187436.1210590",
+      "access_url": "https://www.doc.ic.ac.uk/~phjk/Publications/DynamicTopoSortAlg-JEA-07.pdf",
+      "theme": "updates",
+      "relation": "direct",
+      "finding": "Repairs an order by discovering affected vertices and reassigning their positions. Its journal account corrects an implementation defect in an earlier comparison; reported sparse-graph advantages are conditional.",
+      "proposal_use": "Use as a practical dynamic-ordering baseline. Measure complete update latency, examined edges, and moved vertices on sparse, dense, and adversarial traces.",
+      "limit": "This is affected-region dynamic maintenance, not a direct Kahn queue modification. Reproduce the corrected journal algorithm rather than the earlier flawed comparison.",
+      "evidence_scope": "Author-hosted journal PDF inspected: abstract, correction note, affected-region definitions, discovery/reassignment and complexity, batch experiment discussion, conclusion.",
+      "bibtex_type": "article",
+      "existing_source_id": "E03",
+      "version": "Journal volume/copyright year 2006; author publication page and existing guide record use 2007 for the same DOI.",
+      "volume": "11",
+      "article_number": "1.7",
+      "pages": "1--24"
+    },
+    {
+      "id": "pearce2010",
+      "title": "A Batch Algorithm for Maintaining a Topological Order",
+      "authors": [
+        "Pearce, David J.",
+        "Kelly, Paul H. J."
+      ],
+      "year": 2010,
+      "venue": "Thirty-Third Australasian Computer Science Conference (ACSC 2010)",
+      "status": "peer-reviewed",
+      "doi": "",
+      "url": "https://whileydave.com/publications/PK10_ACSC_preprint.pdf",
+      "access_url": "https://whileydave.com/publications/PK10_ACSC_preprint.pdf",
+      "theme": "updates",
+      "relation": "direct",
+      "finding": "Processes batches of inserted edges and repairs affected regions. Batching and selective repair are established methods; benefits depend on the update sequence and batch structure.",
+      "proposal_use": "Use for a batch-insertion study with matched batch sizes, insertion distances, overlap, and invalidating-edge fractions.",
+      "limit": "One static workflow does not provide an edit trace. Differently titled author drafts must not be combined into one algorithm or guarantee.",
+      "evidence_scope": "Primary author manuscript abstract, introductory model and prior-work definitions inspected; author project page verifies ACSC 2010 and pages. No DOI was verified.",
+      "bibtex_type": "inproceedings",
+      "existing_source_id": "E04",
+      "version": "ACSC 2010 author manuscript; no DOI verified. Use this title rather than the differently titled draft.",
+      "series": "CRPIT",
+      "volume": "102",
+      "pages": "79--88"
+    },
+    {
+      "id": "haeupler2012",
+      "title": "Incremental Cycle Detection, Topological Ordering, and Strong Component Maintenance",
+      "authors": [
+        "Haeupler, Bernhard",
+        "Kavitha, Telikepalli",
+        "Mathew, Rogers",
+        "Sen, Siddhartha",
+        "Tarjan, Robert E."
+      ],
+      "year": 2012,
+      "venue": "ACM Transactions on Algorithms",
+      "status": "peer-reviewed",
+      "doi": "10.1145/2071379.2071382",
+      "url": "https://doi.org/10.1145/2071379.2071382",
+      "access_url": "https://arxiv.org/abs/1105.2397",
+      "theme": "updates",
+      "relation": "direct",
+      "finding": "Maintains topological order and detects cycles during arc insertion, with extensions for strong components. Its complexity bounds concern a sequence of updates rather than one static traversal.",
+      "proposal_use": "Define whether your output is a topological order, a cycle decision, or maintained SCCs. State the update sequence model before comparing bounds.",
+      "limit": "Sequence-level theoretical bounds do not imply a faster static sort. Full proofs and experiments were not reproduced here.",
+      "evidence_scope": "Primary arXiv abstract and author-institution publication record with journal DOI inspected; journal PDF opening definitions inspected. Full proofs not independently reconstructed.",
+      "bibtex_type": "article",
+      "version": "2012 journal article; accessible author preprint first submitted in 2011.",
+      "volume": "8",
+      "number": "1",
+      "article_number": "3"
+    },
+    {
+      "id": "bender2016",
+      "title": "A New Approach to Incremental Cycle Detection and Related Problems",
+      "authors": [
+        "Bender, Michael A.",
+        "Fineman, Jeremy T.",
+        "Gilbert, Seth",
+        "Tarjan, Robert E."
+      ],
+      "year": 2016,
+      "venue": "ACM Transactions on Algorithms",
+      "status": "peer-reviewed",
+      "doi": "10.1145/2756553",
+      "url": "https://doi.org/10.1145/2756553",
+      "access_url": "https://arxiv.org/abs/1112.0784",
+      "theme": "updates",
+      "relation": "direct",
+      "finding": "Uses vertex numberings in sparse- and dense-graph incremental algorithms for cycle detection, topological ordering, and strong components. The growing-graph model has different costs from static Kahn sorting.",
+      "proposal_use": "Use to set the theoretical context for an incremental thesis. A narrow implementation question is more tractable than replacing general worst-case bounds.",
+      "limit": "Sparse/dense assumptions and exact numbering rules matter. The preprint and journal article are versions of one study.",
+      "evidence_scope": "Primary author preprint abstract inspected; Bender's publication list verifies journal volume, article, pages, DOI and year. Full correctness proof and performance not independently reproduced.",
+      "bibtex_type": "article",
+      "version": "2016 journal-volume year; first publication is also cited as December 2015; author preprint dates from 2011.",
+      "volume": "12",
+      "number": "2",
+      "article_number": "14",
+      "pages": "1--22"
+    },
+    {
+      "id": "mccauley2024",
+      "title": "Incremental Topological Ordering and Cycle Detection with Predictions",
+      "authors": [
+        "McCauley, Samuel",
+        "Moseley, Benjamin",
+        "Niaparast, Aidin",
+        "Singh, Shikha"
+      ],
+      "year": 2024,
+      "venue": "Proceedings of the 41st International Conference on Machine Learning",
+      "status": "peer-reviewed",
+      "doi": "",
+      "url": "https://proceedings.mlr.press/v235/mccauley24a.html",
+      "access_url": "",
+      "theme": "updates",
+      "relation": "direct",
+      "finding": "The data structure maintains a topological order as edges arrive and detects cycles. Its analysis accounts for prediction quality through consistency, robustness, and smooth degradation; the paper also reports empirical acceleration with learned predictions.",
+      "proposal_use": "If studying inserted dependencies, compare against incremental methods and measure update latency as prediction quality changes. For a fixed DAG, use this as scope context, not a runtime comparator.",
+      "limit": "Adding learned priorities or claiming change-sensitive maintenance is insufficient novelty. The update model and error guarantees are already studied.",
+      "evidence_scope": "Official PMLR abstract and bibliographic record. Abstract-level verification; proofs and experiments were not independently reproduced.",
+      "bibtex_type": "inproceedings",
+      "existing_source_id": "E05",
+      "series": "Proceedings of Machine Learning Research",
+      "volume": "235",
+      "pages": "35240--35254"
+    },
+    {
+      "id": "streaming2025",
+      "title": "Parameterized Streaming Algorithms for Topological Sorting",
+      "authors": [
+        "Chen, Ho-Lin",
+        "Lin, Peng-Ting",
+        "Tsai, Meng-Tsung"
+      ],
+      "year": 2025,
+      "venue": "19th International Symposium on Algorithms and Data Structures (WADS 2025)",
+      "status": "peer-reviewed",
+      "doi": "10.4230/LIPIcs.WADS.2025.18",
+      "url": "https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.WADS.2025.18",
+      "access_url": "",
+      "theme": "updates",
+      "relation": "direct",
+      "finding": "The paper gives streaming algorithms parameterized by graph independence number and maximum displacement, trading passes against working space. Small parameters yield improvements for dense random DAGs.",
+      "proposal_use": "This supports explicitly stating whether the entire adjacency structure is resident in memory. A BSCS implementation can measure working memory, but a standard in-memory Kahn variant does not inherit streaming guarantees.",
+      "limit": "Low-memory topological sorting is established under restricted access models. Distinguish algorithm workspace from the live workflow data being scheduled.",
+      "evidence_scope": "Official Dagstuhl abstract, date, authors and BibTeX. Abstract-level verification; no implementation or theorem replication.",
+      "bibtex_type": "inproceedings",
+      "existing_source_id": "E06",
+      "publication_date": "2025-08-29",
+      "series": "Leibniz International Proceedings in Informatics (LIPIcs)",
+      "volume": "349",
+      "pages": "18:1--18:20"
+    },
+    {
+      "id": "deng2026",
+      "title": "Incremental Strongly Connected Components with Predictions",
+      "authors": [
+        "Deng, Ronald",
+        "McCauley, Samuel",
+        "Niaparast, Aidin",
+        "Niaparast, Helia",
+        "Ptak, Bennett",
+        "Quintanilla, Shirel",
+        "Singh, Shikha",
+        "Vosburg, Nathan"
+      ],
+      "year": 2026,
+      "venue": "20th Scandinavian Symposium on Algorithm Theory (SWAT 2026)",
+      "status": "peer-reviewed",
+      "doi": "10.4230/LIPIcs.SWAT.2026.17",
+      "url": "https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.SWAT.2026.17",
+      "access_url": "https://drops.dagstuhl.de/storage/00lipics/lipics-vol370-swat2026/html/LIPIcs.SWAT.2026.17/LIPIcs.SWAT.2026.17.html",
+      "theme": "updates",
+      "relation": "adjacent",
+      "finding": "The algorithm uses a possibly erroneous prediction of the edge-arrival sequence to precompute partial solutions for incremental SCC maintenance. The paper reports smooth degradation with error and experiments against incremental heuristics.",
+      "proposal_use": "A cycle-aware dynamic proposal should distinguish rejecting a cyclic insertion from maintaining SCCs after cycles form. Fixed-DAG scheduling can keep cycle validation separate.",
+      "limit": "Prediction-assisted incremental graph maintenance remains active in 2026, but this is an SCC problem. Do not describe it as a faster static Kahn algorithm.",
+      "evidence_scope": "Official Dagstuhl abstract and metadata; Full HTML: comparison with worst-case approaches and experimental section. Selected full-text sections inspected; no code execution or independent validation of speedups.",
+      "bibtex_type": "inproceedings",
+      "existing_source_id": "E07",
+      "publication_date": "2026-06-08",
+      "series": "Leibniz International Proceedings in Informatics (LIPIcs)",
+      "volume": "370",
+      "pages": "17:1--17:16"
+    },
+    {
+      "id": "marchal2013",
+      "title": "Scheduling tree-shaped task graphs to minimize memory and makespan",
+      "authors": [
+        "Marchal, Loris",
+        "Sinnen, Oliver",
+        "Vivien, Frédéric"
+      ],
+      "year": 2013,
+      "venue": "IEEE 27th International Parallel and Distributed Processing Symposium (IPDPS)",
+      "status": "peer-reviewed",
+      "doi": "10.1109/IPDPS.2013.55",
+      "url": "https://doi.org/10.1109/IPDPS.2013.55",
+      "access_url": "https://graal.ens-lyon.fr/~lmarchal/pub/conferences/ipdps13-memory-makespan-tree.pdf",
+      "theme": "memory",
+      "relation": "adjacent",
+      "finding": "Studies tree-shaped tasks with file lifetimes and the tradeoff between peak memory and parallel makespan. It analyzes complexity and evaluates memory-conscious heuristics.",
+      "proposal_use": "Specify allocation timing, execution memory, and release rules. Use it to identify established memory-aware ordering ideas.",
+      "limit": "Tree and edge-file results do not automatically transfer to shared outputs with multiple consumers in a general DAG.",
+      "evidence_scope": "Author-hosted conference PDF abstract and model opening inspected; primary arXiv abstract and INRIA publication metadata inspected. No numerical experiment was independently rerun.",
+      "bibtex_type": "inproceedings",
+      "pages": "839--850"
+    },
+    {
+      "id": "marchal2019",
+      "title": "Limiting the memory footprint when dynamically scheduling DAGs on shared-memory platforms",
+      "authors": [
+        "Marchal, Loris",
+        "Simon, Bertrand",
+        "Vivien, Frédéric"
+      ],
+      "year": 2019,
+      "venue": "Journal of Parallel and Distributed Computing",
+      "status": "peer-reviewed",
+      "doi": "10.1016/j.jpdc.2019.01.009",
+      "url": "https://www.sciencedirect.com/science/article/abs/pii/S0743731518305112",
+      "access_url": "",
+      "theme": "memory",
+      "relation": "adjacent",
+      "finding": "Limits the maximum memory footprint of permitted parallel executions by adding dependencies. It studies the tradeoff with critical-path growth through theory, an ILP formulation, and heuristics.",
+      "proposal_use": "Compare admission rules or added-edge policies under matched memory semantics; measure lost parallelism as well as bytes saved.",
+      "limit": "A maximum over all allowed schedules differs from the peak of one chosen schedule. Added dependencies can reduce concurrency.",
+      "evidence_scope": "Primary publisher abstract, highlights, DOI, authors, volume and pages retrieved through indexed publisher content. A later direct-open attempt failed; full proofs and implementation were not audited.",
+      "bibtex_type": "article",
+      "volume": "128",
+      "pages": "30--42"
+    },
+    {
+      "id": "fradet2023",
+      "title": "Sequential Scheduling of Dataflow Graphs for Memory Peak Minimization",
+      "authors": [
+        "Fradet, Pascal",
+        "Girault, Alain",
+        "Honorat, Alexandre"
+      ],
+      "year": 2023,
+      "venue": "24th ACM SIGPLAN/SIGBED International Conference on Languages, Compilers, and Tools for Embedded Systems (LCTES 2023)",
+      "status": "peer-reviewed",
+      "doi": "10.1145/3589610.3596280",
+      "url": "https://doi.org/10.1145/3589610.3596280",
+      "access_url": "https://pop-art.inrialpes.fr/~fradet/PDFs/LCTES23.pdf",
+      "theme": "memory",
+      "relation": "adjacent",
+      "finding": "The authors combine graph transformations and branch-and-bound to minimize sequential dataflow memory peaks beyond the series-parallel subclass. They also address graph growth when converting synchronous dataflow graphs.",
+      "proposal_use": "Use exact search only on small instances to measure a heuristic's quality gap. Specify the data lifetime model before transferring memory results to workflow files.",
+      "limit": "Peak-memory minimization through task order, graph reduction, and exact search predates the proposal. A greedy priority rule does not establish optimality. Its 2025 journal extension is listed in the existing guide as E13; inspect that version before claiming a new transformation.",
+      "evidence_scope": "Official ACM SIGPLAN proceedings abstract; Author-hosted manuscript text exposed in search; abstract and introduction. Abstract and introductory method description verified; complete PDF fetch failed, and detailed proofs were not checked.",
+      "bibtex_type": "inproceedings",
+      "existing_source_id": "E12",
+      "pages": "76--86"
+    },
+    {
+      "id": "fradet2025",
+      "title": "Parallel Scheduling of Task Graphs with Minimal Memory Requirements",
+      "authors": [
+        "Fradet, Pascal",
+        "Girault, Alain",
+        "Honorat, Alexandre"
+      ],
+      "year": 2025,
+      "venue": "2025 IEEE International Parallel and Distributed Processing Symposium (IPDPS)",
+      "status": "peer-reviewed",
+      "doi": "10.1109/IPDPS64566.2025.00042",
+      "url": "https://ieeexplore.ieee.org/document/11078551/",
+      "access_url": "",
+      "theme": "memory",
+      "relation": "adjacent",
+      "finding": "The method derives a memory-constrained parallel list schedule from a sequential schedule with low memory peak. The abstract reports feasibility under its stated memory threshold and tests on task graphs, scientific workflows, and signal-processing applications.",
+      "proposal_use": "A parallel extension needs processor counts, task durations, live-data accounting, and a feasibility test. Measure both memory and makespan; topological validity alone does not characterize schedule quality.",
+      "limit": "Adapting list scheduling to memory constraints is established. The paper's guarantees cannot be assigned to a different ready-queue heuristic.",
+      "evidence_scope": "IEEE indexed abstract and DOI metadata; Author institutional abstract. Primary abstract verified, including its conditional feasibility statement; detailed algorithm and reported speedups not independently reproduced.",
+      "bibtex_type": "inproceedings",
+      "existing_source_id": "E14",
+      "pages": "395--406"
+    },
+    {
+      "id": "benoit2026",
+      "title": "Minimizing memory in parallel task graph scheduling: Focusing on average consumption",
+      "authors": [
+        "Benoit, Anne",
+        "Marchal, Loris",
+        "Obrecht, Adrien"
+      ],
+      "year": 2026,
+      "venue": "Journal of Parallel and Distributed Computing",
+      "status": "peer-reviewed",
+      "doi": "10.1016/j.jpdc.2026.105299",
+      "url": "https://www.sciencedirect.com/science/article/abs/pii/S0743731526000778",
+      "access_url": "",
+      "theme": "memory",
+      "relation": "adjacent",
+      "finding": "The paper formalizes average-memory objectives under two memory models, provides optimal algorithms for special graph classes, and heuristics for general DAGs. Simulations compare these with peak-oriented schedules when multiple applications execute concurrently.",
+      "proposal_use": "Peak bytes and time-integrated live bytes answer different questions. A single-workflow thesis can retain peak bytes as its primary objective and report average consumption as a secondary metric with explicit task durations.",
+      "limit": "Optimizing average instead of peak memory is already published in 2026. Do not use a renamed memory metric as the contribution.",
+      "evidence_scope": "Publisher-indexed abstract, highlights and article metadata; Author institutional abstract. Publisher and author abstracts verified; full text and experiments not independently replicated.",
+      "bibtex_type": "article",
+      "existing_source_id": "E15",
+      "volume": "215",
+      "article_number": "105299"
+    },
+    {
+      "id": "qi2025",
+      "title": "Reinforcement learning for one-shot DAG scheduling with comparability identification and dense reward",
+      "authors": [
+        "Qi, Xumai",
+        "Zhang, Dongdong",
+        "Liu, Taotao",
+        "Wang, Hongcheng"
+      ],
+      "year": 2025,
+      "venue": "Advances in Neural Information Processing Systems",
+      "status": "peer-reviewed",
+      "doi": "10.52202/085713-5002",
+      "url": "https://proceedings.neurips.cc/paper_files/paper/2025/hash/dc16950e510bcd573783f5c2d7d8cc31-Abstract-Conference.html",
+      "access_url": "https://proceedings.neurips.cc/paper_files/paper/2025/file/dc16950e510bcd573783f5c2d7d8cc31-Paper-Conference.pdf",
+      "theme": "priorities",
+      "relation": "adjacent",
+      "finding": "The method restricts priority comparisons using antichains and supplies denser training feedback. Its priority topological sort selects from the current zero-indegree set. The results discuss both scheduling quality and added overhead, including cases where ablations or earlier methods perform better.",
+      "proposal_use": "Keep eligibility separate from priority. Compare queue maintenance costs under identical scoring, and report schedule quality independently of the time used to compute it.",
+      "limit": "Priority-guided zero-indegree selection and learning to assign task priorities are established. A heap or learned score alone is insufficient.",
+      "evidence_scope": "Official NeurIPS abstract, authors, venue and DOI; Full PDF: Sections 3–4.1 and empirical/ablation discussion, pages 3–8. Selected full-text sections and nonuniform results inspected; training and benchmarks not rerun.",
+      "bibtex_type": "inproceedings",
+      "volume": "38"
+    },
+    {
+      "id": "lattice2026",
+      "title": "LATTICE: Constraint-Directed Scheduling, Memory Planning, and Pipeline Refinement for NPUs",
+      "authors": [
+        "Liu, Runhao",
+        "Pei, Minnan",
+        "Ding, Fei",
+        "Yao, Guangzhen",
+        "Li, You",
+        "Xiao, Peng",
+        "Li, Gang",
+        "Zhang, Peng"
+      ],
+      "year": 2026,
+      "venue": "arXiv:2607.17422v3",
+      "status": "preprint",
+      "doi": "10.48550/arXiv.2607.17422",
+      "url": "https://arxiv.org/abs/2607.17422v3",
+      "access_url": "https://arxiv.org/html/2607.17422v3",
+      "theme": "priorities",
+      "relation": "direct",
+      "finding": "The preprint explicitly uses deterministic Kahn traversal with a ready heap ordered by lifecycle class, memory delta, downstream criticality, and stable tie breakers. It then constructs memory placement and refines pipeline timing, checking output validity.",
+      "proposal_use": "Treat this as close mechanism prior art. A narrower thesis could test exact maintenance of a separately specified dynamic file-release score, with a score-matched baseline and correctness oracle.",
+      "limit": "Memory-aware Kahn selection combined with critical-path priority is already described. Any novelty claim must compare the scoring rule, data model, and maintenance mechanism directly. Unreviewed; six trace-replay workloads do not establish general hardware performance.",
+      "evidence_scope": "Version 3 metadata and abstract; Full HTML: Section IV-B, Algorithm 1, Section IV-E, and evaluation scope. Unreviewed preprint; evidence is six trace-replay workloads. No hardware performance or independent reproduction is claimed here.",
+      "bibtex_type": "misc",
+      "existing_source_id": "E34",
+      "version": "arXiv v3, revised 4 August 2026; v1 was titled DAN-Scheduler. One evolving preprint."
+    },
+    {
+      "id": "taskflow2022",
+      "title": "Taskflow: A Lightweight Parallel and Heterogeneous Task Graph Computing System",
+      "authors": [
+        "Huang, Tsung-Wei",
+        "Lin, Dian-Lun",
+        "Lin, Chun-Xun",
+        "Lin, Yibo"
+      ],
+      "year": 2022,
+      "venue": "IEEE Transactions on Parallel and Distributed Systems",
+      "status": "peer-reviewed",
+      "doi": "10.1109/TPDS.2021.3104255",
+      "url": "https://doi.org/10.1109/TPDS.2021.3104255",
+      "access_url": "https://taskflow.github.io/papers/tpds21-taskflow.pdf",
+      "theme": "parallel",
+      "relation": "adjacent",
+      "finding": "Combines dependency-driven task graphs with work stealing and heterogeneous execution. Ordinary strong dependencies govern readiness, while conditional tasks use separate rules.",
+      "proposal_use": "Use a static-DAG subset as an applied reference. Separate dependency release, queue work, and task computation in a parallel Kahn experiment.",
+      "limit": "Conditional cycles and weak dependencies differ from ordinary DAG edges. Complete-runtime speedups cannot be attributed to indegree processing alone.",
+      "evidence_scope": "Primary author-hosted published PDF inspected: abstract, metadata, Section 4.1, Section 5.1.1 and Section 5.2 opening. Project publication page verifies the 2022 journal citation.",
+      "bibtex_type": "article",
+      "version": "June 2022 journal issue; first published online 11 August 2021.",
+      "volume": "33",
+      "number": "6",
+      "pages": "1303--1320"
+    },
+    {
+      "id": "benchmark2024",
+      "title": "Benchmarking DAG Scheduling Algorithms on Scientific Workflow Instances",
+      "authors": [
+        "Sukhoroslov, Oleg",
+        "Gorokhovskii, Maksim"
+      ],
+      "year": 2024,
+      "venue": "Supercomputing: RuSCDays 2023",
+      "status": "peer-reviewed",
+      "doi": "10.1007/978-3-031-49435-2_1",
+      "url": "https://link.springer.com/chapter/10.1007/978-3-031-49435-2_1",
+      "access_url": "",
+      "theme": "evaluation",
+      "relation": "benchmark",
+      "finding": "Provides 150 scientific-workflow instances and ten cluster configurations, evaluating sixteen scheduling algorithms. The publisher links both the benchmark and its simulator.",
+      "proposal_use": "Select several workflow families, retain provenance and seeds, and report scheduler overhead separately from makespan or memory quality.",
+      "limit": "A single family is insufficient for a general-performance claim. Sequential memory experiments must document departures from the benchmark machine and communication model.",
+      "evidence_scope": "Primary Springer abstract, authors, page range, volume, publisher publication date and source-code/data links inspected. Author-uploaded full-text excerpt located, but the core finding here is bounded to publisher-supported information.",
+      "bibtex_type": "inproceedings",
+      "existing_source_id": "E19",
+      "version": "Published online 5 January 2024; RuSCDays 2023 proceedings. Publisher’s recommended citation uses 2023.",
+      "citation_year": 2023,
+      "publication_date": "2024-01-05",
+      "series": "Lecture Notes in Computer Science",
+      "volume": "14389",
+      "pages": "3--20"
+    }
+  ],
+  "directions": [
+    {
+      "id": "exact-adaptive",
+      "title": "Adaptive ready-set representation with exact policy preservation",
+      "question": "Can switching between an exact scan and an exact heap reduce total ordering cost as the ready frontier and priority-update rate change, while emitting the same sequence?",
+      "change": "Keep Kahn eligibility and one fixed release-byte score with a deterministic tie-break. At decision boundaries, use a measured cost rule to choose scanning or heap selection; rebuild from the exact score vector when switching. Charge every switch, index and score update. The existing guide already implements counters, equal-consumer grouping and bounded reductions: those operations are starting baselines.",
+      "proof": "Both representations must contain exactly the ready tasks and choose the same maximum score and tie-break. Prove score equality after every completion and equivalence across switches; bound rebuild work. Equal output orders must produce equal modeled workflow-memory results.",
+      "baselines": [
+        "Full rescoring oracle with identical scores and tie-breaking.",
+        "Fixed scan and fixed heap over identical incrementally maintained scores.",
+        "The guide’s existing counter/grouping implementations; include all preprocessing."
+      ],
+      "metrics": [
+        "Complete ordering time, including preprocessing, rebuilding and stale-heap work.",
+        "Score equality and whole-order equality; metadata visits and key updates.",
+        "Peak scheduler memory and switch count, separately from live workflow bytes."
+      ],
+      "ablations": [
+        "Switching disabled; fixed threshold versus a training-only cost fit.",
+        "Hysteresis disabled; score mechanism and tie-break held constant."
+      ],
+      "feasibility": "Laptop-scale implementation; start with small exact differential tests, then varying frontier width and shared-file fan-out. Tiny frontiers and frequent switching may lose.",
+      "novelty_check": "This is a candidate extension, not an established gap. Audit adaptive priority queues plus XLA, Dask, Qi and LATTICE at the operation level. A heap, cached score or last-use counter is already known; require a distinct switching rule or a defensible new boundary result before calling it an algorithmic contribution.",
+      "source_ids": [
+        "kahn1962",
+        "qi2025",
+        "lattice2026",
+        "benchmark2024"
+      ]
+    },
+    {
+      "id": "batch-repair",
+      "title": "Bounded interval repair for dependency-insertion batches",
+      "question": "Can a precisely bounded local Kahn repair reduce update cost on overlapping edge-insertion batches compared with full recomputation and existing dynamic methods?",
+      "change": "Before execution, maintain a complete order on a fixed vertex set. For a batch that violates it, form a conservative interval covering invalidating-edge endpoints, sort its induced subgraph with Kahn, and splice it back. Fall back to global recomputation when a charged work budget is exhausted. Reject cyclic batches atomically. An invalidating edge has its source at or after its destination in the old order; this includes self-loops.",
+      "proof": "Every internal and boundary-crossing edge must remain forward after splicing; no vertex may be omitted or duplicated. Detect cycles created jointly by the batch. Rejection must restore a valid prior state. Prove the fallback contract and its total cost.",
+      "baselines": [
+        "Global Kahn after each batch and global Kahn only when invalidated.",
+        "Pearce–Kelly unit-change and 2010 batch algorithms.",
+        "Prediction-assisted methods only when the prediction model and cost can be matched."
+      ],
+      "metrics": [
+        "Complete update time and tail latency, including position/adjacency maintenance.",
+        "Edge visits, vertices moved, interval width and fallback frequency."
+      ],
+      "ablations": [
+        "No fallback versus a fixed budget; fit any adaptive threshold on training traces only.",
+        "Single interval versus safely merged intervals with boundary checks."
+      ],
+      "feasibility": "Moderate BSCS scope: insertion batches only, with no concurrent execution or vertex edits. Include long-distance edges, dense graphs and batches that create a cycle only collectively.",
+      "novelty_check": "Affected-region repair, batching and fallback are established. Compare exact interval rules against Pearce–Kelly and its cited predecessors, and inspect 2024–2026 incremental work. A new name for local recomputation is insufficient; proceed only after documenting a mechanism-level difference.",
+      "source_ids": [
+        "kahn1962",
+        "pearce2006",
+        "pearce2010",
+        "haeupler2012",
+        "bender2016",
+        "mccauley2024",
+        "deng2026"
+      ]
+    },
+    {
+      "id": "lookahead-memory",
+      "title": "Budgeted lookahead under an explicit shared-output memory model",
+      "question": "Does a bounded two-step Kahn-ready choice reduce peak live bytes enough to justify its extra ordering cost over a matched one-step policy?",
+      "change": "For a fixed sequential DAG, simulate at most a declared number of candidate first tasks and their legal second choices; execute only the chosen first task. Minimize the simulated peak including allocation-before-release transients. Count each shared output once until its final consumer completes. Fix the candidate filter and tie-break before evaluation.",
+      "proof": "Simulation must preserve eligibility, account for every live output, and roll back all temporary state. Candidate filtering changes the search and cannot be described as exact unrestricted lookahead. Two steps do not imply global optimality or a memory-cap guarantee.",
+      "baselines": [
+        "FIFO/identifier Kahn and one-step greedy memory selection under identical data semantics.",
+        "Model-matched LATTICE ordering and relevant Fradet heuristics where reproducible.",
+        "Exhaustive optimum on tiny DAGs only, with a declared search/time cap."
+      ],
+      "metrics": [
+        "Peak live bytes, ordering time and number of simulated choices.",
+        "Gap to the certified tiny-instance optimum; report timeouts separately.",
+        "Average memory only with explicit task durations; it is a different objective."
+      ],
+      "ablations": [
+        "One versus two steps; candidate budget and filter.",
+        "Remove secondary priority while retaining the primary memory objective."
+      ],
+      "feasibility": "Small experimental scope; start with DAGs of at most eight tasks for exact oracles, then held-out workflow families. Include cases where local improvement worsens a later peak.",
+      "novelty_check": "Memory-aware Kahn plus critical-path priority already appears in LATTICE. Audit graph transformations, lookahead schedulers, the guide’s E13/E32 records and recent learned priorities. A bounded search alone is not new; identify a specific model, decision rule or provable property before proposing novelty.",
+      "source_ids": [
+        "kahn1962",
+        "marchal2013",
+        "marchal2019",
+        "fradet2023",
+        "fradet2025",
+        "benoit2026",
+        "lattice2026",
+        "benchmark2024"
+      ]
+    },
+    {
+      "id": "parallel-release",
+      "title": "Bounded aggregation of parallel indegree reductions",
+      "question": "Can worker-local aggregation reduce synchronization cost on high-fan-in DAGs without losing or duplicating ready tasks?",
+      "change": "Use a static adjacency-array DAG and a frontier/barrier traversal first. Aggregate decrements for repeated successor destinations in bounded local batches, then publish totals and enqueue a destination exactly once at its zero transition. Include aggregation-map and frontier-merge costs. Treat actual task execution as a separate experiment.",
+      "proof": "Published decrements must equal processed incoming edges. Prove exactly-once eligibility, visibility of predecessor effects, barrier/termination correctness, and cyclic-residual detection. State duplicate-edge semantics. Deterministic output requires a defined merge rule and its cost. Flush every local decrement batch before frontier completion or cycle detection; for atomic subtraction, only the update whose returned old count equals its decrement enqueues the successor.",
+      "baselines": [
+        "Sequential adjacency-array Kahn.",
+        "Per-edge atomic parallel Kahn with identical frontier semantics.",
+        "Taskflow static DAGs only as a separate applied-runtime comparison."
+      ],
+      "metrics": [
+        "Traversal time, speedup versus sequential, atomic operations and queue contention.",
+        "Aggregation overhead, load balance and peak auxiliary memory."
+      ],
+      "ablations": [
+        "Aggregation off; batch size varied.",
+        "Partition policy varied; deterministic merging charged explicitly."
+      ],
+      "feasibility": "Higher difficulty: multicore CPU only, race detection and stress tests. Chains, low fan-in and unbalanced degrees may make aggregation slower; report those regimes.",
+      "novelty_check": "Atomic readiness and batching are established. Search parallel topological sorting, dependency-counter runtimes and sparse triangular-solve scheduling before claiming a new release mechanism. Taskflow end-to-end results cannot establish an indegree-only speedup; the present review does not certify aggregation novelty.",
+      "source_ids": [
+        "kahn1962",
+        "graham1966",
+        "taskflow2022",
+        "benchmark2024"
+      ]
+    }
+  ],
+  "search_audit": {
+    "queries": [
+      "\"topological ordering\" \"2026\" incremental",
+      "\"topological sort\" \"2025\" parallel paper",
+      "\"incremental topological\" \"2024\"",
+      "\"parallel topological\" \"2024\" paper",
+      "\"topological sorting\" \"2023\" \"parallel\" paper",
+      "\"topological sorting\" \"2025\" GPU",
+      "\"incremental topological\" \"2025\" algorithm",
+      "\"DAG\" \"scheduling\" \"2026\" \"ECRTS\"",
+      "\"DAG scheduling\" \"2025\" \"list scheduling\"",
+      "\"DAG scheduling\" \"2024\" \"critical path\" paper",
+      "\"topological sort\" \"parallel\" \"2026\" paper",
+      "\"Reinforcement learning for one-shot DAG scheduling\" NeurIPS 2025",
+      "\"Minimizing Memory in Parallel Task Graph Scheduling: Focusing on Average Consumption\"",
+      "\"Parallel Scheduling of Task Graphs with Minimal Memory Requirements\"",
+      "\"Sequential Scheduling of Dataflow Graphs for Memory Peak Minimization\" Fradet pdf",
+      "\"10.1109/IPDPS64566.2025.00042\"",
+      "\"10.52202/085713-5002\"",
+      "2026 \"topological sorting\" algorithm paper",
+      "2026 \"Kahn\" \"topological\" algorithm research",
+      "2025 2026 memory aware DAG scheduling topological order paper",
+      "\"Benchmarking DAG Scheduling Algorithms on Scientific Workflow Instances\""
+    ],
+    "sources": [
+      "ACM publisher records and author-hosted manuscripts",
+      "IEEE Xplore and institutional author copies",
+      "Dagstuhl LIPIcs official proceedings (WADS 2025, SWAT 2026)",
+      "PMLR ICML 2024 and official NeurIPS 2025 proceedings",
+      "Springer Nature, Wiley/Bell Labs and Elsevier publisher abstracts/metadata",
+      "Versioned arXiv records and full-text HTML for LATTICE and the screened MoSAIC lead",
+      "Existing guide evidence IDs, checked against primary records rather than used as independent authority"
+    ],
+    "included": [
+      "Primary papers with verifiable metadata and an explicit connection to topological ordering, readiness, scheduling objectives or evaluation.",
+      "Foundational and practical baselines retained alongside 2023–2026 work. Adjacent scheduling is not presented as a historical derivation of Kahn.",
+      "Each paper records inspection depth. Published papers and preprints are labeled separately; alternate versions are one study."
+    ],
+    "excluded": [
+      "Tutorials and repositories alone are not counted as research papers; relevant implementation evidence remains linked from the existing guide.",
+      "Keyword matches with no useful connection to the selected mechanisms, unverifiable metadata, and duplicate manuscript versions.",
+      "MoSAIC (arXiv:2610.15205v1, 10 October 2026; existing guide E35) was inspected as an emerging lead but is not a core reading recommendation here: its learned-priority concept is relevant, while the training/access setup and artifact were insufficiently specified in the inspected text for reproduction. No performance claims are adopted. The existing record is retained."
+    ],
+    "limits": [
+      "Targeted web search and backward-reference inspection, not an exhaustive systematic review or an independently duplicated screening. Searches used English technical terms.",
+      "Some access was limited to abstracts or selected full-text sections. Inspect complete proofs, models and current code before implementing or defending a contribution.",
+      "No cited experiment or artifact was rerun for this addition; reported findings are attributed to their authors. Website tests validate reading and export behavior only.",
+      "Publication chronology can differ from proceedings/issue citation years; affected records retain explicit notes. Preprints can change after this cutoff.",
+      "The four directions are our synthesis and scoping judgments. Establish the precise difference from prior art, then preregister a fair experiment; empirical improvement alone does not prove novelty."
+    ]
+  }
+}

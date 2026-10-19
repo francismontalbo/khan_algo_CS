@@ -22,6 +22,7 @@ Workflow_Visual_Comparison_Saved*.html
 /Lineage.json
 /Reviewed_Sources.json
 /algorithm_simulator.js
+/Thesis_References_filtered*.bib
 # Generated verification outputs
 tests/final/*
 !tests/final/check_integrity.py
