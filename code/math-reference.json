@@ -61,7 +61,14 @@
     "C_f − D": "C_f\\setminus D",
     "Cf ∖ D": "C_f\\setminus D",
     "Maintain position(u) < position(v) after graph updates, or report a cycle.": "\\begin{gathered}\\text{Maintain }\\operatorname{position}(u)<\\operatorname{position}(v)\\\\\\text{after graph updates, or report a cycle.}\\end{gathered}",
-    "u → … → v and both point to cleanup C: edge u → C is implied by v → C.": "\\begin{gathered}u\\to\\cdots\\to v\\\\\\text{and both point to cleanup }C:\\\\\\text{edge }u\\to C\\text{ is implied by }v\\to C.\\end{gathered}"
+    "u → … → v and both point to cleanup C: edge u → C is implied by v → C.": "\\begin{gathered}u\\to\\cdots\\to v\\\\\\text{and both point to cleanup }C:\\\\\\text{edge }u\\to C\\text{ is implied by }v\\to C.\\end{gathered}",
+    "O(k² log(k+1))": "O(k^{2}\\log(k+1))",
+    "O(k²)": "O(k^{2})",
+    "O(log H)": "O(\\log H)",
+    "O(n + m + m(n + m))": "O\\bigl(n+m+m(n+m)\\bigr)",
+    "O(|E| + |V| log |V|)": "O\\bigl(|E|+|V|\\log|V|\\bigr)",
+    "O(|V| + |E|)": "O\\bigl(|V|+|E|\\bigr)",
+    "O(|V|)": "O(|V|)"
   },
   "symbols": {
     "Big O": "O",
