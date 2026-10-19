@@ -38,7 +38,7 @@
     {
       "issue": "Local validation source pointed at absent files",
       "status": "Repaired",
-      "repair": "Source locator now names results/checks.json and the runnable test script."
+      "repair": "Source locator now names archive/verification/results/checks.json and the runnable test script."
     },
     {
       "issue": "Embedded source export still held the pre-audit collection",
@@ -82,7 +82,7 @@
     "synthetic_suite": true
   },
   "local_correctness_result": {
-    "path": "results/checks.json",
+    "path": "archive/verification/results/checks.json",
     "run_date": "2026-10-15",
     "not_a_real_workload_benchmark": true
   }

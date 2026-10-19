@@ -15,6 +15,13 @@ private-notes/
 local-exports/
 Workflow_Comparison_Notes*.json
 Algorithm_Simulation_Run*.json
+Workflow_Research_Notes*.json
+Workflow_Visual_Comparison_Saved*.html
+# Standalone browser downloads are generated copies, not editable source files.
+/Earlier_Proof_and_Code.html
+/Lineage.json
+/Reviewed_Sources.json
+/algorithm_simulator.js
 # Generated verification outputs
 tests/final/*
 !tests/final/check_integrity.py

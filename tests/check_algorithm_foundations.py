@@ -3,9 +3,12 @@ from pathlib import Path
 from datetime import datetime,timezone
 from itertools import permutations
 from graphlib import TopologicalSorter,CycleError
-import json,random,sys
+import argparse,json,random,sys
 R=Path(__file__).resolve().parents[1];sys.path.insert(0,str(R/'code'))
 from algorithm_foundations import *
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--out',type=Path,default=R/'output/ci/algorithm-lessons-checks.json')
+args=parser.parse_args()
 
 def valid(g,o):
     return len(o)==len(g) and sorted(o)==list(range(len(g))) and all(o.index(u)<o.index(v) for u,row in enumerate(g) for v in row)
@@ -72,5 +75,6 @@ assert not is_topological(make_graph(2,[(0,1)]),[1,0]);negative+=1
 try:make_graph(2,[(0,1),(0,1)]);raise AssertionError('duplicate accepted')
 except ValueError:negative+=1
 report={'executed_at':datetime.now(timezone.utc).isoformat(),'random_seed':841901,'exhaustive_forward_four_vertex_graphs':64,'edge_insertion_cases':checks,'random_dags':400,'negative_checks':negative,'same_policy_agreement':True,'reachability_and_reduction_verified':True,'critical_path_checked_independently':True,'examples':traces(),'scope':'Finite checks of independently written teaching code only. No video-content audit, novelty certification, or Montage performance benchmark.'}
-(R/'tests/algorithm_lessons/Code_Checks.json').write_text(json.dumps(report,indent=2))
+args.out.parent.mkdir(parents=True,exist_ok=True)
+args.out.write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
 print(json.dumps({k:v for k,v in report.items() if k!='examples'},indent=2))

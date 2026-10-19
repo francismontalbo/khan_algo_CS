@@ -195,7 +195,7 @@ def greedy_counterexample() -> dict:
 def main() -> None:
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--cases",type=int,default=5000)
-    p.add_argument("--out",type=Path,default=Path(__file__).parents[1]/"results"/"checks.json")
+    p.add_argument("--out",type=Path,default=Path(__file__).resolve().parents[1]/"output/ci/proof-checks.json")
     args = p.parse_args()
     if args.cases < 1:
         p.error("cases must be positive")

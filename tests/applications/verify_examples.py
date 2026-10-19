@@ -1,8 +1,11 @@
 """Check named application fixtures independently of the browser rendering."""
 from pathlib import Path
-import json,subprocess,hashlib,zipfile
+import argparse,json,subprocess,hashlib,zipfile
 from datetime import datetime, timezone
 ROOT=Path(__file__).resolve().parents[2]
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--out',type=Path,default=ROOT/'output/ci/applications-checks.json')
+args=parser.parse_args()
 d=json.loads((ROOT/'applications/data.json').read_text());s=json.loads((ROOT/'simulations/data.json').read_text())
 req=[{'id':p['engine'],'input':s['scenarios'][p['scenario']]['input']} for p in d['profiles']]
 runner="const E=require(process.argv[1]);let s='';process.stdin.on('data',x=>s+=x);process.stdin.on('end',()=>console.log(JSON.stringify(JSON.parse(s).map(x=>E.run(x.id,x.input,false).result))));"
@@ -51,5 +54,6 @@ with zipfile.ZipFile(ROOT/'reference/Original_Research_Package.zip') as archive:
   if rel!='simulations/engine.js':ck('Unchanged working algorithm: '+rel,hashlib.sha256((ROOT/rel).read_bytes()).hexdigest()==expected)
 ck('Current preprint version retained',next(x for x in json.loads((ROOT/'data/Reviewed_Sources.json').read_text()) if x['id']=='E34')['url'].endswith('v3'))
 report={'checked':datetime.now(timezone.utc).isoformat(),'checks':len(checks),'passed':sum(c['passed'] for c in checks),'details':checks,'application_results':res,'scope':'Synthetic application-shaped fixtures. Correctness and preservation checks, not production benchmarks or novelty evidence.'}
-(ROOT/'tests/applications/Example_Results.json').write_text(json.dumps(report,indent=2))
+args.out.parent.mkdir(parents=True,exist_ok=True)
+args.out.write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
 print('PASS',len(checks),'application-specific checks')

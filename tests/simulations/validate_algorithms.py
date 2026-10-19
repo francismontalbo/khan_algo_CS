@@ -2,11 +2,14 @@
 Python 3 + NetworkX; Node.js runs the engine. No measured speedup is inferred.
 """
 from __future__ import annotations
-import itertools, json, random, subprocess, hashlib, sys
+import argparse, itertools, json, random, subprocess, hashlib, sys
 from pathlib import Path
 from datetime import datetime, timezone
 import networkx as nx
 ROOT=Path(__file__).resolve().parents[2]
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--out',type=Path,default=ROOT/'output/ci/simulations-checks.json')
+args=parser.parse_args()
 rng=random.Random(20261015)
 D=json.loads((ROOT/'simulations/data.json').read_text())
 requests=[]; checks=[]
@@ -192,6 +195,7 @@ for k,((tag,exp,inp,alg),got) in enumerate(zip(checks,results)):
      assert all(cell is not None for row in f['table']['rows'] for cell in row), 'Uninitialized task metadata must display a placeholder, not a serialized inherited function.'
  except Exception as e:failures.append({'index':k,'algorithm':alg,'test':tag,'error':str(e),'input':inp,'actual':got.get('result')})
 report={'executed_utc':datetime.now(timezone.utc).isoformat(),'seed':20261015,'engine_sha256':hashlib.sha256((ROOT/'simulations/engine.js').read_bytes()).hexdigest(),'oracle':'Independent Python + NetworkX; same JS engine used by browser','cases':len(checks),'counts':counts,'canonical_four_node_DAGs':exhaustive_graphs,'inspected_selection_events':winners,'checked_frames':trace_count,'failures':failures,'scope':'Finite checks of independent teaching implementations on synthetic inputs. No benchmark, novelty, full specialist reproduction or formal verification claim.'}
-(ROOT/'tests/simulations/Algorithm_Validation.json').write_text(json.dumps(report,indent=2))
+args.out.parent.mkdir(parents=True,exist_ok=True)
+args.out.write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
 print(json.dumps({k:v for k,v in report.items() if k not in ('failures',)},indent=2));print('FAILURES',len(failures));print(json.dumps(failures[:3],indent=2))
 if failures:sys.exit(1)

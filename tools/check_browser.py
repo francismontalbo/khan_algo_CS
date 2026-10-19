@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 def main() -> int:
     from playwright.sync_api import sync_playwright
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument('--out', type=Path, default=ROOT/'tests/deployment/Browser_Checks.json')
+    ap.add_argument('--out', type=Path, default=ROOT/'output/ci/browser-checks.json')
     ap.add_argument('--screenshots', type=Path, help='Optional screenshot output directory.')
     ap.add_argument('--require-http', action='store_true', help='Fail unless actual local HTTP navigation succeeds; intended for CI.')
     args = ap.parse_args()
